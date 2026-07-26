@@ -1,0 +1,15 @@
+# Keep repository text canonical and cross-platform.
+* text=auto eol=lf
+
+# Windows command launchers require CRLF for maximum compatibility.
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Explicit binary publication and evidence formats.
+*.docx -text
+*.pdf -text
+*.zip -text
+*.png -text
+*.jpg -text
+*.jpeg -text
+*.webp -text
