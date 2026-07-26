@@ -2,27 +2,28 @@
 
 **Human-led, AI-assisted mathematical research with inspectable proofs, evidence, corrections, and review boundaries.**
 
-This directory is the canonical bootstrap source for the future repository:
+This is the standalone publication and specialist-review repository:
 
 ```text
-novakprotocol/N-Human-AI-Mathematics
+repository:                 novakprotocol/N-Human-AI-Mathematics
+visibility:                 private
+default_branch:             main
+initial_curated_commit:     e378c773f7c54b375fdd208961f77702b1aadd05
+bootstrap_source_commit:    9dc69542fb2b089a4cef5ea3c425d82bb705d4dd
+public_release_authorized:  false
 ```
 
-The future repository will be the clean publication and external-review layer for selected mathematics developed in the private `novakprotocol/N-MathLab` laboratory. It will not contain the laboratory's raw branch history, chat transcripts, abandoned experiments, or unrelated product work.
+It contains selected mathematics developed in the private `novakprotocol/N-MathLab` laboratory. It does not import the laboratory's raw branch history, chat transcripts, abandoned experiments, or unrelated N-Stack work.
 
-## Windows bootstrap
+## Bootstrap provenance
 
-The source must be run from `N-MathLab`, not `N-LMS`. Windows PowerShell 5.1 is supported; PowerShell 7 and `pwsh` are not required.
+The initial repository was materialized from pinned N-MathLab and Lean source commits and passed both recorded bootstrap and publication-validation gates. See:
 
-Use the guarded one-click launcher:
+- [`BOOTSTRAP_RECEIPT.json`](BOOTSTRAP_RECEIPT.json);
+- [`reports/publication-validation.json`](reports/publication-validation.json);
+- [`BOOTSTRAP_CORRECTIONS.md`](BOOTSTRAP_CORRECTIONS.md).
 
-```powershell
-& ".\RUN-INITIALIZE-N-HUMAN-AI-MATHEMATICS.cmd"
-```
-
-or follow the exact recovery, prerequisite, dry-run, and verification commands in [`BOOTSTRAP_WINDOWS.md`](BOOTSTRAP_WINDOWS.md).
-
-The bootstrap creates the standalone repository as **private**, refuses to overwrite an existing repository, preserves public-release authorization as `false`, and applies no blanket MIT license.
+The retained initializer, Windows instructions, and launcher document how the first private repository was built. They are provenance and disaster-recovery material. The initializer must be run from the `N-MathLab` export tree, not from this standalone repository, and it refuses to overwrite an existing destination repository.
 
 ## Start here
 
@@ -63,7 +64,7 @@ Repository publication does **not** by itself establish:
 - security consequences;
 - authority for an AI system to approve or release work.
 
-A commit identifies source. A hash identifies bytes. A passing finite computation establishes only the checked finite scope. A proof-assistant build establishes only the declarations that were compiled under the recorded environment.
+A commit identifies source. A hash identifies bytes. A passing finite computation establishes only the checked finite scope. A proof-assistant build establishes only the declarations compiled under the recorded environment.
 
 ## Current publication order
 
@@ -96,8 +97,6 @@ The machine-readable source of this table is [`research-index.json`](research-in
 ```text
 .
 ├── README.md
-├── BOOTSTRAP_WINDOWS.md
-├── RUN-INITIALIZE-N-HUMAN-AI-MATHEMATICS.cmd
 ├── START_HERE.md
 ├── STATUS.md
 ├── RESEARCH_INDEX.md
@@ -111,6 +110,9 @@ The machine-readable source of this table is [`research-index.json`](research-in
 ├── CORRECTIONS.md
 ├── RIGHTS_AND_LICENSING.md
 ├── CITATION.cff
+├── BOOTSTRAP_RECEIPT.json
+├── BOOTSTRAP_CORRECTIONS.md
+├── reports/
 ├── schemas/
 ├── tools/
 ├── .github/
@@ -140,10 +142,10 @@ Copyright © 2026 Matthew S. Novak. All rights reserved.
 
 See [`RIGHTS_AND_LICENSING.md`](RIGHTS_AND_LICENSING.md).
 
-## Public-review principle
+## Review principle
 
-The public challenge is not "believe the repository." It is:
+The challenge is not "believe the repository." It is:
 
 > Inspect the exact statement, proof, source, evidence, and limitations. Provide a counterexample, identify a proof gap, locate an earlier equivalent theorem, or reproduce the result independently.
 
-All four outcomes improve the scientific record.
+All four outcomes improve the scientific record. Public visibility remains disabled until the explicit release gates are satisfied and the owner separately authorizes the visibility change.
