@@ -2,7 +2,9 @@
 
 ## What is this?
 
-N Human–AI Mathematics is a public-facing review library for mathematics developed through a human-led, AI-assisted process.
+N Human–AI Mathematics is a publication and specialist-review library for mathematics developed through a human-led, AI-assisted process.
+
+The repository is currently **private**. Its architecture is designed for eventual public review, but public visibility, journal submission, peer-review status, and historical-priority claims are not authorized merely because the repository exists.
 
 The private laboratory may contain hundreds of experiments, provisional formulas, failed ideas, test programs, and branches. This publication layer contains only bounded packages that a reader can inspect without knowing the private development history.
 
@@ -41,7 +43,8 @@ A reproduction uses the declared source identity and commands, or implements a s
 - **Internally reproduced** means a separate route inside the project agreed. It is not external review.
 - **Proof-assistant verified** means the listed declarations compiled under a pinned environment. It does not automatically cover the complete paper.
 - **No exact indexed match located** means a search did not find one. It does not prove worldwide novelty.
-- **Peer reviewed** will be used only for an actual external review or journal process that is identified in the record.
+- **Peer reviewed** will be used only for an actual external review or journal process identified in the record.
+- **Private review** means the package is organized and inspectable but has not been publicly released.
 
 ## Current first paper
 

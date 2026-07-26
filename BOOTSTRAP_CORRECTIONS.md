@@ -10,7 +10,7 @@ This ledger preserves bootstrap failures separately from successful evidence. A 
 
 **Correction:** the guarded bootstrap now resolves `N-MathLab`, verifies its `origin`, and invokes Windows PowerShell 5.1 through `powershell.exe`.
 
-**Status:** resolved in the bootstrap branch.
+**Status:** resolved.
 
 ## BSTR-CORR-002 — expected GitHub probe promoted to a terminating error
 
@@ -34,7 +34,7 @@ ERROR: tools/validate_publication.py:101: forbidden blanket MIT license text
 
 The repository did not contain a blanket MIT license. The checker had scanned the literal detection signature embedded in its own source.
 
-**Effect:** validation failed closed; no standalone GitHub repository was created.
+**Effect:** validation failed closed; no standalone GitHub repository was created during that attempt.
 
 **Correction:** the validator now:
 
@@ -44,7 +44,7 @@ The repository did not contain a blanket MIT license. The checker had scanned th
 - continues scanning every manuscript, evidence file, formal source, workflow, status record, rights file, and other tool;
 - rejects unsafe source-manifest target traversal in addition to the prior checks.
 
-The replacement validator was compiled and exercised against three local controls before commit:
+The replacement validator was compiled and exercised against three controls before commit:
 
 1. a complete synthetic publication tree passed;
 2. the actual MIT grant sentence in another file failed;
@@ -52,19 +52,64 @@ The replacement validator was compiled and exercised against three local control
 
 **Correcting commit:** `87b57d54ed72a39c9607c2189dd0b45752924239`
 
-**Status:** source corrected; complete real bootstrap rerun pending.
+**Status:** resolved by the successful complete rerun below.
+
+## Successful guarded bootstrap
+
+A complete Windows PowerShell 5.1 rerun used bootstrap source commit:
+
+```text
+9dc69542fb2b089a4cef5ea3c425d82bb705d4dd
+```
+
+The run:
+
+- authenticated the `novakprotocol` GitHub account;
+- fetched the current N-MathLab bootstrap source;
+- created a detached worktree;
+- materialized the manuscript and verifier sources from N-MathLab commit `e6adac212150177d4afa56e643d37533a208693c`;
+- materialized the Lean sources from `novak-sdt` commit `d7751d1de76253407016ef4bf92738cffa800e82`;
+- completed publication validation with zero errors and zero warnings;
+- created `novakprotocol/N-Human-AI-Mathematics` as a private repository;
+- pushed default branch `main`;
+- verified the final repository identity, visibility, and default branch;
+- removed the dedicated bootstrap worktree after success.
+
+Exact result:
+
+```text
+bootstrap receipt:           PASS
+publication validation:      PASS
+validation errors:           0
+validation warnings:         0
+standalone initial commit:   e378c773f7c54b375fdd208961f77702b1aadd05
+repository visibility:       PRIVATE
+default branch:              main
+public release authorized:   no
+blanket repository license:  no
+created UTC:                 2026-07-26T00:04:30.6333559Z
+```
+
+The controlling evidence is preserved in:
+
+- `BOOTSTRAP_RECEIPT.json`;
+- `reports/publication-validation.json`.
 
 ## Hosted runner status
 
-GitHub-hosted attempts have ended before usable step lists, logs, or artifacts were exposed. They remain classified as **hosted initialization failures with cause unclassified**. They are not evidence that the bootstrap source passed or failed.
+Earlier GitHub-hosted bootstrap attempts ended before usable step lists, logs, or artifacts were exposed. They remain classified as **hosted initialization failures with cause unclassified**. They are not rewritten as source passes or source failures.
+
+The successful guarded local run above is the controlling bootstrap acceptance record. It is operational evidence, not independent mathematical review.
 
 ## Current merge and release boundary
 
-- PR: `novakprotocol/N-MathLab#417`
-- branch: `agent/n-human-ai-mathematics-publication-bootstrap-v1`
-- standalone repository created: **no**
+- N-MathLab bootstrap PR: `novakprotocol/N-MathLab#417`
+- standalone repository created: **yes**
+- standalone visibility: **private**
+- standalone default branch: **main**
+- bootstrap and validation receipts: **PASS**
 - public release authorized: **no**
 - blanket repository license applied: **no**
 - external mathematical review supplied by this correction process: **no**
 
-The controlling next gate is one complete guarded Windows bootstrap producing both `BOOTSTRAP_RECEIPT.json` and `reports/publication-validation.json` with `PASS`, followed by verification that the new repository is private and its default branch is `main`.
+The bootstrap line is operationally complete. Public visibility, journal submission, novelty promotion, and peer-review status remain separate governed decisions.
