@@ -1,0 +1,34 @@
+{
+  "package_id": "N-MathLab-MCRC-HINC-2026-07-24-v1",
+  "title": "Hidden infinitesimal noncommutativity in endomorphism monoids of two graded Gerstenhaber algebras",
+  "article_type": "research article or focused research note - venue decision pending",
+  "authors": [
+    "[Author Name]"
+  ],
+  "affiliations": [
+    "[Affiliation]"
+  ],
+  "corresponding_author_email": "[Email]",
+  "orcid": [
+    "[ORCID]"
+  ],
+  "target_venue": "[Target venue]",
+  "keywords": [
+    "algebraic monoids",
+    "Gerstenhaber algebras",
+    "endomorphism schemes",
+    "nonreduced group schemes",
+    "infinitesimal symmetry",
+    "Hochschild cohomology"
+  ],
+  "msc2020": [
+    "20M32",
+    "16E40",
+    "14L15"
+  ],
+  "conflict_of_interest": "[Confirm]",
+  "funding": "[Confirm]",
+  "data_code_availability": "Standalone reproducibility kit included; public repository/release decision pending.",
+  "ai_disclosure": "[Insert venue-specific approved disclosure]",
+  "submission_authorized": false
+}

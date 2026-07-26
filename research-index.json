@@ -1,0 +1,92 @@
+{
+  "$schema": "./schemas/research-index.schema.json",
+  "schema_version": "n.human_ai_mathematics.research_index.v1",
+  "repository": "novakprotocol/N-Human-AI-Mathematics",
+  "accountable_owner": "Matthew S. Novak",
+  "operating_mode": "human-led-ai-assisted",
+  "public_release_authorized": false,
+  "papers": [
+    {
+      "id": "HINC-001",
+      "slug": "hidden-infinitesimal-noncommutativity",
+      "title": "Hidden Infinitesimal Noncommutativity in Endomorphism Monoids of Two Graded Gerstenhaber Algebras",
+      "fields": [
+        "algebraic monoids",
+        "Gerstenhaber algebras",
+        "nonreduced algebraic geometry"
+      ],
+      "state": "active_review",
+      "claim_status": "candidate_theorem_with_formally_verified_coefficient_layer",
+      "human_proof": "complete_candidate_manuscript",
+      "internal_reproduction": "passed_declared_routes",
+      "formal_verification": {
+        "base_kernel": "public_hosted_pass",
+        "principal_classification": "public_hosted_pass",
+        "generator_to_global": "not_formalized",
+        "full_manuscript": "incomplete"
+      },
+      "external_specialist_review": "pending",
+      "historical_priority": "unestablished",
+      "peer_review": "not_submitted",
+      "public_release": "not_authorized"
+    },
+    {
+      "id": "ABF-001",
+      "slug": "affine-hyperplane-degree-drop",
+      "title": "Affine-Hyperplane Degree-Drop Spectra of a Vectorial Boolean Map",
+      "fields": [
+        "Boolean functions",
+        "vectorial Boolean functions",
+        "finite linear algebra"
+      ],
+      "state": "hold",
+      "claim_status": "exact_finite_theorem",
+      "human_proof": "complete_candidate_manuscript",
+      "internal_reproduction": "python_c_and_exhaustive_small_universe_pass",
+      "formal_verification": "pending",
+      "external_specialist_review": "pending",
+      "historical_priority": "unestablished",
+      "peer_review": "not_submitted",
+      "public_release": "not_authorized"
+    },
+    {
+      "id": "FSG-001",
+      "slug": "fibonacci-sandpile-groups",
+      "title": "Fibonacci Critical Groups of Carry-Rees Petal Graphs",
+      "fields": [
+        "critical groups",
+        "graph theory",
+        "Fibonacci divisibility",
+        "chip firing"
+      ],
+      "state": "hold",
+      "claim_status": "candidate_theorem_package",
+      "human_proof": "complete_candidate_manuscript",
+      "internal_reproduction": "multiple_routes_passed",
+      "formal_verification": "pending",
+      "external_specialist_review": "pending_two_specialties",
+      "historical_priority": "unestablished",
+      "peer_review": "not_submitted",
+      "public_release": "not_authorized"
+    },
+    {
+      "id": "ACM-001",
+      "slug": "anf-code-matroid-geometry",
+      "title": "ANF Code and Matroid Geometry of a Reduced Vectorial Map",
+      "fields": [
+        "coding theory",
+        "matroids",
+        "Boolean functions"
+      ],
+      "state": "hold",
+      "claim_status": "exact_finite_classification",
+      "human_proof": "partial_manuscript_set_requires_consolidation",
+      "internal_reproduction": "multiple_routes_passed_for_merged_scope",
+      "formal_verification": "pending",
+      "external_specialist_review": "pending",
+      "historical_priority": "unestablished",
+      "peer_review": "not_submitted",
+      "public_release": "not_authorized"
+    }
+  ]
+}

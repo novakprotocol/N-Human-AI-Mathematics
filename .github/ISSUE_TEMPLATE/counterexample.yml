@@ -1,0 +1,62 @@
+name: Counterexample report
+description: Submit a concrete object that satisfies the assumptions but violates a theorem conclusion.
+title: "[Counterexample] PAPER-ID / theorem"
+labels: ["review: counterexample", "status: triage"]
+body:
+  - type: input
+    id: paper
+    attributes:
+      label: Paper ID
+      placeholder: HINC-001
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Exact source commit
+      description: Forty-character commit used for the challenged statement.
+    validations:
+      required: true
+  - type: input
+    id: theorem
+    attributes:
+      label: Theorem or lemma identifier
+    validations:
+      required: true
+  - type: textarea
+    id: assumptions
+    attributes:
+      label: Assumptions satisfied
+      description: Explain why the counterexample lies inside the stated hypothesis.
+    validations:
+      required: true
+  - type: textarea
+    id: object
+    attributes:
+      label: Explicit counterexample
+      description: Give the complete object, parameters, or construction.
+    validations:
+      required: true
+  - type: textarea
+    id: failure
+    attributes:
+      label: Calculation showing failure
+      description: Show precisely which conclusion fails.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction instructions
+      description: Include commands, code, environment, or a hand-check route.
+    validations:
+      required: true
+  - type: checkboxes
+    id: declaration
+    attributes:
+      label: Declaration
+      options:
+        - label: I have checked the statement at the exact commit above.
+          required: true
+        - label: I am not submitting private keys, secrets, or confidential material.
+          required: true

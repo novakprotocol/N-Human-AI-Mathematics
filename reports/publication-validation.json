@@ -1,0 +1,18 @@
+{
+  "error_count": 0,
+  "findings": [],
+  "inventory": {
+    "file_count": 68,
+    "hinc_status_sha256": "3d6e38e31f2275137486e51539c06a93e23b68110d4a4caccf0f0cfa9ece1f2e",
+    "research_index_sha256": "b76f5778e1020a53f2660b231f1472dd3a6ef796835fc2eab0bab23b54d584e2",
+    "scan_excluded_paths": [
+      "tools/validate_publication.py"
+    ],
+    "text_file_count": 66,
+    "total_bytes": 284006
+  },
+  "result": "PASS",
+  "root": "C:\\Users\\Chasingcoconuts\\AppData\\Local\\Temp\\N-Human-AI-Mathematics-Bootstrap\\repository",
+  "schema_version": "n.human_ai_mathematics.validation.v1",
+  "warning_count": 0
+}

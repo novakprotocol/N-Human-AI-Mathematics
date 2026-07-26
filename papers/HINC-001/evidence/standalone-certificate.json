@@ -1,0 +1,88 @@
+{
+  "claims": {
+    "fresh_local_process_started": true,
+    "globally_novel_mathematics": false,
+    "independent_of_parent_implementation": true,
+    "proof_assistant_verified": false,
+    "public_release_authorized": false,
+    "publication_priority_established": false
+  },
+  "evidence_sha256": "20d883988da7818f73de0b4ccab68bc7adea5097a4af7a6ef5a72c23b4e1ea4b",
+  "finite_audits": [
+    {
+      "core_points": 3,
+      "even_associativity_checks": 27,
+      "even_pair_checks": 9,
+      "even_points": 3,
+      "failures": 0,
+      "odd_pair_checks": 16,
+      "odd_points": 4,
+      "order": 1,
+      "square_zero_elements": 1
+    },
+    {
+      "core_points": 8,
+      "even_associativity_checks": 4096,
+      "even_pair_checks": 256,
+      "even_points": 16,
+      "failures": 0,
+      "odd_pair_checks": 100,
+      "odd_points": 10,
+      "order": 2,
+      "square_zero_elements": 2
+    },
+    {
+      "core_points": 20,
+      "even_associativity_checks": 64000,
+      "even_pair_checks": 1600,
+      "even_points": 40,
+      "failures": 0,
+      "odd_pair_checks": 576,
+      "odd_points": 24,
+      "order": 3,
+      "square_zero_elements": 2
+    },
+    {
+      "core_points": 48,
+      "even_associativity_checks": 5832,
+      "even_pair_checks": 36864,
+      "even_points": 192,
+      "failures": 0,
+      "odd_pair_checks": 3136,
+      "odd_points": 56,
+      "order": 4,
+      "square_zero_elements": 4
+    }
+  ],
+  "result": "PASS",
+  "schema_version": "n.mathlab.mcrc_hidden_infinitesimal_noncommutativity_standalone.v1",
+  "symbolic_audit": {
+    "check_count": 8,
+    "checks": [
+      {"name": "core_closure_identity", "passed": true},
+      {"name": "even_skew_associativity", "passed": true},
+      {"name": "skew_primitive_coassociativity", "passed": true},
+      {"name": "commutator_defect", "passed": true},
+      {"name": "center_two_reduced_points", "passed": true},
+      {"name": "field_count_even_core", "passed": true},
+      {"name": "field_count_odd", "passed": true},
+      {"name": "tangent_dimensions_crossing_even", "passed": true}
+    ],
+    "failure_count": 0
+  },
+  "theorems_checked": {
+    "common_crossing_core": true,
+    "even_bilateral_skew_law": true,
+    "finite_field_counts": {
+      "both_unit_groups": "q^n-1",
+      "core_and_even": "2*q^n-1",
+      "odd": "3*q^n-2"
+    },
+    "odd_unit_doubling": true,
+    "universal_even_commutator_defect": true,
+    "zeta_functions": {
+      "core_and_even": "(1-T)/(1-q*T)^2",
+      "odd": "(1-T)^2/(1-q*T)^3"
+    }
+  }
+}

@@ -1,0 +1,77 @@
+name: Independent reproduction report
+description: Report a successful, failed, or partial reproduction of a proof or computation.
+title: "[Reproduction] PAPER-ID / scope / result"
+labels: ["review: reproduction", "status: triage"]
+body:
+  - type: input
+    id: paper
+    attributes:
+      label: Paper ID
+      placeholder: HINC-001
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Exact source commit
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope reproduced
+      description: Name the theorem, formal declarations, finite universe, or evidence route.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, tools, versions, compilers/proof assistants, and material hardware.
+    validations:
+      required: true
+  - type: textarea
+    id: commands
+    attributes:
+      label: Commands and procedure
+      render: shell
+    validations:
+      required: true
+  - type: dropdown
+    id: independence
+    attributes:
+      label: Independence level
+      options:
+        - Exact rerun of primary source
+        - Fresh environment rerun
+        - Separately written implementation
+        - Independent proof derivation
+        - Independent formalization
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: Result
+      options:
+        - PASS — agrees for declared scope
+        - FAIL — reproducible discrepancy
+        - BLOCKED — environment or source unavailable
+        - PARTIAL — some scope reproduced
+        - INCONCLUSIVE
+    validations:
+      required: true
+  - type: textarea
+    id: outputs
+    attributes:
+      label: Outputs, logs, and hashes
+      description: Attach or link complete evidence and identify the first discrepancy.
+    validations:
+      required: true
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Limitations
+      description: State what this reproduction does not establish.
+    validations:
+      required: true

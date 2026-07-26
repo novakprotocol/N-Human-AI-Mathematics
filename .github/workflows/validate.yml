@@ -1,0 +1,45 @@
+name: Validate mathematical publication repository
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile validation source
+        run: python -m py_compile tools/validate_publication.py
+
+      - name: Validate structure, status, claims, and public-source hygiene
+        run: |
+          mkdir -p reports
+          python tools/validate_publication.py \
+            --root . \
+            --json-output reports/publication-validation.json
+
+      - name: Check Git whitespace
+        run: git diff --check HEAD^
+        continue-on-error: true
+
+      - name: Upload validation receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: publication-validation-${{ github.run_id }}
+          path: reports/publication-validation.json
+          if-no-files-found: warn
+          retention-days: 90

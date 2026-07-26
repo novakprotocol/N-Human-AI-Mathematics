@@ -1,0 +1,29 @@
+{
+  "claims": {
+    "external_institutional_replication": false,
+    "globally_novel_mathematics": false,
+    "immutable_github_hosted_pass": false,
+    "proof_assistant_verified": false,
+    "public_release_authorized": false,
+    "publication_priority_established": false
+  },
+  "file_sha256": {
+    "certificate": "4a177cf5bbfd35ebc5659103cde0d7312c17f1e0693c7377ae8fcdf49381b676",
+    "fresh_copy_log": "a21de540aed2438a78eff6183e820f13631aef1900e00bbb79f80257a6bba3bb",
+    "source": "ec92a807a75a086b5914f7f1859426ebce34ec219baeadbc9d9bf6f1063aadf3",
+    "test_log": "b5448fe9da325328d20871aba678f690b90fffc58fd7cfe6249ca38147f43cae",
+    "tests": "6e085a590cb2352e96d4707a6e755dbc00408fca7b1ca362fdfb753403831664"
+  },
+  "fresh_copy_certificate_byte_identical": true,
+  "fresh_copy_execution": true,
+  "maximum_artin_order": 4,
+  "platform": "Linux-6.12.13-x86_64-with-glibc2.41",
+  "python_version": "3.13.5",
+  "recorded_at_utc": "2026-07-24T14:17:32.291465+00:00",
+  "result": "PASS",
+  "schema_version": "n.mathlab.mcrc_hidden_infinitesimal_noncommutativity_submission_execution.v1",
+  "standalone_evidence_sha256": "20d883988da7818f73de0b4ccab68bc7adea5097a4af7a6ef5a72c23b4e1ea4b",
+  "unit_test_failures": 0,
+  "unit_tests": 5,
+  "transport_note": "The file hashes refer to the externally packaged reproducibility kit. The GitHub branch is a readable source mirror and has not yet received an immutable hosted PASS."
+}

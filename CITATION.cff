@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: >-
+  Cite the exact paper release rather than the moving repository whenever a
+  paper-specific DOI or release tag is available.
+title: N Human-AI Mathematics
+type: software
+version: 0.1.0-staging
+authors:
+  - family-names: Novak
+    given-names: Matthew S.
+abstract: >-
+  A human-led, AI-assisted mathematical research and publication repository
+  containing precise theorem statements, proofs, formal-verification status,
+  reproducible computational evidence, correction records, prior-art
+  boundaries, and structured adversarial review materials.
+repository-code: https://github.com/novakprotocol/N-Human-AI-Mathematics
+url: https://github.com/novakprotocol/N-Human-AI-Mathematics
+keywords:
+  - mathematics
+  - formal verification
+  - reproducibility
+  - human-AI collaboration
+  - theorem review
+  - computational mathematics
+license: LicenseRef-Proprietary

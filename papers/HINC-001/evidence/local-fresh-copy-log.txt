@@ -1,0 +1,14 @@
+FRESH_COPY=/tmp/tmp.spZqLhqiii
+UTC_START=2026-07-24T14:17:23Z
+test_certificate (test_standalone_common_core.CommonCoreTests.test_certificate) ... ok
+test_deterministic_certificate (test_standalone_common_core.CommonCoreTests.test_deterministic_certificate) ... ok
+test_even_identity (test_standalone_common_core.CommonCoreTests.test_even_identity) ... ok
+test_field_point_counts (test_standalone_common_core.CommonCoreTests.test_field_point_counts) ... ok
+test_odd_identity_and_local_identity (test_standalone_common_core.CommonCoreTests.test_odd_identity_and_local_identity) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 4.834s
+
+OK
+FRESH_COPY_CERTIFICATE_BYTE_IDENTITY=PASS
+UTC_END=2026-07-24T14:17:31Z

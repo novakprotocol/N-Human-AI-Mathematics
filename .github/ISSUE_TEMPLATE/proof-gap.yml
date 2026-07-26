@@ -1,0 +1,63 @@
+name: Proof-gap report
+description: Identify a logical gap, hidden assumption, circular step, or invalid scope transition.
+title: "[Proof gap] PAPER-ID / theorem / location"
+labels: ["review: proof gap", "status: triage"]
+body:
+  - type: input
+    id: paper
+    attributes:
+      label: Paper ID
+      placeholder: HINC-001
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Exact source commit
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Exact theorem and proof location
+      placeholder: Theorem 3.3, sufficiency paragraph
+    validations:
+      required: true
+  - type: textarea
+    id: inference
+    attributes:
+      label: Challenged inference
+      description: Quote or restate the premise and conclusion precisely.
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: Why the inference is unsupported
+      description: Identify the missing assumption, invalid theorem scope, circularity, or omitted argument.
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Estimated severity
+      options:
+        - Clarification only
+        - Local repair likely
+        - Load-bearing repair likely
+        - Fatal to the current statement
+        - Uncertain
+    validations:
+      required: true
+  - type: textarea
+    id: repair
+    attributes:
+      label: Possible repair or test
+      description: Optional, but include a repair or counter-test when known.
+  - type: checkboxes
+    id: declaration
+    attributes:
+      label: Declaration
+      options:
+        - label: I reviewed the exact source identity stated above.
+          required: true

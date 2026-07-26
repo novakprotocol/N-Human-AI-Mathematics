@@ -1,0 +1,15 @@
+{
+    "schema_version":  "n.human_ai_mathematics.bootstrap_receipt.v1",
+    "result":  "PASS",
+    "repository":  "novakprotocol/N-Human-AI-Mathematics",
+    "created_utc":  "2026-07-26T00:04:30.6333559Z",
+    "bootstrap_ref":  "9dc69542fb2b089a4cef5ea3c425d82bb705d4dd",
+    "bootstrap_commit":  "9dc69542fb2b089a4cef5ea3c425d82bb705d4dd",
+    "manuscript_source_repository":  "novakprotocol/N-MathLab",
+    "manuscript_source_commit":  "e6adac212150177d4afa56e643d37533a208693c",
+    "formal_source_repository":  "novakprotocol/novak-sdt",
+    "formal_source_commit":  "d7751d1de76253407016ef4bf92738cffa800e82",
+    "public_visibility_authorized":  false,
+    "license_applied":  false,
+    "validation_receipt":  "reports/publication-validation.json"
+}

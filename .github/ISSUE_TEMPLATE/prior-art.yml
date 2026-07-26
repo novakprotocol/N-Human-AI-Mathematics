@@ -1,0 +1,65 @@
+name: Prior-art or equivalence report
+description: Identify an earlier theorem that may contain, imply, or be equivalent to a project claim.
+title: "[Prior art] PAPER-ID / candidate earlier theorem"
+labels: ["review: prior art", "status: triage"]
+body:
+  - type: input
+    id: paper
+    attributes:
+      label: Paper ID
+      placeholder: HINC-001
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Exact project source commit
+    validations:
+      required: true
+  - type: textarea
+    id: citation
+    attributes:
+      label: Complete earlier source
+      description: Authors, title, venue, year, DOI/MR/Zbl/arXiv/stable URL.
+    validations:
+      required: true
+  - type: textarea
+    id: exact_location
+    attributes:
+      label: Exact earlier theorem or passage
+      description: Theorem number, proposition, page, and assumptions.
+    validations:
+      required: true
+  - type: textarea
+    id: translation
+    attributes:
+      label: Translation of objects and notation
+      description: Map the project definitions to the earlier source.
+    validations:
+      required: true
+  - type: textarea
+    id: implication
+    attributes:
+      label: Implication or equivalence argument
+      description: Explain which project claim follows and which parts do not.
+    validations:
+      required: true
+  - type: dropdown
+    id: effect
+    attributes:
+      label: Suggested effect on novelty status
+      options:
+        - Related framework only
+        - Likely known consequence
+        - Exact prior theorem
+        - Partial overlap
+        - Uncertain
+    validations:
+      required: true
+  - type: checkboxes
+    id: declaration
+    attributes:
+      label: Declaration
+      options:
+        - label: I inspected the actual source, not only a title or search snippet.
+          required: true
