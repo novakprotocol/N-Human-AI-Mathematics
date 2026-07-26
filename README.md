@@ -2,7 +2,7 @@
 
 **Human-led, AI-assisted mathematical research with inspectable proofs, evidence, corrections, and review boundaries.**
 
-This is the standalone publication and specialist-review repository:
+This tree defines the standalone publication and specialist-review repository:
 
 ```text
 repository:                 novakprotocol/N-Human-AI-Mathematics
@@ -13,7 +13,7 @@ bootstrap_source_commit:    9dc69542fb2b089a4cef5ea3c425d82bb705d4dd
 public_release_authorized:  false
 ```
 
-It contains selected mathematics developed in the private `novakprotocol/N-MathLab` laboratory. It does not import the laboratory's raw branch history, chat transcripts, abandoned experiments, or unrelated N-Stack work.
+In the standalone repository this is the live front door. Under `N-MathLab/exports`, it is the canonical source mirror. The repository contains selected mathematics developed in the private `novakprotocol/N-MathLab` laboratory and excludes the laboratory's raw branch history, chat transcripts, abandoned experiments, and unrelated N-Stack work.
 
 ## Bootstrap provenance
 
@@ -23,7 +23,7 @@ The initial repository was materialized from pinned N-MathLab and Lean source co
 - [`reports/publication-validation.json`](reports/publication-validation.json);
 - [`BOOTSTRAP_CORRECTIONS.md`](BOOTSTRAP_CORRECTIONS.md).
 
-The retained initializer, Windows instructions, and launcher document how the first private repository was built. They are provenance and disaster-recovery material. The initializer must be run from the `N-MathLab` export tree, not from this standalone repository, and it refuses to overwrite an existing destination repository.
+The retained initializer, Windows instructions, and launcher document how the first private repository was built. They are provenance and disaster-recovery material. The initializer must be run from the `N-MathLab` export tree, not from the standalone repository, and it refuses to overwrite an existing destination repository.
 
 ## Start here
 
