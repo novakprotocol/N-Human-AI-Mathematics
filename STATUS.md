@@ -1,22 +1,21 @@
-# Repository Status
+# Repository status
 
 ## Current lifecycle state
 
 ```text
 repository_name:             N-Human-AI-Mathematics
-repository_role:             curated private staging and future public-review layer
+public_title:                N Human–LLM Mathematics
+repository_role:             curated candidate-review and reproduction layer
 repository:                  novakprotocol/N-Human-AI-Mathematics
 visibility:                  private
 release_channel:             private staging
-release_version:             none
-release_date:                none
+candidate_version:           0.1.0-public-review-candidate
 default_branch:              main
-standalone_repository:       created
-initial_curated_commit:      e378c773f7c54b375fdd208961f77702b1aadd05
-bootstrap_source_commit:     9dc69542fb2b089a4cef5ea3c425d82bb705d4dd
-bootstrap_result:            PASS
-publication_validation:      PASS for pre-hostile-review staging
-public_release_authorized:   false pending revised approval
+release_branch:              release/public-review-v1
+public_release_authorized:   false
+public_switch_ready:         true
+visibility_switch_executed:  false
+Pages_deployment_executed:   false
 blanket_license_applied:     false
 peer_reviewed:               false
 journal_submitted:           false
@@ -25,52 +24,39 @@ specific_model_disclosed:    false
 specific_provider_disclosed: false
 ```
 
-PR #2 remains a private draft. No merge, tag, GitHub release, Pages deployment, DOI, or visibility change is authorized while the hostile-review blockers remain active.
+The package is prepared so that the remaining release operation is an owner-controlled switch: merge the validated release branch into private `main`, validate `main`, change visibility, activate Pages, and verify the live release.
 
 ## What is complete
 
-- The standalone private repository exists and `main` is the default branch.
+- The standalone private repository exists with `main` as the default branch.
 - The guarded bootstrap and initial publication validation passed.
 - Human-readable and machine-readable evidence rules are defined.
 - Counterexample, proof-gap, prior-art, and reproduction channels are defined.
 - No blanket MIT license is applied.
-- The HINC standalone manuscript, verifier, tests, evidence, and formal source were materialized from pinned commits.
-- The HINC algebraic kernel has a public hosted Lean PASS.
-- The principal even and odd coefficient classifications and normalized monoid laws have a second public hosted Lean PASS.
-- Failed bootstrap, formal-proof, test-harness, and publication attempts are preserved separately from successful evidence.
-- The public wording is category-level **Human + LLM**; no specific model or provider is disclosed.
+- The public wording is category-level **Human-led, LLM-assisted**; no specific model or provider is disclosed.
 - The 2026-07-27 hostile review found no explicit counterexample to the controlling coefficient systems.
-- A self-contained characteristic-two Hochschild derivation is now supplied.
-- A human generator-to-global proof is now supplied.
-- A complete odd-presentation normal-form proof is now supplied.
-- A deeper prior-art ledger and primary-source map are present.
-
-## Active hostile-review controls
-
-The following files currently override stale or broader language in the pre-review manuscript:
+- HINC-001 now has one controlling consolidated manuscript:
 
 ```text
-papers/HINC-001/HOSTILE_REVIEW_2026-07-27.md
-papers/HINC-001/MANUSCRIPT_ERRATA_2026-07-27.md
-papers/HINC-001/FOUNDATIONAL_HOCHSCHILD_DERIVATION_2026-07-27.md
-papers/HINC-001/GENERATOR_TO_GLOBAL_LEMMA_2026-07-27.md
-papers/HINC-001/ODD_PRESENTATION_NORMAL_FORM_2026-07-27.md
-papers/HINC-001/PRIOR_ART_SEARCH_LEDGER_2026-07-27.csv
-papers/HINC-001/PRIOR_ART_PRIMARY_SOURCE_MAP_2026-07-27.json
-docs/PRIVATE_PREVIEW_BLOCKERS_2026-07-27.md
+papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md
 ```
 
-## Why public release is blocked
-
-1. The four-part manuscript has not yet been consolidated with the hostile-review corrections.
-2. The new foundation, odd normal form, and generator-to-global proof are not integrated into Lean.
-3. The complete representability proof remains too compressed.
-4. The center and fppf-derived-subgroup conventions require specialist audit.
-5. The old manuscript contains stale cross-references and evidence language.
-6. The derived PDF/DOCX artifacts have not been regenerated from revised source.
-7. The private website preview still needs branch-correct links, private-preview wording, citation warnings, and accessibility verification.
-8. Source-level historical-equivalence review remains pending.
-9. The repository-name/public-wording mismatch requires legal/editorial resolution.
+- The consolidated manuscript integrates:
+  - the characteristic-two normalized Hochschild derivation;
+  - complete even and odd source presentations;
+  - the odd normal-form theorem;
+  - generator-to-global binary-bracket preservation;
+  - explicit natural representability;
+  - corrected cross-references and terminology;
+  - the center subfunctor and pointwise-center distinction;
+  - disconnected-base clopen language;
+  - the fppf-derived-subgroup argument;
+  - idempotent, geometric, finite-field, and finite-Artin results;
+  - current computational, formal, and historical-priority boundaries.
+- The HINC algebraic kernel has a public hosted Lean PASS.
+- The principal even and odd coefficient classifications and normalized monoid laws have a second public hosted Lean PASS.
+- Failed bootstrap, formal-proof, test-harness, and publication attempts remain preserved separately from successful evidence.
+- The publication order remains HINC-001, ABF-001, FSG-001, ACM-001.
 
 ## Formal verification checkpoint
 
@@ -85,30 +71,45 @@ classification artifact hash: 2dee88b9a248dee8719c27aa23a27ca3281e697cf67202bb50
 sorryAx:                      absent
 ```
 
-These receipts cover the listed algebraic kernel and coefficient-classification declarations only.
+These receipts cover the listed algebraic kernel and coefficient-classification declarations only. The full revised manuscript is not formally verified and is not described as such.
 
 ## Current paper states
 
-| Paper | Current mathematical state | External review | Release state |
+| Paper | Mathematical state | External review | First-launch state |
 |---|---|---|---|
-| `HINC-001` | Candidate classification; hostile-review additions supplied; consolidation pending | Pending | **Hold — private revision** |
-| `ABF-001` | Exact finite theorem package preserved | Pending | Hold |
+| `HINC-001` | Self-contained revised candidate classification; internal evidence and bounded Lean scopes passed | Pending and requested | Complete candidate technical-review package |
+| `ABF-001` | Exact finite theorem package preserved | Pending | Index entry only; next package |
 | `FSG-001` | Candidate all-parameter theorem package preserved | Pending | Hold |
-| `ACM-001` | Exact finite code/matroid line preserved; consolidation pending | Pending | Hold |
+| `ACM-001` | Exact finite code/matroid line preserved | Pending | Hold pending consolidation |
 
-## Next gates
+## Why external review remains pending
 
-1. Integrate all HINC errata into a new manuscript identity.
-2. Expand representability, center, and derived-subgroup definitions.
-3. Update and rerun formal source where practical.
-4. Regenerate and visually inspect derived artifacts.
-5. Complete external algebra/monoid and historical-equivalence reviews.
-6. Approve a corrected private website preview.
-7. Rerun publication and privacy validators.
-8. Obtain a new explicit owner decision before any public action.
+Public technical review is intended to obtain:
 
-Research in N-MathLab may continue in parallel. Public-release cleanup is not a reason to stop the laboratory.
+1. outside algebraic-monoid and Gerstenhaber review;
+2. independent reproduction;
+3. source-level historical-equivalence analysis;
+4. optional independent formalization of unformalized proof nodes.
+
+Those are not blockers to honestly releasing a **candidate technical-review package**, provided they remain visibly pending. They remain blockers to claiming external validation, peer review, journal acceptance, or historical priority.
+
+## Final switch gates
+
+Before the repository becomes public, all of the following must pass in one controlled sequence:
+
+1. release-branch CI;
+2. repository privacy, rights, citation, and withheld-identity scans;
+3. HINC standalone tests;
+4. website static and accessibility checks;
+5. branch merge into private `main`;
+6. fresh validation of private `main`;
+7. public visibility change and metadata re-read;
+8. GitHub Pages activation and live-site verification;
+9. public-review tag, release, and checksum receipt;
+10. structured review-channel creation.
+
+See [`PUBLIC_SWITCH_READINESS.md`](PUBLIC_SWITCH_READINESS.md).
 
 ## Claim boundary
 
-The repository establishes a controlled private staging architecture and strong internal evidence for selected candidate results. It does not establish full manuscript correctness, worldwide novelty, publication priority, peer-review acceptance, importance, public release, specific model/provider identity, or complete formal verification.
+The repository establishes a controlled candidate-review architecture and strong internal evidence for HINC-001. It does not establish complete formal verification, outside correctness review, outside reproduction, worldwide novelty, publication priority, peer-review acceptance, journal submission, DOI assignment, security impact, or a specific model/provider identity.
