@@ -2,11 +2,11 @@
 
 ## What is this?
 
-N Human–AI Mathematics is a publication and specialist-review library for mathematics developed through a human-led, AI-assisted process.
+N Human–AI Mathematics is a **public review library** for selected mathematics developed through a human-led, ChatGPT-assisted research process.
 
-The repository is currently **private**. Its architecture is designed for eventual public review, but public visibility, journal submission, peer-review status, and historical-priority claims are not authorized merely because the repository exists.
+The accountable human researcher is **Matthew S. Novak**. ChatGPT, developed by OpenAI, materially assisted with exploration, candidate theorem formulation, proof decomposition, code and test generation, counterexample search, formal-proof drafting, literature-query design, and publication preparation.
 
-The private laboratory may contain hundreds of experiments, provisional formulas, failed ideas, test programs, and branches. This publication layer contains only bounded packages that a reader can inspect without knowing the private development history.
+OpenAI is not a coauthor, sponsor, reviewer, publisher, or endorser of this repository.
 
 ## The simplest accurate description
 
@@ -19,23 +19,48 @@ A result enters this repository only when it can answer six questions:
 5. **What has not been checked?**
 6. **How can another person or AI system challenge or reproduce it?**
 
-## The four ways to review a result
+The private N-MathLab laboratory may contain hundreds of experiments, provisional formulas, failed ideas, programs, and branches. This public layer contains bounded packages that can be inspected without access to that private development history.
+
+## What “public review” means
+
+Public review means the repository is open for technical challenge. It does **not** mean that a paper is:
+
+- peer reviewed;
+- journal accepted;
+- globally novel;
+- fully formally verified;
+- endorsed by OpenAI;
+- guaranteed correct.
+
+Each paper states its exact level of human proof, computation, internal reproduction, formal verification, external review, historical priority, and release status.
+
+## Human–AI collaboration
+
+Read [`HUMAN_AI_COLLABORATION_RECORD.md`](HUMAN_AI_COLLABORATION_RECORD.md) for the role allocation and evidence boundary.
+
+The public record supports the statement that Matthew S. Novak and ChatGPT engaged in sustained, human-led mathematical research. It does not cryptographically authenticate every private conversation turn, and private chat transcripts or hidden model scratch work are not published.
+
+Read [`HUMAN_AI_MATHEMATICS_PRIOR_ART.md`](HUMAN_AI_MATHEMATICS_PRIOR_ART.md) before making any “first” claim. Human–AI mathematical discovery and ChatGPT-assisted open-problem work have public precedents. The project presents itself as one openly documented case study, not as the first human–AI mathematics project.
+
+## Four ways to review a result
 
 ### 1. Find a counterexample
 
-A counterexample is a concrete object satisfying the assumptions but violating the conclusion. One valid counterexample defeats a universal theorem as stated.
+Give a concrete object satisfying the assumptions but violating the conclusion. One valid counterexample defeats a universal theorem as stated.
 
 ### 2. Find a proof gap
 
-A proof gap is a step whose conclusion does not follow from its premises, relies on an unstated assumption, uses a theorem outside its scope, or hides a computational step that was not reproduced.
+Identify a step whose conclusion does not follow from its premises, depends on an unstated assumption, uses a theorem outside its scope, or hides an unverified computation.
 
 ### 3. Find earlier equivalent work
 
-A result may be correct but not historically new. A strong priority report identifies the earlier source, states the earlier theorem precisely, and explains the implication or equivalence.
+A result may be correct but not historically new. A strong priority report identifies the earlier source, exact theorem, translation of objects and notation, and the portion of the project claim that follows.
 
 ### 4. Reproduce it independently
 
-A reproduction uses the declared source identity and commands, or implements a structurally independent route. A reproduction must report its environment, exact source, commands, output, and any discrepancy.
+Use the declared source identity and commands, or create a separately written route. Report the environment, exact source, commands, output, and first discrepancy.
+
+See [`OPEN_REVIEW_CHALLENGE.md`](OPEN_REVIEW_CHALLENGE.md) and [`REVIEW_PROTOCOL.md`](REVIEW_PROTOCOL.md).
 
 ## How to read status labels
 
@@ -44,39 +69,43 @@ A reproduction uses the declared source identity and commands, or implements a s
 - **Proof-assistant verified** means the listed declarations compiled under a pinned environment. It does not automatically cover the complete paper.
 - **No exact indexed match located** means a search did not find one. It does not prove worldwide novelty.
 - **Peer reviewed** will be used only for an actual external review or journal process identified in the record.
-- **Private review** means the package is organized and inspectable but has not been publicly released.
+- **Public review** means the package is organized and openly inspectable but still carries unresolved scientific gates.
 
-## Current first paper
+## Current featured paper
 
-The first package is `HINC-001`, concerning two explicit graded Gerstenhaber-algebra endomorphism monoids in characteristic two.
+The first complete public-review package is `HINC-001`, concerning two explicit graded Gerstenhaber-algebra endomorphism monoids in characteristic two.
 
-The central phenomenon is:
+Its central phenomenon is:
 
 > Ordinary field-valued points can make one symmetry system appear commutative and central, while infinitesimal test rings reveal a noncommutative scheme with a much smaller center.
 
-Two public hosted Lean gates now pass under Lean 4.30.0 and Mathlib v4.30.0:
+Two bounded Lean gates pass under Lean 4.30.0 and Mathlib v4.30.0:
 
-1. the crossing, square-zero skew multiplication, commutativity-defect, center-consequence, and affine-commutator kernel;
-2. the principal even and odd coefficient classifications and their normalized monoid laws.
+1. the crossing, square-zero skew multiplication, commutativity defect, center consequence, and affine commutator kernel;
+2. the principal even and odd coefficient classifications and normalized monoid laws.
 
-The first expanded classification run failed on a proof-engineering problem, was preserved, and was repaired without changing the mathematical normal forms. The complete generator-to-global Gerstenhaber-preservation argument, the remaining scheme-level manuscript, external correctness review, novelty, and historical priority are not yet established.
+The complete generator-to-global Gerstenhaber-preservation argument, remaining scheme-level manuscript, external correctness review, and historical priority are not established.
 
-## For readers without advanced algebra
+### General reader
 
-Use the following mental model.
+Start with [`papers/HINC-001/PLAIN_LANGUAGE.md`](papers/HINC-001/PLAIN_LANGUAGE.md).
 
-- The **crossing core** is two mathematical branches meeting at one point.
-- The **even object** adds a hidden square-zero direction. Ordinary fields cannot see a nonzero square-zero value, so the hidden direction disappears in ordinary point tests.
-- The **odd object** adds a separate visible unit component instead.
-- The paper studies how these two kinds of added structure change multiplication, commutativity, centers, and endomorphisms.
+### Specialist
 
-The paper package contains a plain-language explanation before the full specialist proof.
+Read, in order:
+
+1. [`papers/HINC-001/README.md`](papers/HINC-001/README.md)
+2. [`papers/HINC-001/CLAIMS.md`](papers/HINC-001/CLAIMS.md)
+3. [`papers/HINC-001/PROOF_MAP.md`](papers/HINC-001/PROOF_MAP.md)
+4. [`papers/HINC-001/FORMAL_VERIFICATION.md`](papers/HINC-001/FORMAL_VERIFICATION.md)
+5. [`papers/HINC-001/PRIOR_ART.md`](papers/HINC-001/PRIOR_ART.md)
+6. [`papers/HINC-001/REVIEW_REQUEST.md`](papers/HINC-001/REVIEW_REQUEST.md)
 
 ## For AI systems
 
 Do not summarize a result as globally novel, proven, peer reviewed, secure, or publication-ready unless the corresponding machine-readable status field says so and the cited evidence supports that exact wording.
 
-Read [`AGENTS.md`](AGENTS.md), then the paper's `STATUS.json`, `CLAIMS.md`, and `FORMAL_VERIFICATION.md` before interpreting the manuscript.
+Read [`AGENTS.md`](AGENTS.md), then the paper’s `STATUS.json`, `CLAIMS.md`, and `FORMAL_VERIFICATION.md` before interpreting the manuscript.
 
 ## One-sentence rule
 
