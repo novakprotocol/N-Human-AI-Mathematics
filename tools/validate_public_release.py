@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed validator for the Human + LLM public-review release."""
+"""Fail-closed validator for the Human + LLM public-switch candidate."""
 
 from __future__ import annotations
 
@@ -18,16 +18,26 @@ REQUIRED_FILES = {
     "STATUS.md",
     "RESEARCH_INDEX.md",
     "research-index.json",
+    "PUBLIC_SWITCH_READINESS.md",
     "HUMAN_AI_COLLABORATION_RECORD.md",
     "HUMAN_AI_MATHEMATICS_PRIOR_ART.md",
     "OPEN_REVIEW_CHALLENGE.md",
-    "PUBLIC_REVIEW_RELEASE.md",
+    "PUBLICATION_WORKFLOW.md",
     "RIGHTS_AND_LICENSING.md",
     "CITATION.cff",
     "reports/public-release-audit-2026-07-27.json",
+    "reports/public-switch-readiness.json",
+    "papers/HINC-001/README.md",
     "papers/HINC-001/STATUS.json",
+    "papers/HINC-001/CLAIMS.md",
+    "papers/HINC-001/PROOF_MAP.md",
+    "papers/HINC-001/FORMAL_VERIFICATION.md",
+    "papers/HINC-001/PRIOR_ART.md",
+    "papers/HINC-001/REPRODUCE.md",
     "papers/HINC-001/AI_DISCLOSURE.md",
     "papers/HINC-001/THIRD_PARTY_NOTICES.md",
+    "papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md",
+    "papers/HINC-001/manuscript/MANUSCRIPT_INDEX.md",
     "papers/HINC-001/manuscript/references.bib",
     "schemas/research-index.schema.json",
     "schemas/paper-status.schema.json",
@@ -61,9 +71,9 @@ TEXT_SUFFIXES = {
     ".cmd",
 }
 
-# Construct withheld identifiers without embedding them as contiguous public
-# strings in this validator. The exact identities remain private pending
-# separate human legal and editorial review.
+# Construct withheld identifiers without embedding them contiguously in public
+# prose. The validator source itself is excluded from this one scan because the
+# strings below are its detection vocabulary.
 WITHHELD_IDENTIFIERS = (
     "Chat" + "GPT",
     "Open" + "AI",
@@ -83,6 +93,13 @@ FORBIDDEN_PATTERNS = (
     (
         "private-key material",
         re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
+    ),
+    (
+        "blanket MIT grant sentence",
+        re.compile(
+            r"Permission is hereby granted, free of charge, to any person obtaining a copy",
+            re.IGNORECASE,
+        ),
     ),
 )
 
@@ -129,8 +146,6 @@ def scan_text(root: Path) -> list[Finding]:
                     Finding("ERROR", f"{relative}:{line}", f"forbidden {label}")
                 )
 
-        # Skip only the exact current validator source because its dynamically
-        # assembled strings are the release gate's detection vocabulary.
         if path.resolve() == validator_path:
             continue
 
@@ -143,7 +158,7 @@ def scan_text(root: Path) -> list[Finding]:
                     Finding(
                         "ERROR",
                         f"{relative}:{line}",
-                        "withheld model or provider identifier appears in public source",
+                        "withheld model or provider identifier appears in proposed public source",
                     )
                 )
 
@@ -155,7 +170,7 @@ def validate(root: Path) -> list[Finding]:
 
     for relative in sorted(REQUIRED_FILES):
         if not (root / relative).is_file():
-            findings.append(Finding("ERROR", relative, "required release file missing"))
+            findings.append(Finding("ERROR", relative, "required readiness file missing"))
 
     if findings:
         return findings
@@ -163,23 +178,29 @@ def validate(root: Path) -> list[Finding]:
     index = load_json(root / "research-index.json")
     hinc = load_json(root / "papers/HINC-001/STATUS.json")
     audit = load_json(root / "reports/public-release-audit-2026-07-27.json")
+    readiness = load_json(root / "reports/public-switch-readiness.json")
     research_schema = load_json(root / "schemas/research-index.schema.json")
     paper_schema = load_json(root / "schemas/paper-status.schema.json")
 
     findings += require(
-        index.get("public_release_authorized") is True,
+        index.get("public_release_authorized") is False,
         "research-index.json",
-        "public release is not authorized",
+        "visibility switch must remain unauthorized in the candidate commit",
     )
     findings += require(
-        index.get("release_channel") == "public_review",
+        index.get("public_switch_ready") is True,
         "research-index.json",
-        "release_channel must be public_review",
+        "public_switch_ready must be true",
     )
     findings += require(
-        index.get("release_version") == "0.1.0-public-review",
+        index.get("release_channel") == "private_staging",
         "research-index.json",
-        "unexpected public-review version",
+        "candidate commit must remain private_staging",
+    )
+    findings += require(
+        index.get("release_version") == "0.1.0-public-review-candidate",
+        "research-index.json",
+        "unexpected candidate version",
     )
     findings += require(
         index.get("specific_model_disclosed") is False,
@@ -192,108 +213,172 @@ def validate(root: Path) -> list[Finding]:
         "specific_provider_disclosed must be false",
     )
 
+    papers = {item.get("id"): item for item in index.get("papers", [])}
+    findings += require(
+        set(papers) == {"HINC-001", "ABF-001", "FSG-001", "ACM-001"},
+        "research-index.json",
+        "paper portfolio does not match the governed four-paper order",
+    )
+    findings += require(
+        papers.get("HINC-001", {}).get("state") == "active_review",
+        "research-index.json",
+        "HINC-001 must be the active candidate package",
+    )
+    for held_id in ("ABF-001", "FSG-001", "ACM-001"):
+        findings += require(
+            papers.get(held_id, {}).get("state") == "hold",
+            "research-index.json",
+            f"{held_id} must remain on hold",
+        )
+
     hinc_release = hinc.get("release", {})
     findings += require(
-        hinc_release.get("public_authorized") is True,
+        hinc_release.get("public_authorized") is False,
         "papers/HINC-001/STATUS.json",
-        "HINC public review is not authorized",
+        "HINC visibility switch must remain unauthorized in the candidate commit",
     )
     findings += require(
-        hinc_release.get("channel") == "public_review",
+        hinc_release.get("public_switch_ready") is True,
         "papers/HINC-001/STATUS.json",
-        "HINC release channel must be public_review",
+        "HINC public_switch_ready must be true",
     )
     findings += require(
-        hinc_release.get("version") == "0.1.0-public-review",
+        hinc_release.get("channel") == "private_staging",
         "papers/HINC-001/STATUS.json",
-        "HINC public-review version mismatch",
+        "HINC channel must remain private_staging",
     )
     findings += require(
-        hinc_release.get("doi") is None,
+        hinc_release.get("version") == "0.1.0-public-review-candidate",
         "papers/HINC-001/STATUS.json",
-        "DOI must remain null until assigned",
+        "HINC candidate version mismatch",
     )
     findings += require(
-        hinc_release.get("specific_model_disclosed") is False,
+        hinc_release.get("release_date") is None and hinc_release.get("doi") is None,
         "papers/HINC-001/STATUS.json",
-        "HINC specific_model_disclosed must be false",
+        "release date and DOI must remain null before the public switch",
     )
     findings += require(
-        hinc_release.get("specific_provider_disclosed") is False,
+        hinc_release.get("specific_model_disclosed") is False
+        and hinc_release.get("specific_provider_disclosed") is False,
         "papers/HINC-001/STATUS.json",
-        "HINC specific_provider_disclosed must be false",
+        "HINC model/provider disclosure boundary failed",
     )
 
     findings += require(
-        audit.get("result") == "PASS_WITH_DECLARED_LIMITATIONS",
+        audit.get("result") == "READY_PENDING_VISIBILITY_SWITCH",
         "reports/public-release-audit-2026-07-27.json",
-        "public release audit is not PASS_WITH_DECLARED_LIMITATIONS",
+        "release audit is not switch-ready",
     )
-    scope = audit.get("release_scope", {})
+    audit_scope = audit.get("release_scope", {})
     findings += require(
-        scope.get("complete_public_review_packages") == ["HINC-001"],
+        audit_scope.get("complete_candidate_public_review_packages") == ["HINC-001"],
         "reports/public-release-audit-2026-07-27.json",
-        "release scope must contain exactly HINC-001",
-    )
-    findings += require(
-        scope.get("peer_reviewed") is False,
-        "reports/public-release-audit-2026-07-27.json",
-        "peer-review boundary is not false",
+        "release audit must contain exactly HINC-001",
     )
     findings += require(
-        scope.get("specific_model_disclosed") is False,
+        audit_scope.get("repository_visibility") == "private"
+        and audit_scope.get("public_switch_ready") is True
+        and audit_scope.get("visibility_change_executed") is False,
         "reports/public-release-audit-2026-07-27.json",
-        "audit specific_model_disclosed must be false",
+        "release audit visibility boundary is inconsistent",
     )
     findings += require(
-        scope.get("specific_provider_disclosed") is False,
+        audit_scope.get("peer_reviewed") is False
+        and audit_scope.get("historical_priority_established") is False,
         "reports/public-release-audit-2026-07-27.json",
-        "audit specific_provider_disclosed must be false",
+        "audit overstates peer review or historical priority",
+    )
+
+    findings += require(
+        readiness.get("result") == "READY_PENDING_VISIBILITY_SWITCH",
+        "reports/public-switch-readiness.json",
+        "switch-readiness receipt is not ready",
+    )
+    findings += require(
+        readiness.get("public_switch_ready") is True
+        and readiness.get("visibility_change_executed") is False
+        and readiness.get("pages_deployment_executed") is False,
+        "reports/public-switch-readiness.json",
+        "switch-readiness execution flags are inconsistent",
+    )
+    findings += require(
+        readiness.get("active_package") == "HINC-001"
+        and readiness.get("held_packages") == ["ABF-001", "FSG-001", "ACM-001"],
+        "reports/public-switch-readiness.json",
+        "switch-readiness portfolio order is inconsistent",
     )
 
     required_index_fields = set(research_schema.get("required", []))
-    for field in (
-        "release_channel",
-        "release_version",
-        "specific_model_disclosed",
-        "specific_provider_disclosed",
-    ):
-        findings += require(
-            field in required_index_fields,
-            "schemas/research-index.schema.json",
-            f"research schema does not require {field}",
-        )
-
-    release_required = set(
+    findings += require(
+        "public_switch_ready" in required_index_fields,
+        "schemas/research-index.schema.json",
+        "research schema does not require public_switch_ready",
+    )
+    paper_release_required = set(
         paper_schema.get("properties", {})
         .get("release", {})
         .get("required", [])
     )
-    for field in (
-        "channel",
-        "release_date",
-        "specific_model_disclosed",
-        "specific_provider_disclosed",
+    findings += require(
+        "public_switch_ready" in paper_release_required,
+        "schemas/paper-status.schema.json",
+        "paper schema does not require public_switch_ready",
+    )
+
+    revised = (
+        root / "papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md"
+    ).read_text(encoding="utf-8")
+    manuscript_index = (
+        root / "papers/HINC-001/manuscript/MANUSCRIPT_INDEX.md"
+    ).read_text(encoding="utf-8")
+    claims = (root / "papers/HINC-001/CLAIMS.md").read_text(encoding="utf-8")
+    proof_map = (root / "papers/HINC-001/PROOF_MAP.md").read_text(encoding="utf-8")
+
+    for required_phrase in (
+        "binary Gerstenhaber endomorphism",
+        "generator-to-global bracket preservation",
+        "complete presentation of `O`",
+        "explicit representability method",
+        "Pointwise-center warning",
+        "fppf-derived subgroup and abelianization",
+        "public technical-review release:            prepared, not yet activated",
     ):
         findings += require(
-            field in release_required,
-            "schemas/paper-status.schema.json",
-            f"paper release schema does not require {field}",
+            required_phrase in revised,
+            "papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md",
+            f"revised manuscript is missing: {required_phrase}",
         )
 
-    references = (root / "papers/HINC-001/manuscript/references.bib").read_text(
-        encoding="utf-8"
+    findings += require(
+        "HINC-001_REVISED_MANUSCRIPT.md" in manuscript_index,
+        "papers/HINC-001/manuscript/MANUSCRIPT_INDEX.md",
+        "manuscript index does not identify the revised controlling source",
     )
     findings += require(
-        "eprint = {1403.3597}" in references,
-        "papers/HINC-001/manuscript/references.bib",
-        "Hermann arXiv identifier is not corrected",
+        "public switch readiness" in claims.casefold(),
+        "papers/HINC-001/CLAIMS.md",
+        "claim matrix does not record switch readiness",
     )
     findings += require(
-        "@misc{Elduque2025" in references and "year = {2025}" in references,
-        "papers/HINC-001/manuscript/references.bib",
-        "Elduque preprint metadata is not aligned to 2025",
+        "controlling source" in proof_map.casefold(),
+        "papers/HINC-001/PROOF_MAP.md",
+        "proof map does not identify the controlling source",
     )
+
+    references = (
+        root / "papers/HINC-001/manuscript/references.bib"
+    ).read_text(encoding="utf-8")
+    for required_reference in (
+        "1403.3597",
+        "2507.12321",
+        "1103.3218",
+        "1406.0036",
+    ):
+        findings += require(
+            required_reference in references,
+            "papers/HINC-001/manuscript/references.bib",
+            f"required bibliography identifier missing: {required_reference}",
+        )
     findings += require(
         "1411.0836" not in references,
         "papers/HINC-001/manuscript/references.bib",
@@ -301,38 +386,32 @@ def validate(root: Path) -> list[Finding]:
     )
 
     readme = (root / "README.md").read_text(encoding="utf-8")
-    collaboration = (root / "HUMAN_AI_COLLABORATION_RECORD.md").read_text(
-        encoding="utf-8"
-    )
-    prior_art = (root / "HUMAN_AI_MATHEMATICS_PRIOR_ART.md").read_text(
-        encoding="utf-8"
-    )
     site = (root / "docs/index.html").read_text(encoding="utf-8")
+    pages = (root / ".github/workflows/pages.yml").read_text(encoding="utf-8")
 
     findings += require(
-        "human-led, LLM-assisted" in readme,
+        "public switch ready:        true" in readme,
         "README.md",
-        "approved public wording is missing",
+        "repository front door does not state switch readiness",
     )
+    for site_phrase in (
+        "Private public-switch preview",
+        "Public switch ready",
+        "Peer reviewed</span><strong>No",
+        "Model/provider</span><strong>Not disclosed",
+        "noindex,nofollow,noarchive,nosnippet",
+    ):
+        findings += require(
+            site_phrase in site,
+            "docs/index.html",
+            f"website boundary missing: {site_phrase}",
+        )
     findings += require(
-        "one or more large language models" in collaboration,
-        "HUMAN_AI_COLLABORATION_RECORD.md",
-        "category-level collaboration disclosure is missing",
-    )
-    findings += require(
-        "does **not** claim to be the first" in prior_art,
-        "HUMAN_AI_MATHEMATICS_PRIOR_ART.md",
-        "broad first-in-history claim is not rejected",
-    )
-    findings += require(
-        "Peer reviewed</span><strong>No" in site,
-        "docs/index.html",
-        "website peer-review boundary missing",
-    )
-    findings += require(
-        "Model/provider</span><strong>Not disclosed" in site,
-        "docs/index.html",
-        "website identity boundary missing",
+        "workflow_dispatch" in pages
+        and "visibility switch" in pages.casefold()
+        and "deploy-pages" in pages,
+        ".github/workflows/pages.yml",
+        "Pages workflow is not staged for the final controlled switch",
     )
 
     findings.extend(scan_text(root))
@@ -354,7 +433,7 @@ def main() -> int:
     findings = validate(root)
     errors = [item for item in findings if item.level == "ERROR"]
     result = {
-        "schema_version": "n.human_ai_mathematics.public_release_validation.v2",
+        "schema_version": "n.human_ai_mathematics.public_switch_validation.v1",
         "root": str(root),
         "result": "PASS" if not errors else "FAIL",
         "error_count": len(errors),
@@ -371,10 +450,7 @@ def main() -> int:
         print(f"{item.level}: {item.path}: {item.message}")
     print(
         json.dumps(
-            {
-                "result": result["result"],
-                "error_count": result["error_count"],
-            },
+            {"result": result["result"], "error_count": result["error_count"]},
             sort_keys=True,
         )
     )
