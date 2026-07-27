@@ -3,11 +3,13 @@
 ## Source identity
 
 ```text
-repository:    novakprotocol/N-Human-AI-Mathematics
-branch:        release/public-review-v1
-source head:   19ddbcb5870dee3642c30031963dd4ab6a304959
-release label: 0.1.0-public-review-candidate
+repository:             novakprotocol/N-Human-AI-Mathematics
+branch:                 release/public-review-v1
+artifact source freeze: 16202759b857bc1f7f92e514531936a67737edf8
+release label:          0.1.0-public-review-candidate
 ```
+
+The artifact source freeze contains the controlling manuscript and the final staged workflow hardening. Later release-control metadata commits may advance the branch without changing the governed manuscript, guide, or binary artifact bytes.
 
 The derived artifacts are prepared for attachment to the eventual GitHub public-review release. They are not committed as binary files in the source history.
 
@@ -18,7 +20,7 @@ file:
 HINC-001_Candidate_Technical_Review_Package_0.1.0.zip
 
 SHA-256:
-4bd29a7fa58cf0e9f4f544c888c56c00e257b721aaaafbd860e62a07100a56a7
+b357909077792a3e3b124359fa7348c21aea72c5d802c19562b46fa96350c123
 ```
 
 ## Included reading artifacts
@@ -29,6 +31,10 @@ SHA-256:
 - `HINC-001_Public_Review_Guide_0.1.0.md`
 - `HINC-001_Public_Review_Guide_0.1.0.docx`
 - `HINC-001_Public_Review_Guide_0.1.0.pdf`
+- DOCX accessibility receipts
+- PDF preflight receipts
+- artifact QA receipt
+- SHA-256 manifest
 
 ## QA
 
