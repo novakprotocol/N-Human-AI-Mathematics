@@ -17,9 +17,9 @@ abstract: >-
   infinitesimal skew thickening and a clopen unit doubling. A bounded
   algebraic kernel and the principal coefficient classifications are publicly
   proof-assistant verified; the complete scheme-level manuscript remains
-  under specialist and historical-equivalence review. ChatGPT materially
-  assisted the research under human direction; OpenAI did not sponsor,
-  review, approve, or endorse the work.
+  under specialist and historical-equivalence review. One or more large
+  language models materially assisted the research under human direction;
+  specific model and provider identities are not disclosed in this release.
 repository-code: https://github.com/novakprotocol/N-Human-AI-Mathematics
 keywords:
   - algebraic monoids
@@ -28,5 +28,5 @@ keywords:
   - nonreduced schemes
   - formal verification
   - human-AI mathematics
-  - ChatGPT-assisted research
+  - LLM-assisted research
 license: LicenseRef-Proprietary
