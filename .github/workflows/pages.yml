@@ -1,5 +1,6 @@
 name: Deploy public technical-review site
 
+# This workflow is deliberately inactive until the final visibility switch.
 on:
   workflow_dispatch:
     inputs:
@@ -59,6 +60,7 @@ jobs:
       - name: Compile release and HINC sources
         run: |
           python -m py_compile tools/validate_publication.py
+          python -m py_compile tools/validate_publication_v2.py
           python -m py_compile tools/validate_public_state.py
           python -m py_compile papers/HINC-001/src/standalone_common_core_verifier.py
           python -m py_compile papers/HINC-001/tests/test_hinc_standalone.py
@@ -66,7 +68,7 @@ jobs:
       - name: Validate the public source state
         run: |
           mkdir -p reports
-          python tools/validate_publication.py \
+          python tools/validate_publication_v2.py \
             --root . \
             --allow-public \
             --json-output reports/publication-validation-public.json
