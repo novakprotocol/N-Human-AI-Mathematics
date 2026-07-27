@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: write
 
 jobs:
   validate:
@@ -170,6 +171,36 @@ jobs:
           JSON
           cat reports/ci-step-outcomes.json | tee -a reports/ci-diagnostic.log
 
+      - name: Publish or update the PR diagnostic comment
+        if: always() && github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          {
+            echo "## Public-switch candidate CI diagnostic"
+            echo
+            echo "Commit: \`$GITHUB_SHA\`"
+            echo "Run: \`$GITHUB_RUN_ID\`"
+            echo
+            echo '```json'
+            cat reports/ci-step-outcomes.json
+            echo '```'
+            echo
+            echo '<details><summary>Captured gate output</summary>'
+            echo
+            echo '```text'
+            tail -n 300 reports/ci-diagnostic.log
+            echo '```'
+            echo
+            echo '</details>'
+          } > reports/pr-ci-comment.md
+          gh pr comment "$PR_NUMBER" \
+            --repo "$GITHUB_REPOSITORY" \
+            --body-file reports/pr-ci-comment.md \
+            --edit-last \
+            --create-if-none
+
       - name: Upload validation and diagnostic receipts
         if: always()
         uses: actions/upload-artifact@v4
@@ -178,6 +209,7 @@ jobs:
           path: |
             reports/ci-diagnostic.log
             reports/ci-step-outcomes.json
+            reports/pr-ci-comment.md
             reports/publication-validation.json
             reports/public-switch-validation.json
             reports/public-release-audit-2026-07-27.json
@@ -193,7 +225,11 @@ jobs:
           import json
           from pathlib import Path
           data = json.loads(Path("reports/ci-step-outcomes.json").read_text())
-          failed = {name: value for name, value in data.items() if name != "schema_version" and value != "success"}
+          failed = {
+              name: value
+              for name, value in data.items()
+              if name != "schema_version" and value != "success"
+          }
           if failed:
               raise SystemExit(f"public-switch candidate gate failed: {failed}")
           print("public-switch candidate gate: PASS")
