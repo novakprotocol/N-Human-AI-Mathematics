@@ -10,6 +10,9 @@
     "accountable_owner",
     "operating_mode",
     "public_release_authorized",
+    "release_channel",
+    "release_version",
+    "openai_endorsement",
     "papers"
   ],
   "properties": {
@@ -19,6 +22,9 @@
     "accountable_owner": {"type": "string", "minLength": 1},
     "operating_mode": {"const": "human-led-ai-assisted"},
     "public_release_authorized": {"type": "boolean"},
+    "release_channel": {"enum": ["private_staging", "public_review", "archival_release", "journal_submission"]},
+    "release_version": {"type": ["string", "null"]},
+    "openai_endorsement": {"const": "not_claimed"},
     "papers": {
       "type": "array",
       "items": {"$ref": "#/$defs/paper"},
