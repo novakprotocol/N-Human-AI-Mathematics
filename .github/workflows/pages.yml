@@ -17,7 +17,6 @@ on:
       - "papers/HINC-001/**"
       - "tools/validate_publication.py"
       - "tools/validate_public_release.py"
-      - "tools/validate_public_release_v2.py"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -48,24 +47,24 @@ jobs:
           mkdir -p reports
           python -m py_compile tools/validate_publication.py
           python -m py_compile tools/validate_public_release.py
-          python -m py_compile tools/validate_public_release_v2.py
           python tools/validate_publication.py \
             --root . \
             --allow-public \
             --json-output reports/publication-validation.json
-          python tools/validate_public_release_v2.py \
+          python tools/validate_public_release.py \
             --root . \
             --json-output reports/public-review-validation.json
 
-      - name: Verify site files
+      - name: Verify site files and category-level disclosure
         run: |
           test -f docs/index.html
           test -f docs/styles.css
           test -f docs/404.html
           test -f docs/.nojekyll
-          grep -q "OpenAI did not sponsor" docs/index.html
+          grep -q "Human-led · LLM-assisted" docs/index.html
           grep -q "Public review" docs/index.html
           grep -q "Peer reviewed</span><strong>No" docs/index.html
+          grep -q "Model/provider</span><strong>Not disclosed" docs/index.html
 
   deploy:
     environment:
