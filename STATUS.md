@@ -20,7 +20,8 @@ blanket_license_applied:     false
 peer_reviewed:               false
 journal_submitted:           false
 historical_priority:         unestablished
-openai_endorsement:          not claimed
+specific_model_disclosed:    false
+specific_provider_disclosed: false
 ```
 
 The GitHub repository may remain private until the release branch is merged and the owner performs the final visibility change. The status above describes the authorized release state being frozen by `release/public-review-v1`.
@@ -36,8 +37,8 @@ The GitHub repository may remain private until the release branch is merged and 
 - Machine-readable research-index and paper-status schemas are included.
 - Counterexample, proof-gap, prior-art, and reproduction workflows are defined.
 - A dependency-free publication validator and GitHub validation workflow are included.
-- The human–AI collaboration record and prior-art boundary are public-review source files.
-- The public-source audit found no indexed personal Windows path, known GitHub token pattern, private-key header, blanket MIT grant sentence, or private chat transcript.
+- The human–LLM collaboration record and prior-art boundary are public-review source files.
+- The public-source audit checks personal paths, credentials, private-key material, blanket license language, private transcripts, and withheld model/provider identifiers.
 - The HINC bibliography metadata was checked against primary publication or preprint records and corrected where needed.
 - The first complete paper package is fixed as `HINC-001`.
 - The HINC standalone manuscript, review packet, verifier, tests, and receipts were materialized from immutable N-MathLab commit `e6adac212150177d4afa56e643d37533a208693c`.
@@ -45,13 +46,13 @@ The GitHub repository may remain private until the release branch is merged and 
 - The HINC algebraic kernel has a public hosted Lean PASS.
 - The principal even and odd coefficient classifications and normalized monoid laws have a second public hosted Lean PASS.
 - Failed bootstrap and formal-proof attempts, their causes, and their repairs remain preserved separately from successful evidence.
-- Matthew S. Novak authorized public-review release on 27 July 2026.
+- Matthew S. Novak authorized public-review release using category-level **Human + LLM** wording.
 
 ## Public-review release record
 
 ```text
 release declaration:          PUBLIC_REVIEW_RELEASE.md
-human-AI record:              HUMAN_AI_COLLABORATION_RECORD.md
+human-LLM record:             HUMAN_AI_COLLABORATION_RECORD.md
 human-AI prior art:           HUMAN_AI_MATHEMATICS_PRIOR_ART.md
 open challenge:               OPEN_REVIEW_CHALLENGE.md
 machine-readable audit:       reports/public-release-audit-2026-07-27.json
@@ -62,6 +63,12 @@ journal venue:                none
 ```
 
 Public review is not peer review. It opens the source and evidence to challenge while preserving unresolved scientific gates.
+
+## Disclosure boundary
+
+The public repository states only that one or more large language models materially assisted the research.
+
+It does not name a specific model, model family, version, provider, or vendor. A more specific disclosure may be added later only after separate human legal and editorial review.
 
 ## Formal verification checkpoint
 
@@ -106,4 +113,4 @@ These tasks may proceed in parallel with new research in N-MathLab.
 
 ## Claim boundary
 
-The repository establishes a controlled, inspectable public-review architecture and evidence of a sustained human-led, ChatGPT-assisted research process. It does not establish mathematical correctness, worldwide novelty, publication priority, peer-review acceptance, importance, OpenAI endorsement, or full formal verification of any manuscript.
+The repository establishes a controlled, inspectable public-review architecture and evidence of a sustained human-led, LLM-assisted research process. It does not establish mathematical correctness, worldwide novelty, publication priority, peer-review acceptance, importance, a specific model/provider identity, or full formal verification of any manuscript.
