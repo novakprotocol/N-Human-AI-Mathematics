@@ -12,7 +12,8 @@
     "public_release_authorized",
     "release_channel",
     "release_version",
-    "openai_endorsement",
+    "specific_model_disclosed",
+    "specific_provider_disclosed",
     "papers"
   ],
   "properties": {
@@ -24,7 +25,8 @@
     "public_release_authorized": {"type": "boolean"},
     "release_channel": {"enum": ["private_staging", "public_review", "archival_release", "journal_submission"]},
     "release_version": {"type": ["string", "null"]},
-    "openai_endorsement": {"const": "not_claimed"},
+    "specific_model_disclosed": {"type": "boolean"},
+    "specific_provider_disclosed": {"type": "boolean"},
     "papers": {
       "type": "array",
       "items": {"$ref": "#/$defs/paper"},
