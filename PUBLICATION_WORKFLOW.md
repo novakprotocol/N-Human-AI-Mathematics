@@ -115,21 +115,22 @@ Also review:
 - bibliography metadata;
 - third-party notices;
 - figures and copied prose;
-- AI model and institutional wording;
-- machine-readable release flags.
+- AI-assistance wording;
+- machine-readable release flags;
+- withheld model and provider identifiers.
 
-## Gate 7 — Human–AI disclosure
+## Gate 7 — Human–LLM disclosure
 
 Every released paper must state:
 
 - the accountable human author;
-- the AI tool or tools used, when known;
-- the material AI contributions;
+- that one or more LLMs materially assisted, where accurate;
+- the material LLM contributions;
 - the human decisions and responsibilities;
-- the evidence and model-identity limits;
-- whether any AI developer or institution participated or endorsed the work.
+- the evidence and identity limits;
+- whether a specific model or provider is publicly disclosed.
 
-Naming ChatGPT or OpenAI must not imply coauthorship, sponsorship, review, or endorsement.
+The default public release uses category-level **LLM-assisted** wording. A specific model, model family, version, provider, or vendor may be named only after separate human legal and editorial review and an explicit owner-approved release change.
 
 ## Gate 8 — Owner authorization
 
@@ -138,7 +139,7 @@ Only the accountable owner may authorize:
 - public visibility;
 - named authorship;
 - release channel;
-- AI-use disclosure;
+- AI-use disclosure level;
 - rights and licensing;
 - release version;
 - residual-risk acceptance.
@@ -157,7 +158,7 @@ claim and limitation snapshot
 formal-verification boundary
 reproduction source
 checksums and receipts
-AI-use disclosure
+human–LLM disclosure
 prior-art boundary
 rights and third-party notices
 open review request
@@ -208,7 +209,7 @@ When the public-review package has reached a suitable checkpoint:
 Before claiming journal submission:
 
 - verify the selected venue’s AI, authorship, data, code, and preprint policies;
-- adapt the disclosure without reducing its accuracy;
+- determine whether a more specific LLM disclosure is legally and editorially appropriate;
 - complete the owner’s proof and reference review;
 - freeze the exact submitted manuscript and supplements;
 - record the venue and submission date only after submission occurs.
