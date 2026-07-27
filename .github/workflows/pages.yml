@@ -17,6 +17,7 @@ on:
       - "papers/HINC-001/**"
       - "tools/validate_publication.py"
       - "tools/validate_public_release.py"
+      - "tools/validate_public_release_v2.py"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -47,11 +48,12 @@ jobs:
           mkdir -p reports
           python -m py_compile tools/validate_publication.py
           python -m py_compile tools/validate_public_release.py
+          python -m py_compile tools/validate_public_release_v2.py
           python tools/validate_publication.py \
             --root . \
             --allow-public \
             --json-output reports/publication-validation.json
-          python tools/validate_public_release.py \
+          python tools/validate_public_release_v2.py \
             --root . \
             --json-output reports/public-review-validation.json
 
