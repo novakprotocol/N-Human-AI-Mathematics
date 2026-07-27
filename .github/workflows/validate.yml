@@ -28,7 +28,6 @@ jobs:
         run: |
           python -m py_compile tools/validate_publication.py
           python -m py_compile tools/validate_public_release.py
-          python -m py_compile tools/validate_public_release_v2.py
 
       - name: Validate structure, status, claims, and source hygiene
         run: |
@@ -37,7 +36,7 @@ jobs:
             --root . \
             --allow-public \
             --json-output reports/publication-validation.json
-          python tools/validate_public_release_v2.py \
+          python tools/validate_public_release.py \
             --root . \
             --json-output reports/public-review-validation.json
 
@@ -65,11 +64,16 @@ jobs:
 
           assert index["public_release_authorized"] is True
           assert index["release_channel"] == "public_review"
+          assert index["specific_model_disclosed"] is False
+          assert index["specific_provider_disclosed"] is False
           assert hinc["release"]["public_authorized"] is True
           assert hinc["release"]["version"] == "0.1.0-public-review"
+          assert hinc["release"]["specific_model_disclosed"] is False
+          assert hinc["release"]["specific_provider_disclosed"] is False
           assert audit["result"] == "PASS_WITH_DECLARED_LIMITATIONS"
           assert audit["release_scope"]["peer_reviewed"] is False
-          assert audit["release_scope"]["openai_endorsement_claimed"] is False
+          assert audit["release_scope"]["specific_model_disclosed"] is False
+          assert audit["release_scope"]["specific_provider_disclosed"] is False
           print("public-review declarations: PASS")
           PY
 
