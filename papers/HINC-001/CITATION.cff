@@ -1,21 +1,25 @@
 cff-version: 1.2.0
 message: >-
-  Cite the exact HINC-001 release or DOI when available. Before release, cite
-  the paper identifier and exact source commit.
+  Cite HINC-001 as a public-review candidate package. Cite a later DOI or
+  archival release if one becomes available.
 title: Hidden Infinitesimal Noncommutativity in Endomorphism Monoids of Two Graded Gerstenhaber Algebras
 type: article
-version: 0.1.0-candidate
+version: 0.1.0-public-review
+date-released: 2026-07-27
 authors:
   - family-names: Novak
     given-names: Matthew S.
 abstract: >-
-  We classify candidate strict graded Gerstenhaber endomorphism monoid schemes
-  for two explicit characteristic-two subalgebras of the Hochschild cohomology
-  of the dual numbers. The two monoids share a reduced crossing core but differ
-  by an infinitesimal skew thickening and a clopen unit doubling. A bounded
+  We give a self-contained candidate classification of strict graded
+  Gerstenhaber endomorphism monoid schemes for two explicit
+  characteristic-two subalgebras of the Hochschild cohomology of the dual
+  numbers. The two monoids share a reduced crossing core but differ by an
+  infinitesimal skew thickening and a clopen unit doubling. A bounded
   algebraic kernel and the principal coefficient classifications are publicly
-  proof-assistant verified; the complete scheme-level manuscript remains under
-  specialist and historical-equivalence review.
+  proof-assistant verified; the complete scheme-level manuscript remains
+  under specialist and historical-equivalence review. ChatGPT materially
+  assisted the research under human direction; OpenAI did not sponsor,
+  review, approve, or endorse the work.
 repository-code: https://github.com/novakprotocol/N-Human-AI-Mathematics
 keywords:
   - algebraic monoids
@@ -24,4 +28,5 @@ keywords:
   - nonreduced schemes
   - formal verification
   - human-AI mathematics
+  - ChatGPT-assisted research
 license: LicenseRef-Proprietary
