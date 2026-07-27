@@ -95,11 +95,21 @@
     "release": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["public_authorized", "version", "doi"],
+      "required": [
+        "public_authorized",
+        "channel",
+        "version",
+        "release_date",
+        "doi",
+        "openai_endorsement"
+      ],
       "properties": {
         "public_authorized": {"type": "boolean"},
+        "channel": {"enum": ["private_staging", "public_review", "archival_release", "journal_submission"]},
         "version": {"type": ["string", "null"]},
-        "doi": {"type": ["string", "null"]}
+        "release_date": {"type": ["string", "null"], "format": "date"},
+        "doi": {"type": ["string", "null"]},
+        "openai_endorsement": {"const": "not_claimed"}
       }
     },
     "limitations": {
