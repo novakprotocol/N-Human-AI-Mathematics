@@ -1,11 +1,11 @@
 {
-  "schema_version": "n.human_ai_mathematics.public_release_audit.v1",
+  "schema_version": "n.human_ai_mathematics.public_release_audit.v2",
   "repository": "novakprotocol/N-Human-AI-Mathematics",
-  "release_version": "0.1.0-public-review",
+  "candidate_version": "0.1.0-public-review-candidate",
   "audit_date": "2026-07-27",
-  "result": "PASS_WITH_DECLARED_LIMITATIONS",
+  "result": "READY_PENDING_VISIBILITY_SWITCH",
   "release_scope": {
-    "complete_public_review_packages": [
+    "complete_candidate_public_review_packages": [
       "HINC-001"
     ],
     "indexed_not_released_as_complete_packages": [
@@ -13,6 +13,9 @@
       "FSG-001",
       "ACM-001"
     ],
+    "repository_visibility": "private",
+    "public_switch_ready": true,
+    "visibility_change_executed": false,
     "journal_submission": false,
     "peer_reviewed": false,
     "doi_assigned": false,
@@ -20,12 +23,28 @@
     "specific_model_disclosed": false,
     "specific_provider_disclosed": false
   },
-  "owner_authorization": {
+  "owner_control": {
     "accountable_owner": "Matthew S. Novak",
-    "public_review_authorized": true,
-    "authorization_date": "2026-07-27",
+    "content_prepared_for_public_review": true,
+    "final_visibility_switch_executed": false,
     "approved_public_wording": "human-led, LLM-assisted",
     "residual_scientific_gates_preserved": true
+  },
+  "mathematical_package_checks": {
+    "consolidated_revised_manuscript": "present",
+    "hostile_review_integrated": "yes",
+    "characteristic_two_foundation": "human proof present",
+    "odd_presentation_normal_form": "human proof present",
+    "generator_to_global_lemma": "human proof present",
+    "representability_argument": "integrated human proof present",
+    "scheme_center_pointwise_distinction": "integrated",
+    "clopen_disconnected_base_qualification": "integrated",
+    "fppf_derived_subgroup_argument": "integrated human proof present",
+    "bounded_lean_kernel": "pass",
+    "bounded_lean_coefficient_classification": "pass",
+    "full_manuscript_lean": "not completed and not claimed",
+    "external_specialist_review": "pending and requested by public release",
+    "independent_external_reproduction": "pending and requested by public release"
   },
   "repository_hygiene_checks": {
     "personal_windows_user_paths": "no indexed match located",
@@ -36,13 +55,38 @@
     "blanket_mit_grant_sentence": "no indexed match located",
     "private_chat_transcripts": "not included by repository policy",
     "hidden_chain_of_thought": "not included by repository policy",
-    "specific_model_or_provider_names": "prohibited in public release",
-    "third_party_figures": "none identified in HINC-001 public-review package",
+    "specific_model_or_provider_names": "prohibited in proposed public source",
+    "third_party_figures": "none identified in HINC-001 package",
     "required_rights_files": "present",
-    "required_ai_disclosure": "present at LLM category level",
+    "required_llm_disclosure": "present at category level",
     "required_claim_and_limitation_records": "present"
   },
-  "hinc_bibliography_checks": [
+  "bibliography_checks": [
+    {
+      "key": "Gerstenhaber1963",
+      "identifier": "Annals of Mathematics 78 (1963), 267-288",
+      "result": "metadata included"
+    },
+    {
+      "key": "Gerstenhaber1964",
+      "identifier": "Annals of Mathematics 79 (1964), 59-103",
+      "result": "metadata included"
+    },
+    {
+      "key": "SanchezFlores2012",
+      "identifier": "arXiv:1103.3218",
+      "result": "direct characteristic-p foundation included"
+    },
+    {
+      "key": "NegronWitherspoon2014",
+      "identifier": "arXiv:1406.0036",
+      "result": "alternate bracket source included"
+    },
+    {
+      "key": "Holm2000",
+      "identifier": "Contributions to Algebra and Geometry 41 (2000), 291-301",
+      "result": "truncated-polynomial Hochschild source included"
+    },
     {
       "key": "Brion2014",
       "identifier": "arXiv:1208.0675",
@@ -64,42 +108,32 @@
       "result": "metadata matched"
     },
     {
-      "key": "KoenigNagase2009",
-      "identifier": "DOI:10.1016/j.jpaa.2008.10.012",
-      "result": "metadata matched"
-    },
-    {
       "key": "Hermann2016",
       "identifier": "arXiv:1403.3597",
-      "result": "metadata matched and bibliography corrected"
+      "result": "corrected metadata included"
     },
     {
       "key": "Elduque2025",
       "identifier": "arXiv:2507.12321",
-      "result": "metadata matched and preprint year aligned with first posting"
+      "result": "first-posting year aligned"
     }
   ],
-  "human_ai_prior_art_boundary": {
-    "first_human_ai_mathematics_claim": false,
-    "first_llm_assisted_mathematics_claim": false,
-    "first_public_detailed_log_collaboration_claim": false,
-    "narrow_process_claim": "candidate distinctive combination; historical priority unestablished",
-    "precedent_record": "HUMAN_AI_MATHEMATICS_PRIOR_ART.md"
+  "historical_priority_boundary": {
+    "exact_indexed_match_located": false,
+    "worldwide_priority_established": false,
+    "allowed_statement": "A broad exact-form and primary-source search did not locate the complete paired classification.",
+    "prohibited_statements": [
+      "first",
+      "nobody has done this",
+      "globally novel"
+    ]
   },
   "known_limitations": [
     "Code-search absence is not proof that no secret or personal identifier exists.",
-    "Bibliographic metadata verification is not a source-level mathematical equivalence review.",
-    "The audit does not establish correctness or novelty of HINC-001.",
-    "The public Lean receipts cover bounded declarations, not the full manuscript.",
-    "The public record does not establish a specific model or provider identity.",
-    "Private historical conversation turns are not cryptographically authenticated by this repository."
+    "Bibliographic metadata review is not a source-level mathematical equivalence ruling.",
+    "The bounded Lean receipts do not cover the full revised manuscript.",
+    "Public technical review would solicit external correctness review and independent reproduction; it would not represent them as already completed.",
+    "Private historical conversations are not cryptographically authenticated by this repository."
   ],
-  "required_post_release_actions": [
-    "accept public counterexample, proof-gap, prior-art, and reproduction reports",
-    "preserve corrections against exact source identities",
-    "obtain qualified external algebra/monoid review",
-    "complete focused HINC historical-equivalence review",
-    "perform separate human legal and editorial review before any specific model/provider disclosure",
-    "freeze a separate archival or journal-submission release before claiming submission status"
-  ]
+  "final_switch_required": true
 }
