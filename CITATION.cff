@@ -10,12 +10,13 @@ authors:
   - family-names: Novak
     given-names: Matthew S.
 abstract: >-
-  A public-review repository for human-led, ChatGPT-assisted mathematical
+  A public-review repository for human-led, LLM-assisted mathematical
   research. It contains precise candidate theorem statements, proofs,
   formal-verification status, reproducible computational evidence, correction
-  records, prior-art boundaries, human-AI role disclosures, and structured
+  records, prior-art boundaries, human-LLM role disclosures, and structured
   adversarial-review materials. Public visibility does not imply peer review,
-  worldwide novelty, OpenAI endorsement, or complete formal verification.
+  worldwide novelty, identification of a specific model or provider, or
+  complete formal verification.
 repository-code: https://github.com/novakprotocol/N-Human-AI-Mathematics
 url: https://github.com/novakprotocol/N-Human-AI-Mathematics
 keywords:
@@ -23,7 +24,7 @@ keywords:
   - formal verification
   - reproducibility
   - human-AI collaboration
-  - ChatGPT-assisted research
+  - LLM-assisted research
   - theorem review
   - computational mathematics
 license: LicenseRef-Proprietary
