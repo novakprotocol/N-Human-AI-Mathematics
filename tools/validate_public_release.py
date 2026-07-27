@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed validator for the public-review release surface."""
+"""Fail-closed validator for the Human + LLM public-review release."""
 
 from __future__ import annotations
 
@@ -36,6 +36,9 @@ REQUIRED_FILES = {
     "docs/404.html",
     "docs/.nojekyll",
     ".github/workflows/pages.yml",
+    ".github/workflows/validate.yml",
+    "tools/validate_publication.py",
+    "tools/validate_public_release.py",
 }
 
 TEXT_SUFFIXES = {
@@ -55,7 +58,18 @@ TEXT_SUFFIXES = {
     ".css",
     ".js",
     ".xml",
+    ".cmd",
 }
+
+# Construct withheld identifiers without embedding them as contiguous public
+# strings in this validator. The exact identities remain private pending
+# separate human legal and editorial review.
+WITHHELD_IDENTIFIERS = (
+    "Chat" + "GPT",
+    "Open" + "AI",
+    "GPT" + "-5",
+    "GPT" + "-4",
+)
 
 FORBIDDEN_PATTERNS = (
     (
@@ -63,22 +77,12 @@ FORBIDDEN_PATTERNS = (
         re.compile(r"[A-Za-z]:\\Users\\[^\\\s]+", re.IGNORECASE),
     ),
     (
-        "GitHub classic token",
-        re.compile(r"gh[oprsu]_[A-Za-z0-9]{30,}"),
-    ),
-    (
-        "GitHub fine-grained token",
-        re.compile(r"github_pat_[A-Za-z0-9_]{30,}"),
+        "GitHub token",
+        re.compile(r"(?:gh[oprsu]_|github_pat_)[A-Za-z0-9_]{20,}"),
     ),
     (
         "private-key material",
-        re.compile(
-            r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"
-        ),
-    ),
-    (
-        "account-local username",
-        re.compile(r"Chasingcoconuts", re.IGNORECASE),
+        re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
     ),
 )
 
@@ -102,9 +106,12 @@ def require(condition: bool, path: str, message: str) -> list[Finding]:
 
 def scan_text(root: Path) -> list[Finding]:
     findings: list[Finding] = []
+    validator_path = Path(__file__).resolve()
+
     for path in sorted(root.rglob("*")):
         if not path.is_file() or path.suffix.lower() not in TEXT_SUFFIXES:
             continue
+
         relative = path.relative_to(root).as_posix()
         try:
             text = path.read_text(encoding="utf-8")
@@ -113,6 +120,7 @@ def scan_text(root: Path) -> list[Finding]:
                 Finding("ERROR", relative, "declared text file is not UTF-8")
             )
             continue
+
         for label, pattern in FORBIDDEN_PATTERNS:
             match = pattern.search(text)
             if match:
@@ -120,6 +128,25 @@ def scan_text(root: Path) -> list[Finding]:
                 findings.append(
                     Finding("ERROR", f"{relative}:{line}", f"forbidden {label}")
                 )
+
+        # Skip only the exact current validator source because its dynamically
+        # assembled strings are the release gate's detection vocabulary.
+        if path.resolve() == validator_path:
+            continue
+
+        lowered = text.casefold()
+        for identifier in WITHHELD_IDENTIFIERS:
+            position = lowered.find(identifier.casefold())
+            if position >= 0:
+                line = text.count("\n", 0, position) + 1
+                findings.append(
+                    Finding(
+                        "ERROR",
+                        f"{relative}:{line}",
+                        "withheld model or provider identifier appears in public source",
+                    )
+                )
+
     return findings
 
 
@@ -155,9 +182,14 @@ def validate(root: Path) -> list[Finding]:
         "unexpected public-review version",
     )
     findings += require(
-        index.get("openai_endorsement") == "not_claimed",
+        index.get("specific_model_disclosed") is False,
         "research-index.json",
-        "OpenAI endorsement boundary missing",
+        "specific_model_disclosed must be false",
+    )
+    findings += require(
+        index.get("specific_provider_disclosed") is False,
+        "research-index.json",
+        "specific_provider_disclosed must be false",
     )
 
     hinc_release = hinc.get("release", {})
@@ -182,9 +214,14 @@ def validate(root: Path) -> list[Finding]:
         "DOI must remain null until assigned",
     )
     findings += require(
-        hinc_release.get("openai_endorsement") == "not_claimed",
+        hinc_release.get("specific_model_disclosed") is False,
         "papers/HINC-001/STATUS.json",
-        "HINC OpenAI endorsement boundary missing",
+        "HINC specific_model_disclosed must be false",
+    )
+    findings += require(
+        hinc_release.get("specific_provider_disclosed") is False,
+        "papers/HINC-001/STATUS.json",
+        "HINC specific_provider_disclosed must be false",
     )
 
     findings += require(
@@ -204,22 +241,40 @@ def validate(root: Path) -> list[Finding]:
         "peer-review boundary is not false",
     )
     findings += require(
-        scope.get("openai_endorsement_claimed") is False,
+        scope.get("specific_model_disclosed") is False,
         "reports/public-release-audit-2026-07-27.json",
-        "OpenAI endorsement boundary is not false",
+        "audit specific_model_disclosed must be false",
+    )
+    findings += require(
+        scope.get("specific_provider_disclosed") is False,
+        "reports/public-release-audit-2026-07-27.json",
+        "audit specific_provider_disclosed must be false",
     )
 
-    findings += require(
-        "release_channel" in research_schema.get("required", []),
-        "schemas/research-index.schema.json",
-        "public release fields are not required by the research schema",
-    )
-    release_required = (
+    required_index_fields = set(research_schema.get("required", []))
+    for field in (
+        "release_channel",
+        "release_version",
+        "specific_model_disclosed",
+        "specific_provider_disclosed",
+    ):
+        findings += require(
+            field in required_index_fields,
+            "schemas/research-index.schema.json",
+            f"research schema does not require {field}",
+        )
+
+    release_required = set(
         paper_schema.get("properties", {})
         .get("release", {})
         .get("required", [])
     )
-    for field in ("channel", "release_date", "openai_endorsement"):
+    for field in (
+        "channel",
+        "release_date",
+        "specific_model_disclosed",
+        "specific_provider_disclosed",
+    ):
         findings += require(
             field in release_required,
             "schemas/paper-status.schema.json",
@@ -254,26 +309,20 @@ def validate(root: Path) -> list[Finding]:
     )
     site = (root / "docs/index.html").read_text(encoding="utf-8")
 
-    for relative, text in (
-        ("README.md", readme),
-        ("HUMAN_AI_COLLABORATION_RECORD.md", collaboration),
-        ("docs/index.html", site),
-    ):
-        findings += require(
-            "OpenAI" in text and "endorse" in text.lower(),
-            relative,
-            "OpenAI institutional boundary is not prominent",
-        )
-
+    findings += require(
+        "human-led, LLM-assisted" in readme,
+        "README.md",
+        "approved public wording is missing",
+    )
+    findings += require(
+        "one or more large language models" in collaboration,
+        "HUMAN_AI_COLLABORATION_RECORD.md",
+        "category-level collaboration disclosure is missing",
+    )
     findings += require(
         "does **not** claim to be the first" in prior_art,
         "HUMAN_AI_MATHEMATICS_PRIOR_ART.md",
         "broad first-in-history claim is not rejected",
-    )
-    findings += require(
-        "ChatGPT" in collaboration and "Matthew S. Novak" in collaboration,
-        "HUMAN_AI_COLLABORATION_RECORD.md",
-        "named collaboration record is incomplete",
     )
     findings += require(
         "Peer reviewed</span><strong>No" in site,
@@ -281,9 +330,9 @@ def validate(root: Path) -> list[Finding]:
         "website peer-review boundary missing",
     )
     findings += require(
-        "OpenAI endorsement</span><strong>Not claimed" in site,
+        "Model/provider</span><strong>Not disclosed" in site,
         "docs/index.html",
-        "website OpenAI endorsement boundary missing",
+        "website identity boundary missing",
     )
 
     findings.extend(scan_text(root))
@@ -305,7 +354,7 @@ def main() -> int:
     findings = validate(root)
     errors = [item for item in findings if item.level == "ERROR"]
     result = {
-        "schema_version": "n.human_ai_mathematics.public_release_validation.v1",
+        "schema_version": "n.human_ai_mathematics.public_release_validation.v2",
         "root": str(root),
         "result": "PASS" if not errors else "FAIL",
         "error_count": len(errors),
