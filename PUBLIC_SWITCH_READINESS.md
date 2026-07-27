@@ -33,7 +33,7 @@ Ready for public technical review means:
 6. The repository contains no blanket license grant, personal workstation path, known credential pattern, private-key material, private chat transcript, or hidden chain-of-thought publication.
 7. The public wording is category-level **Human-led, LLM-assisted**; no specific model or provider is disclosed.
 8. The public website displays candidate, formal-verification, peer-review, and historical-priority limits above the fold.
-9. Validation and Pages workflows are fail-closed.
+9. The private and public workflows use current official GitHub action majors and preserve the hidden `.nojekyll` file in the Pages artifact.
 10. The repository remains private until a separate final switch operation succeeds and is re-read from GitHub.
 
 ## HINC-001 evidence state
@@ -65,6 +65,36 @@ The complete revised manuscript is not formally verified. The unformalized state
 
 The package preserves Python, C, Gröbner, finite-Artin, and standalone common-core challenge routes. These are internal evidence. No outside reproduction is claimed.
 
+## Governed local gate
+
+Private hosted jobs currently fail before exposing an executed step. The repository records that infrastructure limitation without asserting its platform or billing cause.
+
+The authoritative private gate is the downloadable guarded preflight:
+
+```text
+Invoke-PublicSwitchPreflight.ps1
+SHA-256:
+010abb2172ed97a179e1a2614392aae5f35c07881cd4128ca9b458dea49a3d8c
+```
+
+It uses ordinary `github.com` only, rejects GitHub Enterprise, validates the exact PR head, runs the validators and HINC tests, verifies workflow action majors, checks the site and whitespace, and produces a commit-anchored archive and receipt without changing repository state.
+
+The rollback-capable activation gate is:
+
+```text
+FINALIZE-N-HUMAN-LLM-MATHEMATICS-PUBLIC-REVIEW-V1.ps1
+SHA-256:
+ebf24d2497741042b9899ae8ac694646aa018825fd20360adaf96bbb6e561de0
+```
+
+The complete governed switch kit is:
+
+```text
+N-Human-LLM-Mathematics-Final-Public-Switch-Complete-Kit.zip
+SHA-256:
+699d6fc60e86376037558bd54bb75fd973c9aada6b108b87575d8f498d4635f6
+```
+
 ## Public-review purpose
 
 The public repository will ask readers to:
@@ -89,15 +119,15 @@ Public visibility is therefore the beginning of outside review, not a false asse
 
 The eventual switch must perform, in order:
 
-1. verify the release commit and green checks;
-2. merge the release PR into private `main`;
-3. re-run validation on `main`;
-4. set repository visibility to public;
-5. re-read GitHub metadata and require `PUBLIC`;
-6. activate the validated GitHub Pages workflow;
-7. verify the live site and all primary links;
-8. create the public-review release/tag and checksum receipt;
-9. open the four structured review channels;
-10. preserve the final receipt locally and in the repository.
+1. run the guarded private preflight against the exact current PR head;
+2. verify its JSON receipt and checksum manifest;
+3. mark the release PR ready and merge it into private `main`;
+4. re-run validation on private `main`;
+5. build and validate the public-state activation commit;
+6. set repository visibility to public;
+7. re-read GitHub metadata and require `PUBLIC`;
+8. activate the validated GitHub Pages workflow;
+9. verify the live site and all primary boundaries;
+10. create the public-review tag, release, artifact attachment, structured review channels, and final receipts.
 
 No partial success may be represented as a completed public release.
