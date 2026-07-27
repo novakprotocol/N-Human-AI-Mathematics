@@ -26,7 +26,7 @@ jobs:
           test "${{ inputs.confirm_private_candidate }}" = "VALIDATE-HINC-001"
 
       - name: Check out the candidate branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: release/public-review-v1
           fetch-depth: 0
@@ -46,7 +46,7 @@ jobs:
           PY
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -92,7 +92,7 @@ jobs:
 
       - name: Upload private validation receipts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: private-public-switch-validation-${{ github.run_id }}
           path: |
