@@ -9,7 +9,7 @@ artifact source freeze: 16202759b857bc1f7f92e514531936a67737edf8
 release label:          0.1.0-public-review-candidate
 ```
 
-The artifact source freeze contains the controlling manuscript and the final staged workflow hardening. Later release-control metadata commits may advance the branch without changing the governed manuscript, guide, or binary artifact bytes.
+The artifact source freeze identifies the controlling manuscript and review-guide content used to build the derived files. Later workflow and release-control commits may advance the branch without changing the governed manuscript, guide, or binary artifact bytes.
 
 The derived artifacts are prepared for attachment to the eventual GitHub public-review release. They are not committed as binary files in the source history.
 
