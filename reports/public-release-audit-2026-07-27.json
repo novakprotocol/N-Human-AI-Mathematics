@@ -69,12 +69,12 @@
     {
       "key": "Hermann2016",
       "identifier": "arXiv:1403.3597",
-      "result": "title, author, and monograph metadata matched; bibliography eprint corrected separately if required"
+      "result": "metadata matched and bibliography corrected"
     },
     {
-      "key": "Elduque2026",
+      "key": "Elduque2025",
       "identifier": "arXiv:2507.12321",
-      "result": "metadata matched; preprint first posted in 2025"
+      "result": "metadata matched and preprint year aligned with first posting"
     }
   ],
   "human_ai_prior_art_boundary": {
