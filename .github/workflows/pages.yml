@@ -1,40 +1,18 @@
-name: Deploy public-review site
+name: Validate private site preview
 
 on:
-  push:
-    branches: ["main"]
-    paths:
-      - "docs/**"
-      - "README.md"
-      - "START_HERE.md"
-      - "STATUS.md"
-      - "PUBLIC_REVIEW_RELEASE.md"
-      - "HUMAN_AI_COLLABORATION_RECORD.md"
-      - "HUMAN_AI_MATHEMATICS_PRIOR_ART.md"
-      - "OPEN_REVIEW_CHALLENGE.md"
-      - "research-index.json"
-      - "schemas/**"
-      - "papers/HINC-001/**"
-      - "tools/validate_publication.py"
-      - "tools/validate_public_release.py"
-      - ".github/workflows/pages.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
 
 jobs:
-  validate:
+  validate-private-preview:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+
     steps:
-      - name: Check out source
+      - name: Check out private review source
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -42,49 +20,61 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Validate public source
+      - name: Validate repository in private-staging mode
         run: |
           mkdir -p reports
           python -m py_compile tools/validate_publication.py
           python -m py_compile tools/validate_public_release.py
           python tools/validate_publication.py \
             --root . \
-            --allow-public \
-            --json-output reports/publication-validation.json
-          python tools/validate_public_release.py \
-            --root . \
-            --json-output reports/public-review-validation.json
+            --json-output reports/private-preview-publication-validation.json
 
-      - name: Verify site files and category-level disclosure
+      - name: Verify private-preview release blockers
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          index = json.loads(Path("research-index.json").read_text(encoding="utf-8"))
+          hinc = json.loads(Path("papers/HINC-001/STATUS.json").read_text(encoding="utf-8"))
+
+          assert index["public_release_authorized"] is False
+          assert index["release_channel"] == "private_staging"
+          assert index["release_version"] is None
+          assert hinc["release"]["public_authorized"] is False
+          assert hinc["release"]["channel"] == "private_staging"
+          assert hinc["release"]["version"] is None
+          assert Path("papers/HINC-001/HOSTILE_REVIEW_2026-07-27.md").is_file()
+          assert Path("papers/HINC-001/FOUNDATIONAL_HOCHSCHILD_DERIVATION_2026-07-27.md").is_file()
+          assert Path("papers/HINC-001/GENERATOR_TO_GLOBAL_LEMMA_2026-07-27.md").is_file()
+          assert Path("papers/HINC-001/ODD_PRESENTATION_NORMAL_FORM_2026-07-27.md").is_file()
+          print("private hostile-review boundaries: PASS")
+          PY
+
+      - name: Verify private preview files
         run: |
           test -f docs/index.html
           test -f docs/styles.css
           test -f docs/404.html
           test -f docs/.nojekyll
-          grep -q "Human-led · LLM-assisted" docs/index.html
-          grep -q "Public review" docs/index.html
-          grep -q "Peer reviewed</span><strong>No" docs/index.html
-          grep -q "Model/provider</span><strong>Not disclosed" docs/index.html
+          grep -q "Private legal-review preview" docs/index.html
+          grep -q "noindex,nofollow,noarchive,nosnippet" docs/index.html
+          grep -q "Do not cite HINC-001 as established or peer reviewed" docs/index.html
+          grep -q "All four paper lines are on hold" docs/index.html
+          grep -q "Source branch:.*release/public-review-v1" docs/index.html
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: validate
-    timeout-minutes: 10
-    steps:
-      - name: Check out source
-        uses: actions/checkout@v4
+      - name: Check whitespace
+        run: git diff --check HEAD^ HEAD --
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload static site
-        uses: actions/upload-pages-artifact@v4
+      - name: Upload private-preview validation receipt
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          path: docs
+          name: private-site-preview-validation-${{ github.run_id }}
+          path: reports/private-preview-publication-validation.json
+          if-no-files-found: warn
+          retention-days: 30
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+# Deliberately no GitHub Pages deployment job.
+# Public deployment requires a separate owner-approved release commit after all
+# hostile-review, legal/editorial, accessibility, and external-review gates.
