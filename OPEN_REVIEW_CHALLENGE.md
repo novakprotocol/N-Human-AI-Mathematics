@@ -2,7 +2,7 @@
 
 ## The invitation
 
-This repository is public so that its mathematics and its human–AI research process can be challenged.
+This repository is public so that its mathematics and its human–LLM research process can be challenged.
 
 The request is not:
 
@@ -75,17 +75,17 @@ Report the exact source identity, environment, commands, outputs, hashes, and fi
 
 ## Additional process challenge
 
-The repository also invites review of its human–AI collaboration record.
+The repository also invites review of its human–LLM collaboration record.
 
 A process challenge may address:
 
-- whether a public file overstates the contribution of ChatGPT or the human researcher;
-- whether a model identity is stated more strongly than the session evidence supports;
+- whether a public file overstates the contribution of LLMs or the human researcher;
+- whether a specific model or provider is implied despite the category-level disclosure;
 - whether a correction was omitted or misclassified;
 - whether internal reproduction is presented as external review;
 - whether a reconstructed narrative could be mistaken for a contemporaneous record;
 - whether a claimed public precedent is inaccurate or incomplete;
-- whether the OpenAI institutional boundary is unclear.
+- whether private information has entered the public tree.
 
 Open an ordinary issue and cite exact files, commits, and evidence.
 
