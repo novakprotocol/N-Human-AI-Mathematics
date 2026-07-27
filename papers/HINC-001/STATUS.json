@@ -80,14 +80,17 @@
   },
   "review": {
     "internal": "complete candidate package with independent project routes, two public hosted Lean PASS scopes, and preserved formal failure/repair history",
-    "external": "pending",
+    "external": "pending; public review requested",
     "historical_priority": "unestablished",
     "peer_review": "not submitted"
   },
   "release": {
-    "public_authorized": false,
-    "version": null,
-    "doi": null
+    "public_authorized": true,
+    "channel": "public_review",
+    "version": "0.1.0-public-review",
+    "release_date": "2026-07-27",
+    "doi": null,
+    "openai_endorsement": "not_claimed"
   },
   "limitations": [
     "The paper remains a candidate theorem until qualified external review.",
@@ -95,6 +98,6 @@
     "The generator-to-global strict Gerstenhaber preservation theorem remains outside the formalized scope.",
     "A negative literature search does not establish worldwide priority.",
     "The finite Artin-ring checks do not prove arbitrary-base statements by themselves.",
-    "No public release or journal submission is authorized in this status snapshot."
+    "Public review is authorized; journal submission, DOI assignment, peer review, and OpenAI endorsement are not claimed."
   ]
 }
