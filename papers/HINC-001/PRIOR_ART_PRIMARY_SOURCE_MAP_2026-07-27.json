@@ -1,0 +1,78 @@
+{
+  "schema_version": "n.hinc.prior_art.primary_source_map.v1",
+  "search_date": "2026-07-27",
+  "exact_combined_match_located": false,
+  "historical_priority_established": false,
+  "determination": "The component frameworks are established. No exact indexed match was located for the complete paired HINC classification. Historical priority remains unestablished.",
+  "sources": [
+    {
+      "citation": "Tian Yang, A Batalin–Vilkovisky algebra structure on the Hochschild cohomology of truncated polynomials",
+      "identifier": "DOI:10.1016/j.topol.2013.06.010; arXiv:0707.4213",
+      "role": "ambient truncated-polynomial Hochschild, BV, and Gerstenhaber framework",
+      "effect_on_hinc": "The ambient Hochschild/Gerstenhaber computation is not new by itself.",
+      "exact_hinc_match": false
+    },
+    {
+      "citation": "Thorsten Holm, Hochschild cohomology rings of algebras k[X]/(f)",
+      "identifier": "Beiträge zur Algebra und Geometrie 41 (2000), 291–301",
+      "role": "explicit Hochschild cohomology rings for one-relation algebras",
+      "effect_on_hinc": "The exact dual-number ring identity must be tied to an appropriate characteristic-matching source or derived independently.",
+      "exact_hinc_match": false
+    },
+    {
+      "citation": "Michel Brion, On Algebraic Semigroups and Monoids",
+      "identifier": "arXiv:1208.0675",
+      "role": "general algebraic semigroup and monoid structure",
+      "effect_on_hinc": "Unit groups, components, curves, and general monoid language are established.",
+      "exact_hinc_match": false
+    },
+    {
+      "citation": "Michel Brion, On Algebraic Semigroups and Monoids, II",
+      "identifier": "arXiv:1303.3955",
+      "role": "idempotent-scheme theory",
+      "effect_on_hinc": "The odd reduced commutative idempotent behavior fits known theory; it is not independently novel.",
+      "exact_hinc_match": false
+    },
+    {
+      "citation": "Alexander Perepechko, Affine algebraic monoids as endomorphisms' monoids of finite-dimensional algebras",
+      "identifier": "DOI:10.1090/S0002-9939-09-09913-4; arXiv:0809.2356",
+      "role": "endomorphism-monoid realization",
+      "effect_on_hinc": "Obtaining unusual endomorphism-monoid geometry is not new by itself; the paper's variety convention does not automatically cover the nonreduced even scheme.",
+      "exact_hinc_match": false
+    },
+    {
+      "citation": "Reiner Hermann, Monoidal Categories and the Gerstenhaber Bracket in Hochschild Cohomology",
+      "identifier": "Memoirs AMS 243 (2016), no. 1151; arXiv:1403.3597",
+      "role": "functorial Gerstenhaber-bracket machinery",
+      "effect_on_hinc": "Functorial bracket preservation is established machinery; the exact classifications remain instance-specific.",
+      "exact_hinc_match": false
+    },
+    {
+      "citation": "Alberto Elduque, Automorphism group schemes and Weyl groups of gradings",
+      "identifier": "arXiv:2507.12321, first posted 2025",
+      "role": "scheme-theoretic automorphism groups over arbitrary fields",
+      "effect_on_hinc": "Arbitrary-base automorphism-group-scheme methodology is established.",
+      "exact_hinc_match": false
+    },
+    {
+      "citation": "Non-reduced automorphism schemes",
+      "identifier": "DOI:10.1016/j.jpaa.2004.03.004",
+      "role": "nonreduced automorphism schemes in positive characteristic",
+      "effect_on_hinc": "Infinitesimal and nonreduced symmetry schemes are established phenomena.",
+      "exact_hinc_match": false
+    },
+    {
+      "citation": "Benjamin Briggs and Lleonard Rubio y Degrassi, Stable invariance of the restricted Lie algebra structure of Hochschild cohomology",
+      "identifier": "DOI:10.2140/pjm.2022.321.45; arXiv:2006.13871",
+      "role": "positive-characteristic restricted operations on Hochschild cohomology",
+      "effect_on_hinc": "The manuscript must state whether strict endomorphisms preserve only cup and bracket or also the characteristic-two restricted/squaring operation.",
+      "exact_hinc_match": false
+    }
+  ],
+  "limitations": [
+    "Public web search cannot exclude unindexed or subscription-only sources.",
+    "Equivalent objects may appear under different generators or nonlinear coordinate changes.",
+    "A general theorem may imply HINC without naming the exact specialization.",
+    "Source-level MathSciNet, zbMATH, thesis, and non-English review remains required."
+  ]
+}
