@@ -24,16 +24,21 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Compile validation source
-        run: python -m py_compile tools/validate_publication.py
+      - name: Compile validation sources
+        run: |
+          python -m py_compile tools/validate_publication.py
+          python -m py_compile tools/validate_public_release.py
 
-      - name: Validate structure, status, claims, and public-source hygiene
+      - name: Validate structure, status, claims, and source hygiene
         run: |
           mkdir -p reports
           python tools/validate_publication.py \
             --root . \
             --allow-public \
             --json-output reports/publication-validation.json
+          python tools/validate_public_release.py \
+            --root . \
+            --json-output reports/public-review-validation.json
 
       - name: Check complete branch whitespace
         shell: bash
@@ -67,13 +72,14 @@ jobs:
           print("public-review declarations: PASS")
           PY
 
-      - name: Upload validation receipt
+      - name: Upload validation receipts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: publication-validation-${{ github.run_id }}
           path: |
             reports/publication-validation.json
+            reports/public-review-validation.json
             reports/public-release-audit-2026-07-27.json
           if-no-files-found: warn
           retention-days: 90
