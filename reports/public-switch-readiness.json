@@ -1,0 +1,52 @@
+{
+  "schema_version": "n.human_ai_mathematics.public_switch_readiness.v1",
+  "repository": "novakprotocol/N-Human-AI-Mathematics",
+  "candidate_version": "0.1.0-public-review-candidate",
+  "result": "READY_PENDING_VISIBILITY_SWITCH",
+  "repository_visibility": "private",
+  "public_switch_ready": true,
+  "visibility_change_executed": false,
+  "pages_deployment_executed": false,
+  "owner": "Matthew S. Novak",
+  "public_wording": "human-led, LLM-assisted",
+  "specific_model_disclosed": false,
+  "specific_provider_disclosed": false,
+  "active_package": "HINC-001",
+  "held_packages": [
+    "ABF-001",
+    "FSG-001",
+    "ACM-001"
+  ],
+  "mathematical_readiness": {
+    "consolidated_revised_manuscript": true,
+    "hostile_review_integrated": true,
+    "self_contained_human_proof": true,
+    "coefficient_and_kernel_lean_scopes_pass": true,
+    "full_manuscript_formalized": false,
+    "external_specialist_review_complete": false,
+    "external_reproduction_complete": false,
+    "historical_priority_established": false,
+    "peer_reviewed": false
+  },
+  "release_boundary": {
+    "allowed_label": "candidate technical-review package",
+    "journal_submitted": false,
+    "doi_assigned": false,
+    "security_consequence_claimed": false,
+    "first_in_history_claimed": false,
+    "blanket_license_applied": false
+  },
+  "required_final_switch_actions": [
+    "verify release commit and green checks",
+    "merge release PR into private main",
+    "rerun validation on main",
+    "change repository visibility to public",
+    "verify public visibility by rereading repository metadata",
+    "activate and verify GitHub Pages",
+    "create the public-review tag and GitHub release",
+    "open structured review channels",
+    "freeze and publish the final release receipt"
+  ],
+  "failure_policy": "fail_closed",
+  "generated_date": "2026-07-27"
+}
