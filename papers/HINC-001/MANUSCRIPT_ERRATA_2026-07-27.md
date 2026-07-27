@@ -5,24 +5,25 @@ This file is controlling for the private legal-review branch until the manuscrip
 ## Status
 
 ```text
-errata_status: active
-manuscript_status: candidate pending revision
-mathematical_counterexample_found: no
-load-bearing proof clarification required: yes
-public release blocked: yes
+errata_status:                    active
+manuscript_status:                candidate pending consolidated revision
+mathematical_counterexample_found:no
+load-bearing proof additions:     supplied in controlling addenda
+Lean integration of additions:    pending
+public release blocked:           yes
 ```
 
 ## E-001 — Part 1 theorem cross-reference
 
 **Location:** `manuscript/MANUSCRIPT_PART_1.md`, Theorem 3.3 proof.
 
-**Current text:**
+Replace:
 
 ```text
 Lemmas 2.1 and 2.2 prove necessity.
 ```
 
-**Correction:**
+with:
 
 ```text
 Lemmas 3.1 and 3.2 prove necessity.
@@ -30,40 +31,53 @@ Lemmas 3.1 and 3.2 prove necessity.
 
 **Effect:** editorial only.
 
-## E-002 — Part 2 lemma cross-reference
+## E-002 — Part 2 cross-references
 
-**Location:** `manuscript/MANUSCRIPT_PART_2.md`, Lemma 4.2.
+**Location:** `manuscript/MANUSCRIPT_PART_2.md`.
 
-**Current text:**
-
-```text
-After Lemma 3.1, the defining algebra relations are equivalent to ...
-```
-
-**Correction:**
+Replace:
 
 ```text
-After Lemma 4.1, the defining algebra relations are equivalent to ...
+After Lemma 3.1 ...
 ```
+
+with:
+
+```text
+After Lemma 4.1 ...
+```
+
+In Theorem 4.3, replace the citation to Lemmas 3.1 and 3.2 with Lemmas 4.1 and 4.2.
 
 **Effect:** editorial only.
 
 ## E-003 — Characteristic-two structure convention
 
-The manuscript must define whether “strict graded Gerstenhaber endomorphism” preserves:
+Every HINC claim is interpreted as a **binary Gerstenhaber endomorphism** claim:
 
-1. graded-commutative cup product and Gerstenhaber bracket only; or
-2. cup product, bracket, and the characteristic-two restricted/squaring operation on Hochschild cohomology.
+```text
+unital
+base-linear
+degree-preserving
+cup-product-preserving
+binary degree-minus-one bracket-preserving
+```
 
-Until revised, every HINC claim is interpreted as a **cup-and-bracket** endomorphism claim only. No preservation of a restricted or squaring operation is claimed.
+No preservation of a BV operator, restricted power, Gerstenhaber square, brace algebra, or full `E_2` structure is claimed.
 
-**Effect:** claim-scope clarification; potentially load bearing if a stronger structure was intended.
+**Effect:** claim-scope clarification; load bearing if a stronger structure had been intended.
 
 ## E-004 — Generator-to-global sufficiency
 
-The current Lean source proves coefficient equivalence and normalized monoid laws, not the global theorem that the normalized generator assignment preserves all products and all brackets in the complete generated algebra.
+The Lean source proves coefficient equivalence and normalized monoid laws, not the global extension theorem.
 
-Until a generator-to-global theorem is supplied and audited, replace:
+The human proof is now supplied in:
+
+```text
+GENERATOR_TO_GLOBAL_LEMMA_2026-07-27.md
+```
+
+Until formalized and externally audited, replace unqualified uses of:
 
 ```text
 complete endomorphism functor
@@ -72,14 +86,12 @@ complete endomorphism functor
 with:
 
 ```text
-candidate complete cup-and-bracket endomorphism functor, with coefficient classification formally verified and generator-to-global sufficiency pending formalization
+candidate complete binary-Gerstenhaber endomorphism functor; coefficient classification formally verified, global extension human-proved and formalization pending
 ```
-
-This applies to Theorems 3.3 and 4.3 and all downstream claims depending on them.
 
 **Effect:** load-bearing status correction; no counterexample currently known.
 
-## E-005 — Representability terminology
+## E-005 — Representability terminology and proof
 
 Use:
 
@@ -87,21 +99,15 @@ Use:
 affine monoid scheme
 ```
 
-rather than unqualified:
+rather than unqualified “algebraic monoid” when discussing the nonreduced even object or reducible odd object.
 
-```text
-algebraic monoid
-```
-
-when discussing the nonreduced even object or the reducible odd object.
-
-The paper must construct the coefficient scheme and functorial bijection explicitly rather than relying on a one-sentence finite-presentation assertion.
+The consolidated paper must explicitly construct the finite coefficient affine space, polynomial relation/bracket equations, natural functorial bijection, polynomial composition map, and coordinate bialgebra.
 
 **Effect:** terminology and proof-detail correction.
 
-## E-006 — Unit-doubling terminology
+## E-006 — Clopen-unit terminology
 
-Replace undefined uses of:
+Replace undefined promotional uses of:
 
 ```text
 unit doubling
@@ -113,48 +119,62 @@ with:
 adjoining a separate clopen unit component
 ```
 
-or define `Dbl_G(C)` formally before using the phrase.
+or define `Dbl_G(C)` formally as local shorthand after acknowledging the standard idempotent/semilattice-of-groups mechanism.
 
-**Effect:** terminology only.
+**Effect:** terminology and novelty-boundary correction.
 
 ## E-007 — Center and derived subgroup boundary
 
-The explicit commutator calculation remains supported. The statement
+The explicit commutator calculation remains supported.
+
+The paper must define:
+
+- the center as a closed subfunctor after arbitrary base change;
+- the fppf sheaf/closed subgroup convention for the derived subgroup;
+- the abelianization quotient convention.
+
+The statement
 
 ```text
 [G_E,G_E] = alpha_2
 ```
 
-must be labeled as an fppf/group-scheme candidate until a specialist verifies the distinction between pointwise commutators, scheme image, fppf sheaf image, and the closed derived subgroup.
+remains a candidate group-scheme consequence pending specialist audit of pointwise image, scheme image, fppf sheaf image, and closed normal subgroup generation.
 
 **Effect:** claim-status narrowing.
 
-## E-008 — Ambient Hochschild/Gerstenhaber source
+## E-008 — Ambient Hochschild/Gerstenhaber foundation
 
-The identification
+The exact identification and bracket are now proved in:
 
 ```text
-HH*(F[epsilon]/epsilon^2) = D[u]
+FOUNDATIONAL_HOCHSCHILD_DERIVATION_2026-07-27.md
 ```
 
-and the displayed bracket formula must either be derived in a standalone foundation lemma or tied to an exact source whose characteristic and convention match the manuscript.
+The consolidated manuscript must incorporate that proof rather than merely cite broad truncated-polynomial literature.
 
-The broad Hochschild/Gerstenhaber literature is not a substitute for this exact foundational identity.
-
-**Effect:** source/proof completeness correction.
+**Effect:** foundational proof addition.
 
 ## E-009 — Bibliography metadata
 
 - Reiner Hermann’s arXiv identifier is `1403.3597`, not `1411.0836`.
 - Alberto Elduque’s preprint `2507.12321` was first posted in 2025; later revision dates should be stated separately.
+- Add direct sources for truncated-polynomial Hochschild rings, BV/Gerstenhaber structures, positive-characteristic restricted operations, nonreduced automorphism schemes, and algebraic-monoid classifications.
 
 **Effect:** bibliographic correction only.
 
 ## E-010 — Stale status in Part 4
 
-Part 4 states that proof-assistant verification, immutable hosted execution, and public-release authorization are absent. Current project records include two bounded public Lean PASS scopes and an owner-authorized private public-review staging lane.
+Replace the stale status section with the current machine-readable status:
 
-Replace the stale status section with the current machine-readable status. Do not state that the full manuscript is formally verified or publicly released.
+```text
+two bounded Lean PASS scopes: yes
+full manuscript Lean proof:   no
+private draft review lane:     yes
+public release:                no
+external specialist review:   no
+historical priority:           unestablished
+```
 
 **Effect:** evidence-status correction.
 
@@ -162,23 +182,122 @@ Replace the stale status section with the current machine-readable status. Do no
 
 The following concepts are established and must not be claimed as new:
 
-- algebraic/affine monoid scheme language;
+- algebraic and affine monoid-scheme language;
+- upper-triangular matrix monoids;
 - functors of points;
 - nonreduced automorphism or endomorphism schemes;
 - Hochschild/Gerstenhaber structure of truncated polynomial algebras;
-- ordinary field points missing infinitesimal scheme structure;
-- `alpha_2`, semidirect products, and infinitesimal commutators.
+- positive-characteristic restricted operations;
+- field-valued points missing infinitesimal scheme structure;
+- `alpha_2`, semidirect products, and infinitesimal commutators;
+- idempotent and clopen decompositions.
 
-The candidate contribution is narrowed to the explicit paired all-base classification, common reduced crossing, and exact contrasting modifications.
+The candidate contribution is narrowed to the explicit paired arbitrary-base classification, common reduced crossing, and exact contrasting modifications.
 
 **Effect:** novelty-boundary correction.
 
 ## E-012 — MCRC application
 
-The MCRC application is not a logical prerequisite and should be moved to an optional appendix or companion application note so that the lead paper remains a standalone algebra/scheme classification.
+The MCRC application is not a logical prerequisite. Move it to an optional appendix or companion application note.
 
 **Effect:** editorial and positioning correction.
 
+## E-013 — Odd presentation completeness
+
+The relations for the odd algebra require a kernel/completeness proof. This is now supplied in:
+
+```text
+ODD_PRESENTATION_NORMAL_FORM_2026-07-27.md
+```
+
+The unique normal form is:
+
+```text
+f(b) + c g(b) + epsilon h(b) + epsilon c k(b) + tau a.
+```
+
+The consolidated manuscript must integrate that argument.
+
+**Effect:** load-bearing presentation proof addition.
+
+## E-014 — Even triangular-matrix framing
+
+Identify
+
+```text
+(x,y,e)
+```
+
+with the upper-triangular matrix
+
+```text
+[x e]
+[0 y].
+```
+
+The even law is ordinary matrix multiplication restricted by `x(y-1)=0` and `e^2=0`. The multiplication mechanism is not a novelty claim.
+
+**Effect:** scientific framing correction.
+
+## E-015 — Scheme product qualifier
+
+Whenever stating
+
+```text
+M_E = C × alpha_2,
+```
+
+add:
+
+```text
+as schemes, not as monoid schemes.
+```
+
+The square-zero coordinate has unequal left and right weights.
+
+**Effect:** mathematical-structure clarification.
+
+## E-016 — Center points over disconnected bases
+
+Replace literal all-base wording “the center consists only of zero and identity” with:
+
+> The center is the constant finite étale two-point scheme. On connected test algebras its points are zero and identity; on disconnected bases its points correspond to idempotent clopen decompositions.
+
+**Effect:** functor-of-points correction.
+
+## E-017 — Point taxonomy
+
+Distinguish explicitly:
+
+```text
+F-rational points
+field-extension points
+geometric points
+reduced-base points
+arbitrary-base points
+```
+
+Use “ordinary points” only as informal prose after the exact category is named.
+
+**Effect:** terminology correction.
+
+## E-018 — Zeta-function framing
+
+State that Hasse–Weil point counts ignore nilpotent thickening because maps from fields factor through the reduction. Present equality of the even monoid and reduced-crossing zeta functions as an illustration of nilpotent invisibility, not an independent arithmetic anomaly.
+
+**Effect:** interpretation correction.
+
 ## Required consolidated rewrite
 
-Before public release, produce a new manuscript identity that incorporates E-001 through E-012, rerun all source/evidence checks, update hashes, and visually inspect all derived artifacts. The earlier manuscript remains preserved as the pre-hostile-review source.
+Before public release:
+
+1. integrate E-001 through E-018 into a new manuscript identity;
+2. rerun all source, computation, and formal-status checks;
+3. update evidence maps and hashes;
+4. regenerate PDF/DOCX/anonymous artifacts;
+5. inspect every rendered page;
+6. run external algebra/monoid and historical-equivalence review;
+7. approve a corrected private website preview;
+8. keep the repository private until those gates are resolved.
+
+The earlier manuscript remains preserved as the pre-hostile-review source.
