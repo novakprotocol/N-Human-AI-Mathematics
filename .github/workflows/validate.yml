@@ -1,13 +1,19 @@
-name: Validate public-switch candidate
+name: Validate private public-switch candidate
 
+# Private hosted jobs currently fail before executing a step. This workflow is
+# retained as a manual fail-closed gate for use when hosted execution is
+# available again. The authoritative current private gate is the guarded local
+# preflight in tools/Invoke-PublicSwitchPreflight.ps1.
 on:
-  push:
-  pull_request:
   workflow_dispatch:
+    inputs:
+      confirm_private_candidate:
+        description: "Type VALIDATE-HINC-001 while the repository is PRIVATE"
+        required: true
+        type: string
 
 permissions:
   contents: read
-  pull-requests: write
 
 jobs:
   validate:
@@ -15,222 +21,86 @@ jobs:
     timeout-minutes: 20
 
     steps:
-      - name: Check out complete source history
+      - name: Require exact private-gate confirmation
+        run: |
+          test "${{ inputs.confirm_private_candidate }}" = "VALIDATE-HINC-001"
+
+      - name: Check out the candidate branch
         uses: actions/checkout@v4
         with:
+          ref: release/public-review-v1
           fetch-depth: 0
 
-      - name: Initialize durable CI receipt
+      - name: Verify repository remains private
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          mkdir -p reports
-          printf 'public-switch candidate CI\ncommit=%s\nrun=%s\n' \
-            "$GITHUB_SHA" "$GITHUB_RUN_ID" \
-            > reports/ci-diagnostic.log
+          gh api "repos/${GITHUB_REPOSITORY}" > /tmp/repository.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path("/tmp/repository.json").read_text())
+          assert data["visibility"] == "private", data["visibility"]
+          assert data["default_branch"] == "main", data["default_branch"]
+          print("repository visibility: PRIVATE")
+          PY
 
       - name: Set up Python
-        id: setup_python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Install HINC verification requirements
-        id: install
-        continue-on-error: true
+      - name: Install HINC requirements
         run: |
-          set -o pipefail
-          python -m pip install --disable-pip-version-check -r papers/HINC-001/requirements.txt \
-            2>&1 | tee -a reports/ci-diagnostic.log
+          python -m pip install --disable-pip-version-check \
+            -r papers/HINC-001/requirements.txt
 
-      - name: Compile validation and HINC sources
-        id: compile
-        continue-on-error: true
+      - name: Compile all private-gate sources
         run: |
-          set -o pipefail
-          {
-            python -m py_compile tools/validate_publication.py
-            python -m py_compile tools/validate_publication_v2.py
-            python -m py_compile tools/validate_public_release.py
-            python -m py_compile tools/validate_public_release_v2.py
-            python -m py_compile tools/validate_public_state.py
-            python -m py_compile papers/HINC-001/src/standalone_common_core_verifier.py
-            python -m py_compile papers/HINC-001/tests/test_hinc_standalone.py
-          } 2>&1 | tee -a reports/ci-diagnostic.log
+          python -m py_compile tools/validate_publication.py
+          python -m py_compile tools/validate_publication_v2.py
+          python -m py_compile tools/validate_public_release.py
+          python -m py_compile tools/validate_public_release_v2.py
+          python -m py_compile tools/validate_public_state.py
+          python -m py_compile papers/HINC-001/src/standalone_common_core_verifier.py
+          python -m py_compile papers/HINC-001/tests/test_hinc_standalone.py
 
-      - name: Validate repository and public-switch readiness
-        id: validate_source
-        continue-on-error: true
+      - name: Run private publication and switch-readiness validators
         run: |
-          set -o pipefail
-          {
-            python tools/validate_publication_v2.py \
-              --root . \
-              --json-output reports/publication-validation.json
-            python tools/validate_public_release_v2.py \
-              --root . \
-              --json-output reports/public-switch-validation.json
-          } 2>&1 | tee -a reports/ci-diagnostic.log
+          mkdir -p reports
+          python tools/validate_publication_v2.py \
+            --root . \
+            --json-output reports/publication-validation.json
+          python tools/validate_public_release_v2.py \
+            --root . \
+            --json-output reports/public-switch-validation.json
 
       - name: Run HINC standalone tests
-        id: hinc_tests
-        continue-on-error: true
         run: |
-          set -o pipefail
           python -m unittest discover \
             -s papers/HINC-001/tests \
             -p 'test_*.py' \
-            -v 2>&1 | tee reports/hinc-standalone-test-log.txt | tee -a reports/ci-diagnostic.log
+            -v 2>&1 | tee reports/hinc-standalone-test-log.txt
 
-      - name: Verify switch-state declarations
-        id: declarations
-        continue-on-error: true
-        run: |
-          set -o pipefail
-          python - <<'PY' 2>&1 | tee -a reports/ci-diagnostic.log
-          import json
-          from pathlib import Path
-
-          index = json.loads(Path("research-index.json").read_text(encoding="utf-8"))
-          hinc = json.loads(Path("papers/HINC-001/STATUS.json").read_text(encoding="utf-8"))
-          audit = json.loads(Path("reports/public-release-audit-2026-07-27.json").read_text(encoding="utf-8"))
-          ready = json.loads(Path("reports/public-switch-readiness.json").read_text(encoding="utf-8"))
-
-          assert index["public_release_authorized"] is False
-          assert index["public_switch_ready"] is True
-          assert index["release_channel"] == "private_staging"
-          assert index["release_version"] == "0.1.0-public-review-candidate"
-          assert index["specific_model_disclosed"] is False
-          assert index["specific_provider_disclosed"] is False
-
-          release = hinc["release"]
-          assert release["public_authorized"] is False
-          assert release["public_switch_ready"] is True
-          assert release["channel"] == "private_staging"
-          assert release["version"] == "0.1.0-public-review-candidate"
-          assert release["release_date"] is None
-          assert release["doi"] is None
-
-          assert audit["result"] == "READY_PENDING_VISIBILITY_SWITCH"
-          assert audit["release_scope"]["repository_visibility"] == "private"
-          assert audit["release_scope"]["public_switch_ready"] is True
-          assert audit["release_scope"]["visibility_change_executed"] is False
-
-          assert ready["result"] == "READY_PENDING_VISIBILITY_SWITCH"
-          assert ready["public_switch_ready"] is True
-          assert ready["visibility_change_executed"] is False
-          assert ready["pages_deployment_executed"] is False
-          print("private public-switch candidate declarations: PASS")
-          PY
-
-      - name: Verify controlling manuscript and private website
-        id: website
-        continue-on-error: true
-        run: |
-          set -o pipefail
-          {
-            test -f papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md
-            grep -q "HINC-001_REVISED_MANUSCRIPT.md" papers/HINC-001/manuscript/MANUSCRIPT_INDEX.md
-            grep -q "public technical-review release:            prepared, not yet activated" papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md
-            grep -q "Private public-switch preview" docs/index.html
-            grep -q "Public switch ready" docs/index.html
-            grep -q "Peer reviewed</span><strong>No" docs/index.html
-            grep -q "Model/provider</span><strong>Not disclosed" docs/index.html
-            grep -q "noindex,nofollow,noarchive,nosnippet" docs/index.html
-          } 2>&1 | tee -a reports/ci-diagnostic.log
-
-      - name: Check branch whitespace
-        id: whitespace
-        continue-on-error: true
+      - name: Check complete branch whitespace
         shell: bash
         run: |
-          set -o pipefail
-          {
-            set -euo pipefail
-            if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-              git fetch origin "${{ github.base_ref }}"
-              BASE="$(git merge-base "origin/${{ github.base_ref }}" HEAD)"
-            else
-              BASE="$(git rev-parse HEAD^)"
-            fi
-            git diff --check "$BASE" HEAD --
-          } 2>&1 | tee -a reports/ci-diagnostic.log
+          set -euo pipefail
+          git fetch origin main
+          BASE="$(git merge-base origin/main HEAD)"
+          git diff --check "$BASE" HEAD --
 
-      - name: Write machine-readable step outcomes
-        if: always()
-        run: |
-          cat > reports/ci-step-outcomes.json <<'JSON'
-          {
-            "schema_version": "n.human_ai_mathematics.ci_step_outcomes.v1",
-            "install": "${{ steps.install.outcome }}",
-            "compile": "${{ steps.compile.outcome }}",
-            "validate_source": "${{ steps.validate_source.outcome }}",
-            "hinc_tests": "${{ steps.hinc_tests.outcome }}",
-            "declarations": "${{ steps.declarations.outcome }}",
-            "website": "${{ steps.website.outcome }}",
-            "whitespace": "${{ steps.whitespace.outcome }}"
-          }
-          JSON
-          cat reports/ci-step-outcomes.json | tee -a reports/ci-diagnostic.log
-
-      - name: Publish or update the PR diagnostic comment
-        if: always() && github.event_name == 'pull_request'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-        run: |
-          {
-            echo "## Public-switch candidate CI diagnostic"
-            echo
-            echo "Commit: \`$GITHUB_SHA\`"
-            echo "Run: \`$GITHUB_RUN_ID\`"
-            echo
-            echo '```json'
-            cat reports/ci-step-outcomes.json
-            echo '```'
-            echo
-            echo '<details><summary>Captured gate output</summary>'
-            echo
-            echo '```text'
-            tail -n 300 reports/ci-diagnostic.log
-            echo '```'
-            echo
-            echo '</details>'
-          } > reports/pr-ci-comment.md
-          gh pr comment "$PR_NUMBER" \
-            --repo "$GITHUB_REPOSITORY" \
-            --body-file reports/pr-ci-comment.md \
-            --edit-last \
-            --create-if-none
-
-      - name: Upload validation and diagnostic receipts
+      - name: Upload private validation receipts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: public-switch-candidate-validation-${{ github.run_id }}
+          name: private-public-switch-validation-${{ github.run_id }}
           path: |
-            reports/ci-diagnostic.log
-            reports/ci-step-outcomes.json
-            reports/pr-ci-comment.md
             reports/publication-validation.json
             reports/public-switch-validation.json
             reports/public-release-audit-2026-07-27.json
             reports/public-switch-readiness.json
             reports/hinc-standalone-test-log.txt
-          if-no-files-found: error
+            reports/hosted-runner-availability-2026-07-27.json
+          if-no-files-found: warn
           retention-days: 90
-
-      - name: Enforce complete gate success
-        if: always()
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          data = json.loads(Path("reports/ci-step-outcomes.json").read_text())
-          failed = {
-              name: value
-              for name, value in data.items()
-              if name != "schema_version" and value != "success"
-          }
-          if failed:
-              raise SystemExit(f"public-switch candidate gate failed: {failed}")
-          print("public-switch candidate gate: PASS")
-          PY
