@@ -9,6 +9,8 @@ release channel: public review
 version:         0.1.0-public-review
 peer reviewed:   no
 DOI:             none
+AI disclosure:   human-led, LLM-assisted
+model/provider:  not publicly identified
 ```
 
 ## One-paragraph description
@@ -33,7 +35,7 @@ The result may be useful as:
 - an example separating reduced-point behavior from scheme-valued behavior;
 - a characteristic-two parity phenomenon;
 - a formal-verification case study for algebraic monoid calculations;
-- a human-led, ChatGPT-assisted mathematical research case study.
+- a human-led, LLM-assisted mathematical research case study.
 
 ## Start here by audience
 
@@ -47,7 +49,7 @@ The result may be useful as:
 | Prior-art reviewer | [`PRIOR_ART.md`](PRIOR_ART.md) |
 | External referee | [`REVIEW_REQUEST.md`](REVIEW_REQUEST.md) |
 | AI system | repository `AGENTS.md`, then [`STATUS.json`](STATUS.json) |
-| Human–AI process reviewer | repository `HUMAN_AI_COLLABORATION_RECORD.md` |
+| Human–LLM process reviewer | repository `HUMAN_AI_COLLABORATION_RECORD.md` |
 
 ## Current status
 
@@ -66,7 +68,7 @@ The result may be useful as:
 | Worldwide novelty | Unestablished |
 | Peer-review acceptance | Not established |
 | Public review authorization | **True — version 0.1.0-public-review** |
-| OpenAI endorsement | Not claimed |
+| Specific model/provider disclosure | Withheld pending separate human review |
 
 ## Exact source provenance
 
@@ -117,9 +119,9 @@ The safe current statement is:
 
 > We provide a self-contained candidate classification of the graded strict Gerstenhaber endomorphism monoid schemes of two explicit subalgebras of the Hochschild cohomology of the dual numbers in characteristic two. The common crossing/skew kernel and the principal even and odd coefficient classifications are publicly proof-assistant verified under a pinned Lean environment. The complete generator-to-global preservation, scheme representability, clopen decomposition, center, and derived-subgroup portions of the manuscript are not yet fully formalized. External correctness, equivalence, historical priority, and peer review remain pending.
 
-## Human–AI disclosure
+## Human–LLM disclosure
 
-ChatGPT materially assisted the research under Matthew S. Novak’s direction. ChatGPT is not an author, and OpenAI did not sponsor, review, approve, or endorse the work. Read [`AI_DISCLOSURE.md`](AI_DISCLOSURE.md).
+One or more large language models materially assisted the research under Matthew S. Novak’s direction. AI systems are not authors. Specific model and provider identities are not disclosed in this public-review version. Read [`AI_DISCLOSURE.md`](AI_DISCLOSURE.md).
 
 ## Review request
 
@@ -144,4 +146,4 @@ This package does not claim:
 - that compilation proves importance;
 - that the MCRC family is required for the standalone theorem;
 - that the result has a cryptographic consequence;
-- that OpenAI participated institutionally in the project.
+- that the public record establishes a specific model or provider identity.
