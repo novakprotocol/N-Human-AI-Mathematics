@@ -1,18 +1,20 @@
 # N Human–AI Mathematics
 
-**An open research record of human-led, LLM-assisted mathematical exploration.**
+**Private staging for human-led, LLM-assisted mathematical research.**
 
-This repository publishes selected mathematics developed through sustained collaboration between **Matthew S. Novak** and one or more **large language models (LLMs)**, together with the proofs, programs, formal checks, failed attempts, corrections, status records, and review boundaries needed to inspect the work responsibly.
+This repository curates selected mathematics developed through sustained interaction between **Matthew S. Novak** and one or more **large language models**, together with the proof sources, programs, formal checks, failed attempts, corrections, status records, and review boundaries needed to inspect the work responsibly.
 
-It is a **public-review repository**, not a declaration that every result is correct, historically new, peer reviewed, or journal accepted.
+It is currently a **private hostile-review and legal/editorial staging repository**. No paper is publicly released from this branch.
 
 ```text
 repository:                 novakprotocol/N-Human-AI-Mathematics
-release channel:            public review
+visibility:                 private
+release channel:            private staging
 accountable human:          Matthew S. Novak
 LLM role:                   material research assistance
-specific model/provider:    not publicly identified
-public release authorized:  true
+specific model/provider:    not disclosed
+public release authorized:  false pending revised approval
+peer reviewed:              no
 blanket license applied:    no
 ```
 
@@ -21,93 +23,84 @@ blanket license applied:    no
 | Reader | Start here | Purpose |
 |---|---|---|
 | General reader | [`START_HERE.md`](START_HERE.md) | Understand the project and its limits. |
-| Human–LLM research reviewer | [`HUMAN_AI_COLLABORATION_RECORD.md`](HUMAN_AI_COLLABORATION_RECORD.md) | See who did what and what the record can prove. |
-| Historical-priority reviewer | [`HUMAN_AI_MATHEMATICS_PRIOR_ART.md`](HUMAN_AI_MATHEMATICS_PRIOR_ART.md) | Compare this project with earlier human–AI mathematics. |
-| Mathematician | [`RESEARCH_INDEX.md`](RESEARCH_INDEX.md) | Find theorem packages, proofs, and open gates. |
+| Mathematician | [`RESEARCH_INDEX.md`](RESEARCH_INDEX.md) | Find candidate theorem packages and open gates. |
+| HINC hostile reviewer | [`papers/HINC-001/HOSTILE_REVIEW_2026-07-27.md`](papers/HINC-001/HOSTILE_REVIEW_2026-07-27.md) | See the adversarial findings and release blockers. |
+| Proof auditor | [`papers/HINC-001/CLAIMS.md`](papers/HINC-001/CLAIMS.md) | Read the narrowed claim-by-claim status. |
 | Reproducer | [`EVIDENCE_STANDARD.md`](EVIDENCE_STANDARD.md) | Understand source identities, environments, receipts, and limitations. |
-| Adversarial reviewer | [`OPEN_REVIEW_CHALLENGE.md`](OPEN_REVIEW_CHALLENGE.md) | Submit a counterexample, proof gap, prior-art match, or reproduction. |
-| AI system | [`AGENTS.md`](AGENTS.md) | Read the machine-facing claim rules before summarizing the work. |
+| Historical-priority reviewer | [`papers/HINC-001/PRIOR_ART_PRIMARY_SOURCE_MAP_2026-07-27.json`](papers/HINC-001/PRIOR_ART_PRIMARY_SOURCE_MAP_2026-07-27.json) | Inspect the closest established frameworks and search limits. |
+| LLM system | [`AGENTS.md`](AGENTS.md) | Read the machine-facing claim rules before summarizing the work. |
 | Editor or publisher | [`PUBLICATION_WORKFLOW.md`](PUBLICATION_WORKFLOW.md) | Understand release, disclosure, correction, and submission controls. |
 
-A compact web front door is maintained under [`docs/`](docs/).
+The proposed static site under [`docs/`](docs/) is a private preview and is blocked from deployment by [`docs/PRIVATE_PREVIEW_BLOCKERS_2026-07-27.md`](docs/PRIVATE_PREVIEW_BLOCKERS_2026-07-27.md).
 
-## The central claim
+## Current hostile-review result
 
-The repository demonstrates a sustained **human-led, LLM-assisted mathematical workflow** in which:
+The 2026-07-27 audit did **not** find an explicit counterexample to the controlling even or odd coefficient systems. It did find release-blocking defects in foundation, terminology, global-proof presentation, representability, center/derived-subgroup conventions, citations, status language, and website framing.
+
+The following records now control HINC-001:
+
+- [`HOSTILE_REVIEW_2026-07-27.md`](papers/HINC-001/HOSTILE_REVIEW_2026-07-27.md)
+- [`MANUSCRIPT_ERRATA_2026-07-27.md`](papers/HINC-001/MANUSCRIPT_ERRATA_2026-07-27.md)
+- [`FOUNDATIONAL_HOCHSCHILD_DERIVATION_2026-07-27.md`](papers/HINC-001/FOUNDATIONAL_HOCHSCHILD_DERIVATION_2026-07-27.md)
+- [`GENERATOR_TO_GLOBAL_LEMMA_2026-07-27.md`](papers/HINC-001/GENERATOR_TO_GLOBAL_LEMMA_2026-07-27.md)
+- [`ODD_PRESENTATION_NORMAL_FORM_2026-07-27.md`](papers/HINC-001/ODD_PRESENTATION_NORMAL_FORM_2026-07-27.md)
+
+The pre-review four-part manuscript remains preserved, but it must not be cited without the controlling corrections.
+
+## Central research claim
+
+The repository documents a sustained **human-led, LLM-assisted mathematical workflow** in which:
 
 - the human selected problems, imposed constraints, judged significance, ran release gates, and retained publication authority;
 - LLMs proposed directions, algebraic decompositions, proof structures, programs, tests, counterexample searches, literature queries, and editorial revisions;
-- Python, C, symbolic systems, Git, GitHub, and Lean were used to test or formalize bounded claims;
+- Python, C, symbolic systems, Git, GitHub, and Lean tested or formalized bounded claims;
 - failures were preserved rather than rewritten as successes;
-- every promoted paper separates internal evidence from external review and historical priority.
+- internal evidence remains separate from external review and historical priority.
 
-The repository does **not** claim to be the first human–AI mathematical collaboration. Earlier public work includes machine-learning-guided mathematical discovery, LLM-guided program search, LLM-assisted proofs, automated theorem solving, and formally verified human–AI discovery case studies. The narrower project-specific claim is that this repository supplies an unusually explicit, commit-anchored public record combining research disclosure, claim ledgers, correction history, executable evidence, formal-proof scope, and structured adversarial review. Historical priority for that exact combination remains unestablished.
-
-## What this repository provides
-
-- dated Git commits and immutable source identities;
-- paper-level human–LLM disclosures;
-- deterministic programs and test receipts;
-- separate implementations and finite exhaustive checks where applicable;
-- bounded proof-assistant build records;
-- preserved failed runs and correction ledgers;
-- public channels for challenge and reproduction.
-
-## What it does not prove by itself
-
-- that every theorem is correct;
-- that any theorem is worldwide novel;
-- that a particular LLM vendor or model participated;
-- that an LLM is a legal author or rights holder;
-- that every historical conversation turn is cryptographically authenticated;
-- that internal reproduction is external peer review;
-- that a public repository is a journal publication.
-
-A commit identifies source. A hash identifies bytes. A passing finite computation establishes only the declared finite scope. A proof-assistant build establishes only the declarations compiled under the recorded environment.
+The repository does not claim to be the first human–AI mathematics project. Historical priority for either the process architecture or the mathematics remains unestablished.
 
 ## Current paper portfolio
 
-| ID | Working title | Field | Public status |
-|---|---|---|---|
-| `HINC-001` | Hidden Infinitesimal Noncommutativity in Two Gerstenhaber Endomorphism Monoids | Algebraic monoids, Gerstenhaber algebra, nonreduced geometry | **Public review package.** Candidate manuscript; two bounded Lean scopes pass; external review and historical priority remain pending. |
-| `ABF-001` | Affine-Hyperplane Degree-Drop Spectra of a Vectorial Boolean Map | Boolean functions, finite linear algebra | Indexed only; complete standalone package not yet released. |
-| `FSG-001` | Fibonacci Critical Groups of Carry–Rees Petal Graphs | Critical groups, graph theory, Fibonacci divisibility | Indexed only; complete standalone package not yet released. |
-| `ACM-001` | ANF Code and Matroid Geometry of a Reduced Vectorial Map | Coding theory, matroids, Boolean functions | Indexed only; consolidation and standalone package pending. |
+| ID | Working title | Current state |
+|---|---|---|
+| `HINC-001` | Hidden Infinitesimal Noncommutativity in Two Gerstenhaber Endomorphism Monoids | **Hold — private hostile-review revision** |
+| `ABF-001` | Affine-Hyperplane Degree-Drop Spectra of a Vectorial Boolean Map | Hold |
+| `FSG-001` | Fibonacci Critical Groups of Carry–Rees Petal Graphs | Hold |
+| `ACM-001` | ANF Code and Matroid Geometry of a Reduced Vectorial Map | Hold |
 
 The machine-readable source is [`research-index.json`](research-index.json).
 
-## Featured paper: HINC-001
-
-The first complete public-review package studies two explicit graded Gerstenhaber-algebra endomorphism monoids in characteristic two. Its central phenomenon is that ordinary field-valued points can hide infinitesimal noncommutativity and center behavior visible over general test rings.
-
-Start with:
-
-- [`papers/HINC-001/PLAIN_LANGUAGE.md`](papers/HINC-001/PLAIN_LANGUAGE.md)
-- [`papers/HINC-001/README.md`](papers/HINC-001/README.md)
-- [`papers/HINC-001/CLAIMS.md`](papers/HINC-001/CLAIMS.md)
-- [`papers/HINC-001/FORMAL_VERIFICATION.md`](papers/HINC-001/FORMAL_VERIFICATION.md)
-- [`papers/HINC-001/REVIEW_REQUEST.md`](papers/HINC-001/REVIEW_REQUEST.md)
-
-## Evidence status vocabulary
+## Evidence vocabulary
 
 | Status | Meaning |
 |---|---|
-| `stated` | Precisely written but not yet fully checked. |
-| `proved_on_paper` | A complete human proof is supplied, pending external review. |
-| `computationally_exhaustive` | Exhaustive for the explicitly bounded finite domain. |
-| `internally_reproduced` | A separate route inside the project agrees. It is not outside review. |
-| `proof_assistant_verified` | The listed declarations compiled in the pinned proof environment. |
-| `externally_reproduced` | An independent person or institution published a reproduction. |
-| `peer_reviewed` | Accepted through an identified external peer-review process. |
-| `historical_priority_established` | A qualified source-level review supports the stated priority boundary. |
-| `rejected` | A counterexample, proof failure, or decisive equivalence invalidated the claim as stated. |
-| `superseded` | Replaced by a later exact statement while preserving history. |
+| `candidate theorem` | Precise statement and human proof supplied; external review incomplete. |
+| `internally reproduced` | A separate route inside the project agrees; not outside review. |
+| `proof-assistant verified` | Only the listed declarations compiled in the pinned environment. |
+| `externally reproduced` | An independent person or institution published a reproduction. |
+| `peer reviewed` | Accepted through an identified external process. |
+| `historical priority established` | A qualified source-level review supports the exact priority boundary. |
+| `rejected` | A counterexample or proof failure invalidated the claim as stated. |
+| `superseded` | Replaced while preserving the earlier record. |
+
+A commit identifies source. A hash identifies bytes. A finite computation establishes only its declared finite scope. A proof-assistant build establishes only the declarations compiled under the recorded environment.
+
+## What remains before any public release
+
+1. consolidate every HINC erratum into a new manuscript identity;
+2. formalize or clearly isolate the new foundation and global-extension proofs;
+3. expand representability and group-scheme conventions;
+4. complete external algebra/monoid and historical-equivalence review;
+5. regenerate and inspect derived artifacts;
+6. correct and approve the private website preview;
+7. rerun privacy, rights, citation, link, and accessibility gates;
+8. obtain a fresh explicit owner release decision.
 
 ## Authorship and LLM assistance
 
-The accountable human author and repository owner is **Matthew S. Novak**. LLMs materially assisted the research. AI systems are not listed as authors, do not own the work, and do not exercise publication authority.
+Matthew S. Novak is the accountable human author and repository owner. LLMs materially assisted the research. AI systems are not listed as authors, do not own the work, and do not exercise publication authority.
 
-The public release deliberately identifies the assistance at the category level—**LLM-assisted**—without naming a model or provider. A more specific disclosure may be added only after a separate human legal and publication-policy review.
+The proposed public wording identifies assistance only at the category level—**LLM-assisted**—without naming a model or provider.
 
 ## Rights
 
@@ -117,12 +110,10 @@ No blanket MIT license applies. Manuscripts, code, data, evidence, figures, and 
 Copyright © 2026 Matthew S. Novak. All rights reserved.
 ```
 
-Public visibility grants access for inspection. It does not silently grant unrestricted republication or commercial reuse. See [`RIGHTS_AND_LICENSING.md`](RIGHTS_AND_LICENSING.md).
+Private access does not grant unrestricted republication or commercial reuse. See [`RIGHTS_AND_LICENSING.md`](RIGHTS_AND_LICENSING.md).
 
-## Open review principle
+## Review principle
 
-The challenge is not “believe the repository.” It is:
+> Inspect the exact statement, proof, source, evidence, and limitations. Provide a counterexample, identify a proof gap, locate earlier equivalent work, or reproduce the result independently.
 
-> Inspect the exact statement, proof, source, evidence, and limitations. Provide a counterexample, identify a proof gap, locate an earlier equivalent theorem, or reproduce the result independently.
-
-All four outcomes improve the scientific record.
+All four outcomes improve the record.
