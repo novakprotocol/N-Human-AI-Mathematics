@@ -19,45 +19,72 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Initialize durable CI receipt
+        run: |
+          mkdir -p reports
+          printf 'public-switch candidate CI\ncommit=%s\nrun=%s\n' \
+            "$GITHUB_SHA" "$GITHUB_RUN_ID" \
+            > reports/ci-diagnostic.log
+
       - name: Set up Python
+        id: setup_python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Install HINC verification requirements
+        id: install
+        continue-on-error: true
         run: |
-          python -m pip install --disable-pip-version-check -r papers/HINC-001/requirements.txt
+          set -o pipefail
+          python -m pip install --disable-pip-version-check -r papers/HINC-001/requirements.txt \
+            2>&1 | tee -a reports/ci-diagnostic.log
 
       - name: Compile validation and HINC sources
+        id: compile
+        continue-on-error: true
         run: |
-          python -m py_compile tools/validate_publication.py
-          python -m py_compile tools/validate_publication_v2.py
-          python -m py_compile tools/validate_public_release.py
-          python -m py_compile tools/validate_public_release_v2.py
-          python -m py_compile tools/validate_public_state.py
-          python -m py_compile papers/HINC-001/src/standalone_common_core_verifier.py
-          python -m py_compile papers/HINC-001/tests/test_hinc_standalone.py
+          set -o pipefail
+          {
+            python -m py_compile tools/validate_publication.py
+            python -m py_compile tools/validate_publication_v2.py
+            python -m py_compile tools/validate_public_release.py
+            python -m py_compile tools/validate_public_release_v2.py
+            python -m py_compile tools/validate_public_state.py
+            python -m py_compile papers/HINC-001/src/standalone_common_core_verifier.py
+            python -m py_compile papers/HINC-001/tests/test_hinc_standalone.py
+          } 2>&1 | tee -a reports/ci-diagnostic.log
 
       - name: Validate repository and public-switch readiness
+        id: validate_source
+        continue-on-error: true
         run: |
-          mkdir -p reports
-          python tools/validate_publication_v2.py \
-            --root . \
-            --json-output reports/publication-validation.json
-          python tools/validate_public_release_v2.py \
-            --root . \
-            --json-output reports/public-switch-validation.json
+          set -o pipefail
+          {
+            python tools/validate_publication_v2.py \
+              --root . \
+              --json-output reports/publication-validation.json
+            python tools/validate_public_release_v2.py \
+              --root . \
+              --json-output reports/public-switch-validation.json
+          } 2>&1 | tee -a reports/ci-diagnostic.log
 
       - name: Run HINC standalone tests
+        id: hinc_tests
+        continue-on-error: true
         run: |
+          set -o pipefail
           python -m unittest discover \
             -s papers/HINC-001/tests \
             -p 'test_*.py' \
-            -v 2>&1 | tee reports/hinc-standalone-test-log.txt
+            -v 2>&1 | tee reports/hinc-standalone-test-log.txt | tee -a reports/ci-diagnostic.log
 
       - name: Verify switch-state declarations
+        id: declarations
+        continue-on-error: true
         run: |
-          python - <<'PY'
+          set -o pipefail
+          python - <<'PY' 2>&1 | tee -a reports/ci-diagnostic.log
           import json
           from pathlib import Path
 
@@ -94,38 +121,80 @@ jobs:
           PY
 
       - name: Verify controlling manuscript and private website
+        id: website
+        continue-on-error: true
         run: |
-          test -f papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md
-          grep -q "HINC-001_REVISED_MANUSCRIPT.md" papers/HINC-001/manuscript/MANUSCRIPT_INDEX.md
-          grep -q "public technical-review release:            prepared, not yet activated" papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md
-          grep -q "Private public-switch preview" docs/index.html
-          grep -q "Public switch ready" docs/index.html
-          grep -q "Peer reviewed</span><strong>No" docs/index.html
-          grep -q "Model/provider</span><strong>Not disclosed" docs/index.html
-          grep -q "noindex,nofollow,noarchive,nosnippet" docs/index.html
+          set -o pipefail
+          {
+            test -f papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md
+            grep -q "HINC-001_REVISED_MANUSCRIPT.md" papers/HINC-001/manuscript/MANUSCRIPT_INDEX.md
+            grep -q "public technical-review release:            prepared, not yet activated" papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md
+            grep -q "Private public-switch preview" docs/index.html
+            grep -q "Public switch ready" docs/index.html
+            grep -q "Peer reviewed</span><strong>No" docs/index.html
+            grep -q "Model/provider</span><strong>Not disclosed" docs/index.html
+            grep -q "noindex,nofollow,noarchive,nosnippet" docs/index.html
+          } 2>&1 | tee -a reports/ci-diagnostic.log
 
       - name: Check branch whitespace
+        id: whitespace
+        continue-on-error: true
         shell: bash
         run: |
-          set -euo pipefail
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            git fetch origin "${{ github.base_ref }}"
-            BASE="$(git merge-base "origin/${{ github.base_ref }}" HEAD)"
-          else
-            BASE="$(git rev-parse HEAD^)"
-          fi
-          git diff --check "$BASE" HEAD --
+          set -o pipefail
+          {
+            set -euo pipefail
+            if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+              git fetch origin "${{ github.base_ref }}"
+              BASE="$(git merge-base "origin/${{ github.base_ref }}" HEAD)"
+            else
+              BASE="$(git rev-parse HEAD^)"
+            fi
+            git diff --check "$BASE" HEAD --
+          } 2>&1 | tee -a reports/ci-diagnostic.log
 
-      - name: Upload validation receipts
+      - name: Write machine-readable step outcomes
+        if: always()
+        run: |
+          cat > reports/ci-step-outcomes.json <<'JSON'
+          {
+            "schema_version": "n.human_ai_mathematics.ci_step_outcomes.v1",
+            "install": "${{ steps.install.outcome }}",
+            "compile": "${{ steps.compile.outcome }}",
+            "validate_source": "${{ steps.validate_source.outcome }}",
+            "hinc_tests": "${{ steps.hinc_tests.outcome }}",
+            "declarations": "${{ steps.declarations.outcome }}",
+            "website": "${{ steps.website.outcome }}",
+            "whitespace": "${{ steps.whitespace.outcome }}"
+          }
+          JSON
+          cat reports/ci-step-outcomes.json | tee -a reports/ci-diagnostic.log
+
+      - name: Upload validation and diagnostic receipts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: public-switch-candidate-validation-${{ github.run_id }}
           path: |
+            reports/ci-diagnostic.log
+            reports/ci-step-outcomes.json
             reports/publication-validation.json
             reports/public-switch-validation.json
             reports/public-release-audit-2026-07-27.json
             reports/public-switch-readiness.json
             reports/hinc-standalone-test-log.txt
-          if-no-files-found: warn
+          if-no-files-found: error
           retention-days: 90
+
+      - name: Enforce complete gate success
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path("reports/ci-step-outcomes.json").read_text())
+          failed = {name: value for name, value in data.items() if name != "schema_version" and value != "success"}
+          if failed:
+              raise SystemExit(f"public-switch candidate gate failed: {failed}")
+          print("public-switch candidate gate: PASS")
+          PY
