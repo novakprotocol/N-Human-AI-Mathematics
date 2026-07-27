@@ -33,6 +33,7 @@ jobs:
           python -m py_compile tools/validate_publication.py
           python -m py_compile tools/validate_publication_v2.py
           python -m py_compile tools/validate_public_release.py
+          python -m py_compile tools/validate_public_release_v2.py
           python -m py_compile tools/validate_public_state.py
           python -m py_compile papers/HINC-001/src/standalone_common_core_verifier.py
           python -m py_compile papers/HINC-001/tests/test_hinc_standalone.py
@@ -43,7 +44,7 @@ jobs:
           python tools/validate_publication_v2.py \
             --root . \
             --json-output reports/publication-validation.json
-          python tools/validate_public_release.py \
+          python tools/validate_public_release_v2.py \
             --root . \
             --json-output reports/public-switch-validation.json
 
