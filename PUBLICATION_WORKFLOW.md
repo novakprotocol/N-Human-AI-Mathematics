@@ -2,7 +2,9 @@
 
 N-MathLab remains the private research laboratory. N Human–AI Mathematics receives only curated, self-contained exports.
 
-## Lifecycle
+## Two distinct release tracks
+
+The project separates **public review** from **archival or journal publication**.
 
 ```text
 private exploration
@@ -11,18 +13,22 @@ candidate theorem freeze
     ↓
 proof and evidence audit
     ↓
-clean-room package export
+clean package export
     ↓
-private specialist review
-    ↓
-formal/reproduction updates
+public-source and rights audit
     ↓
 owner authorization
     ↓
-public repository release
+PUBLIC REVIEW RELEASE
     ↓
-DOI/archive and journal submission
+outside review, correction, reproduction, priority analysis
+    ↓
+reviewed archival release / DOI
+    ↓
+journal submission and peer review
 ```
+
+A public GitHub repository is not a journal publication. External review is not required merely to ask the public for review, but all unresolved scientific gates must remain visible.
 
 ## Gate 1 — Select one controlling result
 
@@ -73,11 +79,11 @@ At minimum:
 - a prior-art equivalence audit;
 - a correction-ledger review.
 
-A failed control blocks promotion.
+A failed load-bearing control blocks promotion. An operational failure is preserved and classified separately from a mathematical failure.
 
 ## Gate 5 — Formalization boundary
 
-Formal proof is not mandatory for every paper, but status must be explicit:
+Formal proof is not mandatory for public review, but status must be explicit:
 
 ```text
 not_started
@@ -96,18 +102,86 @@ Remove or quarantine:
 - private repository URLs not meant for disclosure;
 - personal workstation paths;
 - secrets, tokens, or private attachments;
-- chat transcripts;
+- raw private chat transcripts;
+- hidden chain-of-thought representations;
 - reconstructed notes that could be mistaken for contemporaneous notes;
 - unsupported reviewer identities;
 - duplicate or superseded artifacts;
 - license ambiguity;
 - promotional claims exceeding status.
 
-## Gate 7 — Private external review
+Also review:
+
+- bibliography metadata;
+- third-party notices;
+- figures and copied prose;
+- AI model and institutional wording;
+- machine-readable release flags.
+
+## Gate 7 — Human–AI disclosure
+
+Every released paper must state:
+
+- the accountable human author;
+- the AI tool or tools used, when known;
+- the material AI contributions;
+- the human decisions and responsibilities;
+- the evidence and model-identity limits;
+- whether any AI developer or institution participated or endorsed the work.
+
+Naming ChatGPT or OpenAI must not imply coauthorship, sponsorship, review, or endorsement.
+
+## Gate 8 — Owner authorization
+
+Only the accountable owner may authorize:
+
+- public visibility;
+- named authorship;
+- release channel;
+- AI-use disclosure;
+- rights and licensing;
+- release version;
+- residual-risk acceptance.
+
+Technical PASS does not grant release authority.
+
+## Gate 9 — Public review release
+
+A public-review release should contain:
+
+```text
+source commit
+public-review version
+self-contained manuscript source
+claim and limitation snapshot
+formal-verification boundary
+reproduction source
+checksums and receipts
+AI-use disclosure
+prior-art boundary
+rights and third-party notices
+open review request
+release audit
+citation metadata
+```
+
+Generated PDF, DOCX, PPTX, and ZIP files normally belong in GitHub Releases rather than repeated in Git history. A source-complete Markdown release may precede polished derived reading artifacts when the status says so explicitly.
+
+## Gate 10 — Public review handling
+
+After public visibility:
+
+1. triage counterexample, proof-gap, prior-art, and reproduction reports;
+2. link every substantive report to the affected paper and exact source identity;
+3. preserve the original release;
+4. publish corrections, narrowed claims, supersessions, or rejections explicitly;
+5. never convert silence into external validation.
+
+## Gate 11 — Private or public specialist review
 
 Send one bounded package to the appropriate specialist. Ask specific questions. Do not send the entire N-MathLab history unless requested.
 
-A review packet includes:
+A specialist packet includes:
 
 - manuscript;
 - claim matrix;
@@ -117,46 +191,29 @@ A review packet includes:
 - formal status;
 - review questionnaire.
 
-## Gate 8 — Human authorization
+A reviewer’s identity and conclusion may be published only with an appropriate basis and accurate scope.
 
-Only the accountable owner may authorize:
+## Gate 12 — Archival citation
 
-- public visibility;
-- named authorship;
-- venue selection;
-- AI-use disclosure;
-- rights and licensing;
-- release version;
-- residual-risk acceptance.
+When the public-review package has reached a suitable checkpoint:
 
-Technical PASS does not grant release authority.
+1. freeze an exact release tag;
+2. archive it through Zenodo or an equivalent repository;
+3. record the DOI in `CITATION.cff` and paper metadata;
+4. retain the Git commit, release tag, DOI, and artifact hashes together;
+5. update later corrections without rewriting the archived release.
 
-## Gate 9 — Release
+## Gate 13 — Journal submission
 
-The release should contain:
+Before claiming journal submission:
 
-```text
-source tag
-source commit
-PDF manuscript
-source archive
-reproducibility archive
-checksums
-status snapshot
-citation metadata
-release notes
-```
+- verify the selected venue’s AI, authorship, data, code, and preprint policies;
+- adapt the disclosure without reducing its accuracy;
+- complete the owner’s proof and reference review;
+- freeze the exact submitted manuscript and supplements;
+- record the venue and submission date only after submission occurs.
 
-Generated PDF, DOCX, PPTX, and ZIP files normally belong in GitHub Releases rather than repeated in Git history.
-
-## Gate 10 — Archival citation
-
-After public release:
-
-1. archive the exact release through Zenodo or an equivalent repository;
-2. record the DOI in `CITATION.cff` and paper metadata;
-3. retain the Git commit, release tag, DOI, and artifact hashes together;
-4. update later corrections without rewriting the archived release.
+Peer-review or acceptance status may be recorded only after the identified external process produces it.
 
 ## Source-of-truth rule
 
@@ -164,7 +221,9 @@ Reviewable Markdown, LaTeX, formal source, structured status, and exact evidence
 
 ## One paper at a time
 
-The first public package is `HINC-001`. No second paper should be published until the first repository workflow has demonstrated:
+The first complete public-review package is `HINC-001`. Later papers may be indexed as `hold`, but no entry should be represented as a released paper until it independently satisfies the package gates.
+
+The public workflow must demonstrate:
 
 - clean source import;
 - validation;
