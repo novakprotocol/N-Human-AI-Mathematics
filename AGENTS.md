@@ -29,24 +29,24 @@ Public visibility means that selected source and evidence are available for tech
 - journal submitted or accepted;
 - historically novel;
 - fully formally verified;
-- endorsed by OpenAI;
+- endorsed by an AI vendor;
 - correct by authority.
 
 `HINC-001` is the only complete released paper package in version `0.1.0-public-review`. `ABF-001`, `FSG-001`, and `ACM-001` are index entries on hold, not released standalone papers.
 
-## 3. Human–AI identity boundary
+## 3. Human–LLM identity boundary
 
-The accountable human author is Matthew S. Novak. ChatGPT, developed by OpenAI, materially assisted the research.
+The accountable human author is Matthew S. Novak. One or more large language models materially assisted the research.
 
 AI systems MUST NOT state or imply that:
 
-- OpenAI is a coauthor, sponsor, reviewer, owner, publisher, or endorser;
-- ChatGPT holds rights or publication authority;
+- a particular model, model family, version, provider, or vendor participated;
+- an LLM holds rights or publication authority;
 - the repository cryptographically authenticates every private conversation turn;
 - the project is the first human–AI mathematical collaboration;
-- the project is the first ChatGPT-assisted open-problem solution.
+- the project is the first LLM-assisted mathematical result.
 
-The narrow allowed description is that this is one openly documented, commit-anchored case study of sustained human-led, ChatGPT-assisted mathematics with explicit claim, evidence, correction, and review controls.
+The allowed public description is that this is one openly documented, commit-anchored case study of sustained human-led, LLM-assisted mathematics with explicit claim, evidence, correction, and review controls.
 
 ## 4. Claim discipline
 
@@ -106,7 +106,7 @@ AI systems MUST:
 - avoid fabricating citations or reviewer identities;
 - label simulated review as internal simulation;
 - keep human authorship and publication authority explicit;
-- distinguish model disclosure from institutional endorsement.
+- preserve the category-level public disclosure without inferring a specific model or provider.
 
 AI systems MUST NOT:
 
@@ -117,7 +117,8 @@ AI systems MUST NOT:
 - invent a license or rights grant;
 - reveal private laboratory material in the public repository;
 - treat AI output as an authority source;
-- publish hidden chain-of-thought or private chat transcripts as research evidence.
+- publish hidden chain-of-thought or private chat transcripts as research evidence;
+- add a specific model or provider identity without a separately reviewed owner decision.
 
 ## 7. Required theorem-summary structure
 
@@ -132,7 +133,7 @@ What is computationally checked
 What remains unverified
 Prior-art boundary
 Current publication status
-Human–AI disclosure boundary
+Human–LLM disclosure boundary
 ```
 
 ## 8. Required challenge structure
@@ -150,9 +151,9 @@ reproduction instructions
 severity
 ```
 
-## 9. Human–AI disclosure
+## 9. Human–LLM disclosure
 
-AI systems are research tools and material collaborators in the process, not accountable authors. The human author must understand and accept responsibility for every submitted claim. When preparing public material, retain the declared AI-assistance disclosure and do not minimize or exaggerate AI involvement.
+AI systems are research tools and material collaborators in the process, not accountable authors. The human author must understand and accept responsibility for every submitted claim. When preparing public material, retain the declared LLM-assistance disclosure and do not minimize or exaggerate AI involvement.
 
 ## 10. Stop conditions
 
@@ -163,7 +164,7 @@ Stop and request human review when:
 - source or evidence provenance is missing;
 - a citation cannot be verified;
 - licensing is unclear;
-- a private path, secret, or personal record appears in public staging;
+- a private path, secret, personal record, or withheld model/provider identifier appears in public staging;
 - the requested wording exceeds the evidence status;
 - a consequential release or rights action lacks explicit owner authorization.
 
