@@ -1,0 +1,31 @@
+{
+  "schema_version": "n.human_ai_mathematics.hosted_runner_availability.v1",
+  "repository": "novakprotocol/N-Human-AI-Mathematics",
+  "repository_visibility": "private",
+  "date": "2026-07-27",
+  "result": "HOSTED_RUNNER_DID_NOT_EXECUTE_STEPS",
+  "smoke_workflow": {
+    "name": "Hosted runner smoke test",
+    "commit": "29ad9e53a2eae0848391a753a5b0b8d5e6308797",
+    "run_id": 30282224465,
+    "job_id": 90031201547,
+    "conclusion": "failure",
+    "reported_steps": null,
+    "smoke_command": "echo HOSTED_RUNNER_EXECUTED"
+  },
+  "interpretation": [
+    "The smoke workflow contained no repository checkout, dependency installation, validator, or mathematical test.",
+    "Its failure before a reported step means the run cannot be used as evidence that repository source, HINC mathematics, validators, or tests failed.",
+    "The exact account, billing, policy, runner-allocation, or platform cause was not exposed by the available GitHub API response and is not asserted.",
+    "Private pre-release validation must therefore use the guarded local preflight until hosted execution becomes available.",
+    "The post-switch Pages workflow remains fail-closed and must run only after GitHub reports public repository visibility."
+  ],
+  "off_limits": [
+    "va.ghe.com",
+    "all GitHub Enterprise repositories",
+    "all VA or government enterprise resources"
+  ],
+  "allowed_remote": "github.com/novakprotocol/N-Human-AI-Mathematics",
+  "source_failure_claimed": false,
+  "mathematical_failure_claimed": false
+}
