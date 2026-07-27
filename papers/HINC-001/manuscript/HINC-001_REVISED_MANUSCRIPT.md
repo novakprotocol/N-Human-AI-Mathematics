@@ -1,9 +1,9 @@
 # Hidden infinitesimal noncommutativity in two binary-Gerstenhaber endomorphism monoid schemes
 
-**Author:** Matthew S. Novak  
-**Paper ID:** HINC-001  
-**Release status:** candidate manuscript prepared for public technical review  
-**External specialist review:** pending  
+**Author:** Matthew S. Novak<br>
+**Paper ID:** HINC-001<br>
+**Release status:** candidate manuscript prepared for public technical review<br>
+**External specialist review:** pending<br>
 **Historical priority:** unestablished
 
 ## Abstract

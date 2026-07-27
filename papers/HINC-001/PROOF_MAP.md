@@ -51,8 +51,8 @@ HH*(D,D)=D[u]
 [xu^i,yu^j]=(i x partial(y)+j y partial(x))u^(i+j-1).
 ```
 
-**Human proof:** complete.  
-**Lean:** not formalized.  
+**Human proof:** complete.<br>
+**Lean:** not formalized.<br>
 **External review:** pending.
 
 ### F2–F3 — source algebras
@@ -76,16 +76,16 @@ with complete normal form
 f(b)+c g(b)+epsilon h(b)+epsilon c k(b)+tau a.
 ```
 
-**Human proof:** complete.  
-**Lean:** not formalized.  
+**Human proof:** complete.<br>
+**Lean:** not formalized.<br>
 **External review:** pending.
 
 ### F6 — generator-to-global theorem
 
 The revised manuscript proves that a unital graded algebra homomorphism preserving brackets on homogeneous algebra generators preserves the bracket globally, by induction through the two biderivation identities.
 
-**Human proof:** complete.  
-**Lean:** not formalized.  
+**Human proof:** complete.<br>
+**Lean:** not formalized.<br>
 **External review:** pending.
 
 ### F8 — representability
@@ -98,8 +98,8 @@ The revised manuscript explicitly:
 4. derives polynomial composition;
 5. identifies the coordinate bialgebras.
 
-**Human proof:** complete.  
-**Lean:** coefficient equations and normalized composition only.  
+**Human proof:** complete.<br>
+**Lean:** coefficient equations and normalized composition only.<br>
 **External review:** pending.
 
 ---
