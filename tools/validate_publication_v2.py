@@ -13,7 +13,9 @@ base.SCAN_EXCLUDED_PATHS = frozenset(
         "tools/validate_publication.py",
         "tools/validate_publication_v2.py",
         "tools/validate_public_release.py",
+        "tools/validate_public_release_v2.py",
         "tools/validate_public_state.py",
+        "tools/Invoke-PublicSwitchPreflight.ps1",
     }
 )
 
