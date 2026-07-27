@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/novakprotocol/N-Human-AI-Mathematics/schemas/paper-status.schema.json",
-  "title": "N Human-AI Mathematics Paper Status",
+  "title": "N Human-LLM Mathematics Paper Status",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -97,6 +97,7 @@
       "additionalProperties": false,
       "required": [
         "public_authorized",
+        "public_switch_ready",
         "channel",
         "version",
         "release_date",
@@ -106,6 +107,7 @@
       ],
       "properties": {
         "public_authorized": {"type": "boolean"},
+        "public_switch_ready": {"type": "boolean"},
         "channel": {"enum": ["private_staging", "public_review", "archival_release", "journal_submission"]},
         "version": {"type": ["string", "null"]},
         "release_date": {"type": ["string", "null"], "format": "date"},
