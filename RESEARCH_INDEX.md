@@ -2,13 +2,25 @@
 
 This index lists only results selected for a clean paper-scale review package. It is not an inventory of every experiment in N-MathLab.
 
+## Repository release state
+
+```text
+release channel:        public review
+complete paper package: HINC-001
+indexed hold entries:   ABF-001, FSG-001, ACM-001
+peer reviewed:          no
+journal submitted:      no
+historical priority:    unestablished
+```
+
 ## Status rules
 
-- `active_review`: complete candidate package being prepared or reviewed.
-- `hold`: mathematically substantial but not yet clean enough for public review.
+- `active_review`: a complete candidate package is openly available for review.
+- `hold`: mathematically substantial but not yet converted into the complete public package format.
 - `archived_case_study`: correct or useful work retained primarily as process history.
 - `rejected`: invalidated as stated.
-- `superseded`: replaced by a later statement.
+- `superseded`: replaced by a later statement while preserving history.
+- `published`: reserved for an identified archival or journal publication, not ordinary GitHub visibility.
 
 ## Principal papers
 
@@ -30,7 +42,9 @@ This index lists only results selected for a clean paper-scale review package. I
 - generator-to-global Gerstenhaber preservation and the remaining scheme-level manuscript are not fully formalized;
 - external specialist and historical-equivalence review remain pending.
 
-**Current status:** `active_review`.
+**Public status:** `active_review`, version `0.1.0-public-review`.
+
+**Start:** [`papers/HINC-001/README.md`](papers/HINC-001/README.md)
 
 ---
 
@@ -44,13 +58,13 @@ This index lists only results selected for a clean paper-scale review package. I
 
 **Current evidence:**
 
-- complete theorem and proof packet;
+- complete theorem and proof packet in the private laboratory;
 - primary exhaustive calculation over all 131,070 affine hyperplanes;
 - separately written C reconstruction;
 - exhaustive control over all 65,536 maps `GF(2)^3 -> GF(2)^2`, totaling 917,504 checks;
 - proof-assistant and external specialist review pending.
 
-**Current status:** `hold` pending conversion to the clean publication format.
+**Public status:** `hold`; index entry only. No complete ABF-001 package is released here yet.
 
 ---
 
@@ -62,9 +76,9 @@ This index lists only results selected for a clean paper-scale review package. I
 
 **Current evidence:** multiple internal proof and computational routes with preserved correction history.
 
-**Blocking gates:** external critical-groups review, external Fibonacci-divisibility review, formal verification of the graph-to-small-matrix reduction and Smith form, and deeper historical-equivalence review.
+**Blocking gates:** complete standalone package, external critical-groups review, external Fibonacci-divisibility review, formal verification of the graph-to-small-matrix reduction and Smith form, and deeper historical-equivalence review.
 
-**Current status:** `hold`.
+**Public status:** `hold`; index entry only.
 
 ---
 
@@ -74,15 +88,25 @@ This index lists only results selected for a clean paper-scale review package. I
 
 **Core package:** exact ANF degree-layer codes, generalized Hamming weights, complete subcode support spectra, chain-condition behavior, coefficient-multiplicity rigidity, exact automorphism groups, and a top-layer code/matroid classification.
 
-**Current evidence:** exhaustive finite classification with separate Python and native implementations for the merged portions.
+**Current evidence:** exhaustive finite classification with separate Python, symbolic, and native implementations for the merged scope. The v40 top-layer matroid continuation has passed its declared internal gates but remains in the N-MathLab promotion lane.
 
 **Blocking gates:** consolidate the controlling manuscript, incorporate the later matroid continuation, perform equivalence review, and define the exact public benchmark object without cryptographic overstatement.
 
-**Current status:** `hold`.
+**Public status:** `hold`; index entry only.
+
+## Human–AI process record
+
+The mathematical paper index is separate from the collaboration-process record. Read:
+
+- [`HUMAN_AI_COLLABORATION_RECORD.md`](HUMAN_AI_COLLABORATION_RECORD.md)
+- [`HUMAN_AI_MATHEMATICS_PRIOR_ART.md`](HUMAN_AI_MATHEMATICS_PRIOR_ART.md)
+- [`PUBLIC_REVIEW_RELEASE.md`](PUBLIC_REVIEW_RELEASE.md)
+
+The project does not claim to be the first human–AI mathematics collaboration.
 
 ## Results intentionally excluded as standalone papers
 
-The following may appear as supplements or process case studies but should not be promoted as independent mathematical breakthroughs:
+The following may appear as supplements or process case studies but are not promoted as independent mathematical breakthroughs:
 
 - broad black-box measurement atlases;
 - bounded dictionary or brute-force preimage searches;
@@ -90,8 +114,8 @@ The following may appear as supplements or process case studies but should not b
 - a blind phrase-oracle replay;
 - low-entropy public-hash coordinate demonstrations;
 - intermediate theorem versions already subsumed by controlling papers;
-- proposed invariants determined to be re-encodings of established Hall or probabilistic-zeta data.
+- proposed invariants determined to be re-encodings of established data.
 
 ## Selection rule
 
-A result is added to the principal index only when it has a precise object, bounded claims, a coherent proof or exact classification, reproducible evidence where relevant, and a credible external-review question.
+A result is added to the principal index only when it has a precise object, bounded claims, a coherent proof or exact classification, reproducible evidence where relevant, an explicit AI-use disclosure, and a credible external-review question.
