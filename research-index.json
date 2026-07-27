@@ -7,7 +7,8 @@
   "public_release_authorized": true,
   "release_channel": "public_review",
   "release_version": "0.1.0-public-review",
-  "openai_endorsement": "not_claimed",
+  "specific_model_disclosed": false,
+  "specific_provider_disclosed": false,
   "papers": [
     {
       "id": "HINC-001",
