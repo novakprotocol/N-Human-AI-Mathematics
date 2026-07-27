@@ -101,7 +101,8 @@
         "version",
         "release_date",
         "doi",
-        "openai_endorsement"
+        "specific_model_disclosed",
+        "specific_provider_disclosed"
       ],
       "properties": {
         "public_authorized": {"type": "boolean"},
@@ -109,7 +110,8 @@
         "version": {"type": ["string", "null"]},
         "release_date": {"type": ["string", "null"], "format": "date"},
         "doi": {"type": ["string", "null"]},
-        "openai_endorsement": {"const": "not_claimed"}
+        "specific_model_disclosed": {"type": "boolean"},
+        "specific_provider_disclosed": {"type": "boolean"}
       }
     },
     "limitations": {
