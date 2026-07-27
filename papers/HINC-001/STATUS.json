@@ -90,7 +90,8 @@
     "version": "0.1.0-public-review",
     "release_date": "2026-07-27",
     "doi": null,
-    "openai_endorsement": "not_claimed"
+    "specific_model_disclosed": false,
+    "specific_provider_disclosed": false
   },
   "limitations": [
     "The paper remains a candidate theorem until qualified external review.",
@@ -98,6 +99,6 @@
     "The generator-to-global strict Gerstenhaber preservation theorem remains outside the formalized scope.",
     "A negative literature search does not establish worldwide priority.",
     "The finite Artin-ring checks do not prove arbitrary-base statements by themselves.",
-    "Public review is authorized; journal submission, DOI assignment, peer review, and OpenAI endorsement are not claimed."
+    "Public review is authorized; journal submission, DOI assignment, peer review, and specific model/provider disclosure are not claimed."
   ]
 }
