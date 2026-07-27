@@ -12,9 +12,12 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+
     steps:
-      - name: Check out source
+      - name: Check out complete source history
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -29,17 +32,48 @@ jobs:
           mkdir -p reports
           python tools/validate_publication.py \
             --root . \
+            --allow-public \
             --json-output reports/publication-validation.json
 
-      - name: Check Git whitespace
-        run: git diff --check HEAD^
-        continue-on-error: true
+      - name: Check complete branch whitespace
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            git fetch origin "${{ github.base_ref }}"
+            BASE="$(git merge-base "origin/${{ github.base_ref }}" HEAD)"
+          else
+            BASE="$(git rev-parse HEAD^)"
+          fi
+          git diff --check "$BASE" HEAD
+
+      - name: Verify public-release declarations
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          index = json.loads(Path("research-index.json").read_text(encoding="utf-8"))
+          hinc = json.loads(Path("papers/HINC-001/STATUS.json").read_text(encoding="utf-8"))
+          audit = json.loads(Path("reports/public-release-audit-2026-07-27.json").read_text(encoding="utf-8"))
+
+          assert index["public_release_authorized"] is True
+          assert index["release_channel"] == "public_review"
+          assert hinc["release"]["public_authorized"] is True
+          assert hinc["release"]["version"] == "0.1.0-public-review"
+          assert audit["result"] == "PASS_WITH_DECLARED_LIMITATIONS"
+          assert audit["release_scope"]["peer_reviewed"] is False
+          assert audit["release_scope"]["openai_endorsement_claimed"] is False
+          print("public-review declarations: PASS")
+          PY
 
       - name: Upload validation receipt
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: publication-validation-${{ github.run_id }}
-          path: reports/publication-validation.json
+          path: |
+            reports/publication-validation.json
+            reports/public-release-audit-2026-07-27.json
           if-no-files-found: warn
           retention-days: 90
