@@ -1,49 +1,28 @@
-name: Validate private public-switch candidate
+name: Validate mathematical publication repository
 
-# Private hosted jobs currently fail before executing a step. This workflow is
-# retained as a manual fail-closed gate for use when hosted execution is
-# available again. The authoritative current private gate is the guarded local
-# preflight in tools/Invoke-PublicSwitchPreflight.ps1.
 on:
+  push:
+    branches:
+      - main
+      - release/public-review-v1
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
-    inputs:
-      confirm_private_candidate:
-        description: "Type VALIDATE-HINC-001 while the repository is PRIVATE"
-        required: true
-        type: string
 
 permissions:
   contents: read
 
 jobs:
-  validate:
+  publication:
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
     steps:
-      - name: Require exact private-gate confirmation
-        run: |
-          test "${{ inputs.confirm_private_candidate }}" = "VALIDATE-HINC-001"
-
-      - name: Check out the candidate branch
+      - name: Check out complete source history
         uses: actions/checkout@v7
         with:
-          ref: release/public-review-v1
           fetch-depth: 0
-
-      - name: Verify repository remains private
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh api "repos/${GITHUB_REPOSITORY}" > /tmp/repository.json
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          data = json.loads(Path("/tmp/repository.json").read_text())
-          assert data["visibility"] == "private", data["visibility"]
-          assert data["default_branch"] == "main", data["default_branch"]
-          print("repository visibility: PRIVATE")
-          PY
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -55,52 +34,179 @@ jobs:
           python -m pip install --disable-pip-version-check \
             -r papers/HINC-001/requirements.txt
 
-      - name: Compile all private-gate sources
+      - name: Compile validators and HINC source
         run: |
           python -m py_compile tools/validate_publication.py
           python -m py_compile tools/validate_publication_v2.py
           python -m py_compile tools/validate_public_release.py
           python -m py_compile tools/validate_public_release_v2.py
           python -m py_compile tools/validate_public_state.py
+          python -m py_compile papers/HINC-001/src/mcrc_hidden_infinitesimal_noncommutativity_standalone.py
           python -m py_compile papers/HINC-001/src/standalone_common_core_verifier.py
           python -m py_compile papers/HINC-001/tests/test_hinc_standalone.py
 
-      - name: Run private publication and switch-readiness validators
+      - name: Verify repository visibility matches the recorded state
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${GITHUB_REPOSITORY}" > /tmp/repository.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          repository = json.loads(Path("/tmp/repository.json").read_text())
+          index = json.loads(Path("research-index.json").read_text(encoding="utf-8"))
+          expected = "public" if index["public_release_authorized"] else "private"
+          assert repository["visibility"] == expected, (
+              expected,
+              repository["visibility"],
+          )
+          assert repository["default_branch"] == "main"
+          print(f"repository visibility: {expected.upper()}")
+          PY
+
+      - name: Validate publication and release boundaries
         run: |
           mkdir -p reports
           python tools/validate_publication_v2.py \
             --root . \
-            --json-output reports/publication-validation.json
-          python tools/validate_public_release_v2.py \
-            --root . \
-            --json-output reports/public-switch-validation.json
+            --allow-public \
+            --json-output reports/publication-validation-ci.json
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          index = json.loads(Path("research-index.json").read_text(encoding="utf-8"))
+          if index["public_release_authorized"]:
+              command = [
+                  "python",
+                  "tools/validate_public_state.py",
+                  "--root",
+                  ".",
+                  "--json-output",
+                  "reports/public-state-validation-ci.json",
+              ]
+          else:
+              command = [
+                  "python",
+                  "tools/validate_public_release_v2.py",
+                  "--root",
+                  ".",
+                  "--json-output",
+                  "reports/public-review-validation-ci.json",
+              ]
+          subprocess.run(command, check=True)
+          PY
 
       - name: Run HINC standalone tests
         run: |
           python -m unittest discover \
             -s papers/HINC-001/tests \
             -p 'test_*.py' \
-            -v 2>&1 | tee reports/hinc-standalone-test-log.txt
+            -v 2>&1 | tee reports/hinc-test-log-ci.txt
 
-      - name: Check complete branch whitespace
+      - name: Verify deterministic certificate identity
+        run: |
+          python - <<'PY'
+          import sys
+
+          sys.path.insert(0, "papers/HINC-001/src")
+          from mcrc_hidden_infinitesimal_noncommutativity_standalone import build_certificate
+
+          expected = "20d883988da7818f73de0b4ccab68bc7adea5097a4af7a6ef5a72c23b4e1ea4b"
+          actual = build_certificate(4)["evidence_sha256"]
+          assert actual == expected, (expected, actual)
+          print(actual)
+          PY
+
+      - name: Verify private-readiness or public-release state
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          index = json.loads(Path("research-index.json").read_text(encoding="utf-8"))
+          hinc = json.loads(Path("papers/HINC-001/STATUS.json").read_text(encoding="utf-8"))
+          audit = json.loads(Path("reports/public-release-audit-2026-07-27.json").read_text(encoding="utf-8"))
+          readiness = json.loads(Path("reports/public-switch-readiness.json").read_text(encoding="utf-8"))
+
+          assert index["public_switch_ready"] is True
+          assert index["specific_model_disclosed"] is False
+          assert index["specific_provider_disclosed"] is False
+          assert hinc["release"]["public_switch_ready"] is True
+          assert hinc["release"]["specific_model_disclosed"] is False
+          assert hinc["release"]["specific_provider_disclosed"] is False
+
+          if index["public_release_authorized"] is False:
+              assert index["release_channel"] == "private_staging"
+              assert index["release_version"] == "0.1.0-public-review-candidate"
+              assert hinc["release"]["public_authorized"] is False
+              assert hinc["release"]["channel"] == "private_staging"
+              assert audit["result"] == "READY_PENDING_VISIBILITY_SWITCH"
+              assert readiness["result"] == "READY_PENDING_VISIBILITY_SWITCH"
+              print("private release-ready state: PASS")
+          else:
+              assert index["release_channel"] == "public_review"
+              assert index["release_version"] == "0.1.0-public-review"
+              assert hinc["release"]["public_authorized"] is True
+              assert hinc["release"]["channel"] == "public_review"
+              assert audit["result"] == "PUBLIC_RELEASED"
+              assert readiness["result"] == "PUBLIC_RELEASED"
+              print("public release state: PASS")
+          PY
+
+      - name: Check branch whitespace
         shell: bash
         run: |
           set -euo pipefail
-          git fetch origin main
-          BASE="$(git merge-base origin/main HEAD)"
-          git diff --check "$BASE" HEAD --
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            git fetch origin "${{ github.base_ref }}"
+            BASE="$(git merge-base "origin/${{ github.base_ref }}" HEAD)"
+            git diff --check "$BASE" HEAD --
+          elif git rev-parse HEAD^ >/dev/null 2>&1; then
+            git diff --check HEAD^ HEAD --
+          else
+            git diff --check --
+          fi
 
-      - name: Upload private validation receipts
+      - name: Upload publication receipts
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: private-public-switch-validation-${{ github.run_id }}
+          name: publication-validation-${{ github.run_id }}
           path: |
-            reports/publication-validation.json
-            reports/public-switch-validation.json
+            reports/publication-validation-ci.json
+            reports/public-review-validation-ci.json
+            reports/public-state-validation-ci.json
+            reports/hinc-test-log-ci.txt
             reports/public-release-audit-2026-07-27.json
             reports/public-switch-readiness.json
-            reports/hinc-standalone-test-log.txt
-            reports/hosted-runner-availability-2026-07-27.json
           if-no-files-found: warn
           retention-days: 90
+
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out formal source
+        uses: actions/checkout@v7
+
+      - name: Reject proof placeholders
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -RInE '(^|[^A-Za-z])(sorry|admit)([^A-Za-z]|$)' \
+              papers/HINC-001/formal --include='*.lean'; then
+            echo "Lean placeholder found" >&2
+            exit 1
+          fi
+
+      - name: Build pinned Lean package
+        uses: leanprover/lean-action@v1.5.0
+        with:
+          lake-package-directory: papers/HINC-001/formal
+          build: true
+          test: false
+          lint: false
