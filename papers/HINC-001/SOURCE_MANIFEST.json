@@ -62,6 +62,6 @@
       "role": "principal coefficient classification PASS"
     }
   ],
-  "materialization_status": "staged_manifest_complete_files_not_yet_copied_into_standalone_repository",
+  "materialization_status": "materialized_in_standalone_repository; revised manuscript is the controlling source",
   "public_release_authorized": false
 }
