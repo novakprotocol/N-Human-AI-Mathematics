@@ -10,16 +10,16 @@ authors:
   - family-names: Novak
     given-names: Matthew S.
 abstract: >-
-  We give a self-contained candidate classification of strict graded
-  Gerstenhaber endomorphism monoid schemes for two explicit
-  characteristic-two subalgebras of the Hochschild cohomology of the dual
-  numbers. The two monoids share a reduced crossing core but differ by an
-  infinitesimal skew thickening and a clopen unit doubling. A bounded
-  algebraic kernel and the principal coefficient classifications are publicly
-  proof-assistant verified; the complete scheme-level manuscript remains
-  under specialist and historical-equivalence review. One or more large
-  language models materially assisted the research under human direction;
-  specific model and provider identities are not disclosed in this release.
+  We give a self-contained candidate classification of graded binary-Gerstenhaber
+  endomorphism monoid schemes for two explicit characteristic-two subalgebras of
+  the Hochschild cohomology of the dual numbers. The two monoids share a reduced
+  crossing core but differ by a constrained infinitesimal skew thickening and a
+  separate clopen torus unit component. A bounded algebraic kernel and the
+  principal coefficient classifications are publicly proof-assistant verified;
+  the complete scheme-level manuscript remains under specialist and
+  historical-equivalence review. One or more large language models materially
+  assisted the research under human direction; specific model and provider
+  identities are not disclosed in this release.
 repository-code: https://github.com/novakprotocol/N-Human-AI-Mathematics
 keywords:
   - algebraic monoids
