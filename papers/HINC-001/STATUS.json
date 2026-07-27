@@ -14,23 +14,26 @@
   },
   "claim": {
     "level": 3,
-    "status": "self-contained candidate theorem with internal proof and reproduction routes; core and coefficient classifications formally verified",
+    "status": "candidate binary-Gerstenhaber classification under hostile review; coefficient kernels formally verified; global and scheme-level consequences pending consolidated revision and external audit",
     "globally_novel": "unestablished",
     "security_consequence": "not_applicable"
   },
   "proof": {
-    "human_proof_status": "complete candidate manuscript pending external specialist audit",
+    "human_proof_status": "pre-review manuscript plus controlling foundation, generator-to-global, odd-normal-form, hostile-review, and errata addenda; consolidated revision pending",
     "dependency_map": "PROOF_MAP.md",
     "known_gaps": [
-      "external audit of arbitrary-base odd coefficient elimination and generator-to-global sufficiency",
-      "external audit of representability and the common-core scheme isomorphisms",
-      "external audit of the complete center and fppf-derived subgroup claims",
-      "source-level historical equivalence review"
+      "integrate the characteristic-two Hochschild derivation into the manuscript",
+      "integrate and externally audit generator-to-global binary-bracket preservation",
+      "formalize the even and odd presented algebras and odd normal-form theorem",
+      "expand the complete representability proof",
+      "externally audit the center and fppf-derived subgroup conventions",
+      "complete source-level historical-equivalence review",
+      "consolidate and rerender the corrected manuscript"
     ]
   },
   "computation": {
-    "role": "finite Artin-ring and symbolic consistency verification; not a substitute for the all-base proof",
-    "primary_status": "five focused tests passed",
+    "role": "finite Artin-ring and symbolic consistency verification; not a substitute for the arbitrary-base proof",
+    "primary_status": "five focused tests passed for the pre-review source",
     "independent_status": "fresh copied workspace passed and reproduced the deterministic certificate byte-identically",
     "receipts": [
       "N-MathLab PR #406",
@@ -38,7 +41,7 @@
     ]
   },
   "formal_verification": {
-    "status": "base algebraic kernel and principal even/odd coefficient classifications public hosted PASS",
+    "status": "base algebraic kernel and principal even/odd coefficient classifications public hosted PASS; hostile-review additions not yet formalized",
     "assistant": "Lean 4.30.0 with Mathlib v4.30.0",
     "verified_scope": [
       "crossing closure, associativity, identity, and commutativity",
@@ -55,13 +58,16 @@
       "odd coefficient-level principal classification"
     ],
     "unverified_scope": [
-      "generator-to-global preservation of all cup products and Gerstenhaber brackets",
+      "characteristic-two normalized-bar Hochschild derivation",
+      "presented even and odd source algebras",
+      "odd presentation normal-form theorem",
+      "generator-to-global preservation of all cup products and binary Gerstenhaber brackets",
       "representability of the complete endomorphism functors",
       "coordinate bialgebra formulas as full affine monoid-scheme structures",
       "odd clopen decomposition",
       "complete scheme-theoretic center equality",
-      "fppf-derived subgroup theorem",
-      "full manuscript"
+      "fppf-derived subgroup theorem and abelianization",
+      "full revised manuscript"
     ],
     "receipts": [
       "N-MathLab PR #412",
@@ -79,26 +85,28 @@
     ]
   },
   "review": {
-    "internal": "complete candidate package with independent project routes, two public hosted Lean PASS scopes, and preserved formal failure/repair history",
-    "external": "pending; public review requested",
-    "historical_priority": "unestablished",
+    "internal": "hostile review completed; no coefficient-system counterexample found; release-blocking foundation, terminology, global-proof, representability, center, derived-subgroup, citation, and website corrections recorded",
+    "external": "pending; no outside specialist approval or reproduction",
+    "historical_priority": "unestablished; broad search found established component frameworks but no exact indexed paired classification",
     "peer_review": "not submitted"
   },
   "release": {
-    "public_authorized": true,
-    "channel": "public_review",
-    "version": "0.1.0-public-review",
-    "release_date": "2026-07-27",
+    "public_authorized": false,
+    "channel": "private_staging",
+    "version": null,
+    "release_date": null,
     "doi": null,
     "specific_model_disclosed": false,
     "specific_provider_disclosed": false
   },
   "limitations": [
-    "The paper remains a candidate theorem until qualified external review.",
-    "The public Lean PASS covers the base kernel and coefficient classifications, not the complete manuscript.",
-    "The generator-to-global strict Gerstenhaber preservation theorem remains outside the formalized scope.",
-    "A negative literature search does not establish worldwide priority.",
-    "The finite Artin-ring checks do not prove arbitrary-base statements by themselves.",
-    "Public review is authorized; journal submission, DOI assignment, peer review, and specific model/provider disclosure are not claimed."
+    "The repository and release pull request remain private and draft.",
+    "The pre-review manuscript is superseded for release purposes by controlling hostile-review and errata records until a consolidated revision is frozen.",
+    "The Lean PASS covers the base kernel and coefficient classifications, not the full classification or revised manuscript.",
+    "The characteristic-two foundation, odd presentation, and generator-to-global arguments are human proofs not yet formalized.",
+    "The complete representability, center, clopen-decomposition, and fppf-derived-subgroup statements require external specialist audit.",
+    "No exact indexed prior-art match was located, but worldwide historical priority is not established.",
+    "Finite Artin-ring checks do not prove arbitrary-base statements by themselves.",
+    "Journal submission, DOI assignment, peer review, public release, and specific model/provider disclosure are not claimed."
   ]
 }
