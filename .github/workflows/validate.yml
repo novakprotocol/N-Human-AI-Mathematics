@@ -26,7 +26,7 @@ jobs:
           test "${{ inputs.confirm_private_candidate }}" = "VALIDATE-HINC-001"
 
       - name: Check out the candidate branch
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: release/public-review-v1
           fetch-depth: 0
@@ -46,7 +46,7 @@ jobs:
           PY
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
