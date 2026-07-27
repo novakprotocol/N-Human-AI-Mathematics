@@ -1,8 +1,8 @@
-# HINC-001 Prior-Art and Equivalence Boundary
+# HINC-001 prior-art and equivalence boundary
 
 ## Current determination
 
-A broad indexed search did not locate the complete paired HINC classification under the exact title, equations, presentations, coordinate rings, or project terminology searched.
+A broad indexed search did not locate the complete paired HINC classification under the exact title, equations, presentations, coordinate rings, or translated terminology searched.
 
 This does **not** establish worldwide priority.
 
@@ -23,27 +23,27 @@ The potentially publishable content is narrowed to the combination of:
    ```
 
 4. the exact contrast between:
-   - a constrained upper-triangular square-zero skew thickening; and
-   - adjoining a separate clopen torus unit component;
-5. the resulting scheme-valued comparison of pointwise commutativity, universal center, idempotents, and finite-base behavior.
+   - a constrained upper-triangular square-zero skew direction; and
+   - a separate clopen torus unit component;
+5. the resulting scheme-valued comparison of centers, units, idempotents, tangent behavior, and finite-base counts.
 
-No claim of novelty attaches to the individual mechanisms below.
+No novelty claim attaches to the individual mechanisms below.
 
 ## Established surrounding mathematics
 
 ### Hochschild rings and Gerstenhaber structure
 
-The Hochschild cohomology rings of one-relation and truncated-polynomial algebras are established. BV and Gerstenhaber structures for truncated-polynomial settings and nontrivial positive-characteristic modular brackets are also established.
+Hochschild cohomology and the Gerstenhaber bracket are established. The Hochschild rings and Lie structures of truncated polynomial and modular cyclic group algebras are established, including positive-characteristic examples.
 
-HINC now includes a self-contained characteristic-two normalized-cochain derivation because the exact formula should not be imported from a source with different characteristic or convention.
+HINC includes a self-contained characteristic-two normalized-cochain derivation because the exact convention should not be imported from a source with different characteristic or structure.
 
 ### Positive-characteristic extra operations
 
-Hochschild cohomology in characteristic `p` carries restricted or power operations arising from richer cochain-level structure. HINC classifies preservation of cup product and the binary Gerstenhaber bracket only. It does not classify preservation of restricted, squaring, brace, BV, or full `E_2` structure.
+Hochschild cohomology in characteristic `p` may carry restricted or power operations arising from richer cochain-level structure. HINC classifies preservation of cup product and the binary Gerstenhaber bracket only. It does not classify preservation of restricted powers, squaring, braces, BV operators, or full `E_2` structure.
 
 ### Algebraic and affine monoids
 
-General theory of algebraic semigroups and monoids, matrix monoids, unit groups, idempotents, reducible monoids, and nonreduced semigroup-scheme examples is established.
+Algebraic semigroups and monoids, matrix monoids, unit groups, idempotents, reducible monoids, and nonreduced group and monoid schemes are established.
 
 The even multiplication is a constrained upper-triangular matrix law. That mechanism is not new.
 
@@ -60,32 +60,32 @@ Normal affine surface monoids have substantial commutative and noncommutative cl
 - the common crossing is reducible and nonnormal;
 - the even object is nonreduced;
 - the base characteristic is two;
-- the classification is a functor over arbitrary commutative base algebras;
-- the objects arise from a specific binary-Gerstenhaber endomorphism problem.
+- the classification is functorial over arbitrary commutative base algebras;
+- the objects arise from a specified binary-Gerstenhaber endomorphism problem.
 
 ### Idempotents and clopen components
 
-Idempotent schemes and clopen decompositions are established tools. The odd “unit doubling” language is therefore demoted to local shorthand. The revised paper should describe a separate clopen unit component and acknowledge the standard mechanism.
+Idempotent splittings and clopen decompositions are established. The odd construction is therefore described as a separate clopen torus unit component, not promoted as a new general doubling mechanism.
 
 ### Functors of points and infinitesimal visibility
 
 That field-valued points can miss nilpotent scheme structure is foundational scheme theory. HINC’s candidate contribution is the exact explicit endomorphism-monoid instance, not the general observation.
 
-## Closest primary-source map
+## Primary-source map
 
-The controlling machine-readable map is:
+The machine-readable map is:
 
 ```text
 PRIOR_ART_PRIMARY_SOURCE_MAP_2026-07-27.json
 ```
 
-It includes sources for:
+It covers:
 
-- truncated-polynomial Hochschild rings and BV/Gerstenhaber structures;
-- modular Gerstenhaber brackets;
+- truncated-polynomial Hochschild rings and Gerstenhaber structures;
+- modular positive-characteristic brackets;
 - restricted positive-characteristic operations;
 - algebraic semigroups and monoids;
-- idempotent schemes;
+- idempotent schemes and clopen decompositions;
 - endomorphism-monoid realization;
 - nonreduced automorphism schemes;
 - arbitrary-base automorphism group schemes;
@@ -94,7 +94,7 @@ It includes sources for:
 
 ## Search coverage
 
-The controlling query ledger is:
+The query ledger is:
 
 ```text
 PRIOR_ART_SEARCH_LEDGER_2026-07-27.csv
@@ -105,7 +105,7 @@ It records searches across:
 - exact titles and equations;
 - exact algebra presentations and coordinate rings;
 - arXiv and publisher metadata;
-- GitHub exact-code search;
+- public GitHub code search;
 - HAL, Zenodo, and theses.fr;
 - public zbMATH and MathSciNet surfaces;
 - algebraic-monoid classifications;
@@ -133,14 +133,14 @@ It does not exclude:
 - unpublished or private work;
 - a source using a stronger structure whose endomorphisms specialize to the HINC equations.
 
-## Required external priority review
+## Requested external priority review
 
-A qualified reviewer should perform:
+The public technical-review package asks qualified readers to perform:
 
 1. source-level MathSciNet and zbMATH searches;
 2. backward and forward citation tracing from the closest sources;
 3. thesis and book searches in algebraic monoids, Hochschild operations, and automorphism schemes;
-4. an explicit isomorphism/equivalence test under generator changes and matrix coordinates;
+4. explicit equivalence tests under generator changes, opposite conventions, and matrix coordinates;
 5. claim-by-claim classification as established framework, direct specialization, finite instance, or potentially new exact theorem.
 
 ## Allowed wording
@@ -161,4 +161,4 @@ Do not state:
 
 ## Release consequence
 
-The prior-art search supports continued specialist review. It does not support public novelty promotion. Public release remains blocked until the revised manuscript and source-level historical-equivalence review are complete.
+The search record is sufficient for an honest **candidate technical-review release** only because the limitations and pending equivalence review are prominent. Public visibility would solicit the qualified source-level review that is still missing. It would not establish novelty or priority.
