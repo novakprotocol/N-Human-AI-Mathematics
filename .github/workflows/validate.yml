@@ -1,4 +1,4 @@
-name: Validate mathematical publication repository
+name: Validate public-switch candidate
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
 
     steps:
       - name: Check out complete source history
@@ -24,23 +24,84 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Compile validation sources
+      - name: Install HINC verification requirements
+        run: |
+          python -m pip install --disable-pip-version-check -r papers/HINC-001/requirements.txt
+
+      - name: Compile validation and HINC sources
         run: |
           python -m py_compile tools/validate_publication.py
           python -m py_compile tools/validate_public_release.py
+          python -m py_compile papers/HINC-001/src/standalone_common_core_verifier.py
+          python -m py_compile papers/HINC-001/tests/test_hinc_standalone.py
 
-      - name: Validate structure, status, claims, and source hygiene
+      - name: Validate repository and public-switch readiness
         run: |
           mkdir -p reports
           python tools/validate_publication.py \
             --root . \
-            --allow-public \
             --json-output reports/publication-validation.json
           python tools/validate_public_release.py \
             --root . \
-            --json-output reports/public-review-validation.json
+            --json-output reports/public-switch-validation.json
 
-      - name: Check complete branch whitespace
+      - name: Run HINC standalone tests
+        run: |
+          python -m unittest discover \
+            -s papers/HINC-001/tests \
+            -p 'test_*.py' \
+            -v 2>&1 | tee reports/hinc-standalone-test-log.txt
+
+      - name: Verify switch-state declarations
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          index = json.loads(Path("research-index.json").read_text(encoding="utf-8"))
+          hinc = json.loads(Path("papers/HINC-001/STATUS.json").read_text(encoding="utf-8"))
+          audit = json.loads(Path("reports/public-release-audit-2026-07-27.json").read_text(encoding="utf-8"))
+          ready = json.loads(Path("reports/public-switch-readiness.json").read_text(encoding="utf-8"))
+
+          assert index["public_release_authorized"] is False
+          assert index["public_switch_ready"] is True
+          assert index["release_channel"] == "private_staging"
+          assert index["release_version"] == "0.1.0-public-review-candidate"
+          assert index["specific_model_disclosed"] is False
+          assert index["specific_provider_disclosed"] is False
+
+          release = hinc["release"]
+          assert release["public_authorized"] is False
+          assert release["public_switch_ready"] is True
+          assert release["channel"] == "private_staging"
+          assert release["version"] == "0.1.0-public-review-candidate"
+          assert release["release_date"] is None
+          assert release["doi"] is None
+
+          assert audit["result"] == "READY_PENDING_VISIBILITY_SWITCH"
+          assert audit["release_scope"]["repository_visibility"] == "private"
+          assert audit["release_scope"]["public_switch_ready"] is True
+          assert audit["release_scope"]["visibility_change_executed"] is False
+
+          assert ready["result"] == "READY_PENDING_VISIBILITY_SWITCH"
+          assert ready["public_switch_ready"] is True
+          assert ready["visibility_change_executed"] is False
+          assert ready["pages_deployment_executed"] is False
+          print("private public-switch candidate declarations: PASS")
+          PY
+
+      - name: Verify controlling manuscript and private website
+        run: |
+          test -f papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md
+          grep -q "HINC-001_REVISED_MANUSCRIPT.md" papers/HINC-001/manuscript/MANUSCRIPT_INDEX.md
+          grep -q "public technical-review release:            prepared, not yet activated" papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md
+          grep -q "Private public-switch preview" docs/index.html
+          grep -q "Public switch ready" docs/index.html
+          grep -q "Peer reviewed</span><strong>No" docs/index.html
+          grep -q "Model/provider</span><strong>Not disclosed" docs/index.html
+          grep -q "noindex,nofollow,noarchive,nosnippet" docs/index.html
+
+      - name: Check branch whitespace
         shell: bash
         run: |
           set -euo pipefail
@@ -50,41 +111,18 @@ jobs:
           else
             BASE="$(git rev-parse HEAD^)"
           fi
-          git diff --check "$BASE" HEAD
-
-      - name: Verify public-release declarations
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-
-          index = json.loads(Path("research-index.json").read_text(encoding="utf-8"))
-          hinc = json.loads(Path("papers/HINC-001/STATUS.json").read_text(encoding="utf-8"))
-          audit = json.loads(Path("reports/public-release-audit-2026-07-27.json").read_text(encoding="utf-8"))
-
-          assert index["public_release_authorized"] is True
-          assert index["release_channel"] == "public_review"
-          assert index["specific_model_disclosed"] is False
-          assert index["specific_provider_disclosed"] is False
-          assert hinc["release"]["public_authorized"] is True
-          assert hinc["release"]["version"] == "0.1.0-public-review"
-          assert hinc["release"]["specific_model_disclosed"] is False
-          assert hinc["release"]["specific_provider_disclosed"] is False
-          assert audit["result"] == "PASS_WITH_DECLARED_LIMITATIONS"
-          assert audit["release_scope"]["peer_reviewed"] is False
-          assert audit["release_scope"]["specific_model_disclosed"] is False
-          assert audit["release_scope"]["specific_provider_disclosed"] is False
-          print("public-review declarations: PASS")
-          PY
+          git diff --check "$BASE" HEAD --
 
       - name: Upload validation receipts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: publication-validation-${{ github.run_id }}
+          name: public-switch-candidate-validation-${{ github.run_id }}
           path: |
             reports/publication-validation.json
-            reports/public-review-validation.json
+            reports/public-switch-validation.json
             reports/public-release-audit-2026-07-27.json
+            reports/public-switch-readiness.json
+            reports/hinc-standalone-test-log.txt
           if-no-files-found: warn
           retention-days: 90
