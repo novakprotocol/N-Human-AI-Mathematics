@@ -1,32 +1,47 @@
-# Private Website Preview — Hostile-Review Blockers
+# Private website preview — blocker resolution ledger
 
-The current `docs/` tree is a private draft and is not approved for deployment.
+This file preserves the hostile-review website blockers and records their disposition. The current controlling readiness record is:
 
-## Blocking findings
+- [`../PUBLIC_SWITCH_READINESS.md`](../PUBLIC_SWITCH_READINESS.md)
 
-1. Replace public-release language with private/proposed-release language above the fold.
-2. Add `noindex,nofollow,noarchive,nosnippet` during private legal review.
-3. Link draft-only documents to `release/public-review-v1`, not `main`.
-4. Add mobile navigation that works without JavaScript.
-5. Make Explain/Inspect/Reproduce content accessible without JavaScript.
-6. Label the observatory graphic as a status visualization, not evidence.
-7. Separate coefficient-level verification, candidate generator-to-global claims, scheme consequences, historical priority, and collaboration attestation.
-8. State what evidence would falsify or downgrade each claim.
-9. State that the Human + LLM collaboration disclosure is self-reported and commit-anchored, not independently attested.
-10. Complete screen-reader, forced-colors, 200%/400% zoom, link, and Pages-staging checks.
-11. Resolve the repository-name mismatch (`AI`) versus proposed public wording (`LLM`) through legal/editorial review.
+## Resolved before the final switch
 
-## Corrected preview
+1. **Public-release language above the fold** — replaced with private public-switch preview language.
+2. **Search indexing during private review** — `noindex,nofollow,noarchive,nosnippet` retained.
+3. **Draft links** — branch-pinned to `release/public-review-v1`.
+4. **Mobile navigation** — available without JavaScript.
+5. **Substantive content without JavaScript** — all mathematical and status content is static HTML.
+6. **Status visualization** — explicitly labeled as status, not evidence.
+7. **Evidence separation** — human proof, internal computation, bounded Lean verification, external review, and historical priority are displayed separately.
+8. **Falsification and downgrade routes** — counterexample, proof-gap, prior-art, and reproduction channels are specified.
+9. **Human + LLM boundary** — category-level disclosure is explicit and is not mathematical evidence or independent attestation.
+10. **Release state** — repository remains private; public switch readiness is machine-readable and fail-closed.
+11. **Repository-name/public-title mismatch** — the repository slug is treated as a legacy technical identifier; the public title is `N Human–LLM Mathematics`.
+12. **Controlling manuscript** — the site links to `HINC-001_REVISED_MANUSCRIPT.md`, not the superseded four-part source.
+13. **Citation warning** — the site states that HINC-001 is not established or peer reviewed.
+14. **Pages deployment** — a separate post-switch workflow requires public visibility, exact owner confirmation, public-state validation, and HINC tests before deployment.
 
-A corrected private v2 preview and hostile-review package were generated outside the repository. They must be reviewed before replacing the staged `docs/` tree.
+## Remaining post-launch scientific work
 
-## Release boundary
+The following remain pending by design and are objectives of public technical review:
+
+- external algebraic-monoid and Gerstenhaber review;
+- independent reproduction;
+- historical-equivalence review;
+- optional independent formalization of the unformalized manuscript nodes;
+- journal submission and peer review, if pursued later.
+
+These do not prevent an honest public **candidate technical-review** release because they are displayed as pending and are not claimed as completed.
+
+## Current release boundary
 
 ```text
-repository visibility: private
-PR #2:                 open draft
-Pages deployment:      not authorized
-public release:        blocked
+repository visibility:       private
+candidate package:           complete
+public switch ready:         true
+PR merge:                    pending final green checks
+Pages deployment:            staged but not executed
+public release:              not yet activated
+peer reviewed:               no
+historical priority:         unestablished
 ```
-
-This blocker file must not be removed merely because the design is visually approved. The mathematical errata and prior-art gates remain independently controlling.
