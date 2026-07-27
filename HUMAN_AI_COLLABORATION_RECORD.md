@@ -1,4 +1,4 @@
-# Human–AI Collaboration Record
+# Human–LLM Collaboration Record
 
 ## Purpose
 
@@ -10,19 +10,19 @@ The accountable human researcher and repository owner is:
 Matthew S. Novak
 ```
 
-The AI research tool is:
+The public AI-assistance category is:
 
 ```text
-ChatGPT, developed by OpenAI
+one or more large language models (LLMs)
 ```
 
-The project uses a **human-led, AI-assisted** model. Matthew S. Novak selects research goals, supplies domain context and constraints, evaluates significance, runs or supervises release gates, decides which claims survive, and retains authorship and publication authority. ChatGPT materially assists with exploration, candidate theorem formulation, algebraic derivation, proof decomposition, program generation, test design, counterexample search, formal-proof drafting, literature-query design, documentation, and correction analysis.
+The project uses a **human-led, LLM-assisted** model. Matthew S. Novak selects research goals, supplies domain context and constraints, evaluates significance, runs or supervises release gates, decides which claims survive, and retains authorship and publication authority. LLMs materially assist with exploration, candidate theorem formulation, algebraic derivation, proof decomposition, program generation, test design, counterexample search, formal-proof drafting, literature-query design, documentation, and correction analysis.
 
-OpenAI is not a party to this repository. OpenAI did not sponsor, supervise, peer review, approve, or endorse the work. Naming ChatGPT and OpenAI identifies the tool and its developer; it does not imply institutional participation.
+The public release does not identify a specific model, model family, version, provider, or vendor. A more specific disclosure may be added only after separate human legal and publication-policy review.
 
 ## What the public record can establish
 
-The repository supplies inspectable evidence that a sustained human–AI research process occurred:
+The repository supplies inspectable evidence that a sustained human–LLM research process occurred:
 
 - dated Git commits and pull requests;
 - source and artifact hashes;
@@ -42,6 +42,7 @@ The public repository does not publish:
 
 - private chat transcripts;
 - hidden chain-of-thought or internal model scratch work;
+- specific model or provider identities;
 - personal workstation paths;
 - credentials or private attachments;
 - abandoned branches that do not contribute to a selected paper;
@@ -63,9 +64,9 @@ The human role includes:
 6. reviewing release boundaries, rights, attribution, and public visibility;
 7. accepting responsibility for retained claims and future corrections.
 
-### ChatGPT
+### Large language models
 
-The AI role includes:
+The LLM role includes:
 
 1. generating candidate mathematical objects, conjectures, reductions, and normal forms;
 2. proposing proof plans and identifying load-bearing lemmas;
@@ -81,9 +82,11 @@ The AI role includes:
 
 Python, C compilers, symbolic algebra systems, Lean, Git, GitHub Actions, and checksum tools provide evidence routes. They do not become authors and do not convert a flawed statement into a theorem merely because a program ran.
 
-## Model identity boundary
+## Identity boundary
 
-The public-release preparation recorded in July 2026 was conducted through ChatGPT, with the active assistant identifying itself as GPT-5.6 Pro. Earlier project sessions may have used different OpenAI model versions. The repository does not claim cryptographic attestation of the model behind every historical message; paper-level records should name a model only where the available session record supports that statement.
+The public disclosure intentionally stops at the category **LLM-assisted**. It does not claim cryptographic attestation of the model behind every historical message and does not identify any specific model or provider.
+
+If a later journal, archive, legal review, or owner decision requires more specificity, that disclosure must be added as a separately reviewed change tied to an exact release.
 
 ## Correction discipline
 
@@ -109,7 +112,7 @@ Operational failures are not mathematical counterexamples. Mathematical failures
 
 AI systems are not listed as authors, do not own the work, and do not exercise publication authority. Matthew S. Novak is the accountable human author and accepts responsibility for deciding what is released, corrected, submitted, or withdrawn.
 
-This follows the practical distinction used in other disclosed LLM-assisted mathematical work: an AI may materially influence discovery while the human researcher verifies, rewrites, selects, and accepts responsibility for the final manuscript.
+An LLM may materially influence discovery while the human researcher verifies, rewrites, selects, and accepts responsibility for the final manuscript.
 
 ## Public challenge
 
