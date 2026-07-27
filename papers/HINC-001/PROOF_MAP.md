@@ -1,235 +1,166 @@
-# HINC-001 Proof Map
+# HINC-001 proof map
 
-## Current use
+## Controlling source
 
-This map reflects the 2026-07-27 hostile review. The preserved four-part manuscript predates several load-bearing clarifications. Read the controlling foundation and errata files before treating any downstream theorem as release-ready.
+The controlling proof is the consolidated manuscript:
+
+```text
+manuscript/HINC-001_REVISED_MANUSCRIPT.md
+```
+
+The hostile-review addenda remain provenance and review records; they are no longer substitutes for an integrated manuscript.
 
 ## Structure convention
 
-The classified maps are **binary Gerstenhaber endomorphisms**:
+The classified maps are **binary Gerstenhaber endomorphisms**: unital, base-linear, degree-preserving, cup-product-preserving, and preserving the binary degree-minus-one bracket.
 
-```text
-unital
-base-linear
-degree-preserving
-cup-product-preserving
-binary degree-minus-one bracket-preserving
-```
-
-No BV, restricted-power, Gerstenhaber-square, brace, or full `E_2` preservation is claimed.
+No BV, restricted-power, brace, Gerstenhaber-square beyond the binary bracket, or full `E_2` preservation is claimed.
 
 ---
 
 ## Foundation chain
 
 ```text
-F0  normalized Hochschild cochains of D=F[epsilon]/epsilon^2 in char 2
+F0  normalized cochains of D=F[epsilon]/(epsilon^2) in characteristic two
         ↓
 F1  zero differential, cup algebra D[u], explicit binary bracket
         ↓
-F2  explicit subalgebras E and O inside D[u]
+F2  explicit subalgebras E and O
         ↓
-F3  complete algebra presentations and generator bracket tables
+F3  complete algebra presentations
         ↓
 F4  general homogeneous generator images
         ↓
-F5  coefficient equations
+F5  polynomial relation and generator-bracket equations
         ↓
-F6  generator-to-global binary-bracket preservation
+F6  generator-to-global biderivation lemma
         ↓
-F7  functorial endomorphism classifications
+F7  natural arbitrary-base endomorphism classifications
         ↓
-F8  affine coefficient schemes and polynomial composition
+F8  affine coefficient schemes, polynomial composition, bialgebras
         ↓
-F9  geometry, centers, units, derived groups, idempotents, and counts
+F9  common core, centers, units, clopen split, idempotents, and counts
 ```
 
-### F0–F1 — Ambient Hochschild structure
+### F0–F1 — ambient Hochschild structure
 
-The exact characteristic-two derivation is now supplied in:
+The revised manuscript proves directly:
 
 ```text
-FOUNDATIONAL_HOCHSCHILD_DERIVATION_2026-07-27.md
+HH*(D,D)=D[u]
+[xu^i,yu^j]=(i x partial(y)+j y partial(x))u^(i+j-1).
 ```
 
-It is a human proof, not part of the current Lean package.
+**Human proof:** complete.  
+**Lean:** not formalized.  
+**External review:** pending.
 
-### F2–F3 — Source algebras
+### F2–F3 — source algebras
 
 Even:
 
 ```text
-E = F + uD[u] = F[r,s]/(s^2)
-|r|=|s|=1
-[r,s]=r
+E=F+uD[u]=F[r,s]/(s^2)
+[r,s]=r.
 ```
 
 Odd:
 
 ```text
-O = D + F epsilon u + u^2D[u]
+O=D+F epsilon u+u^2D[u]
 ```
 
-with the displayed presentation on `epsilon,a,b,c`.
-
-The odd presentation completeness is supplied by:
-
-```text
-ODD_PRESENTATION_NORMAL_FORM_2026-07-27.md
-```
-
-with unique normal form
+with complete normal form
 
 ```text
 f(b)+c g(b)+epsilon h(b)+epsilon c k(b)+tau a.
 ```
 
-### F6 — Generator-to-global theorem
+**Human proof:** complete.  
+**Lean:** not formalized.  
+**External review:** pending.
 
-The biderivation induction is supplied in:
+### F6 — generator-to-global theorem
 
-```text
-GENERATOR_TO_GLOBAL_LEMMA_2026-07-27.md
-```
+The revised manuscript proves that a unital graded algebra homomorphism preserving brackets on homogeneous algebra generators preserves the bracket globally, by induction through the two biderivation identities.
 
-This closes the human proof route but remains unformalized and externally unaudited.
+**Human proof:** complete.  
+**Lean:** not formalized.  
+**External review:** pending.
+
+### F8 — representability
+
+The revised manuscript explicitly:
+
+1. chooses finite homogeneous generator-image coefficient spaces;
+2. imposes polynomial algebra and bracket equations;
+3. proves a natural base-wise bijection using F3 and F6;
+4. derives polynomial composition;
+5. identifies the coordinate bialgebras.
+
+**Human proof:** complete.  
+**Lean:** coefficient equations and normalized composition only.  
+**External review:** pending.
 
 ---
 
 ## Even classification chain
-
-### E1 — General degree-one candidate
 
 ```text
 r -> lambda r + beta s
 s -> eta r + delta s
 ```
 
-### E2 — Algebra relation
-
-Preserving `s^2=0` gives
-
-```text
-eta^2=0.
-```
-
-Dependency: `r^2` spans a free base-ring summand.
-
-### E3 — Bracket relation
-
-Preserving `[r,s]=r` gives
-
-```text
-beta=0
-lambda(delta-1)=0.
-```
-
-### E4 — Coefficient theorem
-
-The generator equations are equivalent to the normal form. This is formally verified in the bounded Lean classification kernel.
-
-### E5 — Global extension
-
-The normal-form assignment preserves the algebra relation and complete generator bracket table. The generator-to-global lemma gives global binary-bracket preservation.
-
-```text
-human proof:        supplied
-Lean formalization: pending
-external audit:     pending
-```
-
-### E6 — Composition
+- `s^2=0` gives `eta^2=0`.
+- `[r,s]=r` gives `beta=0` and `lambda(delta-1)=0`.
+- F6 extends generator-table preservation globally.
+- Composition is
 
 ```text
 (lambda,delta,eta)(lambda',delta',eta')
  = (lambda lambda',delta delta',lambda eta'+delta' eta).
 ```
 
-Closure, identity, and associativity are formally verified for normalized data.
-
-### E7 — Representability
-
-Candidate coefficient scheme:
+The representing ring is
 
 ```text
-A_E = F[lambda,delta,eta]/(eta^2,lambda(delta-1)).
+F[lambda,delta,eta]/(eta^2,lambda(delta-1)).
 ```
 
-Required before release:
-
-- define the coefficient affine space;
-- impose all algebra and bracket equations;
-- prove the natural base-wise bijection;
-- derive polynomial composition and coordinate-bialgebra maps.
-
-### E8 — Matrix and geometric interpretation
-
-The multiplication is upper-triangular matrix multiplication:
+The multiplication is constrained upper-triangular matrix multiplication. As schemes,
 
 ```text
-[x e]
-[0 y]
+M_E = C x alpha_2,
 ```
 
-with constraints
+but this is not a direct-product monoid law.
 
-```text
-x(y-1)=0,
-e^2=0.
-```
+### Even proof status
 
-As schemes,
-
-```text
-M_E = C × alpha_2.
-```
-
-This is not a direct-product monoid law.
-
-### E9 — Units and commutator
-
-Unit law:
-
-```text
-(a,c)(b,d)=(ab,ad+c).
-```
-
-Commutator:
-
-```text
-(1,(a+1)d+(b+1)c).
-```
-
-The commutator formula has bounded Lean verification.
-
-### E10 — Center and derived group
-
-Candidate center equations:
-
-```text
-e=0,
-x=y,
-x(x-1)=0.
-```
-
-The center should be stated as the constant finite étale two-point scheme. The complete center equality and fppf-derived subgroup convention remain outside the current Lean scope and require specialist audit.
+| Node | Human proof | Internal computation | Lean | External review |
+|---|---|---|---|---|
+| Algebra presentation | Complete | Checked | Not formalized | Pending |
+| Coefficient equations | Complete | Checked | Hosted PASS | Pending |
+| Generator-to-global | Complete | Supporting checks | Not formalized | Pending |
+| Composition | Complete | Checked | Hosted PASS | Pending |
+| Representability | Complete | Symbolic checks | Partial | Pending |
+| Common-core scheme statement | Complete | Checked | Multiplication kernel PASS | Pending |
+| Center equality | Complete | Finite/symbolic checks | Sufficient equations only | Pending |
+| Unit commutator | Complete | Checked | Hosted PASS | Pending |
+| fppf-derived subgroup | Complete paper proof | Commutator checked | Not formalized | Pending |
 
 ---
 
 ## Odd classification chain
 
-### O1 — General homogeneous candidate
-
 ```text
 epsilon -> x + lambda epsilon
 a       -> mu a
 b       -> p b + q epsilon b
-c       -> rho c + sigma epsilon c.
+c       -> rho c + sigma epsilon c
 ```
 
-### O2 — Bracket elimination
-
-The generator bracket table gives
+The generator brackets give
 
 ```text
 x=q=sigma=0
@@ -238,35 +169,15 @@ lambda(mu-1)=0
 rho(mu-1)=0.
 ```
 
-### O3 — Algebra equation
-
-The remaining relation gives
+The remaining algebra relation gives
 
 ```text
 rho=lambda p^2.
 ```
 
-### O4 — Coefficient theorem
+The normal-form theorem proves that the displayed source relations are complete. F6 then gives global bracket preservation. Composition is coordinatewise.
 
-The direct generator equations are equivalent to the diagonal normal form. This is formally verified in the bounded Lean classification kernel.
-
-### O5 — Global extension
-
-The odd normal-form presentation plus the generator-to-global lemma gives the human proof of global binary-bracket preservation.
-
-```text
-human proof:        supplied
-Lean formalization: pending
-external audit:     pending
-```
-
-### O6 — Composition
-
-Composition is coordinatewise on normalized data. Closure, identity, associativity, and commutativity are formally verified.
-
-### O7 — Representability and clopen split
-
-Candidate coordinate ring:
+The representing ring is
 
 ```text
 F[lambda,mu,p,rho]/
@@ -276,88 +187,103 @@ F[lambda,mu,p,rho]/
  rho(mu-1)).
 ```
 
-The element
+The group-like idempotent
 
 ```text
 z=lambda^3 rho
 ```
 
-is idempotent and group-like, yielding a torus unit component and crossing ideal. This scheme-level decomposition is internally checked but not formally verified.
+splits the representing scheme into a torus unit component and a crossing ideal.
 
-Use “adjoining a separate clopen unit component” rather than implying a new general doubling construction.
+For connected bases, every point lies in one component. For disconnected bases, points may select components on complementary clopen pieces; the scheme split is not a naive all-rings set disjoint union.
+
+### Odd proof status
+
+| Node | Human proof | Internal computation | Lean | External review |
+|---|---|---|---|---|
+| Presentation normal form | Complete | Checked | Not formalized | Pending |
+| Coefficient equations | Complete | Checked | Hosted PASS | Pending |
+| Generator-to-global | Complete | Supporting checks | Not formalized | Pending |
+| Composition | Complete | Checked | Hosted PASS | Pending |
+| Representability | Complete | Symbolic checks | Partial | Pending |
+| Group-like idempotent | Complete | Checked | Not formalized | Pending |
+| Clopen scheme split | Complete | Checked | Not formalized | Pending |
 
 ---
 
 ## Common-core synthesis
 
 ```text
-Even reduction                  = crossing C
-Odd nonunit clopen component   = crossing C
+Even reduction                = crossing C
+Odd nonunit clopen component = crossing C
 ```
 
 where
 
 ```text
-C = Spec F[x,y]/(x(y-1))
+C=Spec F[x,y]/(x(y-1))
 ```
 
 with coordinatewise multiplication.
 
-The candidate comparison is:
+The paired result is:
 
 ```text
-Even: C with a skew square-zero direction
-Odd:  C plus a separate clopen torus unit component
+Even: C plus a constrained skew square-zero direction.
+Odd:  C plus a separate clopen torus unit component.
 ```
 
-The general mechanisms are established. The candidate project contribution is the explicit Gerstenhaber-derived pair and exact common-core identification.
+The general mechanisms are established. The candidate contribution is the explicit binary-Gerstenhaber-derived pair and exact common-core identification.
 
 ---
 
-## Secondary consequences
+## Scheme-theoretic center and pointwise warning
 
-The following depend on the global classifications and, where applicable, scheme-level conventions:
+The revised proof identifies
 
-- idempotent schemes;
-- center descriptions;
-- derived subgroup and abelianization;
-- tangent spaces;
-- normalization;
-- finite-Artin counts;
-- finite-field counts and zeta functions;
-- MCRC application.
+```text
+Z_sch(M_E)=Spec F[z]/(z(z-1))
+```
 
-A flaw in F0–F7 blocks all downstream consequences. A flaw only in E10 does not invalidate the coefficient classifications.
+embedded by `z -> (z,z,0)`.
+
+Thus
+
+```text
+Z_sch(M_E)(R)={(e,e,0):e^2=e}.
+```
+
+The abstract center of `M_E(R)` can be larger. This distinction is part of the controlling theorem and must remain visible in every summary.
 
 ---
 
-## Verification overlay
+## Evidence overlay
 
-| Proof node | Human proof | Internal computation | Lean status | External review |
-|---|---|---|---|---|
-| Characteristic-two Hochschild foundation | Supplied in addendum | Generator table checked | Not formalized | Pending |
-| Even algebra presentation | Complete | Checked | Not formalized | Pending |
-| Odd algebra presentation | Normal-form proof supplied | Checked | Not formalized | Pending |
-| Even coefficient equations | Complete | Checked | Public hosted PASS | Pending |
-| Odd coefficient equations | Complete | Checked | Public hosted PASS | Pending |
-| Generator-to-global lemma | Supplied in addendum | Partly checked | Not formalized | Pending |
-| Even/odd normalized composition | Complete | Checked | Public hosted PASS | Pending |
-| Representability/bialgebras | Candidate, needs expansion | Symbolic checks | Not formalized | Pending |
-| Odd clopen split | Candidate | Checked in declared routes | Not formalized | Pending |
-| Complete center equality | Candidate | Symbolic/finite checks | Partial kernel only | Pending |
-| Derived subgroup/abelianization | Candidate | Commutator checked | Commutator formula only | Pending |
+The current Lean package verifies the algebraic kernel, coefficient equations, normalized composition laws, commutativity defect, sufficient center equations, and unit-group commutator. It does not verify the full revised manuscript.
 
-## Review priority
+Finite Python, C, Gröbner, Artin-ring, and standalone common-core routes challenge the declared formulas. They are internal evidence, not external reproduction.
 
-1. Characteristic-two normalized-bar and bracket derivation.
-2. Odd presentation normal form.
-3. Generator-to-global binary-bracket preservation.
-4. Functorial representability and coordinate bialgebras.
-5. Complete center subfunctor.
-6. fppf-derived subgroup and abelianization.
-7. Odd clopen split and common-core isomorphism.
-8. Historical equivalence under different generators or matrix-monoid language.
+---
+
+## Review priorities after public release
+
+Public release is intended to obtain, not pre-claim:
+
+1. an external check of the characteristic-two normalized-cochain derivation;
+2. an external check of the odd presentation normal form;
+3. an external check of generator-to-global preservation;
+4. a scheme-theoretic audit of representability and the clopen split;
+5. a center and fppf-derived-subgroup audit;
+6. a source-level equivalence and historical-priority review;
+7. independent reproduction or formalization of the presently unformalized nodes.
 
 ## Release rule
 
-Do not release the pre-review manuscript as controlling. First consolidate the foundation, presentation, global-extension, terminology, status, bibliography, and priority corrections into a new source identity; then rerun every evidence and rendering gate.
+The candidate package may be made public only with:
+
+- the consolidated revised manuscript as the controlling source;
+- the exact formal-verification boundary displayed;
+- external review and historical priority marked pending;
+- no claim of peer review or journal acceptance;
+- the repository privacy and identity scans passing;
+- a final owner-controlled visibility switch.
