@@ -17,12 +17,14 @@
     "peer_reviewed": false,
     "doi_assigned": false,
     "historical_priority_established": false,
-    "openai_endorsement_claimed": false
+    "specific_model_disclosed": false,
+    "specific_provider_disclosed": false
   },
   "owner_authorization": {
     "accountable_owner": "Matthew S. Novak",
     "public_review_authorized": true,
     "authorization_date": "2026-07-27",
+    "approved_public_wording": "human-led, LLM-assisted",
     "residual_scientific_gates_preserved": true
   },
   "repository_hygiene_checks": {
@@ -34,9 +36,10 @@
     "blanket_mit_grant_sentence": "no indexed match located",
     "private_chat_transcripts": "not included by repository policy",
     "hidden_chain_of_thought": "not included by repository policy",
+    "specific_model_or_provider_names": "prohibited in public release",
     "third_party_figures": "none identified in HINC-001 public-review package",
     "required_rights_files": "present",
-    "required_ai_disclosure": "present",
+    "required_ai_disclosure": "present at LLM category level",
     "required_claim_and_limitation_records": "present"
   },
   "hinc_bibliography_checks": [
@@ -78,7 +81,7 @@
   ],
   "human_ai_prior_art_boundary": {
     "first_human_ai_mathematics_claim": false,
-    "first_chatgpt_assisted_open_problem_claim": false,
+    "first_llm_assisted_mathematics_claim": false,
     "first_public_detailed_log_collaboration_claim": false,
     "narrow_process_claim": "candidate distinctive combination; historical priority unestablished",
     "precedent_record": "HUMAN_AI_MATHEMATICS_PRIOR_ART.md"
@@ -88,7 +91,7 @@
     "Bibliographic metadata verification is not a source-level mathematical equivalence review.",
     "The audit does not establish correctness or novelty of HINC-001.",
     "The public Lean receipts cover bounded declarations, not the full manuscript.",
-    "OpenAI did not independently verify or endorse the collaboration record.",
+    "The public record does not establish a specific model or provider identity.",
     "Private historical conversation turns are not cryptographically authenticated by this repository."
   ],
   "required_post_release_actions": [
@@ -96,6 +99,7 @@
     "preserve corrections against exact source identities",
     "obtain qualified external algebra/monoid review",
     "complete focused HINC historical-equivalence review",
+    "perform separate human legal and editorial review before any specific model/provider disclosure",
     "freeze a separate archival or journal-submission release before claiming submission status"
   ]
 }
