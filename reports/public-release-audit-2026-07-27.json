@@ -1,0 +1,102 @@
+{
+  "schema_version": "n.human_ai_mathematics.public_release_audit.v1",
+  "repository": "novakprotocol/N-Human-AI-Mathematics",
+  "release_version": "0.1.0-public-review",
+  "audit_date": "2026-07-27",
+  "result": "PASS_WITH_DECLARED_LIMITATIONS",
+  "release_scope": {
+    "complete_public_review_packages": [
+      "HINC-001"
+    ],
+    "indexed_not_released_as_complete_packages": [
+      "ABF-001",
+      "FSG-001",
+      "ACM-001"
+    ],
+    "journal_submission": false,
+    "peer_reviewed": false,
+    "doi_assigned": false,
+    "historical_priority_established": false,
+    "openai_endorsement_claimed": false
+  },
+  "owner_authorization": {
+    "accountable_owner": "Matthew S. Novak",
+    "public_review_authorized": true,
+    "authorization_date": "2026-07-27",
+    "residual_scientific_gates_preserved": true
+  },
+  "repository_hygiene_checks": {
+    "personal_windows_user_paths": "no indexed match located",
+    "github_classic_token_pattern": "no indexed match located",
+    "github_fine_grained_token_pattern": "no indexed match located",
+    "private_key_header": "no indexed match located",
+    "account_username_chasingcoconuts": "no indexed match located",
+    "appdata_path": "no indexed match located",
+    "blanket_mit_grant_sentence": "no indexed match located",
+    "private_chat_transcripts": "not included by repository policy",
+    "hidden_chain_of_thought": "not included by repository policy",
+    "third_party_figures": "none identified in HINC-001 public-review package",
+    "required_rights_files": "present",
+    "required_ai_disclosure": "present",
+    "required_claim_and_limitation_records": "present"
+  },
+  "hinc_bibliography_checks": [
+    {
+      "key": "Brion2014",
+      "identifier": "arXiv:1208.0675",
+      "result": "metadata matched"
+    },
+    {
+      "key": "Brion2014II",
+      "identifier": "arXiv:1303.3955",
+      "result": "metadata matched"
+    },
+    {
+      "key": "Rittatore1998",
+      "identifier": "arXiv:math/9802073",
+      "result": "metadata matched"
+    },
+    {
+      "key": "Perepechko2009",
+      "identifier": "DOI:10.1090/S0002-9939-09-09913-4; arXiv:0809.2356",
+      "result": "metadata matched"
+    },
+    {
+      "key": "KoenigNagase2009",
+      "identifier": "DOI:10.1016/j.jpaa.2008.10.012",
+      "result": "metadata matched"
+    },
+    {
+      "key": "Hermann2016",
+      "identifier": "arXiv:1403.3597",
+      "result": "title, author, and monograph metadata matched; bibliography eprint corrected separately if required"
+    },
+    {
+      "key": "Elduque2026",
+      "identifier": "arXiv:2507.12321",
+      "result": "metadata matched; preprint first posted in 2025"
+    }
+  ],
+  "human_ai_prior_art_boundary": {
+    "first_human_ai_mathematics_claim": false,
+    "first_chatgpt_assisted_open_problem_claim": false,
+    "first_public_detailed_log_collaboration_claim": false,
+    "narrow_process_claim": "candidate distinctive combination; historical priority unestablished",
+    "precedent_record": "HUMAN_AI_MATHEMATICS_PRIOR_ART.md"
+  },
+  "known_limitations": [
+    "Code-search absence is not proof that no secret or personal identifier exists.",
+    "Bibliographic metadata verification is not a source-level mathematical equivalence review.",
+    "The audit does not establish correctness or novelty of HINC-001.",
+    "The public Lean receipts cover bounded declarations, not the full manuscript.",
+    "OpenAI did not independently verify or endorse the collaboration record.",
+    "Private historical conversation turns are not cryptographically authenticated by this repository."
+  ],
+  "required_post_release_actions": [
+    "accept public counterexample, proof-gap, prior-art, and reproduction reports",
+    "preserve corrections against exact source identities",
+    "obtain qualified external algebra/monoid review",
+    "complete focused HINC historical-equivalence review",
+    "freeze a separate archival or journal-submission release before claiming submission status"
+  ]
+}
