@@ -1,0 +1,81 @@
+name: Deploy public-review site
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "docs/**"
+      - "README.md"
+      - "START_HERE.md"
+      - "STATUS.md"
+      - "PUBLIC_REVIEW_RELEASE.md"
+      - "HUMAN_AI_COLLABORATION_RECORD.md"
+      - "HUMAN_AI_MATHEMATICS_PRIOR_ART.md"
+      - "OPEN_REVIEW_CHALLENGE.md"
+      - "research-index.json"
+      - "papers/HINC-001/**"
+      - "tools/validate_publication.py"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate public source
+        run: |
+          python -m py_compile tools/validate_publication.py
+          python tools/validate_publication.py \
+            --root . \
+            --allow-public \
+            --json-output reports/publication-validation.json
+
+      - name: Verify site files
+        run: |
+          test -f docs/index.html
+          test -f docs/styles.css
+          test -f docs/404.html
+          test -f docs/.nojekyll
+          grep -q "OpenAI did not sponsor" docs/index.html
+          grep -q "Public review" docs/index.html
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: validate
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload static site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
