@@ -11,6 +11,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 $ExpectedHost = "github.com"
+$env:GH_HOST = $ExpectedHost
 $ExpectedRepository = "novakprotocol/N-Human-AI-Mathematics"
 $ExpectedLeaf = "N-Human-LLM-Mathematics-Private-Preflight"
 
@@ -110,19 +111,20 @@ if ($Remote -notmatch "^https://github\.com/novakprotocol/N-Human-AI-Mathematics
 $Base = ((Invoke-Native -File "git.exe" -Arguments @("merge-base", "origin/main", "HEAD") -WorkingDirectory $WorkDirectory).Output -join "").Trim()
 if ($Base -notmatch "^[0-9a-f]{40}$") { throw "Invalid merge base." }
 
-$Venv = Join-Path $WorkDirectory ".venv"
+$Venv = Join-Path $env:TEMP "N-Human-LLM-Mathematics-Private-Preflight-$Stamp-venv"
+if (Test-Path -LiteralPath $Venv) { Remove-Item -LiteralPath $Venv -Recurse -Force }
 $VenvPython = Join-Path $Venv "Scripts\python.exe"
 $VenvArgs = @(); $VenvArgs += $Python.Prefix; $VenvArgs += @("-m", "venv", $Venv)
 Invoke-Native -File $Python.File -Arguments $VenvArgs -WorkingDirectory $WorkDirectory -Label "create isolated Python environment" | Out-Null
 Invoke-Native -File $VenvPython -Arguments @("-m", "pip", "install", "--disable-pip-version-check", "-r", "papers/HINC-001/requirements.txt") -WorkingDirectory $WorkDirectory -Label "install HINC requirements" | Out-Null
-Invoke-Native -File $VenvPython -Arguments @("-m", "py_compile", "tools/validate_publication.py", "tools/validate_publication_v2.py", "tools/validate_public_release.py", "tools/validate_public_release_v2.py", "tools/validate_public_state.py", "papers/HINC-001/src/standalone_common_core_verifier.py", "papers/HINC-001/tests/test_hinc_standalone.py") -WorkingDirectory $WorkDirectory -Label "compile validators and HINC sources" | Out-Null
+Invoke-Native -File $VenvPython -Arguments @("-m", "py_compile", "tools/validate_publication.py", "tools/validate_publication_v2.py", "tools/validate_public_release.py", "tools/validate_public_release_v2.py", "tools/validate_public_state.py", "papers/HINC-001/src/mcrc_hidden_infinitesimal_noncommutativity_standalone.py", "papers/HINC-001/src/standalone_common_core_verifier.py", "papers/HINC-001/tests/test_hinc_standalone.py") -WorkingDirectory $WorkDirectory -Label "compile validators and HINC sources" | Out-Null
 
 $PublicationJson = Join-Path $WorkDirectory "reports\publication-validation-preflight.json"
 $SwitchJson = Join-Path $WorkDirectory "reports\public-switch-validation-preflight.json"
 Invoke-Native -File $VenvPython -Arguments @("tools/validate_publication_v2.py", "--root", ".", "--json-output", $PublicationJson) -WorkingDirectory $WorkDirectory -Label "publication validator" | Out-Null
 Invoke-Native -File $VenvPython -Arguments @("tools/validate_public_release_v2.py", "--root", ".", "--json-output", $SwitchJson) -WorkingDirectory $WorkDirectory -Label "switch-readiness validator" | Out-Null
 Invoke-Native -File $VenvPython -Arguments @("-m", "unittest", "discover", "-s", "papers/HINC-001/tests", "-p", "test_*.py", "-v") -WorkingDirectory $WorkDirectory -Label "HINC standalone tests" | Out-Null
-Invoke-Native -File $VenvPython -Arguments @("papers/HINC-001/src/standalone_common_core_verifier.py", "--max-n", "4") -WorkingDirectory $WorkDirectory -Label "HINC common-core verifier" | Out-Null
+Invoke-Native -File $VenvPython -Arguments @("papers/HINC-001/src/standalone_common_core_verifier.py", "--maximum-order", "4") -WorkingDirectory $WorkDirectory -Label "HINC common-core verifier" | Out-Null
 Invoke-Native -File "git.exe" -Arguments @("diff", "--check", $Base, "HEAD", "--") -WorkingDirectory $WorkDirectory -Label "complete branch whitespace" | Out-Null
 
 $Index = Get-Content -LiteralPath (Join-Path $WorkDirectory "research-index.json") -Raw | ConvertFrom-Json
@@ -163,6 +165,15 @@ if ($Switch.result -ne "PASS" -or $Switch.error_count -ne 0) { throw "Switch rec
 if (Test-Path -LiteralPath $ArchivePath) { Remove-Item -LiteralPath $ArchivePath -Force }
 Invoke-Native -File "git.exe" -Arguments @("archive", "--format=zip", "--output=$ArchivePath", "HEAD") -WorkingDirectory $WorkDirectory -Label "create commit-anchored archive" | Out-Null
 $ArchiveHash = (Get-FileHash -LiteralPath $ArchivePath -Algorithm SHA256).Hash.ToLowerInvariant()
+
+Write-Log ""
+Write-Log "PASS - private public-switch preflight completed." Green
+Write-Log "Release commit: $Head"
+Write-Log "Candidate archive: $ArchivePath"
+Write-Log "Archive SHA-256: $ArchiveHash"
+Write-Log "Receipt path reserved: $ReceiptPath"
+Write-Log "No merge, tag, release, Pages deployment, visibility change, or GitHub Enterprise access occurred." Yellow
+
 $LogHash = (Get-FileHash -LiteralPath $LogPath -Algorithm SHA256).Hash.ToLowerInvariant()
 
 $Receipt = [ordered]@{
@@ -202,16 +213,14 @@ Write-Utf8NoBom -Path $ReceiptPath -Content (($Receipt | ConvertTo-Json -Depth 2
 $ReceiptHash = (Get-FileHash -LiteralPath $ReceiptPath -Algorithm SHA256).Hash.ToLowerInvariant()
 Write-Utf8NoBom -Path $ChecksumPath -Content ("$ArchiveHash  $([IO.Path]::GetFileName($ArchivePath))`n$LogHash  $([IO.Path]::GetFileName($LogPath))`n$ReceiptHash  $([IO.Path]::GetFileName($ReceiptPath))`n")
 
-Write-Log ""
-Write-Log "PASS - private public-switch preflight completed." Green
-Write-Log "Release commit: $Head"
-Write-Log "Candidate archive: $ArchivePath"
-Write-Log "Archive SHA-256: $ArchiveHash"
-Write-Log "Receipt: $ReceiptPath"
-Write-Log "Receipt SHA-256: $ReceiptHash"
-Write-Log "No merge, tag, release, Pages deployment, visibility change, or GitHub Enterprise access occurred." Yellow
+Write-Host "Receipt: $ReceiptPath"
+Write-Host "Receipt SHA-256: $ReceiptHash"
+Write-Host "Checksum manifest: $ChecksumPath"
 
+if (Test-Path -LiteralPath $Venv) {
+    Remove-Item -LiteralPath $Venv -Recurse -Force
+}
 if (-not $KeepWorkDirectory) {
     Remove-Item -LiteralPath $WorkDirectory -Recurse -Force
-    Write-Log "Temporary preflight checkout removed."
+    Write-Host "Temporary preflight checkout removed."
 }
