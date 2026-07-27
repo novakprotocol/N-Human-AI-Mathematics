@@ -20,6 +20,8 @@ The complete kit contains:
 - a complete checksum manifest;
 - a machine-readable kit receipt.
 
+The kit is **prepared but not executed**. The repository remains private, PR #2 remains draft, and no merge, visibility change, Pages deployment, tag, or GitHub release has occurred.
+
 ## Private preflight
 
 ```text
