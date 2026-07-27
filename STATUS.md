@@ -4,18 +4,19 @@
 
 ```text
 repository_name:             N-Human-AI-Mathematics
-repository_role:             curated public-review and external-review layer
+repository_role:             curated private staging and future public-review layer
 repository:                  novakprotocol/N-Human-AI-Mathematics
-release_channel:             public review
-release_version:             0.1.0-public-review
-release_date:                2026-07-27
+visibility:                  private
+release_channel:             private staging
+release_version:             none
+release_date:                none
 default_branch:              main
 standalone_repository:       created
 initial_curated_commit:      e378c773f7c54b375fdd208961f77702b1aadd05
 bootstrap_source_commit:     9dc69542fb2b089a4cef5ea3c425d82bb705d4dd
 bootstrap_result:            PASS
-publication_validation:      PASS
-public_release_authorized:   true
+publication_validation:      PASS for pre-hostile-review staging
+public_release_authorized:   false pending revised approval
 blanket_license_applied:     false
 peer_reviewed:               false
 journal_submitted:           false
@@ -24,51 +25,52 @@ specific_model_disclosed:    false
 specific_provider_disclosed: false
 ```
 
-The GitHub repository may remain private until the release branch is merged and the owner performs the final visibility change. The status above describes the authorized release state being frozen by `release/public-review-v1`.
+PR #2 remains a private draft. No merge, tag, GitHub release, Pages deployment, DOI, or visibility change is authorized while the hostile-review blockers remain active.
 
 ## What is complete
 
-- The standalone GitHub repository exists and `main` is the default branch.
-- The initial curated repository was created from pinned N-MathLab and `novak-sdt` commits.
-- `BOOTSTRAP_RECEIPT.json` records `PASS`.
-- The initial publication validation recorded zero errors and zero warnings.
-- Repository purpose and separation from the private laboratory are fixed.
-- Human-readable and AI-readable evidence rules are defined.
-- Machine-readable research-index and paper-status schemas are included.
-- Counterexample, proof-gap, prior-art, and reproduction workflows are defined.
-- A dependency-free publication validator and GitHub validation workflow are included.
-- The human–LLM collaboration record and prior-art boundary are public-review source files.
-- The public-source audit checks personal paths, credentials, private-key material, blanket license language, private transcripts, and withheld model/provider identifiers.
-- The HINC bibliography metadata was checked against primary publication or preprint records and corrected where needed.
-- The first complete paper package is fixed as `HINC-001`.
-- The HINC standalone manuscript, review packet, verifier, tests, and receipts were materialized from immutable N-MathLab commit `e6adac212150177d4afa56e643d37533a208693c`.
-- The HINC formal sources were materialized from immutable `novak-sdt` commit `d7751d1de76253407016ef4bf92738cffa800e82`.
+- The standalone private repository exists and `main` is the default branch.
+- The guarded bootstrap and initial publication validation passed.
+- Human-readable and machine-readable evidence rules are defined.
+- Counterexample, proof-gap, prior-art, and reproduction channels are defined.
+- No blanket MIT license is applied.
+- The HINC standalone manuscript, verifier, tests, evidence, and formal source were materialized from pinned commits.
 - The HINC algebraic kernel has a public hosted Lean PASS.
 - The principal even and odd coefficient classifications and normalized monoid laws have a second public hosted Lean PASS.
-- Failed bootstrap and formal-proof attempts, their causes, and their repairs remain preserved separately from successful evidence.
-- Matthew S. Novak authorized public-review release using category-level **Human + LLM** wording.
+- Failed bootstrap, formal-proof, test-harness, and publication attempts are preserved separately from successful evidence.
+- The public wording is category-level **Human + LLM**; no specific model or provider is disclosed.
+- The 2026-07-27 hostile review found no explicit counterexample to the controlling coefficient systems.
+- A self-contained characteristic-two Hochschild derivation is now supplied.
+- A human generator-to-global proof is now supplied.
+- A complete odd-presentation normal-form proof is now supplied.
+- A deeper prior-art ledger and primary-source map are present.
 
-## Public-review release record
+## Active hostile-review controls
+
+The following files currently override stale or broader language in the pre-review manuscript:
 
 ```text
-release declaration:          PUBLIC_REVIEW_RELEASE.md
-human-LLM record:             HUMAN_AI_COLLABORATION_RECORD.md
-human-AI prior art:           HUMAN_AI_MATHEMATICS_PRIOR_ART.md
-open challenge:               OPEN_REVIEW_CHALLENGE.md
-machine-readable audit:       reports/public-release-audit-2026-07-27.json
-complete released package:    HINC-001
-indexed hold packages:        ABF-001, FSG-001, ACM-001
-DOI:                          none
-journal venue:                none
+papers/HINC-001/HOSTILE_REVIEW_2026-07-27.md
+papers/HINC-001/MANUSCRIPT_ERRATA_2026-07-27.md
+papers/HINC-001/FOUNDATIONAL_HOCHSCHILD_DERIVATION_2026-07-27.md
+papers/HINC-001/GENERATOR_TO_GLOBAL_LEMMA_2026-07-27.md
+papers/HINC-001/ODD_PRESENTATION_NORMAL_FORM_2026-07-27.md
+papers/HINC-001/PRIOR_ART_SEARCH_LEDGER_2026-07-27.csv
+papers/HINC-001/PRIOR_ART_PRIMARY_SOURCE_MAP_2026-07-27.json
+docs/PRIVATE_PREVIEW_BLOCKERS_2026-07-27.md
 ```
 
-Public review is not peer review. It opens the source and evidence to challenge while preserving unresolved scientific gates.
+## Why public release is blocked
 
-## Disclosure boundary
-
-The public repository states only that one or more large language models materially assisted the research.
-
-It does not name a specific model, model family, version, provider, or vendor. A more specific disclosure may be added later only after separate human legal and editorial review.
+1. The four-part manuscript has not yet been consolidated with the hostile-review corrections.
+2. The new foundation, odd normal form, and generator-to-global proof are not integrated into Lean.
+3. The complete representability proof remains too compressed.
+4. The center and fppf-derived-subgroup conventions require specialist audit.
+5. The old manuscript contains stale cross-references and evidence language.
+6. The derived PDF/DOCX artifacts have not been regenerated from revised source.
+7. The private website preview still needs branch-correct links, private-preview wording, citation warnings, and accessibility verification.
+8. Source-level historical-equivalence review remains pending.
+9. The repository-name/public-wording mismatch requires legal/editorial resolution.
 
 ## Formal verification checkpoint
 
@@ -83,34 +85,30 @@ classification artifact hash: 2dee88b9a248dee8719c27aa23a27ca3281e697cf67202bb50
 sorryAx:                      absent
 ```
 
-## What remains after public release
-
-### HINC-001 scientific review
-
-1. Obtain qualified outside algebra/monoid review.
-2. Complete a focused source-level historical-equivalence review.
-3. Resolve any counterexample, proof-gap, prior-art, or reproduction reports.
-4. Decide whether to formalize generator-to-global Gerstenhaber preservation before journal submission.
-5. Freeze a separate reviewed archival or journal-submission identity.
-6. Record DOI, venue, peer review, or acceptance only after those events occur.
-
-### Additional paper packages
-
-1. Convert `ABF-001` into the complete public package format.
-2. Convert `FSG-001` into the complete public package format.
-3. Consolidate the ANF code/matroid line into `ACM-001` and create its public package.
-
-These tasks may proceed in parallel with new research in N-MathLab.
+These receipts cover the listed algebraic kernel and coefficient-classification declarations only.
 
 ## Current paper states
 
-| Paper | Statement/proof | Internal reproduction | Formal proof | External review | Public state |
-|---|---|---|---|---|---|
-| `HINC-001` | Complete candidate manuscript | Passed for declared finite/symbolic routes | Base kernel PASS; principal coefficient classifications PASS; full manuscript incomplete | Pending | Public review package |
-| `ABF-001` | Exact finite theorem complete | Python/C/small-universe controls passed | Pending | Pending | Indexed hold; package not released |
-| `FSG-001` | Candidate all-parameter theorem package | Multiple internal routes passed | Pending | Pending | Indexed hold; package not released |
-| `ACM-001` | Exact finite code/matroid classification | Multiple routes passed for merged scope | Pending | Pending | Indexed hold; consolidation pending |
+| Paper | Current mathematical state | External review | Release state |
+|---|---|---|---|
+| `HINC-001` | Candidate classification; hostile-review additions supplied; consolidation pending | Pending | **Hold — private revision** |
+| `ABF-001` | Exact finite theorem package preserved | Pending | Hold |
+| `FSG-001` | Candidate all-parameter theorem package preserved | Pending | Hold |
+| `ACM-001` | Exact finite code/matroid line preserved; consolidation pending | Pending | Hold |
+
+## Next gates
+
+1. Integrate all HINC errata into a new manuscript identity.
+2. Expand representability, center, and derived-subgroup definitions.
+3. Update and rerun formal source where practical.
+4. Regenerate and visually inspect derived artifacts.
+5. Complete external algebra/monoid and historical-equivalence reviews.
+6. Approve a corrected private website preview.
+7. Rerun publication and privacy validators.
+8. Obtain a new explicit owner decision before any public action.
+
+Research in N-MathLab may continue in parallel. Public-release cleanup is not a reason to stop the laboratory.
 
 ## Claim boundary
 
-The repository establishes a controlled, inspectable public-review architecture and evidence of a sustained human-led, LLM-assisted research process. It does not establish mathematical correctness, worldwide novelty, publication priority, peer-review acceptance, importance, a specific model/provider identity, or full formal verification of any manuscript.
+The repository establishes a controlled private staging architecture and strong internal evidence for selected candidate results. It does not establish full manuscript correctness, worldwide novelty, publication priority, peer-review acceptance, importance, public release, specific model/provider identity, or complete formal verification.
