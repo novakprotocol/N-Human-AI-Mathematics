@@ -4,7 +4,10 @@
   "repository": "novakprotocol/N-Human-AI-Mathematics",
   "accountable_owner": "Matthew S. Novak",
   "operating_mode": "human-led-ai-assisted",
-  "public_release_authorized": false,
+  "public_release_authorized": true,
+  "release_channel": "public_review",
+  "release_version": "0.1.0-public-review",
+  "openai_endorsement": "not_claimed",
   "papers": [
     {
       "id": "HINC-001",
@@ -28,7 +31,7 @@
       "external_specialist_review": "pending",
       "historical_priority": "unestablished",
       "peer_review": "not_submitted",
-      "public_release": "not_authorized"
+      "public_release": "public_review_0.1.0"
     },
     {
       "id": "ABF-001",
@@ -47,7 +50,7 @@
       "external_specialist_review": "pending",
       "historical_priority": "unestablished",
       "peer_review": "not_submitted",
-      "public_release": "not_authorized"
+      "public_release": "index_entry_only_package_not_released"
     },
     {
       "id": "FSG-001",
@@ -67,7 +70,7 @@
       "external_specialist_review": "pending_two_specialties",
       "historical_priority": "unestablished",
       "peer_review": "not_submitted",
-      "public_release": "not_authorized"
+      "public_release": "index_entry_only_package_not_released"
     },
     {
       "id": "ACM-001",
@@ -86,7 +89,7 @@
       "external_specialist_review": "pending",
       "historical_priority": "unestablished",
       "peer_review": "not_submitted",
-      "public_release": "not_authorized"
+      "public_release": "index_entry_only_package_not_released"
     }
   ]
 }
