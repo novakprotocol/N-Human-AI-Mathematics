@@ -7,7 +7,7 @@ file:
 N-Human-LLM-Mathematics-Final-Public-Switch-Complete-Kit.zip
 
 SHA-256:
-c68e9b1c2bd01331145e96d53715184995258faef5ec4a33b6f7729dd05261be
+b013212cd8022c84ef95b5cafd33de917d6d043c85c1a434bd22cac7ea887fef
 ```
 
 The complete kit contains:
@@ -31,7 +31,7 @@ file:
 RUN-N-HUMAN-LLM-PRIVATE-PREFLIGHT.ps1
 
 SHA-256:
-9d25b42dd84c654a39e768cff28f31eaaf4e14aa229c85eb9e9de346933091a1
+f86b7c6965c7eb84cfa5a7801e8ac68c3c82a29754288a6c1a34eb4760f201ea
 ```
 
 The launcher discovers the governed preflight in `Downloads`, verifies its SHA-256, runs the Windows PowerShell parser, and invokes it only after both gates pass.
@@ -43,13 +43,13 @@ file:
 Invoke-PublicSwitchPreflight.ps1
 
 SHA-256:
-010abb2172ed97a179e1a2614392aae5f35c07881cd4128ca9b458dea49a3d8c
+c5b8d1efa9e9650d10bf42ed184602bc2c631b635ac3cd390a6073d4bc587b1e
 
 standalone kit:
 N-Human-LLM-Mathematics-Private-Preflight-Kit.zip
 
 standalone kit SHA-256:
-5a020039081fdf78dd9b11b66d9f152596edb5de6449920ad150f1762d4b76ac
+7277673b5a138cba23faa749ea074e3d9732afe728c6ea62d81e6615a251c087
 ```
 
 The preflight:
@@ -63,6 +63,18 @@ The preflight:
 - checks the private website boundaries and complete branch whitespace;
 - creates a commit-anchored ZIP plus JSON, log, and checksum receipts;
 - performs no merge, tag, release, Pages deployment, or visibility change.
+
+## Frozen workflow controls
+
+```text
+actions/checkout@v7
+actions/setup-python@v7
+actions/upload-artifact@v7
+actions/configure-pages@v6
+actions/upload-pages-artifact@v5
+actions/deploy-pages@v5
+include-hidden-files: true
+```
 
 ## Final publication launcher
 
