@@ -1,121 +1,137 @@
-# Research Index
+# Research index
 
-This index lists only results selected for a clean paper-scale review package. It is not an inventory of every experiment in N-MathLab.
+This index lists only results selected for paper-scale review packages. It is not an inventory of every N-MathLab experiment.
 
-## Repository release state
+## Repository state
 
 ```text
-release channel:        public review
-complete paper package: HINC-001
-indexed hold entries:   ABF-001, FSG-001, ACM-001
-peer reviewed:          no
-journal submitted:      no
-historical priority:    unestablished
+repository visibility:        private
+candidate release:            0.1.0-public-review-candidate
+public switch ready:          true
+visibility switch executed:   false
+complete candidate package:   HINC-001
+index-only hold entries:      ABF-001, FSG-001, ACM-001
+peer reviewed:                no
+journal submitted:            no
+historical priority:          unestablished
 ```
+
+## Publication order
+
+| Order | ID | Working title | Field | Current state |
+|---:|---|---|---|---|
+| 1 | `HINC-001` | Hidden Infinitesimal Noncommutativity in Two Binary-Gerstenhaber Endomorphism Monoid Schemes | Affine monoid schemes, binary Gerstenhaber algebras, nonreduced geometry | Complete candidate package; ready for final public switch |
+| 2 | `ABF-001` | Affine-Hyperplane Degree-Drop Spectra of a Vectorial Boolean Map | Boolean functions, finite linear algebra | Planned second package; exact finite theorem internally reproduced |
+| 3 | `FSG-001` | Fibonacci Critical Groups of Carry-Rees Petal Graphs | Critical groups, graph theory, Fibonacci divisibility | Hold pending specialist and formal review |
+| 4 | `ACM-001` | ANF Code and Matroid Geometry of a Reduced Vectorial Map | Coding theory, matroids, Boolean functions | Hold pending final consolidation |
 
 ## Status rules
 
-- `active_review`: a complete candidate package is openly available for review.
-- `hold`: mathematically substantial but not yet converted into the complete public package format.
-- `archived_case_study`: correct or useful work retained primarily as process history.
+- `active_review`: a complete candidate package prepared for public technical review.
+- `hold`: mathematically substantial but not yet released as a complete package.
+- `archived_case_study`: retained mainly as process history.
 - `rejected`: invalidated as stated.
-- `superseded`: replaced by a later statement while preserving history.
+- `superseded`: replaced while preserving the prior record.
 - `published`: reserved for an identified archival or journal publication, not ordinary GitHub visibility.
 
-## Principal papers
+## HINC-001 — first package
 
-### HINC-001 — Hidden Infinitesimal Noncommutativity
+### Controlling source
 
-**Working title:** *Hidden Infinitesimal Noncommutativity in Endomorphism Monoids of Two Graded Gerstenhaber Algebras*
+- [`papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md`](papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md)
 
-**Field:** algebraic monoids, Gerstenhaber algebras, nonreduced algebraic geometry.
+### Core claim
 
-**Core claim:** Two explicit characteristic-two Gerstenhaber endomorphism monoids share a crossing core but differ by an infinitesimal skew thickening versus a discrete clopen unit addition. The even monoid can appear commutative on ordinary field-valued points while remaining universally noncommutative.
+Two explicit characteristic-two binary-Gerstenhaber endomorphism monoid schemes share the crossing
 
-**Current evidence:**
+```text
+C = Spec F[x,y]/(x(y-1)).
+```
 
-- complete candidate manuscript and specialist packet;
-- independent local and fresh-copy verifier passes;
-- public hosted Lean PASS for the crossing, skew extension, commutativity defect, center consequences, and affine commutator kernel;
-- public hosted Lean PASS for the principal even and odd coefficient classifications and normalized monoid laws;
-- the failed first classification run and explicit proof repair are preserved;
-- generator-to-global Gerstenhaber preservation and the remaining scheme-level manuscript are not fully formalized;
-- external specialist and historical-equivalence review remain pending.
+The even object adds a constrained skew square-zero direction. The odd object adds a separate clopen torus unit component.
 
-**Public status:** `active_review`, version `0.1.0-public-review`.
+### Current evidence
 
-**Start:** [`papers/HINC-001/README.md`](papers/HINC-001/README.md)
+- one consolidated, self-contained revised human manuscript;
+- complete characteristic-two Hochschild foundation;
+- complete even and odd presentations;
+- odd normal-form proof;
+- generator-to-global proof;
+- explicit natural representability arguments;
+- corrected center and disconnected-base language;
+- expanded fppf-derived-subgroup proof;
+- Python, C, Gröbner, finite-Artin, and common-core internal challenge routes;
+- public hosted Lean PASS for the algebraic kernel;
+- public hosted Lean PASS for the even and odd coefficient classifications and normalized monoid laws;
+- preserved failed runs and correction records;
+- exact formal and historical-priority limits.
+
+### Pending outside work
+
+- qualified external algebraic-monoid and Gerstenhaber review;
+- independent external reproduction;
+- source-level historical-equivalence review;
+- optional formalization of presently unformalized manuscript nodes;
+- journal submission and peer review, if pursued later.
+
+These are objectives of the public technical-review release. They are not falsely represented as already completed.
+
+### Public status
+
+```text
+candidate package:       complete
+public switch ready:     yes
+repository private:      yes
+peer reviewed:           no
+historical priority:     unestablished
+```
+
+Start with [`papers/HINC-001/README.md`](papers/HINC-001/README.md).
 
 ---
 
-### ABF-001 — Affine-Hyperplane Degree-Drop Spectra
-
-**Working title:** *Affine-Hyperplane Degree-Drop Spectra of a Vectorial Boolean Map*
-
-**Field:** Boolean functions, vectorial Boolean functions, finite linear algebra.
+## ABF-001 — second package
 
 **Core claim:** For one fully specified map `GF(2)^16 -> GF(2)^8`, exactly 130,559 affine-hyperplane restrictions have degree 15, exactly 511 have degree 14, and none has degree 13 or lower. The 511 exceptional restrictions form a punctured nine-dimensional parameter flat certified by a second rank calculation.
 
-**Current evidence:**
+**Internal evidence:** exhaustive classification of all 131,070 affine hyperplanes, separately written C reconstruction, and exhaustive small-universe controls.
 
-- complete theorem and proof packet in the private laboratory;
-- primary exhaustive calculation over all 131,070 affine hyperplanes;
-- separately written C reconstruction;
-- exhaustive control over all 65,536 maps `GF(2)^3 -> GF(2)^2`, totaling 917,504 checks;
-- proof-assistant and external specialist review pending.
-
-**Public status:** `hold`; index entry only. No complete ABF-001 package is released here yet.
+**State:** index entry only; complete public package not yet prepared.
 
 ---
 
-### FSG-001 — Fibonacci Critical Groups of Carry–Rees Petal Graphs
+## FSG-001 — third package
 
-**Field:** critical groups, graph theory, Fibonacci divisibility, chip firing.
+**Core package:** spanning-tree, forest, resistance, critical-group Smith-form, Fibonacci-divisibility, torsion, density, and chip-firing results for Carry-Rees petal graphs.
 
-**Core package:** closed spanning-tree, forest, and resistance formulas; complete critical-group Smith forms; prime-power torsion progressions; a conditional Wall–Sun–Sun detector; unbounded prime-factor complexity; density laws; and a constructive chip-firing classifier.
-
-**Current evidence:** multiple internal proof and computational routes with preserved correction history.
-
-**Blocking gates:** complete standalone package, external critical-groups review, external Fibonacci-divisibility review, formal verification of the graph-to-small-matrix reduction and Smith form, and deeper historical-equivalence review.
-
-**Public status:** `hold`; index entry only.
+**State:** hold pending complete standalone packaging, critical-groups review, Fibonacci-divisibility review, formal proof work, and deeper equivalence review.
 
 ---
 
-### ACM-001 — ANF Code and Matroid Geometry
+## ACM-001 — fourth package
 
-**Field:** coding theory, matroids, Boolean functions.
+**Core package:** ANF degree-layer codes, generalized Hamming weights, complete support spectra, chain-condition behavior, coefficient-multiplicity rigidity, automorphism groups, and top-layer code/matroid geometry.
 
-**Core package:** exact ANF degree-layer codes, generalized Hamming weights, complete subcode support spectra, chain-condition behavior, coefficient-multiplicity rigidity, exact automorphism groups, and a top-layer code/matroid classification.
+**State:** hold pending consolidation of the v36–v40 line, equivalence review, and exact benchmark framing.
 
-**Current evidence:** exhaustive finite classification with separate Python, symbolic, and native implementations for the merged scope. The v40 top-layer matroid continuation has passed its declared internal gates but remains in the N-MathLab promotion lane.
+## Process record
 
-**Blocking gates:** consolidate the controlling manuscript, incorporate the later matroid continuation, perform equivalence review, and define the exact public benchmark object without cryptographic overstatement.
-
-**Public status:** `hold`; index entry only.
-
-## Human–AI process record
-
-The mathematical paper index is separate from the collaboration-process record. Read:
+The mathematical paper index is separate from the Human + LLM process record. Read:
 
 - [`HUMAN_AI_COLLABORATION_RECORD.md`](HUMAN_AI_COLLABORATION_RECORD.md)
 - [`HUMAN_AI_MATHEMATICS_PRIOR_ART.md`](HUMAN_AI_MATHEMATICS_PRIOR_ART.md)
-- [`PUBLIC_REVIEW_RELEASE.md`](PUBLIC_REVIEW_RELEASE.md)
+- [`PUBLIC_SWITCH_READINESS.md`](PUBLIC_SWITCH_READINESS.md)
 
 The project does not claim to be the first human–AI mathematics collaboration.
 
-## Results intentionally excluded as standalone papers
-
-The following may appear as supplements or process case studies but are not promoted as independent mathematical breakthroughs:
-
-- broad black-box measurement atlases;
-- bounded dictionary or brute-force preimage searches;
-- ordinary avalanche statistics;
-- a blind phrase-oracle replay;
-- low-entropy public-hash coordinate demonstrations;
-- intermediate theorem versions already subsumed by controlling papers;
-- proposed invariants determined to be re-encodings of established data.
-
 ## Selection rule
 
-A result is added to the principal index only when it has a precise object, bounded claims, a coherent proof or exact classification, reproducible evidence where relevant, an explicit AI-use disclosure, and a credible external-review question.
+A result enters the principal index only when it has:
+
+- a precise object and bounded claims;
+- a coherent proof or exact finite classification;
+- reproducible evidence where relevant;
+- explicit formal-verification limits;
+- a Human + LLM disclosure boundary;
+- a credible external-review question;
+- a fail-closed correction and release process.
