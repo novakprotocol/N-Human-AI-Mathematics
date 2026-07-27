@@ -13,8 +13,10 @@ on:
       - "HUMAN_AI_MATHEMATICS_PRIOR_ART.md"
       - "OPEN_REVIEW_CHALLENGE.md"
       - "research-index.json"
+      - "schemas/**"
       - "papers/HINC-001/**"
       - "tools/validate_publication.py"
+      - "tools/validate_public_release.py"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -42,11 +44,16 @@ jobs:
 
       - name: Validate public source
         run: |
+          mkdir -p reports
           python -m py_compile tools/validate_publication.py
+          python -m py_compile tools/validate_public_release.py
           python tools/validate_publication.py \
             --root . \
             --allow-public \
             --json-output reports/publication-validation.json
+          python tools/validate_public_release.py \
+            --root . \
+            --json-output reports/public-review-validation.json
 
       - name: Verify site files
         run: |
@@ -56,6 +63,7 @@ jobs:
           test -f docs/.nojekyll
           grep -q "OpenAI did not sponsor" docs/index.html
           grep -q "Public review" docs/index.html
+          grep -q "Peer reviewed</span><strong>No" docs/index.html
 
   deploy:
     environment:
