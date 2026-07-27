@@ -74,7 +74,7 @@ The hash-verified preflight launcher is:
 ```text
 RUN-N-HUMAN-LLM-PRIVATE-PREFLIGHT.ps1
 SHA-256:
-9d25b42dd84c654a39e768cff28f31eaaf4e14aa229c85eb9e9de346933091a1
+f86b7c6965c7eb84cfa5a7801e8ac68c3c82a29754288a6c1a34eb4760f201ea
 ```
 
 It discovers the governed preflight in `Downloads`, verifies the target SHA-256, parses it with the Windows PowerShell parser, and invokes it only after both checks pass.
@@ -84,10 +84,22 @@ The authoritative private preflight is:
 ```text
 Invoke-PublicSwitchPreflight.ps1
 SHA-256:
-010abb2172ed97a179e1a2614392aae5f35c07881cd4128ca9b458dea49a3d8c
+c5b8d1efa9e9650d10bf42ed184602bc2c631b635ac3cd390a6073d4bc587b1e
 ```
 
 It uses ordinary `github.com` only, rejects GitHub Enterprise, validates the exact PR head, runs the validators and HINC tests, verifies workflow action majors, checks the site and whitespace, and produces a commit-anchored archive and receipt without changing repository state.
+
+The frozen workflow controls are:
+
+```text
+actions/checkout@v7
+actions/setup-python@v7
+actions/upload-artifact@v7
+actions/configure-pages@v6
+actions/upload-pages-artifact@v5
+actions/deploy-pages@v5
+include-hidden-files: true
+```
 
 The hash-verified publication launcher is:
 
@@ -112,7 +124,7 @@ The complete governed switch kit is:
 ```text
 N-Human-LLM-Mathematics-Final-Public-Switch-Complete-Kit.zip
 SHA-256:
-c68e9b1c2bd01331145e96d53715184995258faef5ec4a33b6f7729dd05261be
+b013212cd8022c84ef95b5cafd33de917d6d043c85c1a434bd22cac7ea887fef
 ```
 
 ## Public-review purpose
