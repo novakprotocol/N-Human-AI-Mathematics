@@ -28,6 +28,7 @@ jobs:
         run: |
           python -m py_compile tools/validate_publication.py
           python -m py_compile tools/validate_public_release.py
+          python -m py_compile tools/validate_public_release_v2.py
 
       - name: Validate structure, status, claims, and source hygiene
         run: |
@@ -36,7 +37,7 @@ jobs:
             --root . \
             --allow-public \
             --json-output reports/publication-validation.json
-          python tools/validate_public_release.py \
+          python tools/validate_public_release_v2.py \
             --root . \
             --json-output reports/public-review-validation.json
 
