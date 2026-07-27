@@ -69,7 +69,17 @@ The package preserves Python, C, Gröbner, finite-Artin, and standalone common-c
 
 Private hosted jobs currently fail before exposing an executed step. The repository records that infrastructure limitation without asserting its platform or billing cause.
 
-The authoritative private gate is the downloadable guarded preflight:
+The hash-verified preflight launcher is:
+
+```text
+RUN-N-HUMAN-LLM-PRIVATE-PREFLIGHT.ps1
+SHA-256:
+9d25b42dd84c654a39e768cff28f31eaaf4e14aa229c85eb9e9de346933091a1
+```
+
+It discovers the governed preflight in `Downloads`, verifies the target SHA-256, parses it with the Windows PowerShell parser, and invokes it only after both checks pass.
+
+The authoritative private preflight is:
 
 ```text
 Invoke-PublicSwitchPreflight.ps1
@@ -78,6 +88,16 @@ SHA-256:
 ```
 
 It uses ordinary `github.com` only, rejects GitHub Enterprise, validates the exact PR head, runs the validators and HINC tests, verifies workflow action majors, checks the site and whitespace, and produces a commit-anchored archive and receipt without changing repository state.
+
+The hash-verified publication launcher is:
+
+```text
+RUN-N-HUMAN-LLM-FINAL-PUBLIC-SWITCH.ps1
+SHA-256:
+593e849d9e50b9dc63f11c7b3e4527e4767de3e6b7c606b35ddfa6a3caa07023
+required confirmation:
+PUBLISH-HINC-001
+```
 
 The rollback-capable activation gate is:
 
@@ -92,7 +112,7 @@ The complete governed switch kit is:
 ```text
 N-Human-LLM-Mathematics-Final-Public-Switch-Complete-Kit.zip
 SHA-256:
-699d6fc60e86376037558bd54bb75fd973c9aada6b108b87575d8f498d4635f6
+c68e9b1c2bd01331145e96d53715184995258faef5ec4a33b6f7729dd05261be
 ```
 
 ## Public-review purpose
@@ -119,15 +139,15 @@ Public visibility is therefore the beginning of outside review, not a false asse
 
 The eventual switch must perform, in order:
 
-1. run the guarded private preflight against the exact current PR head;
-2. verify its JSON receipt and checksum manifest;
-3. mark the release PR ready and merge it into private `main`;
-4. re-run validation on private `main`;
-5. build and validate the public-state activation commit;
-6. set repository visibility to public;
-7. re-read GitHub metadata and require `PUBLIC`;
-8. activate the validated GitHub Pages workflow;
-9. verify the live site and all primary boundaries;
+1. run the hash-verified private-preflight launcher against the exact current PR head;
+2. verify the generated JSON receipt and checksum manifest;
+3. run the hash-verified publication launcher and supply the exact confirmation phrase;
+4. mark the release PR ready and merge it into private `main`;
+5. re-run validation on private `main`;
+6. build and validate the public-state activation commit;
+7. set repository visibility to public;
+8. re-read GitHub metadata and require `PUBLIC`;
+9. activate and verify the validated GitHub Pages workflow;
 10. create the public-review tag, release, artifact attachment, structured review channels, and final receipts.
 
 No partial success may be represented as a completed public release.
