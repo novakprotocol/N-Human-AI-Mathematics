@@ -11,7 +11,8 @@ For the `0.1.0-public-review` release:
 - the Elduque preprint year was aligned with its 2025 arXiv posting;
 - no third-party figure was identified in the released package;
 - no extended copied passage was identified;
-- dependency names and the AI institutional boundary were reviewed.
+- dependency names and the category-level AI disclosure were reviewed;
+- specific model and provider identities were excluded from the public package.
 
 This audit is recorded in `reports/public-release-audit-2026-07-27.json`. It is not a substitute for source-level mathematical prior-art review.
 
@@ -51,9 +52,9 @@ The public-review package contains project-created explanatory material. Any fut
 
 ## AI systems
 
-ChatGPT is developed by OpenAI. Product and model names belong to their respective owners.
+The package states only that one or more large language models materially assisted the work under human direction. It does not identify a specific model, family, version, provider, or vendor.
 
-ChatGPT is disclosed as a research tool and is not an author or rights holder. OpenAI is not a coauthor, sponsor, reviewer, publisher, or endorser of HINC-001.
+AI systems are not authors or rights holders. A more specific disclosure may be added only after separate human legal and editorial review.
 
 ## Rights boundary
 
