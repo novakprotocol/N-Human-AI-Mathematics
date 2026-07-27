@@ -1,8 +1,8 @@
-# HINC-001 Human–AI Research Disclosure
+# HINC-001 Human–LLM Research Disclosure
 
 ## Operating model
 
-This work was developed through a **human-led, ChatGPT-assisted mathematical research process**.
+This work was developed through a **human-led, LLM-assisted mathematical research process**.
 
 The accountable human author is:
 
@@ -10,17 +10,17 @@ The accountable human author is:
 Matthew S. Novak
 ```
 
-The principal AI research tool was:
+The public AI-assistance category is:
 
 ```text
-ChatGPT, developed by OpenAI
+one or more large language models (LLMs)
 ```
 
-AI systems are not listed as authors, do not own the work, and do not possess publication authority. OpenAI is not a coauthor, sponsor, reviewer, publisher, or endorser of this paper or repository.
+AI systems are not listed as authors, do not own the work, and do not possess publication authority. The public package does not identify a specific model, family, version, provider, or vendor.
 
-## Material ChatGPT assistance
+## Material LLM assistance
 
-ChatGPT materially assisted with:
+LLMs materially assisted with:
 
 - translating human intuitions and research questions into formal candidate objects;
 - exploratory algebraic derivation;
@@ -44,7 +44,7 @@ Matthew S. Novak:
 3. challenged shallow or unsupported outputs;
 4. decided which candidate claims and research lanes were retained;
 5. executed or supervised local computational and publication gates;
-6. approved authorship, rights, disclosure, release channel, and public visibility;
+6. approved authorship, rights, disclosure level, release channel, and public visibility;
 7. accepts responsibility for errors, corrections, and withdrawal decisions.
 
 Before any journal submission, the human author must additionally:
@@ -54,7 +54,7 @@ Before any journal submission, the human author must additionally:
 3. rerun or supervise all material computational evidence;
 4. inspect formal source and the exact scope of machine verification;
 5. decide which claims are retained, revised, or withdrawn;
-6. adapt the AI disclosure to the selected venue’s current policy.
+6. determine whether a more specific AI disclosure is legally and editorially appropriate for the selected venue.
 
 ## Independent evidence layers
 
@@ -72,15 +72,15 @@ The project separates AI-generated prose from evidence through:
 
 These controls reduce risk. They do not transform internal work into external peer review.
 
-## Model identity boundary
+## Model and provider identity boundary
 
-The July 2026 public-release preparation was conducted through ChatGPT, with the active assistant identifying itself as GPT-5.6 Pro. Earlier research sessions may have used other OpenAI models. The repository does not claim cryptographic attestation of the model behind every historical conversation turn.
+The public release intentionally stops at **LLM-assisted**. It does not name a model, model family, version, provider, or vendor and does not claim cryptographic attestation of the system behind every historical interaction.
 
-Where a paper-level statement depends on a particular model version, that version should be named only when the available session or execution record supports it.
+A more specific disclosure may be added only after a separate human legal and editorial review and an exact owner-approved release change.
 
 ## Suggested manuscript disclosure
 
-> **AI-assisted research disclosure.** ChatGPT, developed by OpenAI, was used under human direction for exploratory theorem formulation, proof development, code and test generation, counterexample search, literature-query formulation, formal-proof drafting, manuscript organization, and editorial revision. Matthew S. Novak selected the research goals and retained claims, reviewed and revised the mathematical arguments, supervised material evidence and release gates, resolved corrections, and accepts responsibility for the manuscript. Exact source identities, deterministic programs, execution receipts, known failures, and formal-verification scope are supplied in the accompanying repository. ChatGPT is not an author, and OpenAI did not sponsor, review, approve, or endorse the work.
+> **AI-assisted research disclosure.** One or more large language models were used under human direction for exploratory theorem formulation, proof development, code and test generation, counterexample search, literature-query formulation, formal-proof drafting, manuscript organization, and editorial revision. Matthew S. Novak selected the research goals and retained claims, reviewed and revised the mathematical arguments, supervised material evidence and release gates, resolved corrections, and accepts responsibility for the manuscript. Exact source identities, deterministic programs, execution receipts, known failures, and formal-verification scope are supplied in the accompanying repository. AI systems are not authors and did not exercise publication authority. Specific model and provider identities are not disclosed in this public-review version.
 
 The final wording must be adapted to the selected venue’s current policy and remain factually accurate.
 
@@ -88,12 +88,12 @@ The final wording must be adapted to the selected venue’s current policy and r
 
 This disclosure does not claim that:
 
-- ChatGPT independently certified correctness;
-- ChatGPT established historical novelty;
+- an LLM independently certified correctness;
+- an LLM established historical novelty;
 - the work was produced without human intellectual direction;
 - the human author may rely on model confidence instead of understanding the proof;
 - internal AI role simulation constitutes peer review;
-- OpenAI participated institutionally in the research;
+- a specific model or provider is established by the public record;
 - the repository is the first human–AI mathematical collaboration;
 - every private interaction is publicly or cryptographically authenticated.
 
@@ -108,4 +108,4 @@ The repository-level role allocation and evidence limits are stated in:
 
 ## Why the disclosure is prominent
 
-The AI role was material. Transparent disclosure allows reviewers to evaluate both the mathematics and the evidence process without misrepresenting authorship, accountability, model identity, or institutional involvement.
+The LLM role was material. Transparent category-level disclosure allows reviewers to evaluate both the mathematics and the evidence process without misrepresenting authorship, accountability, or the public identity boundary.
