@@ -7,16 +7,18 @@ file:
 N-Human-LLM-Mathematics-Final-Public-Switch-Complete-Kit.zip
 
 SHA-256:
-f17e486df202fdbe053c3acee6ffbed67ae4471209d84ebae61ec5514c4451fb
+699d6fc60e86376037558bd54bb75fd973c9aada6b108b87575d8f498d4635f6
 ```
 
 The complete kit contains:
 
-- guarded private preflight;
-- rollback-capable final activation gate;
+- the guarded private preflight;
+- the rollback-capable final activation gate;
 - individual script checksums;
 - the governed HINC-001 publication artifact ZIP;
-- instructions and a complete checksum manifest.
+- an operator README;
+- a complete checksum manifest;
+- a machine-readable kit receipt.
 
 ## Private preflight
 
@@ -25,19 +27,25 @@ file:
 Invoke-PublicSwitchPreflight.ps1
 
 SHA-256:
-563f1b171a130a781887549ceda8c6e0912c3f576e0fe1eaf4c9271be6ad9041
+010abb2172ed97a179e1a2614392aae5f35c07881cd4128ca9b458dea49a3d8c
+
+standalone kit:
+N-Human-LLM-Mathematics-Private-Preflight-Kit.zip
+
+standalone kit SHA-256:
+5a020039081fdf78dd9b11b66d9f152596edb5de6449920ad150f1762d4b76ac
 ```
 
 The preflight:
 
 - uses ordinary `github.com` only;
-- rejects GitHub Enterprise;
+- rejects GitHub Enterprise and VA enterprise resources;
 - requires private visibility;
 - requires PR #2 to remain open, draft, mergeable, and at the exact cloned head;
 - runs both validators, HINC tests, and the common-core verifier;
-- scans paths, credentials, private keys, blanket-license text, and withheld identities;
-- checks branch whitespace;
-- creates a commit-anchored ZIP and signed JSON/checksum receipt;
+- verifies the current official GitHub action majors and `.nojekyll` upload control;
+- checks the private website boundaries and complete branch whitespace;
+- creates a commit-anchored ZIP plus JSON, log, and checksum receipts;
 - performs no merge, tag, release, Pages deployment, or visibility change.
 
 ## Final activation
@@ -47,7 +55,13 @@ file:
 FINALIZE-N-HUMAN-LLM-MATHEMATICS-PUBLIC-REVIEW-V1.ps1
 
 SHA-256:
-1478b3112fcdaf6fc9acf6a75b30d2a8775ce3b4583c22f3d78c5008b128c859
+ebf24d2497741042b9899ae8ac694646aa018825fd20360adaf96bbb6e561de0
+
+standalone kit:
+N-Human-LLM-Mathematics-Final-Public-Switch-Kit.zip
+
+standalone kit SHA-256:
+351ae15312eb77159394319030d0fb359b6c68d70ecded3a35b1949a16265391
 ```
 
 The activation gate:
@@ -55,15 +69,15 @@ The activation gate:
 - requires the governed private-preflight PASS receipt;
 - requires the preflight commit to remain the exact PR head;
 - verifies the HINC publication artifact hash;
-- merges only the validated PR;
+- marks ready and merges only the validated PR into private `main`;
 - reruns validators and HINC tests on private `main`;
 - builds and locally validates a public-state activation commit;
-- changes visibility and verifies GitHub metadata;
+- changes visibility and re-reads GitHub metadata;
 - deploys Pages through the fail-closed public-state workflow;
 - verifies the live site;
 - attaches the governed publication package to the GitHub release;
-- opens structured review channels;
-- records final receipts;
+- opens four structured review channels;
+- records final local and repository receipts;
 - attempts rollback to private visibility if any post-switch gate fails.
 
 ## HINC-001 publication artifact
@@ -73,7 +87,17 @@ file:
 HINC-001_Candidate_Technical_Review_Package_0.1.0.zip
 
 SHA-256:
-4bd29a7fa58cf0e9f4f544c888c56c00e257b721aaaafbd860e62a07100a56a7
+b357909077792a3e3b124359fa7348c21aea72c5d802c19562b46fa96350c123
+```
+
+Artifact QA:
+
+```text
+revised manuscript pages:       15
+public review guide pages:       4
+DOCX accessibility findings:    0
+PDF preflight warnings:          0
+visual page inspection:          complete
 ```
 
 ## Hard boundary
@@ -83,7 +107,6 @@ allowed remote:
 github.com/novakprotocol/N-Human-AI-Mathematics
 
 off limits:
-va.ghe.com
 all GitHub Enterprise repositories
 all VA or government enterprise resources
 ```
