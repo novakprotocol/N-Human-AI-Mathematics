@@ -1,114 +1,307 @@
 # HINC-001 Claim Matrix
 
-## Object definition
-
-Let `F` be a field of characteristic two, let
+## Controlling status
 
 ```text
-D = F[epsilon]/(epsilon^2),
-HH*(D) = D[u], |u| = 1,
+paper state:                    private candidate under hostile review
+public release:                 blocked
+peer reviewed:                  no
+external specialist review:    pending
+historical priority:            unestablished
+explicit counterexample found: no
 ```
 
-with the displayed Hochschild Gerstenhaber bracket, and define the two explicit graded Gerstenhaber subalgebras `E` and `O` in the manuscript.
+The pre-review manuscript must be read together with:
 
-The classifications are intended functorially over arbitrary commutative `F`-algebras `R`.
+- `HOSTILE_REVIEW_2026-07-27.md`;
+- `MANUSCRIPT_ERRATA_2026-07-27.md`;
+- `FOUNDATIONAL_HOCHSCHILD_DERIVATION_2026-07-27.md`;
+- `GENERATOR_TO_GLOBAL_LEMMA_2026-07-27.md`;
+- `ODD_PRESENTATION_NORMAL_FORM_2026-07-27.md`.
 
-## Principal claims
+## Structure convention
 
-| ID | Claim | Current support | Status |
-|---|---|---|---|
-| `HINC-E-1a` | The direct even generator equations are equivalent to `beta=0`, `eta^2=0`, and `lambda(delta-1)=0`. | Human derivation plus public hosted Lean PASS. | Proof-assistant verified |
-| `HINC-E-1b` | Every strict graded Gerstenhaber endomorphism of `E_R` has the resulting normal form. | Complete manuscript proof; coefficient theorem Lean PASS; generator-to-global sufficiency not yet formalized. | Candidate theorem with verified coefficient layer |
-| `HINC-E-2` | Normalized composition is `(lambda,delta,eta)(lambda',delta',eta')=(lambda lambda',delta delta',lambda eta'+delta' eta)`, with identity and associativity. | Direct substitution; finite/symbolic verifier; public hosted Lean PASS. | Proof-assistant verified for normalized data |
-| `HINC-E-3` | The representing monoid scheme is `Spec F[lambda,delta,eta]/(eta^2,lambda(delta-1))`. | Manuscript representability argument from finite homogeneous generators and relations. | Candidate theorem |
-| `HINC-E-4` | The reduction is the crossing `C=Spec F[x,y]/(x(y-1))`; the full monoid is a connected nonreduced skew thickening and is noncommutative. | Manuscript proof; explicit dual-number witness; base Lean skew/defect kernel PASS. | Strongly supported candidate theorem |
-| `HINC-E-5` | The scheme-theoretic center is exactly zero and identity. | Manuscript coefficient calculation; base Lean verifies sufficient center equations and one consequence, not the complete equality. | Candidate theorem; partial formal kernel |
-| `HINC-E-6` | The unit group is `alpha_2 semidirect G_m`, with trivial center, derived subgroup `alpha_2`, and abelianization `G_m`. | Manuscript calculation; affine commutator formula Lean PASS; full group-scheme consequences not formalized. | Candidate theorem; partial formal kernel |
-| `HINC-O-1a` | The direct odd coefficient equations are equivalent to the stated diagonal normal form. | Human derivation plus public hosted Lean PASS. | Proof-assistant verified |
-| `HINC-O-1b` | Every strict graded Gerstenhaber endomorphism of `O_R` is diagonal with those equations. | Complete manuscript proof; coefficient theorem Lean PASS; generator-to-global sufficiency not yet formalized. | Candidate theorem with verified coefficient layer |
-| `HINC-O-2` | The normalized odd endomorphism composition is closed, unital, associative, and commutative. | Manuscript proof and public hosted Lean PASS. | Proof-assistant verified for normalized data |
-| `HINC-O-3` | The odd monoid is reduced and splits as a clopen unit component disjoint from the common crossing core. | Manuscript algebraic/scheme proof; not yet formalized. | Candidate theorem |
-| `HINC-C-1` | The even and odd monoids contain the same crossing core but differ by infinitesimal skew thickening versus discrete unit doubling. | Consequence of the two classifications and scheme decompositions. | Candidate synthesis theorem |
-| `HINC-P-1` | Ordinary field-valued points fail to detect the even infinitesimal noncommutativity and universal center. | Explicit square-zero analysis; base Lean defect kernel; formal field/reduced-base comparison not complete. | Strongly supported candidate consequence |
-
-## Secondary claims
-
-The manuscript also derives:
-
-- idempotent schemes;
-- connected-component structure;
-- normalization of the crossing core;
-- tangent dimensions;
-- finite-field point counts;
-- zeta functions;
-- application to the even/odd MCRC singular-corner images.
-
-These claims are subordinate to the principal classification. Their correctness depends on the classification and their individual calculations.
-
-## Computational claims
-
-The standalone verifier checks:
-
-- the common-core laws over finite Artin rings `F_2[t]/(t^n)` for `1 <= n <= 4`;
-- the declared finite cases and symbolic identities;
-- semantic negative controls;
-- deterministic certificate regeneration.
-
-The finite checks support implementation consistency. They do not prove the arbitrary-base theorem by enumeration.
-
-## Formal claims
-
-### Base public hosted PASS
-
-Lean 4.30.0 with Mathlib v4.30.0 verifies:
-
-- crossing multiplication laws;
-- skew-extension multiplication laws;
-- exact commutativity defect;
-- commutativity iff zero defect;
-- sufficient center equations and an idempotent-coordinate consequence;
-- affine unit commutator formula.
-
-### Principal-classification public hosted PASS
-
-The immutable repaired `HINC/Classification.lean` verifies:
-
-- even generator equations iff normal form;
-- even normalized composition closure, identity, and associativity;
-- even coefficient-level principal classification;
-- odd generator equations iff normal form;
-- odd normalized composition closure, identity, associativity, and commutativity;
-- odd coefficient-level principal classification.
+A **binary Gerstenhaber endomorphism** in HINC-001 means a map that is:
 
 ```text
-workflow run:           30174213006
-workflow job:           89720259114
-artifact SHA-256:       2dee88b9a248dee8719c27aa23a27ca3281e697cf67202bb50c1fe60a4809dc9
-Classification SHA-256:56267aba47fd67e94be5842057aaec5bd0718829e860af212eedcdb43efbb084
-sorryAx:                absent
+unital
+base-linear
+degree-preserving
+cup-product-preserving
+binary Gerstenhaber-bracket-preserving
 ```
 
-The first run failed on proof recursion depth and is preserved; the repaired proof passed without changing the normal-form statement.
+No preservation of a BV operator, restricted power, Gerstenhaber square, brace algebra, or full `E_2` structure is claimed.
 
-### Formal scope still missing
+---
 
-The current Lean package does not yet prove the complete generator-to-global strict Gerstenhaber extension, scheme representability, odd clopen decomposition, complete center equality, or derived-subgroup theorem.
+## C-01 — Ambient characteristic-two Hochschild algebra
 
-## Claims explicitly prohibited at this stage
+**Claim.** For `D=F[epsilon]/(epsilon^2)` over a field of characteristic two, normalized Hochschild cochains give
 
-Do not state that:
+```text
+HH*(D,D) = D[u]
+```
 
-- the full manuscript is formally verified;
-- worldwide novelty is established;
-- publication priority is established;
-- no equivalent general theorem exists;
-- an external specialist has approved the result;
-- the work is peer reviewed;
-- the result solves an open problem;
-- the result has a cryptographic weakness or security consequence;
-- AI assistance proves autonomy, correctness, or authorship;
-- test counts replace the universal proof.
+with the bracket
 
-## Promotion rule
+```text
+[xu^i,yu^j]
+  = (i x partial(y) + j y partial(x))u^(i+j-1).
+```
 
-Any status upgrade must identify the exact new evidence, source commit, reviewer or proof environment, and the precise claims affected.
+**Status:** human proof supplied in `FOUNDATIONAL_HOCHSCHILD_DERIVATION_2026-07-27.md`; external review pending; not formalized in the current Lean package.
+
+**Not claimed:** preservation or classification of additional positive-characteristic Hochschild operations.
+
+## C-02 — Even algebra presentation
+
+**Claim.** The even algebra is
+
+```text
+E = F + uD[u]
+  = F[r,s]/(s^2),
+r=u,
+s=epsilon u,
+[r,s]=r.
+```
+
+**Status:** direct algebraic consequence of C-01; human proof supplied; external review pending.
+
+## C-03 — Even coefficient classification
+
+**Claim.** A homogeneous generator candidate
+
+```text
+r -> lambda r + beta s,
+s -> eta r + delta s
+```
+
+satisfies the generator relation/bracket equations exactly when
+
+```text
+beta=0,
+eta^2=0,
+lambda(delta-1)=0.
+```
+
+**Status:** human proof complete; finite/symbolic controls passed; bounded public Lean PASS.
+
+## C-04 — Even global endomorphism classification
+
+**Claim.** The normalized even coefficient data determine all binary Gerstenhaber endomorphisms of `E` over arbitrary commutative characteristic-two base algebras.
+
+**Status:** candidate theorem. Coefficient classification formally verified; generator-to-global human proof now supplied; Lean integration and external specialist audit pending.
+
+## C-05 — Even affine monoid scheme
+
+**Claim.** The candidate endomorphism functor is represented by
+
+```text
+Spec F[lambda,delta,eta]/(eta^2,lambda(delta-1))
+```
+
+with composition
+
+```text
+(lambda,delta,eta)(lambda',delta',eta')
+  = (lambda lambda',delta delta',lambda eta' + delta' eta).
+```
+
+**Status:** coefficient equations and composition law formally verified; complete representability proof remains prose and must be expanded before release.
+
+**Framing:** the multiplication is constrained upper-triangular matrix multiplication. As a scheme it is `C × alpha_2`; not as a monoid scheme.
+
+## C-06 — Odd algebra presentation
+
+**Claim.** The odd algebra
+
+```text
+O = D + F epsilon u + u^2 D[u]
+```
+
+has the displayed presentation on `epsilon,a,b,c`.
+
+**Status:** the relations are direct; presentation completeness is now human-proved by the normal form in `ODD_PRESENTATION_NORMAL_FORM_2026-07-27.md`; Lean formalization and external audit pending.
+
+## C-07 — Odd coefficient classification
+
+**Claim.** The most general homogeneous generator candidate reduces exactly to
+
+```text
+epsilon -> lambda epsilon,
+a       -> mu a,
+b       -> p b,
+c       -> rho c,
+```
+
+with
+
+```text
+p=lambda rho,
+rho=lambda p^2,
+lambda(mu-1)=0,
+rho(mu-1)=0.
+```
+
+**Status:** human proof complete; finite/symbolic controls passed; bounded public Lean PASS.
+
+## C-08 — Odd global endomorphism classification
+
+**Claim.** The normalized odd coefficient data determine all binary Gerstenhaber endomorphisms of `O` over arbitrary commutative characteristic-two base algebras.
+
+**Status:** candidate theorem. Coefficient classification formally verified; odd presentation and generator-to-global human proofs supplied; Lean integration and external audit pending.
+
+## C-09 — Odd affine monoid scheme and clopen split
+
+**Claim.** The odd candidate functor is represented by the stated coefficient ring with coordinatewise composition. The idempotent
+
+```text
+z=lambda^3 rho
+```
+
+splits it into a torus unit component and a crossing ideal.
+
+**Status:** candidate scheme-level theorem; algebraic identities internally reproduced; not included in the current Lean scope; external review pending.
+
+**Framing:** describe this as adjoining a separate clopen unit component, not as a novel generic “unit-doubling” mechanism.
+
+## C-10 — Common reduced crossing
+
+**Claim.** The even reduction and odd nonunit component have the common commutative crossing
+
+```text
+C = Spec F[x,y]/(x(y-1))
+```
+
+with coordinatewise multiplication.
+
+**Status:** exact internally reproduced algebraic consequence; external review pending.
+
+## C-11 — Even universal noncommutativity
+
+**Claim.** The even monoid has commutator defect
+
+```text
+(x+y)e' + (x'+y')e,
+```
+
+and is noncommutative over suitable square-zero test algebras even though the square-zero coordinate vanishes over fields.
+
+**Status:** bounded Lean PASS for the defect formula and commutativity criterion; exact example supplied.
+
+## C-12 — Scheme-theoretic center
+
+**Claim.** The center is the constant finite étale two-point scheme cut out by
+
+```text
+e=0,
+x=y,
+x(x-1)=0.
+```
+
+**Status:** sufficient equations and idempotent consequence have bounded Lean PASS; complete equality as a center subfunctor remains outside the current Lean scope and requires specialist review.
+
+**Pointwise wording:** on connected bases the points are zero and identity; disconnected bases allow idempotent mixtures.
+
+## C-13 — Even unit-group commutator
+
+**Claim.** The unit group has law
+
+```text
+(a,c)(b,d)=(ab,ad+c)
+```
+
+and commutator
+
+```text
+(1,(a+1)d+(b+1)c).
+```
+
+**Status:** bounded Lean PASS with explicit inverse witnesses.
+
+## C-14 — Derived subgroup and abelianization
+
+**Claim.** The fppf-derived subgroup is `alpha_2` and the abelianization is `G_m`.
+
+**Status:** candidate group-scheme consequence. The pointwise commutator formula is verified; the scheme-image, fppf-sheaf image, closure, and quotient conventions require external audit and formalization.
+
+## C-15 — Idempotent schemes
+
+**Claim.** The even and odd idempotent schemes have the stated components, including one nonreduced `alpha_2` component in the even case and reduced finite components in the odd case.
+
+**Status:** exact internally reproduced polynomial classification; external review pending.
+
+## C-16 — Tangent, connectedness, and component claims
+
+**Claim.** The manuscript’s dimension, tangent-space, reduction, connectedness, and clopen-component calculations follow from the displayed coordinate rings.
+
+**Status:** exact internally reproduced commutative-algebra consequences; external review pending.
+
+## C-17 — Finite-Artin counts
+
+**Claim.** Over `R_n=F_2[t]/(t^n)`, the stated formulas for the crossing, square-zero elements, and even/odd monoids hold.
+
+**Status:** exact finite formulas with computational controls. They support consistency and do not prove arbitrary-base classification.
+
+## C-18 — Finite-field points and zeta functions
+
+**Claim.** The stated finite-field point counts and zeta functions follow from the reduction and clopen split.
+
+**Status:** exact internally reproduced. The even nilpotent thickening is invisible to field-valued points by construction; this is an illustration, not a new general arithmetic principle.
+
+## C-19 — MCRC application
+
+**Claim.** The private MCRC family supplies examples of the two abstract parity types.
+
+**Status:** separate application claim. It is not needed for the standalone HINC theorem and should move to an appendix or companion note.
+
+## C-20 — Historical priority
+
+**Claim allowed.** A broad primary-source and exact-form search did not locate the complete paired HINC classification.
+
+**Status:** historical priority unestablished.
+
+**Not allowed:** “first,” “nobody has done this,” “globally novel,” or equivalent wording before qualified source-level review.
+
+---
+
+## Formal verification boundary
+
+The current Lean package verifies:
+
+- crossing and skew-extension multiplication laws;
+- exact commutativity defect and criterion;
+- sufficient center equations and one idempotent consequence;
+- unit-group commutator formula;
+- even and odd coefficient equations iff their normal forms;
+- normalized composition closure, identity, and associativity;
+- odd normalized commutativity.
+
+It does not yet formalize:
+
+- the characteristic-two Hochschild derivation;
+- the even or odd presented algebras;
+- the odd normal-form theorem;
+- generator-to-global binary-bracket preservation;
+- complete representability;
+- clopen decomposition;
+- complete center equality;
+- fppf-derived subgroup or abelianization;
+- the full manuscript.
+
+## Publication boundary
+
+```text
+candidate mathematics:             yes
+strong internal evidence:          yes
+bounded formal verification:       yes
+complete manuscript formalization: no
+external correctness review:       no
+external reproduction:             no
+historical priority established:   no
+peer reviewed:                      no
+public release completed:          no; private draft only
+```
+
+Any status upgrade must identify the exact new source, proof, execution, reviewer, or formal environment and the precise claims affected.
