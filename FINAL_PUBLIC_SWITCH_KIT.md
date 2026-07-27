@@ -7,12 +7,14 @@ file:
 N-Human-LLM-Mathematics-Final-Public-Switch-Complete-Kit.zip
 
 SHA-256:
-699d6fc60e86376037558bd54bb75fd973c9aada6b108b87575d8f498d4635f6
+c68e9b1c2bd01331145e96d53715184995258faef5ec4a33b6f7729dd05261be
 ```
 
 The complete kit contains:
 
+- a hash-verified private-preflight launcher;
 - the guarded private preflight;
+- a hash-verified publication launcher with an exact confirmation phrase;
 - the rollback-capable final activation gate;
 - individual script checksums;
 - the governed HINC-001 publication artifact ZIP;
@@ -21,6 +23,18 @@ The complete kit contains:
 - a machine-readable kit receipt.
 
 The kit is **prepared but not executed**. The repository remains private, PR #2 remains draft, and no merge, visibility change, Pages deployment, tag, or GitHub release has occurred.
+
+## Private preflight launcher
+
+```text
+file:
+RUN-N-HUMAN-LLM-PRIVATE-PREFLIGHT.ps1
+
+SHA-256:
+9d25b42dd84c654a39e768cff28f31eaaf4e14aa229c85eb9e9de346933091a1
+```
+
+The launcher discovers the governed preflight in `Downloads`, verifies its SHA-256, runs the Windows PowerShell parser, and invokes it only after both gates pass.
 
 ## Private preflight
 
@@ -49,6 +63,24 @@ The preflight:
 - checks the private website boundaries and complete branch whitespace;
 - creates a commit-anchored ZIP plus JSON, log, and checksum receipts;
 - performs no merge, tag, release, Pages deployment, or visibility change.
+
+## Final publication launcher
+
+```text
+file:
+RUN-N-HUMAN-LLM-FINAL-PUBLIC-SWITCH.ps1
+
+SHA-256:
+593e849d9e50b9dc63f11c7b3e4527e4767de3e6b7c606b35ddfa6a3caa07023
+```
+
+The launcher discovers the governed activation script in `Downloads`, verifies its SHA-256, runs the Windows PowerShell parser, and requires the exact case-sensitive phrase:
+
+```text
+PUBLISH-HINC-001
+```
+
+before any public-switch operation can start.
 
 ## Final activation
 
