@@ -4,9 +4,9 @@
   "repository": "novakprotocol/N-Human-AI-Mathematics",
   "accountable_owner": "Matthew S. Novak",
   "operating_mode": "human-led-ai-assisted",
-  "public_release_authorized": true,
-  "release_channel": "public_review",
-  "release_version": "0.1.0-public-review",
+  "public_release_authorized": false,
+  "release_channel": "private_staging",
+  "release_version": null,
   "specific_model_disclosed": false,
   "specific_provider_disclosed": false,
   "papers": [
@@ -19,20 +19,22 @@
         "Gerstenhaber algebras",
         "nonreduced algebraic geometry"
       ],
-      "state": "active_review",
-      "claim_status": "candidate_theorem_with_formally_verified_coefficient_layer",
-      "human_proof": "complete_candidate_manuscript",
-      "internal_reproduction": "passed_declared_routes",
+      "state": "hold",
+      "claim_status": "candidate_binary_Gerstenhaber_classification_under_hostile_review_with_formally_verified_coefficient_layer",
+      "human_proof": "pre_review_manuscript_plus_controlling_foundation_global_extension_and_normal_form_addenda_consolidation_pending",
+      "internal_reproduction": "passed_declared_pre_review_routes",
       "formal_verification": {
         "base_kernel": "public_hosted_pass",
         "principal_classification": "public_hosted_pass",
-        "generator_to_global": "not_formalized",
+        "characteristic_two_foundation": "human_proof_not_formalized",
+        "odd_presentation": "human_proof_not_formalized",
+        "generator_to_global": "human_proof_not_formalized",
         "full_manuscript": "incomplete"
       },
       "external_specialist_review": "pending",
       "historical_priority": "unestablished",
       "peer_review": "not_submitted",
-      "public_release": "public_review_0.1.0"
+      "public_release": "blocked_pending_consolidated_revision_and_reaudit"
     },
     {
       "id": "ABF-001",
