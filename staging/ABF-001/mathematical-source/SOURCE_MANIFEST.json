@@ -1,0 +1,34 @@
+{
+  "schema_version": "n.human_ai.mathematics.source_manifest.v1",
+  "paper_id": "ABF-001",
+  "generated_repository": "novakprotocol/N-Human-AI-Mathematics",
+  "materialization_status": "exact mathematical source freeze; final hostile review and owner authorization are added only in the one-commit release-control child",
+  "public_release_authorized": false,
+  "sources": [
+    {
+      "repository": "novakprotocol/N-MathLab",
+      "commit": "4376321b33f5a8fd8b5a9c63240cc5823eed7bbb",
+      "role": "v30 affine-hyperplane theorem and evidence"
+    },
+    {
+      "repository": "novakprotocol/N-MathLab",
+      "commit": "d530494329163ad1ecc3eb8c72a945b159935bc9",
+      "role": "v32 bidual incidence theorem and finite radical geometry"
+    }
+  ],
+  "primary_source_bundle": {
+    "assembler": "src/assemble_primary.py",
+    "manifest": "src/_primary_bundle/manifest.json",
+    "target": "src/abf001_verifier.py"
+  },
+  "release_gate_sources": [
+    "src/abf001_independent_bitset.py",
+    "src/abf001_small_universe.py",
+    "src/abf001_small_universe.c",
+    "src/abf001_tamper_control.py",
+    "tests/test_abf001.py",
+    "literature/SEARCH_PROTOCOL.md",
+    "literature/PRIMARY_SOURCE_MAP.md",
+    "literature/search-query-ledger-expanded.csv"
+  ]
+}
