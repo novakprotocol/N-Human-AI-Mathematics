@@ -1,0 +1,229 @@
+name: Guarded ABF-001 public-review release
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+  attestations: write
+  id-token: write
+
+concurrency:
+  group: abf-001-public-review-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: >-
+      github.event.issue.user.login == github.repository_owner &&
+      github.event.issue.title == '[Release ABF-001] abf-001-public-review-v1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Parse exact owner authorization
+        id: auth
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          set -euo pipefail
+          python - <<'PY' > /tmp/release.env
+          import os, re
+          body = os.environ.get('ISSUE_BODY', '')
+          required = {
+              'SOURCE_COMMIT': r'(?m)^source_commit:\s*([0-9a-f]{40})\s*$',
+              'PACKAGE_SHA256': r'(?m)^package_sha256:\s*([0-9a-f]{64})\s*$',
+              'MANIFEST_SHA256': r'(?m)^manifest_sha256:\s*([0-9a-f]{64})\s*$',
+              'AUTHORIZATION': r'(?m)^authorization:\s*(RELEASE-ABF-001-PUBLIC-TECHNICAL-REVIEW)\s*$',
+          }
+          values = {}
+          for key, pattern in required.items():
+              match = re.search(pattern, body)
+              if not match:
+                  raise SystemExit(f'missing or invalid {key}')
+              values[key] = match.group(1)
+          for key, value in values.items():
+              print(f'{key}={value}')
+          PY
+          cat /tmp/release.env >> "$GITHUB_ENV"
+          cat /tmp/release.env
+
+      - name: Check out repository history
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Verify exact frozen source commit
+        run: |
+          set -euo pipefail
+          git cat-file -e "${SOURCE_COMMIT}^{commit}"
+          git merge-base --is-ancestor "$GITHUB_SHA" "$SOURCE_COMMIT"
+          test "$(git show -s --format=%P "$SOURCE_COMMIT" | wc -w)" -eq 1
+          git checkout --detach "$SOURCE_COMMIT"
+          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
+          test -f papers/ABF-001/ABF-001_RELEASE_CANDIDATE.json
+          test -f papers/ABF-001/OWNER_AUTHORIZATION.md
+          test -f papers/ABF-001/review/FINAL_HOSTILE_REVIEW.md
+          test -f papers/ABF-001/literature/FINAL_DELTA_SEARCH.md
+          test -f papers/ABF-001/SOURCE_SHA256SUMS.txt
+
+      - name: Verify release-candidate identities and closed gates
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, json, os, pathlib, re
+          root = pathlib.Path('papers/ABF-001')
+          record = json.loads((root / 'ABF-001_RELEASE_CANDIDATE.json').read_text())
+          assert record['schema_version'] == 'n.human_llm_mathematics.abf001.release_candidate.v1'
+          assert record['paper_id'] == 'ABF-001'
+          assert record['source_commit'] == os.environ['SOURCE_COMMIT']
+          assert record['package_sha256'] == os.environ['PACKAGE_SHA256']
+          assert record['manifest_sha256'] == os.environ['MANIFEST_SHA256']
+          assert record['hostile_review']['blocking_findings_open'] == 0
+          assert record['prior_art']['search_completed_to_declared_scope'] is True
+          assert record['prior_art']['final_delta_search_completed'] is True
+          assert record['prior_art']['final_delta_search_date'] == '2026-07-28'
+          assert record['owner_authorization']['authorization'] == 'RELEASE-ABF-001-PUBLIC-TECHNICAL-REVIEW'
+          assert record['owner_authorization']['package_specific_authorization'] is True
+          auth = (root / 'OWNER_AUTHORIZATION.md').read_text()
+          assert os.environ['SOURCE_COMMIT'] in auth
+          assert os.environ['PACKAGE_SHA256'] in auth
+          assert 'abf-001-public-review-v1' in auth
+          hostile = (root / 'review/FINAL_HOSTILE_REVIEW.md').read_text()
+          assert 'blocking_findings_open: 0' in hostile
+          delta = (root / 'literature/FINAL_DELTA_SEARCH.md').read_text()
+          assert 'final_delta_search_date: 2026-07-28' in delta
+          digest = hashlib.sha256((root / 'SOURCE_SHA256SUMS.txt').read_bytes()).hexdigest()
+          assert digest == os.environ['MANIFEST_SHA256'], (digest, os.environ['MANIFEST_SHA256'])
+          PY
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+
+      - name: Install pinned dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check -r papers/ABF-001/requirements-release.txt
+
+      - name: Reconstruct and compile all ABF source
+        run: |
+          set -euo pipefail
+          python papers/ABF-001/src/assemble_primary.py
+          python -m py_compile \
+            papers/ABF-001/src/abf001_verifier.py \
+            papers/ABF-001/src/abf001_independent_bitset.py \
+            papers/ABF-001/src/abf001_small_universe.py \
+            papers/ABF-001/src/abf001_tamper_control.py \
+            papers/ABF-001/tests/test_abf001.py \
+            papers/ABF-001/tools/build_abf001_publication.py
+          gcc -std=c11 -O3 -Wall -Wextra -Werror \
+            papers/ABF-001/src/abf001_small_universe.c \
+            -o /tmp/abf001_small_universe
+
+      - name: Verify source manifest
+        working-directory: papers/ABF-001
+        run: |
+          set -euo pipefail
+          sha256sum --check SOURCE_SHA256SUMS.txt
+
+      - name: Run complete ABF challenge suite
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/abf-results
+          python -m unittest discover -s papers/ABF-001/tests -p 'test_*.py' -v 2>&1 | tee /tmp/abf-results/tests.txt
+          python papers/ABF-001/src/abf001_verifier.py --output-dir /tmp/abf-results/primary 2>&1 | tee /tmp/abf-results/primary.txt
+          python papers/ABF-001/src/abf001_independent_bitset.py --output-dir /tmp/abf-results/independent 2>&1 | tee /tmp/abf-results/independent.txt
+          python papers/ABF-001/src/abf001_tamper_control.py 2>&1 | tee /tmp/abf-results/tamper.txt
+          /tmp/abf001_small_universe | tee /tmp/abf-results/small-universe-c.json
+          grep -q '"result":"PASS"' /tmp/abf-results/small-universe-c.json
+          test "$(sha256sum /tmp/abf-results/primary/incidence-edges.csv | cut -d' ' -f1)" = \
+            "$(sha256sum /tmp/abf-results/independent/independent-incidence-edges.csv | cut -d' ' -f1)"
+
+      - name: Reconstruct governed publication package
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/abf-release
+          cat papers/ABF-001/release-assets/ABF-001_Public_Technical_Review_Package_0.1.0.zip.b64.part-* \
+            | base64 --decode > /tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip
+          ACTUAL_PACKAGE="$(sha256sum /tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip | cut -d' ' -f1)"
+          test "$ACTUAL_PACKAGE" = "$PACKAGE_SHA256"
+          git archive --format=zip --prefix=ABF-001/ "$SOURCE_COMMIT" papers/ABF-001 \
+            > /tmp/abf-release/ABF-001_Source_0.1.0.zip
+          sha256sum /tmp/abf-release/*.zip | tee /tmp/abf-release/SHA256SUMS.txt
+          cp papers/ABF-001/ABF-001_RELEASE_NOTES.md /tmp/abf-release/RELEASE_NOTES.md
+          python - <<'PY'
+          import hashlib, json, os, pathlib
+          out = pathlib.Path('/tmp/abf-release')
+          data = {
+              'schema_version': 'n.human_llm_mathematics.abf001.release_attestation.v1',
+              'paper_id': 'ABF-001',
+              'release_target': 'public_technical_review',
+              'tag': 'abf-001-public-review-v1',
+              'source_commit': os.environ['SOURCE_COMMIT'],
+              'package_sha256': os.environ['PACKAGE_SHA256'],
+              'manifest_sha256': os.environ['MANIFEST_SHA256'],
+              'historical_priority': 'unestablished',
+              'external_reproduction': 'pending',
+              'peer_reviewed': False,
+              'globally_novel_claimed': False,
+          }
+          (out / 'ABF-001_RELEASE_ATTESTATION.json').write_text(json.dumps(data, indent=2) + '\n')
+          PY
+
+      - name: Create immutable tag
+        run: |
+          set -euo pipefail
+          test -z "$(git ls-remote --tags origin refs/tags/abf-001-public-review-v1)"
+          git tag -a abf-001-public-review-v1 "$SOURCE_COMMIT" \
+            -m 'ABF-001 candidate public technical review v1'
+          git push origin refs/tags/abf-001-public-review-v1
+
+      - name: Create GitHub release with governed assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release create abf-001-public-review-v1 \
+            /tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip \
+            /tmp/abf-release/ABF-001_Source_0.1.0.zip \
+            /tmp/abf-release/SHA256SUMS.txt \
+            /tmp/abf-release/ABF-001_RELEASE_ATTESTATION.json \
+            --repo "$GITHUB_REPOSITORY" \
+            --title 'ABF-001 Public Technical Review v1' \
+            --notes-file /tmp/abf-release/RELEASE_NOTES.md \
+            --verify-tag
+
+      - name: Attest release assets
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-path: |
+            /tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip
+            /tmp/abf-release/ABF-001_Source_0.1.0.zip
+            /tmp/abf-release/SHA256SUMS.txt
+            /tmp/abf-release/ABF-001_RELEASE_ATTESTATION.json
+
+      - name: Upload complete release validation evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: abf-001-release-validation-${{ github.run_id }}
+          path: |
+            /tmp/abf-results
+            /tmp/abf-release/SHA256SUMS.txt
+            /tmp/abf-release/ABF-001_RELEASE_ATTESTATION.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Record successful release on authorization issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          RELEASE_URL="https://github.com/${GITHUB_REPOSITORY}/releases/tag/abf-001-public-review-v1"
+          gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body \
+            "ABF-001 release gate PASS. Tag and immutable release created from \`$SOURCE_COMMIT\`. Release: $RELEASE_URL"
+          gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed
