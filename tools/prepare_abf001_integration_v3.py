@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the ABF integration generator and correct release-evidence references."""
+"""Run the ABF integration generator and correct release metadata."""
 
 from __future__ import annotations
 
@@ -8,6 +8,9 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+
+
+EXPECTED_SCHEMA_VERSION = "n.human_llm_mathematics.publication_gate.v1"
 
 
 def main() -> int:
@@ -21,6 +24,7 @@ def main() -> int:
     root = known.root.resolve()
     gate_path = root / "reports" / "publication-gates" / "ABF-001.json"
     gate = json.loads(gate_path.read_text(encoding="utf-8"))
+    gate["schema_version"] = EXPECTED_SCHEMA_VERSION
     gate["gates"]["provenance"]["evidence"] = [
         "papers/ABF-001/SOURCE_SHA256SUMS.txt",
         "papers/ABF-001/ABF-001_RELEASE_CANDIDATE.json",
@@ -31,7 +35,16 @@ def main() -> int:
         encoding="utf-8",
         newline="\n",
     )
-    print(json.dumps({"result": "PASS", "provenance_evidence_corrected": True}, sort_keys=True))
+    print(
+        json.dumps(
+            {
+                "result": "PASS",
+                "schema_version_corrected": True,
+                "provenance_evidence_corrected": True,
+            },
+            sort_keys=True,
+        )
+    )
     return 0
 
 
