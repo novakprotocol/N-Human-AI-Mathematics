@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/novakprotocol/N-Human-AI-Mathematics/schemas/publication-gate.schema.json",
+  "title": "N Human-LLM Mathematics Publication Gate Receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "paper_id",
+    "receipt_date",
+    "release_target",
+    "status",
+    "source_identity",
+    "gates",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "n.human_llm_mathematics.publication_gate.v1"
+    },
+    "paper_id": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,8}-[0-9]{3}$"
+    },
+    "receipt_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "release_target": {
+      "enum": [
+        "public_technical_review",
+        "archival_release",
+        "journal_submission"
+      ]
+    },
+    "status": {
+      "enum": [
+        "PASS_PUBLIC_TECHNICAL_REVIEW",
+        "PASS_ARCHIVAL_RELEASE",
+        "PASS_JOURNAL_SUBMISSION",
+        "HOLD"
+      ]
+    },
+    "source_identity": {
+      "type": "object",
+      "minProperties": 3
+    },
+    "gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_boundary",
+        "proof",
+        "hostile_review",
+        "prior_art_search",
+        "independent_challenge",
+        "clean_execution",
+        "provenance",
+        "owner_authorization"
+      ],
+      "properties": {
+        "claim_boundary": {"$ref": "#/$defs/gate"},
+        "proof": {"$ref": "#/$defs/gate"},
+        "hostile_review": {"$ref": "#/$defs/gate"},
+        "prior_art_search": {"$ref": "#/$defs/gate"},
+        "independent_challenge": {"$ref": "#/$defs/gate"},
+        "clean_execution": {"$ref": "#/$defs/gate"},
+        "provenance": {"$ref": "#/$defs/gate"},
+        "owner_authorization": {"$ref": "#/$defs/gate"}
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "gate": {
+      "type": "object",
+      "required": ["status", "evidence"],
+      "properties": {
+        "status": {"enum": ["PASS", "HOLD"]},
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

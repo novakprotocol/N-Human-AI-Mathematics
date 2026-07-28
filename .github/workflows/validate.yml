@@ -41,6 +41,7 @@ jobs:
           python -m py_compile tools/validate_public_release.py
           python -m py_compile tools/validate_public_release_v2.py
           python -m py_compile tools/validate_public_state.py
+          python -m py_compile tools/validate_publication_gate.py
           python -m py_compile papers/HINC-001/src/mcrc_hidden_infinitesimal_noncommutativity_standalone.py
           python -m py_compile papers/HINC-001/src/standalone_common_core_verifier.py
           python -m py_compile papers/HINC-001/tests/test_hinc_standalone.py
@@ -98,6 +99,9 @@ jobs:
               ]
           subprocess.run(command, check=True)
           PY
+          python tools/validate_publication_gate.py \
+            --root . \
+            --json-output reports/publication-gate-validation-ci.json
 
       - name: Run HINC standalone tests
         run: |
@@ -179,6 +183,7 @@ jobs:
             reports/publication-validation-ci.json
             reports/public-review-validation-ci.json
             reports/public-state-validation-ci.json
+            reports/publication-gate-validation-ci.json
             reports/hinc-test-log-ci.txt
             reports/public-release-audit-2026-07-27.json
             reports/public-switch-readiness.json
@@ -203,10 +208,42 @@ jobs:
             exit 1
           fi
 
-      - name: Build pinned Lean package
-        uses: leanprover/lean-action@v1.5.0
+      - name: Install pinned Lean toolchain manager
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p reports
+          curl --proto '=https' --tlsv1.2 -sSfL \
+            https://raw.githubusercontent.com/leanprover/elan/v4.2.1/elan-init.sh \
+            -o /tmp/elan-init.sh
+          sha256sum /tmp/elan-init.sh | tee reports/elan-installer-sha256-ci.txt
+          sh /tmp/elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/elan" --version | tee reports/elan-version-ci.txt
+
+      - name: Update dependencies and build pinned Lean package
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          mkdir -p reports
+          cd papers/HINC-001/formal
+          lake --version 2>&1 | tee ../../../reports/hinc-lake-version-ci.txt
+          lake update 2>&1 | tee ../../../reports/hinc-lean-update-ci.txt
+          lake exe cache get 2>&1 | tee ../../../reports/hinc-lean-cache-ci.txt
+          lake build 2>&1 | tee ../../../reports/hinc-lean-build-ci.txt
+
+      - name: Upload Lean build receipts
+        if: always()
+        uses: actions/upload-artifact@v7
         with:
-          lake-package-directory: papers/HINC-001/formal
-          build: true
-          test: false
-          lint: false
+          name: hinc-lean-validation-${{ github.run_id }}
+          path: |
+            reports/elan-installer-sha256-ci.txt
+            reports/elan-version-ci.txt
+            reports/hinc-lake-version-ci.txt
+            reports/hinc-lean-update-ci.txt
+            reports/hinc-lean-cache-ci.txt
+            reports/hinc-lean-build-ci.txt
+          if-no-files-found: warn
+          retention-days: 90

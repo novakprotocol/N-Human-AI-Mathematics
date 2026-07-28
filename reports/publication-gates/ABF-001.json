@@ -1,0 +1,96 @@
+{
+  "gates": {
+    "claim_boundary": {
+      "evidence": [
+        "research-index.json",
+        "ABF staging package SHA-256 aa045d2bd951416e43b26812395e103a52a62d69a7e110341efd9dd7670cc33d"
+      ],
+      "notes": "Candidate finite theorem and methods paper only; no full-width security, worldwide-priority, peer-review, or external-reproduction claim.",
+      "status": "PASS"
+    },
+    "clean_execution": {
+      "completed_without_timeout": true,
+      "deterministic_receipt_present": true,
+      "evidence": [
+        "Fresh ABF validation receipt SHA-256 f5197ee2413cc4137112ce010423ddb8f3ee108df149f2c306877fcd20ca8226",
+        "Primary evidence SHA-256 ebf4d164512339f4cf3fb14d22b7ba98253ad0726f4b5258ef5f52b2d17e34a9",
+        "Independent evidence SHA-256 c47b5a4b3e7c12e2c42da27ce0d2da440adfcce1ae82906d862e2eaf9904c96b"
+      ],
+      "fresh_checkout_or_clean_copy": true,
+      "partial_runs_accepted": false,
+      "status": "PASS"
+    },
+    "hostile_review": {
+      "blocking_findings_open": 1,
+      "evidence": [
+        "ABF staging hostile-review record in package SHA-256 aa045d2bd951416e43b26812395e103a52a62d69a7e110341efd9dd7670cc33d"
+      ],
+      "notes": "The initial hostile review corrected the 203 mask-indexed versus 202 distinct radical-subspace distinction. A final release-candidate hostile review must be rerun after the expanded prior-art ledger and exact GitHub source tree are frozen.",
+      "status": "HOLD"
+    },
+    "independent_challenge": {
+      "evidence": [
+        "Primary evidence SHA-256 ebf4d164512339f4cf3fb14d22b7ba98253ad0726f4b5258ef5f52b2d17e34a9",
+        "Independent evidence SHA-256 c47b5a4b3e7c12e2c42da27ce0d2da440adfcce1ae82906d862e2eaf9904c96b",
+        "Canonical edge-atlas SHA-256 95d64917af27fa1b827bda0b82364dc6e69de6376ccb0ad81e12ab22b82742fa"
+      ],
+      "external_reproduction": "pending",
+      "status": "PASS",
+      "structurally_independent_internal_route": true
+    },
+    "owner_authorization": {
+      "evidence": [
+        "HOLD: No exact ABF-001 release commit and package authorization is recorded."
+      ],
+      "package_specific_authorization": false,
+      "status": "HOLD"
+    },
+    "prior_art_search": {
+      "evidence": [
+        "ABF staging prior-art record in package SHA-256 aa045d2bd951416e43b26812395e103a52a62d69a7e110341efd9dd7670cc33d"
+      ],
+      "final_delta_search_completed": false,
+      "historical_priority": "unestablished",
+      "notes": "Broad searches were rerun on 2026-07-28 and identified the closest affine-restriction, Reed-Muller, APN-trim, and symmetric-bilinear-form literature. The expanded query/source ledger is not yet committed, and the final same-day delta search remains mandatory.",
+      "search_completed_to_declared_scope": false,
+      "status": "HOLD"
+    },
+    "proof": {
+      "evidence": [
+        "ABF staging manuscript and proof map in package SHA-256 aa045d2bd951416e43b26812395e103a52a62d69a7e110341efd9dd7670cc33d",
+        "N-MathLab PR #341",
+        "N-MathLab PR #387"
+      ],
+      "finite_claims_exhaustively_verified_or_not_applicable": true,
+      "status": "PASS",
+      "universal_claims_have_complete_human_proofs": true
+    },
+    "provenance": {
+      "evidence": [
+        "Staging package SHA-256 aa045d2bd951416e43b26812395e103a52a62d69a7e110341efd9dd7670cc33d"
+      ],
+      "notes": "The exact public-repository source commit, version tag, release assets, and immutable release/attestation are not yet created.",
+      "release_record_present": false,
+      "sha256_manifest_present": true,
+      "source_identity_locked": false,
+      "status": "HOLD",
+      "versioned_tag_present": false
+    }
+  },
+  "limitations": [
+    "ABF-001 is not authorized for public release.",
+    "Historical priority remains unestablished.",
+    "External specialist review and outside reproduction remain pending.",
+    "The final hostile review, same-day delta search, exact source commit, release tag, immutable release record, and package-specific owner authorization are unresolved blockers."
+  ],
+  "paper_id": "ABF-001",
+  "receipt_date": "2026-07-28",
+  "release_target": "public_technical_review",
+  "schema_version": "n.human_llm_mathematics.publication_gate.v1",
+  "source_identity": {
+    "package_sha256": "aa045d2bd951416e43b26812395e103a52a62d69a7e110341efd9dd7670cc33d",
+    "repository": "novakprotocol/N-Human-AI-Mathematics",
+    "staging_package": "ABF-001_Public_Technical_Review_Package_0.1.0.zip"
+  },
+  "status": "HOLD"
+}

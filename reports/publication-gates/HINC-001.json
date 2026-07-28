@@ -1,0 +1,109 @@
+{
+  "gates": {
+    "claim_boundary": {
+      "evidence": [
+        "papers/HINC-001/CLAIMS.md",
+        "papers/HINC-001/STATUS.json",
+        "papers/HINC-001/FORMAL_VERIFICATION.md"
+      ],
+      "notes": "Candidate public technical review only; peer review, worldwide priority, and full-manuscript formalization are not claimed.",
+      "status": "PASS"
+    },
+    "clean_execution": {
+      "completed_without_timeout": true,
+      "deterministic_receipt_present": true,
+      "evidence": [
+        "papers/HINC-001/evidence/local-test-log.txt",
+        "papers/HINC-001/evidence/local-fresh-copy-log.txt",
+        "reports/public-switch-readiness.json"
+      ],
+      "fresh_checkout_or_clean_copy": true,
+      "partial_runs_accepted": false,
+      "status": "PASS"
+    },
+    "hostile_review": {
+      "blocking_findings_open": 0,
+      "evidence": [
+        "papers/HINC-001/STATUS.json",
+        "papers/HINC-001/PROOF_MAP.md"
+      ],
+      "notes": "Release-blocking coefficient, arbitrary-base, center, disconnected-base, and scheme-language corrections were integrated before release and summarized in the committed status and proof map.",
+      "status": "PASS"
+    },
+    "independent_challenge": {
+      "evidence": [
+        "papers/HINC-001/REPRODUCE.md",
+        "papers/HINC-001/evidence/standalone-certificate.json",
+        "papers/HINC-001/evidence/submission-execution-receipt.json"
+      ],
+      "external_reproduction": "pending",
+      "status": "PASS",
+      "structurally_independent_internal_route": true
+    },
+    "owner_authorization": {
+      "evidence": [
+        "reports/public-release-receipt-2026-07-27.json"
+      ],
+      "package_specific_authorization": true,
+      "status": "PASS"
+    },
+    "prior_art_search": {
+      "evidence": [
+        "papers/HINC-001/PRIOR_ART.md",
+        "papers/HINC-001/PRIOR_ART_SEARCH_LEDGER_2026-07-27.csv",
+        "papers/HINC-001/PRIOR_ART_PRIMARY_SOURCE_MAP_2026-07-27.json"
+      ],
+      "final_delta_search_completed": true,
+      "final_delta_search_date": "2026-07-27",
+      "historical_priority": "unestablished",
+      "search_completed_to_declared_scope": true,
+      "search_date": "2026-07-27",
+      "status": "PASS"
+    },
+    "proof": {
+      "evidence": [
+        "papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md",
+        "papers/HINC-001/PROOF_MAP.md",
+        "papers/HINC-001/FORMAL_VERIFICATION.md"
+      ],
+      "finite_claims_exhaustively_verified_or_not_applicable": true,
+      "proof_assistant_status": "bounded public PASS for the algebraic kernel and principal coefficient classifications; full revised manuscript unformalized",
+      "status": "PASS",
+      "universal_claims_have_complete_human_proofs": true
+    },
+    "provenance": {
+      "doi": null,
+      "evidence": [
+        "reports/public-release-receipt-2026-07-27.json",
+        "papers/HINC-001/SOURCE_MANIFEST.json",
+        "papers/HINC-001/evidence/BINARY_ARTIFACT_IDENTITIES.md"
+      ],
+      "immutability_status": "legacy release created before the repository adopted the mandatory immutable-release policy",
+      "release_record_present": true,
+      "sha256_manifest_present": true,
+      "source_identity_locked": true,
+      "status": "PASS",
+      "versioned_tag_present": true
+    }
+  },
+  "limitations": [
+    "This receipt authorizes only the recorded candidate public technical-review release.",
+    "External specialist review, independent outside reproduction, and historical priority remain pending.",
+    "The full revised manuscript is not formally verified.",
+    "The release record establishes provenance, not correctness or worldwide priority."
+  ],
+  "paper_id": "HINC-001",
+  "receipt_date": "2026-07-27",
+  "release_target": "public_technical_review",
+  "schema_version": "n.human_llm_mathematics.publication_gate.v1",
+  "source_identity": {
+    "candidate_source_commit": "4b3d321bdfb34e561d76408f26e7b53a629e8893",
+    "merge_commit": "af968322d078a48037bee91726b2ac77a9816f8b",
+    "package_name": "HINC-001_Current_Source_Technical_Review_Package_0.1.0.zip",
+    "package_sha256": "e107e923eed6384bf71eb883783a15c94fd3ccb7b9addecebec14b05851f6294",
+    "release_receipt_commit": "86ea1ad22ba3c7a578f1a4ec1c548045687309b2",
+    "release_tag": "public-review-v1",
+    "repository": "novakprotocol/N-Human-AI-Mathematics"
+  },
+  "status": "PASS_PUBLIC_TECHNICAL_REVIEW"
+}
