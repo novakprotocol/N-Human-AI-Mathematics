@@ -1,8 +1,8 @@
 name: Patch ABF-001 same-step hash propagation
 
 on:
-  push:
-    branches: [main]
+  pull_request:
+    types: [opened]
 
 permissions:
   contents: write
@@ -15,7 +15,8 @@ concurrency:
 jobs:
   patch:
     if: >-
-      startsWith(github.event.head_commit.message, 'Arm ABF same-step hash patch')
+      github.event.pull_request.user.login == github.repository_owner &&
+      github.event.pull_request.title == '[Trigger ABF same-step hash patch]'
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -23,6 +24,7 @@ jobs:
       - name: Check out public main
         uses: actions/checkout@v7
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Apply exact release-only patch
