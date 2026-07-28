@@ -25,10 +25,9 @@
       "blocking_findings_open": 0,
       "evidence": [
         "papers/HINC-001/STATUS.json",
-        "papers/HINC-001/PROOF_MAP.md",
-        "papers/HINC-001/CORRECTION_LEDGER_2026-07-27.md"
+        "papers/HINC-001/PROOF_MAP.md"
       ],
-      "notes": "Release-blocking coefficient, arbitrary-base, center, disconnected-base, and scheme-language corrections were integrated before release.",
+      "notes": "Release-blocking coefficient, arbitrary-base, center, disconnected-base, and scheme-language corrections were integrated before release and summarized in the committed status and proof map.",
       "status": "PASS"
     },
     "independent_challenge": {
