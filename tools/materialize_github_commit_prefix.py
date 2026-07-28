@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Materialize a path prefix from an exact GitHub Git commit via the object API.
+"""Materialize a path prefix from an exact GitHub commit via the object API.
 
-This is intended for immutable release sources that are deliberately not attached
-to an ordinary branch. Every downloaded blob is checked against its Git object
-SHA before it is written.
+The release gate uses this for commits that are intentionally not ordinary
+publication branches. Every downloaded blob is checked against its Git object
+SHA before writing.
 
-For the ABF-001 two-stage freeze, the mathematical-source commit contains the
+ABF-001 uses a two-stage freeze. The mathematical-source commit fixes the
 controlling theorem, proof, source, tests, and search ledger. Its one-commit
-release-control child adds a declared set of publication and rights records
-without modifying any frozen mathematical-source byte. The second materializer
-call verifies that exact additive overlay and copies the allowed records into the
-comparison tree so the workflow can perform a complete directory comparison.
+release-control child may add a strict allowlist of disclosure, rights, and
+package records. It may also replace one exact release-runtime dependency file;
+that replacement is identified by both its old and new SHA-256 values and does
+not alter mathematical source or claims.
 """
 
 from __future__ import annotations
@@ -26,7 +26,6 @@ import urllib.error
 import urllib.request
 from pathlib import Path, PurePosixPath
 from typing import Any
-
 
 ABF_MATHEMATICAL_PREFIX = "staging/ABF-001/mathematical-source"
 ABF_RELEASE_OVERLAY = Path("/tmp/abf-freeze/mathematical-source")
@@ -46,6 +45,17 @@ ABF_ALLOWED_ADDITIONS = frozenset(
         "THIRD_PARTY_NOTICES.md",
     }
 )
+ABF_ALLOWED_REPLACEMENTS = {
+    "requirements-release.txt": {
+        "frozen_sha256": "81794646d1034c4f16ed368949e6ec21f1c182b1778785a238b9b14a43e57524",
+        "released_sha256": "54afc6f1c04f582ebdc4f495a48b34c467a5e94b6cba67cdc4030aa3f2f39de6",
+        "classification": "release_runtime_dependency_pin",
+        "reason": (
+            "WeasyPrint 63.0 is the first line with declared Python 3.13 and "
+            "pydyf 0.11 support; mathematical source and claims are unchanged"
+        ),
+    }
+}
 
 
 def api_json(url: str, token: str) -> dict[str, Any]:
@@ -67,8 +77,11 @@ def api_json(url: str, token: str) -> dict[str, Any]:
 
 
 def git_blob_sha(data: bytes) -> str:
-    header = f"blob {len(data)}\0".encode("ascii")
-    return hashlib.sha1(header + data).hexdigest()
+    return hashlib.sha1(f"blob {len(data)}\0".encode("ascii") + data).hexdigest()
+
+
+def sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def safe_output_path(root: Path, relative: str) -> Path:
@@ -103,13 +116,18 @@ def walk_tree(
     current_path: str = "",
 ) -> list[dict[str, Any]]:
     owner, name = repository.split("/", 1)
-    url = f"https://api.github.com/repos/{owner}/{name}/git/trees/{tree_sha}"
-    tree = api_json(url, token)
+    tree = api_json(
+        f"https://api.github.com/repos/{owner}/{name}/git/trees/{tree_sha}",
+        token,
+    )
     materialized: list[dict[str, Any]] = []
 
     for entry in tree.get("tree", []):
-        name_part = entry["path"]
-        path = f"{current_path}/{name_part}" if current_path else name_part
+        path = (
+            f"{current_path}/{entry['path']}"
+            if current_path
+            else entry["path"]
+        )
         entry_type = entry["type"]
         mode = entry["mode"]
         sha = entry["sha"]
@@ -130,12 +148,14 @@ def walk_tree(
 
         if not (path == prefix or path.startswith(prefix + "/")):
             continue
-
         if entry_type != "blob":
             raise RuntimeError(f"unsupported Git tree entry {entry_type} at {path}")
 
-        blob_url = f"https://api.github.com/repos/{owner}/{name}/git/blobs/{sha}"
-        blob = api_json(blob_url, token)
+        owner, name = repository.split("/", 1)
+        blob = api_json(
+            f"https://api.github.com/repos/{owner}/{name}/git/blobs/{sha}",
+            token,
+        )
         if blob.get("encoding") != "base64":
             raise RuntimeError(
                 f"unexpected blob encoding at {path}: {blob.get('encoding')}"
@@ -150,10 +170,8 @@ def walk_tree(
         relative = path[len(prefix) :].lstrip("/")
         target = safe_output_path(output, relative)
         target.parent.mkdir(parents=True, exist_ok=True)
-
         if mode == "120000":
-            link_target = data.decode("utf-8")
-            target.symlink_to(link_target)
+            target.symlink_to(data.decode("utf-8"))
         else:
             target.write_bytes(data)
             if mode == "100755":
@@ -163,7 +181,6 @@ def walk_tree(
                     | stat.S_IXGRP
                     | stat.S_IXOTH
                 )
-
         materialized.append(
             {
                 "repository_path": path,
@@ -173,7 +190,6 @@ def walk_tree(
                 "mode": mode,
             }
         )
-
     return materialized
 
 
@@ -186,17 +202,8 @@ def regular_files(root: Path) -> dict[str, Path]:
 
 
 def verify_and_apply_abf_release_overlay(
-    *,
-    prefix: str,
-    output: Path,
+    *, prefix: str, output: Path
 ) -> list[dict[str, Any]]:
-    """Verify the declared additive release-control overlay for ABF-001.
-
-    The release-control child is allowed to add only publication, disclosure,
-    rights, and package metadata records. It may not alter or delete any byte
-    from the mathematical-source commit.
-    """
-
     if prefix != ABF_MATHEMATICAL_PREFIX:
         return []
     if not ABF_RELEASE_OVERLAY.is_dir():
@@ -206,49 +213,71 @@ def verify_and_apply_abf_release_overlay(
 
     frozen = regular_files(output)
     released = regular_files(ABF_RELEASE_OVERLAY)
-
     missing = sorted(set(frozen) - set(released))
     if missing:
         raise RuntimeError(
-            "release-control child deleted frozen mathematical-source files: "
-            + ", ".join(missing)
-        )
-
-    changed = [
-        relative
-        for relative in sorted(frozen)
-        if frozen[relative].read_bytes() != released[relative].read_bytes()
-    ]
-    if changed:
-        raise RuntimeError(
-            "release-control child modified frozen mathematical-source bytes: "
-            + ", ".join(changed)
+            "release-control child deleted frozen files: " + ", ".join(missing)
         )
 
     additions = set(released) - set(frozen)
     if additions != ABF_ALLOWED_ADDITIONS:
         raise RuntimeError(
             "unexpected ABF release-control additions: "
-            f"expected={sorted(ABF_ALLOWED_ADDITIONS)} "
-            f"actual={sorted(additions)}"
+            f"expected={sorted(ABF_ALLOWED_ADDITIONS)} actual={sorted(additions)}"
         )
 
-    overlay_receipt: list[dict[str, Any]] = []
+    changed = {
+        relative
+        for relative in frozen
+        if frozen[relative].read_bytes() != released[relative].read_bytes()
+    }
+    expected_changed = set(ABF_ALLOWED_REPLACEMENTS)
+    if changed != expected_changed:
+        raise RuntimeError(
+            "unexpected ABF release-control replacements: "
+            f"expected={sorted(expected_changed)} actual={sorted(changed)}"
+        )
+
+    receipt: list[dict[str, Any]] = []
+    for relative in sorted(changed):
+        policy = ABF_ALLOWED_REPLACEMENTS[relative]
+        old_hash = sha256_file(frozen[relative])
+        new_hash = sha256_file(released[relative])
+        if old_hash != policy["frozen_sha256"]:
+            raise RuntimeError(
+                f"unexpected frozen identity for {relative}: {old_hash}"
+            )
+        if new_hash != policy["released_sha256"]:
+            raise RuntimeError(
+                f"unexpected released identity for {relative}: {new_hash}"
+            )
+        shutil.copyfile(released[relative], frozen[relative])
+        receipt.append(
+            {
+                "relative_path": relative,
+                "sha256_before": old_hash,
+                "sha256_after": new_hash,
+                "bytes": frozen[relative].stat().st_size,
+                "classification": policy["classification"],
+                "reason": policy["reason"],
+            }
+        )
+
     for relative in sorted(additions):
         source = released[relative]
         target = safe_output_path(output, relative)
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, target)
         data = target.read_bytes()
-        overlay_receipt.append(
+        receipt.append(
             {
                 "relative_path": relative,
-                "sha256": hashlib.sha256(data).hexdigest(),
+                "sha256_after": hashlib.sha256(data).hexdigest(),
                 "bytes": len(data),
                 "classification": "allowed_additive_release_record",
             }
         )
-    return overlay_receipt
+    return receipt
 
 
 def main() -> int:
@@ -262,28 +291,22 @@ def main() -> int:
     parser.add_argument("--token-env", default="GH_TOKEN")
     args = parser.parse_args()
 
-    if (
-        not all(c in "0123456789abcdef" for c in args.commit)
-        or len(args.commit) != 40
+    for label, value in (
+        ("--commit", args.commit),
+        ("--expected-parent", args.expected_parent),
     ):
-        raise SystemExit("--commit must be a lowercase 40-character SHA")
-    if (
-        not all(c in "0123456789abcdef" for c in args.expected_parent)
-        or len(args.expected_parent) != 40
-    ):
-        raise SystemExit("--expected-parent must be a lowercase 40-character SHA")
+        if len(value) != 40 or not all(c in "0123456789abcdef" for c in value):
+            raise SystemExit(f"{label} must be a lowercase 40-character SHA")
 
     token = os.environ.get(args.token_env)
     if not token:
-        raise SystemExit(
-            f"missing token environment variable: {args.token_env}"
-        )
+        raise SystemExit(f"missing token environment variable: {args.token_env}")
 
     owner, name = args.repository.split("/", 1)
-    commit_url = (
-        f"https://api.github.com/repos/{owner}/{name}/git/commits/{args.commit}"
+    commit = api_json(
+        f"https://api.github.com/repos/{owner}/{name}/git/commits/{args.commit}",
+        token,
     )
-    commit = api_json(commit_url, token)
     if commit.get("sha") != args.commit:
         raise RuntimeError("commit identity mismatch")
     parents = [item["sha"] for item in commit.get("parents", [])]
@@ -294,7 +317,6 @@ def main() -> int:
     if output.exists() and any(output.iterdir()):
         raise RuntimeError(f"output directory is not empty: {output}")
     output.mkdir(parents=True, exist_ok=True)
-
     prefix = args.prefix.strip("/")
     entries = walk_tree(
         repository=args.repository,
@@ -305,15 +327,11 @@ def main() -> int:
     )
     if not entries:
         raise RuntimeError(f"no blobs found under prefix: {args.prefix}")
-
-    overlay = verify_and_apply_abf_release_overlay(
-        prefix=prefix,
-        output=output,
-    )
+    overlay = verify_and_apply_abf_release_overlay(prefix=prefix, output=output)
 
     receipt = {
         "schema_version": (
-            "n.human_llm.mathematics.github_object_materialization.v2"
+            "n.human_llm.mathematics.github_object_materialization.v3"
         ),
         "result": "PASS",
         "repository": args.repository,
@@ -327,8 +345,8 @@ def main() -> int:
         "release_control_overlay": {
             "applied": bool(overlay),
             "policy": (
-                "frozen mathematical bytes unchanged; exact additive "
-                "publication-record allowlist"
+                "frozen mathematical bytes unchanged except one exact "
+                "release-runtime dependency pin; exact additive record allowlist"
             ),
             "files": overlay,
         },
@@ -351,9 +369,7 @@ def main() -> int:
                     "total_bytes",
                 )
             }
-            | {
-                "release_control_overlay_files": len(overlay),
-            },
+            | {"release_control_overlay_files": len(overlay)},
             sort_keys=True,
         )
     )
