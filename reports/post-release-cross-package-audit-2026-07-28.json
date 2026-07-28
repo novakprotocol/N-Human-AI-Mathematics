@@ -1,0 +1,29 @@
+{
+  "schema": "n.human_ai_mathematics.post_release_cross_package_audit.v1",
+  "date_utc": "2026-07-28",
+  "repository": "novakprotocol/N-Human-AI-Mathematics",
+  "packages": {
+    "HINC-001": {
+      "publication_gate": "PASS_PUBLIC_TECHNICAL_REVIEW",
+      "mathematical_blockers_found": 0,
+      "control_plane_findings": [
+        "README review-request language still referred to a future visibility switch"
+      ],
+      "external_review": "pending",
+      "full_manuscript_formalization": "not_completed"
+    },
+    "ABF-001": {
+      "publication_gate": "PASS_PUBLIC_TECHNICAL_REVIEW",
+      "mathematical_blockers_found": 0,
+      "control_plane_findings": [
+        "README still described public review as pending final gate",
+        "release-candidate JSON did not distinguish its pre-execution snapshot from final release status"
+      ],
+      "external_review": "pending",
+      "proof_assistant_formalization": "not_completed"
+    }
+  },
+  "mathematical_source_changed": false,
+  "release_identity_changed": false,
+  "result": "PASS_AFTER_CONTROL_PLANE_CORRECTIONS"
+}
