@@ -238,11 +238,13 @@ jobs:
           zip -X -qr /tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip ABF-001
           PROFESSIONAL_PACKAGE_SHA256="$(sha256sum /tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip | cut -d' ' -f1)"
           echo "PROFESSIONAL_PACKAGE_SHA256=$PROFESSIONAL_PACKAGE_SHA256" >> "$GITHUB_ENV"
+          export PROFESSIONAL_PACKAGE_SHA256
           cd /tmp
           find abf-freeze -exec touch -h -d '1980-01-01 00:00:00 UTC' {} +
           zip -X -qr /tmp/abf-release/ABF-001_Frozen_Git_Source_0.1.0.zip abf-freeze
           FROZEN_GIT_SOURCE_SHA256="$(sha256sum /tmp/abf-release/ABF-001_Frozen_Git_Source_0.1.0.zip | cut -d' ' -f1)"
           echo "FROZEN_GIT_SOURCE_SHA256=$FROZEN_GIT_SOURCE_SHA256" >> "$GITHUB_ENV"
+          export FROZEN_GIT_SOURCE_SHA256
           sha256sum /tmp/abf-release/*.zip | tee /tmp/abf-release/SHA256SUMS.txt
           cp /tmp/abf-source/ABF-001/ABF-001_RELEASE_NOTES.md /tmp/abf-release/RELEASE_NOTES.md
           python - <<'PY'
