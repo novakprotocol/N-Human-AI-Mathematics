@@ -1,0 +1,87 @@
+name: Patch ABF-001 same-step hash propagation
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: abf-001-release-env-patch
+  cancel-in-progress: false
+
+jobs:
+  patch:
+    if: >-
+      github.event.issue.user.login == github.repository_owner &&
+      github.event.issue.title == '[Patch ABF-001 release env propagation]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out public main
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Apply exact release-only patch
+        run: |
+          set -euo pipefail
+          branch='control/abf-release-same-step-env-fix-v1'
+          test -z "$(git ls-remote --heads origin "refs/heads/${branch}")"
+          git switch -c "$branch"
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('.github/workflows/release-abf-001-object-tree.yml')
+          text = path.read_text(encoding='utf-8')
+          replacements = {
+              '          echo "PROFESSIONAL_PACKAGE_SHA256=$PROFESSIONAL_PACKAGE_SHA256" >> "$GITHUB_ENV"\n':
+              '          echo "PROFESSIONAL_PACKAGE_SHA256=$PROFESSIONAL_PACKAGE_SHA256" >> "$GITHUB_ENV"\n'
+              '          export PROFESSIONAL_PACKAGE_SHA256\n',
+              '          echo "FROZEN_GIT_SOURCE_SHA256=$FROZEN_GIT_SOURCE_SHA256" >> "$GITHUB_ENV"\n':
+              '          echo "FROZEN_GIT_SOURCE_SHA256=$FROZEN_GIT_SOURCE_SHA256" >> "$GITHUB_ENV"\n'
+              '          export FROZEN_GIT_SOURCE_SHA256\n',
+          }
+          for old, new in replacements.items():
+              count = text.count(old)
+              if count != 1:
+                  raise SystemExit(f'expected one release hash target, found {count}: {old!r}')
+              text = text.replace(old, new, 1)
+          path.write_text(text, encoding='utf-8', newline='\n')
+          PY
+          test "$(git diff --name-only | wc -l)" -eq 1
+          test "$(git diff --name-only)" = '.github/workflows/release-abf-001-object-tree.yml'
+          git diff --check
+          grep -F 'export PROFESSIONAL_PACKAGE_SHA256' .github/workflows/release-abf-001-object-tree.yml
+          grep -F 'export FROZEN_GIT_SOURCE_SHA256' .github/workflows/release-abf-001-object-tree.yml
+          git add .github/workflows/release-abf-001-object-tree.yml
+          git diff --cached --check
+          git -c user.name=novakprotocol -c user.email=245606744+novakprotocol@users.noreply.github.com \
+            commit -m 'Export ABF package hashes within the generating step'
+          git push -u origin "$branch"
+
+      - name: Open narrow control pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          branch='control/abf-release-same-step-env-fix-v1'
+          gh pr create \
+            --repo "$GITHUB_REPOSITORY" \
+            --base main \
+            --head "$branch" \
+            --title 'Export ABF package hashes within the generating step' \
+            --body '## Exact defect\n\nThe guarded ABF release built both deterministic ZIPs, then failed because values appended to `GITHUB_ENV` are unavailable until the next step. The attestation Python process runs in the same step.\n\n## Narrow correction\n\nExport `PROFESSIONAL_PACKAGE_SHA256` and `FROZEN_GIT_SOURCE_SHA256` in the current shell immediately after computing them, while retaining the existing `GITHUB_ENV` writes for later steps.\n\n## Safety boundary\n\nThis changes one workflow file only. It does not alter ABF mathematics, HINC-001, `docs/`, source identities, claims, tags, releases, or assets.'
+
+      - name: Record patch pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          url="$(gh pr view control/abf-release-same-step-env-fix-v1 --repo "$GITHUB_REPOSITORY" --json url --jq .url)"
+          gh issue comment "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --body "ABF release hash-propagation patch PR opened: ${url}"
+          gh issue close "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --reason completed
