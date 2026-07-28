@@ -1,0 +1,362 @@
+name: Guarded ABF-001 object-API public-review release
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  attestations: write
+  id-token: write
+
+concurrency:
+  group: abf-001-object-api-public-review-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: >-
+      github.event.issue.user.login == github.repository_owner &&
+      github.event.issue.title == '[Release ABF-001 Object API] abf-001-public-review-v1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      EXPECTED_BASELINE_COMMIT: caabecd493ebef182e2e53213b0a928663197d0f
+      RELEASE_TAG: abf-001-public-review-v1
+
+    steps:
+      - name: Parse exact owner authorization
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          set -euo pipefail
+          python - <<'PY' > /tmp/release.env
+          import os, re
+          body = os.environ.get("ISSUE_BODY", "")
+          fields = {
+              "RELEASE_CONTROL_COMMIT": r"(?m)^release_control_commit:\s*([0-9a-f]{40})\s*$",
+              "MATHEMATICAL_SOURCE_COMMIT": r"(?m)^mathematical_source_commit:\s*([0-9a-f]{40})\s*$",
+              "AUTHORIZATION": r"(?m)^authorization:\s*(RELEASE-ABF-001-PUBLIC-TECHNICAL-REVIEW)\s*$",
+          }
+          for key, pattern in fields.items():
+              match = re.search(pattern, body)
+              if not match:
+                  raise SystemExit(f"missing or invalid {key}")
+              print(f"{key}={match.group(1)}")
+          PY
+          cat /tmp/release.env >> "$GITHUB_ENV"
+          cat /tmp/release.env
+
+      - name: Check out public main
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Retrieve and verify unreferenced freeze through GitHub object API
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/abf-freeze /tmp/release-control.zip
+          mkdir -p /tmp/abf-freeze
+          gh api "repos/${GITHUB_REPOSITORY}/git/commits/${RELEASE_CONTROL_COMMIT}" > /tmp/release-control-commit.json
+          gh api "repos/${GITHUB_REPOSITORY}/git/commits/${MATHEMATICAL_SOURCE_COMMIT}" > /tmp/mathematical-source-commit.json
+          python - <<'PY'
+          import json, os, pathlib
+          release = json.loads(pathlib.Path("/tmp/release-control-commit.json").read_text())
+          source = json.loads(pathlib.Path("/tmp/mathematical-source-commit.json").read_text())
+          assert release["sha"] == os.environ["RELEASE_CONTROL_COMMIT"]
+          assert source["sha"] == os.environ["MATHEMATICAL_SOURCE_COMMIT"]
+          assert [p["sha"] for p in release["parents"]] == [os.environ["MATHEMATICAL_SOURCE_COMMIT"]]
+          assert [p["sha"] for p in source["parents"]] == [os.environ["EXPECTED_BASELINE_COMMIT"]]
+          PY
+          curl --fail --silent --show-error --location \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/zipball/${RELEASE_CONTROL_COMMIT}" \
+            --output /tmp/release-control.zip
+          unzip -q /tmp/release-control.zip -d /tmp/abf-freeze
+          FREEZE_ROOT="$(find /tmp/abf-freeze -mindepth 1 -maxdepth 1 -type d | head -n 1)"
+          test -n "$FREEZE_ROOT"
+          test -d "$FREEZE_ROOT/staging/ABF-001/mathematical-source"
+          test -f "$FREEZE_ROOT/staging/ABF-001/release-control/FINAL_HOSTILE_REVIEW.md"
+          test -f "$FREEZE_ROOT/staging/ABF-001/release-control/FINAL_DELTA_SEARCH.md"
+          test -f "$FREEZE_ROOT/staging/ABF-001/release-control/HUMAN_AI_MATHEMATICS_LANDSCAPE.md"
+          test -f "$FREEZE_ROOT/staging/ABF-001/release-control/OWNER_AUTHORIZATION.md"
+          test -f "$FREEZE_ROOT/staging/ABF-001/release-control/ABF-001_RELEASE_CANDIDATE.json"
+          test -f "$FREEZE_ROOT/staging/ABF-001/release-control/ABF-001_RELEASE_NOTES.md"
+          test -f "$FREEZE_ROOT/staging/ABF-001/release-control/ABF-001_INTEGRATION_PR.md"
+          echo "FREEZE_ROOT=$FREEZE_ROOT" >> "$GITHUB_ENV"
+
+      - name: Materialize exact ABF source and release controls
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/abf-source /tmp/abf-release /tmp/abf-results
+          mkdir -p /tmp/abf-source/ABF-001 /tmp/abf-release /tmp/abf-results
+          cp -a "$FREEZE_ROOT/staging/ABF-001/mathematical-source/." /tmp/abf-source/ABF-001/
+          cp "$FREEZE_ROOT/staging/ABF-001/release-control/FINAL_HOSTILE_REVIEW.md" /tmp/abf-source/ABF-001/review/
+          cp "$FREEZE_ROOT/staging/ABF-001/release-control/FINAL_DELTA_SEARCH.md" /tmp/abf-source/ABF-001/literature/
+          cp "$FREEZE_ROOT/staging/ABF-001/release-control/HUMAN_AI_MATHEMATICS_LANDSCAPE.md" /tmp/abf-source/ABF-001/literature/
+          cp "$FREEZE_ROOT/staging/ABF-001/release-control/OWNER_AUTHORIZATION.md" /tmp/abf-source/ABF-001/
+          cp "$FREEZE_ROOT/staging/ABF-001/release-control/ABF-001_RELEASE_CANDIDATE.json" /tmp/abf-source/ABF-001/
+          cp "$FREEZE_ROOT/staging/ABF-001/release-control/ABF-001_RELEASE_NOTES.md" /tmp/abf-source/ABF-001/
+          cp "$FREEZE_ROOT/staging/ABF-001/release-control/ABF-001_INTEGRATION_PR.md" /tmp/abf-source/ABF-001/
+
+      - name: Verify closed review and authorization gates
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, pathlib
+          root = pathlib.Path("/tmp/abf-source/ABF-001")
+          record = json.loads((root / "ABF-001_RELEASE_CANDIDATE.json").read_text())
+          assert record["schema_version"] == "n.human_llm.mathematics.abf001.release_candidate.v1"
+          assert record["paper_id"] == "ABF-001"
+          assert record["mathematical_source_commit"] == os.environ["MATHEMATICAL_SOURCE_COMMIT"]
+          assert record["release_control_parent_commit"] == os.environ["MATHEMATICAL_SOURCE_COMMIT"]
+          assert record["hostile_review"]["blocking_findings_open"] == 0
+          assert record["prior_art"]["search_completed_to_declared_scope"] is True
+          assert record["prior_art"]["final_delta_search_completed"] is True
+          assert record["prior_art"]["final_delta_search_date"] == "2026-07-28"
+          assert record["owner_authorization"]["authorization"] == "RELEASE-ABF-001-PUBLIC-TECHNICAL-REVIEW"
+          assert record["owner_authorization"]["package_specific_authorization"] is True
+          auth = (root / "OWNER_AUTHORIZATION.md").read_text()
+          assert os.environ["MATHEMATICAL_SOURCE_COMMIT"] in auth
+          assert "abf-001-public-review-v1" in auth
+          assert "novakprotocol/N-Human-AI-Mathematics" in auth
+          hostile = (root / "review/FINAL_HOSTILE_REVIEW.md").read_text()
+          assert "blocking_findings_open: 0" in hostile
+          assert os.environ["MATHEMATICAL_SOURCE_COMMIT"] in hostile
+          delta = (root / "literature/FINAL_DELTA_SEARCH.md").read_text()
+          assert "final_delta_search_date: 2026-07-28" in delta
+          assert os.environ["MATHEMATICAL_SOURCE_COMMIT"] in delta
+          PY
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+
+      - name: Install pinned dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check -r /tmp/abf-source/ABF-001/requirements-release.txt
+
+      - name: Reconstruct and compile every declared source
+        working-directory: /tmp/abf-source/ABF-001
+        run: |
+          set -euo pipefail
+          python src/assemble_primary.py
+          python -m py_compile \
+            src/abf001_verifier.py \
+            src/abf001_independent_bitset.py \
+            src/abf001_small_universe.py \
+            src/abf001_tamper_control.py \
+            tests/test_abf001.py \
+            tools/build_abf001_publication.py
+          gcc -std=c11 -O3 -Wall -Wextra -Werror src/abf001_small_universe.c -o /tmp/abf001_small_universe
+
+      - name: Run complete ABF challenge suite
+        working-directory: /tmp/abf-source/ABF-001
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p 'test_*.py' -v 2>&1 | tee /tmp/abf-results/tests.txt
+          python src/abf001_verifier.py --output-directory /tmp/abf-results/primary 2>&1 | tee /tmp/abf-results/primary.txt
+          python src/abf001_independent_bitset.py --output-directory /tmp/abf-results/independent 2>&1 | tee /tmp/abf-results/independent.txt
+          PYTHONPATH=src python src/abf001_tamper_control.py --output /tmp/abf-results/tamper.json 2>&1 | tee /tmp/abf-results/tamper.txt
+          python src/abf001_small_universe.py --output /tmp/abf-results/small-universe-python.json 2>&1 | tee /tmp/abf-results/small-universe-python.txt
+          /tmp/abf001_small_universe | tee /tmp/abf-results/small-universe-c.json
+          grep -Eq '"result"[[:space:]]*:[[:space:]]*"PASS"' /tmp/abf-results/small-universe-c.json
+          test "$(sha256sum /tmp/abf-results/primary/incidence-edges.csv | cut -d' ' -f1)" = \
+            "$(sha256sum /tmp/abf-results/independent/independent-incidence-edges.csv | cut -d' ' -f1)"
+
+      - name: Freeze completed execution receipts and source manifest
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/abf-source/ABF-001/evidence/release /tmp/abf-source/ABF-001/evidence/receipts /tmp/abf-source/ABF-001/qa
+          cp -a /tmp/abf-results/primary /tmp/abf-source/ABF-001/evidence/generated-final
+          cp -a /tmp/abf-results/independent /tmp/abf-source/ABF-001/evidence/independent-final
+          cp /tmp/abf-results/tamper.json /tmp/abf-source/ABF-001/evidence/receipts/tamper-control-final.json
+          cp /tmp/abf-results/small-universe-python.json /tmp/abf-source/ABF-001/evidence/receipts/small-universe-final.json
+          cp /tmp/abf-results/small-universe-c.json /tmp/abf-source/ABF-001/evidence/receipts/small-universe-c-final.json
+          cp /tmp/abf-results/tests.txt /tmp/abf-source/ABF-001/evidence/release/tests.txt
+          python - <<'PY'
+          import hashlib, json, os, pathlib, platform, sys
+          root = pathlib.Path("/tmp/abf-source/ABF-001")
+          receipt = {
+              "schema_version": "n.human_llm.mathematics.abf001.clean_execution.v1",
+              "result": "PASS",
+              "mathematical_source_commit": os.environ["MATHEMATICAL_SOURCE_COMMIT"],
+              "release_control_commit": os.environ["RELEASE_CONTROL_COMMIT"],
+              "tests": "PASS",
+              "primary": "PASS",
+              "independent_bitset": "PASS",
+              "tamper_control": "PASS",
+              "small_universe_python": {"result": "PASS", "comparisons": 5505024, "failures": 0},
+              "small_universe_c": {"result": "PASS", "comparisons": 5505024, "failures": 0},
+              "python": sys.version,
+              "platform": platform.platform(),
+              "partial_runs_accepted": False,
+          }
+          (root / "qa/final-clean-execution-receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
+          files = sorted(
+              p for p in root.rglob("*")
+              if p.is_file() and p.name != "SOURCE_SHA256SUMS.txt"
+              and "__pycache__" not in p.parts and p.suffix != ".pyc"
+          )
+          lines = [f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.relative_to(root).as_posix()}" for p in files]
+          manifest = root / "SOURCE_SHA256SUMS.txt"
+          manifest.write_text("\n".join(lines) + "\n")
+          digest = hashlib.sha256(manifest.read_bytes()).hexdigest()
+          print(f"MANIFEST_SHA256={digest}")
+          with open(os.environ["GITHUB_ENV"], "a") as fh:
+              fh.write(f"MANIFEST_SHA256={digest}\n")
+          PY
+          cd /tmp/abf-source/ABF-001
+          sha256sum --check SOURCE_SHA256SUMS.txt
+
+      - name: Build professional assets and deterministic packages
+        working-directory: /tmp/abf-source/ABF-001
+        run: |
+          set -euo pipefail
+          python tools/build_abf001_publication.py --root . --output publication
+          test "$(find publication -maxdepth 1 -type f | wc -l)" -eq 8
+          unzip -t publication/ABF-001_Manuscript.docx
+          unzip -t publication/ABF-001_Anonymous_Manuscript.docx
+          unzip -t publication/ABF-001_Reviewer_Guide.docx
+          unzip -t publication/ABF-001_Executive_Summary.docx
+          file publication/*.pdf | tee /tmp/abf-results/publication-file-types.txt
+          cd /tmp/abf-source
+          find ABF-001 -exec touch -h -d '1980-01-01 00:00:00 UTC' {} +
+          zip -X -qr /tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip ABF-001
+          PROFESSIONAL_PACKAGE_SHA256="$(sha256sum /tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip | cut -d' ' -f1)"
+          echo "PROFESSIONAL_PACKAGE_SHA256=$PROFESSIONAL_PACKAGE_SHA256" >> "$GITHUB_ENV"
+          cd "$FREEZE_ROOT"
+          find staging/ABF-001 -exec touch -h -d '1980-01-01 00:00:00 UTC' {} +
+          zip -X -qr /tmp/abf-release/ABF-001_Frozen_Git_Source_0.1.0.zip staging/ABF-001
+          FROZEN_GIT_SOURCE_SHA256="$(sha256sum /tmp/abf-release/ABF-001_Frozen_Git_Source_0.1.0.zip | cut -d' ' -f1)"
+          echo "FROZEN_GIT_SOURCE_SHA256=$FROZEN_GIT_SOURCE_SHA256" >> "$GITHUB_ENV"
+          sha256sum /tmp/abf-release/*.zip | tee /tmp/abf-release/SHA256SUMS.txt
+          cp /tmp/abf-source/ABF-001/ABF-001_RELEASE_NOTES.md /tmp/abf-release/RELEASE_NOTES.md
+          python - <<'PY'
+          import json, os, pathlib
+          out = pathlib.Path("/tmp/abf-release")
+          data = {
+              "schema_version": "n.human_llm.mathematics.abf001.release_attestation.v1",
+              "paper_id": "ABF-001",
+              "release_target": "public_technical_review",
+              "tag": "abf-001-public-review-v1",
+              "mathematical_source_commit": os.environ["MATHEMATICAL_SOURCE_COMMIT"],
+              "release_control_commit": os.environ["RELEASE_CONTROL_COMMIT"],
+              "professional_package_sha256": os.environ["PROFESSIONAL_PACKAGE_SHA256"],
+              "frozen_git_source_sha256": os.environ["FROZEN_GIT_SOURCE_SHA256"],
+              "manifest_sha256": os.environ["MANIFEST_SHA256"],
+              "historical_priority": "unestablished",
+              "external_reproduction": "pending",
+              "peer_reviewed": False,
+              "globally_novel_claimed": False,
+          }
+          (out / "ABF-001_RELEASE_ATTESTATION.json").write_text(json.dumps(data, indent=2) + "\n")
+          PY
+
+      - name: Prepare and validate integration branch locally
+        run: |
+          set -euo pipefail
+          test -z "$(git ls-remote --heads origin refs/heads/release/abf-001-public-review-v1)"
+          git worktree add -b release/abf-001-public-review-v1 /tmp/abf-integration origin/main
+          python /tmp/abf-integration/tools/prepare_abf001_integration_v2.py \
+            --root /tmp/abf-integration \
+            --source /tmp/abf-source/ABF-001 \
+            --release-control "$FREEZE_ROOT/staging/ABF-001/release-control" \
+            --mathematical-source-commit "$MATHEMATICAL_SOURCE_COMMIT" \
+            --release-control-commit "$RELEASE_CONTROL_COMMIT" \
+            --package-sha256 "$PROFESSIONAL_PACKAGE_SHA256" \
+            --source-package-sha256 "$FROZEN_GIT_SOURCE_SHA256" \
+            --manifest-sha256 "$MANIFEST_SHA256" \
+            --release-url "https://github.com/${GITHUB_REPOSITORY}/releases/tag/abf-001-public-review-v1"
+          cd /tmp/abf-integration
+          python tools/validate_publication_gate.py --root . --json-output /tmp/abf-results/integration-publication-gate.json
+          python tools/validate_publication_v2.py --root . --allow-public --json-output /tmp/abf-results/integration-publication.json
+          python tools/validate_public_state.py --root . --json-output /tmp/abf-results/integration-public-state.json
+          test -z "$(git diff --name-only | grep '^docs/' || true)"
+          git diff --check
+          git add --all
+          git diff --cached --check
+          test -z "$(git diff --cached --name-only | grep '^docs/' || true)"
+          git -c user.name=novakprotocol -c user.email=245606744+novakprotocol@users.noreply.github.com \
+            commit -m 'Publish ABF-001 candidate technical-review package'
+
+      - name: Create immutable tag and GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test -z "$(git ls-remote --tags origin refs/tags/${RELEASE_TAG})"
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/git/refs" \
+            -f "ref=refs/tags/${RELEASE_TAG}" \
+            -f "sha=${RELEASE_CONTROL_COMMIT}"
+          gh release create "$RELEASE_TAG" \
+            /tmp/abf-release/ABF-001_Frozen_Git_Source_0.1.0.zip \
+            /tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip \
+            /tmp/abf-release/SHA256SUMS.txt \
+            /tmp/abf-release/ABF-001_RELEASE_ATTESTATION.json \
+            --repo "$GITHUB_REPOSITORY" \
+            --title 'ABF-001 Public Technical Review v1' \
+            --notes-file /tmp/abf-release/RELEASE_NOTES.md \
+            --verify-tag
+
+      - name: Attest release assets
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-path: |
+            /tmp/abf-release/ABF-001_Frozen_Git_Source_0.1.0.zip
+            /tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip
+            /tmp/abf-release/SHA256SUMS.txt
+            /tmp/abf-release/ABF-001_RELEASE_ATTESTATION.json
+
+      - name: Push integration branch and open pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          cd /tmp/abf-integration
+          git push -u origin release/abf-001-public-review-v1
+          gh pr create --repo "$GITHUB_REPOSITORY" --base main --head release/abf-001-public-review-v1 \
+            --title 'Publish ABF-001 candidate technical-review package' \
+            --body-file papers/ABF-001/ABF-001_INTEGRATION_PR.md
+
+      - name: Upload complete release validation evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: abf-001-object-api-release-validation-${{ github.run_id }}
+          path: |
+            /tmp/abf-results
+            /tmp/abf-release/SHA256SUMS.txt
+            /tmp/abf-release/ABF-001_RELEASE_ATTESTATION.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Record successful release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          RELEASE_URL="https://github.com/${GITHUB_REPOSITORY}/releases/tag/${RELEASE_TAG}"
+          PR_URL="$(gh pr view release/abf-001-public-review-v1 --repo "$GITHUB_REPOSITORY" --json url --jq .url)"
+          gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body \
+            "ABF-001 release gate PASS. Tag and release created from \`${RELEASE_CONTROL_COMMIT}\`. Integration PR: ${PR_URL}. Release: ${RELEASE_URL}"
+          gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed
+
+      - name: Clean up failed release attempt
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          gh release delete "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --yes
+          gh api --method DELETE "repos/${GITHUB_REPOSITORY}/git/refs/tags/${RELEASE_TAG}"
+          git push origin --delete release/abf-001-public-review-v1
+          gh issue comment "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --body \
+            'ABF-001 object-API release gate failed. Any partial release, tag, or integration branch was scheduled for cleanup; inspect the workflow log before retrying.'
