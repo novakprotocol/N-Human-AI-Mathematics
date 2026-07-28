@@ -1,0 +1,11 @@
+# Python-generated cache and local environments
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+
+# Local editor and operating-system noise
+.DS_Store
+Thumbs.db
