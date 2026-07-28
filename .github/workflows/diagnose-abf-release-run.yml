@@ -1,0 +1,52 @@
+name: Diagnose one ABF-001 release run
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  actions: read
+  contents: read
+  issues: write
+
+jobs:
+  diagnose:
+    if: >-
+      github.event.issue.user.login == github.repository_owner &&
+      github.event.issue.title == '[Diagnose ABF-001 release run]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Parse exact workflow run ID
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          set -euo pipefail
+          python - <<'PY' > /tmp/diagnostic.env
+          import os, re
+          body = os.environ.get('ISSUE_BODY', '')
+          match = re.search(r'(?m)^run_id:\s*([0-9]+)\s*$', body)
+          if not match:
+              raise SystemExit('missing run_id')
+          print(f'RUN_ID={match.group(1)}')
+          PY
+          cat /tmp/diagnostic.env >> "$GITHUB_ENV"
+
+      - name: Fetch exact failed-step log tail
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh run view "$RUN_ID" --repo "$GITHUB_REPOSITORY" --log-failed > /tmp/failed.log
+          python - <<'PY'
+          from pathlib import Path
+          data = Path('/tmp/failed.log').read_text(errors='replace')
+          # Keep the final 48,000 characters, below GitHub's comment limit after fencing.
+          tail = data[-48000:]
+          Path('/tmp/comment.md').write_text(
+              'Exact failed-step log tail for workflow run `' + __import__('os').environ['RUN_ID'] + '`:\n\n```text\n' + tail + '\n```\n'
+          )
+          PY
+          gh issue comment "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --body-file /tmp/comment.md
+          gh issue close "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --reason completed
