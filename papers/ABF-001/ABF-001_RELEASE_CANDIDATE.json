@@ -3,8 +3,11 @@
   "paper_id": "ABF-001",
   "title": "Affine Restriction Moment Kernels and Radical Incidence Geometry of a Vectorial Boolean Map",
   "repository": "novakprotocol/N-Human-AI-Mathematics",
+  "record_role": "pre_execution_authorization_snapshot_reconciled_with_final_release",
+  "authorization_status_at_creation": "AUTHORIZED_PENDING_EXECUTION",
   "mathematical_source_commit": "45dbf87cb4a46dcbbce690da7a22cdd7f88cb052",
   "release_control_parent_commit": "45dbf87cb4a46dcbbce690da7a22cdd7f88cb052",
+  "release_control_commit": "4afb398aeb0dbb937c1a0fa38e38c370cc5b999b",
   "release_target": "public_technical_review",
   "tag": "abf-001-public-review-v1",
   "claim_boundary": {
@@ -40,7 +43,13 @@
     "vector_degree_15": 130559,
     "vector_degree_14": 511,
     "vector_degree_13_or_lower": 0,
-    "rank_histogram": {"13": 2, "14": 15, "15": 74, "16": 112, "17": 52},
+    "rank_histogram": {
+      "13": 2,
+      "14": 15,
+      "15": 74,
+      "16": 112,
+      "17": 52
+    },
     "singular_mask_indexed_radicals": 203,
     "distinct_nonzero_radical_subspaces": 202,
     "incidence_edges": 469,
@@ -48,5 +57,12 @@
     "forest_components": 201
   },
   "release_gate": "owner-triggered repository workflow",
-  "status": "AUTHORIZED_PENDING_EXECUTION"
+  "final_release": {
+    "status": "PASS_PUBLIC_TECHNICAL_REVIEW",
+    "publication_gate_receipt": "../../reports/publication-gates/ABF-001.json",
+    "release_date": "2026-07-28",
+    "tag": "abf-001-public-review-v1",
+    "public_site_active": true
+  },
+  "status": "RELEASED_PUBLIC_TECHNICAL_REVIEW"
 }

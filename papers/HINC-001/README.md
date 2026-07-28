@@ -127,7 +127,7 @@ One or more large language models materially assisted the research under Matthew
 
 ## Review request
 
-The public candidate package will solicit:
+The active public candidate package solicits:
 
 - counterexamples;
 - proof-gap reports;
@@ -135,7 +135,7 @@ The public candidate package will solicit:
 - independent reproductions;
 - formalization contributions.
 
-Use [`REVIEW_REQUEST.md`](REVIEW_REQUEST.md) and the repository issue templates after the final visibility switch.
+Use [`REVIEW_REQUEST.md`](REVIEW_REQUEST.md) and the repository issue templates to submit a review result against the exact public source.
 
 ## Not claimed
 

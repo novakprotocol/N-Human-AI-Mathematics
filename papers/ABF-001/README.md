@@ -6,8 +6,10 @@
 
 ```text
 candidate version:           0.1.0-public-review
-release state:               frozen source candidate
-public technical review:     pending final gate
+release state:               active immutable candidate public-review release
+public technical review:     active
+release tag:                 abf-001-public-review-v1
+release date:                2026-07-28
 peer reviewed:               no
 journal submitted:           no
 DOI:                         none
@@ -20,6 +22,18 @@ specific model/provider:     not disclosed
 - [`manuscript/ABF-001_MANUSCRIPT.md`](manuscript/ABF-001_MANUSCRIPT.md)
 
 The manuscript consolidates and supersedes the earlier v30 affine-hyperplane note and the later v32 radical-incidence note for public-review purposes.
+
+## Immutable release identity
+
+```text
+mathematical source commit:  45dbf87cb4a46dcbbce690da7a22cdd7f88cb052
+release-control commit:      4afb398aeb0dbb937c1a0fa38e38c370cc5b999b
+release tag:                 abf-001-public-review-v1
+publication gate:            PASS_PUBLIC_TECHNICAL_REVIEW
+```
+
+The complete package, source-package, and manifest hashes are recorded in
+[`../../reports/publication-gates/ABF-001.json`](../../reports/publication-gates/ABF-001.json).
 
 ## Start here by audience
 
@@ -48,6 +62,7 @@ The manuscript consolidates and supersedes the earlier v30 affine-hyperplane not
 | Formal verification | Not completed |
 | External reproduction | Pending |
 | Historical priority | Unestablished |
+| Public technical review | Active |
 
 ## Safe public claim
 
@@ -59,4 +74,5 @@ The manuscript consolidates and supersedes the earlier v30 affine-hyperplane not
 - complete 5,505,024-comparison small-universe control;
 - one-bit truth-table tamper rejection;
 - final clean-copy execution receipt;
-- release-candidate hostile review and same-day delta search recorded after source freeze.
+- release-candidate hostile review and same-day delta search recorded after source freeze;
+- immutable tag, release assets, source manifest, and publication-gate PASS receipt.
