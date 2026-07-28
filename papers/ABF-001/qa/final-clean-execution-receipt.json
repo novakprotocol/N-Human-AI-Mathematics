@@ -1,0 +1,23 @@
+{
+  "schema_version": "n.human_llm.mathematics.abf001.clean_execution.v1",
+  "result": "PASS",
+  "mathematical_source_commit": "45dbf87cb4a46dcbbce690da7a22cdd7f88cb052",
+  "release_control_commit": "4afb398aeb0dbb937c1a0fa38e38c370cc5b999b",
+  "tests": "PASS",
+  "primary": "PASS",
+  "independent_bitset": "PASS",
+  "tamper_control": "PASS",
+  "small_universe_python": {
+    "result": "PASS",
+    "comparisons": 5505024,
+    "failures": 0
+  },
+  "small_universe_c": {
+    "result": "PASS",
+    "comparisons": 5505024,
+    "failures": 0
+  },
+  "python": "3.13.14 (main, Jun 11 2026, 03:02:07) [GCC 13.3.0]",
+  "platform": "Linux-6.17.0-1020-azure-x86_64-with-glibc2.39",
+  "partial_runs_accepted": false
+}

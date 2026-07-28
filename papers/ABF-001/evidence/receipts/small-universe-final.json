@@ -1,0 +1,20 @@
+{
+  "elapsed_seconds": 27.800617,
+  "evidence_sha256": "80a867313e2dbc3b9bf322ef2c48e855894cd51e58f455861a2f707283d9d7cf",
+  "failures": 0,
+  "implementation": "standalone direct restriction ANF versus ambient moment sums",
+  "platform": "Linux-6.17.0-1020-azure-x86_64-with-glibc2.39",
+  "python": "3.13.14 (main, Jun 11 2026, 03:02:07) [GCC 13.3.0]",
+  "result": "PASS",
+  "schema_version": "n.human_llm_mathematics.abf001.small_universe.v1",
+  "universe": {
+    "affine_hyperplanes_per_map": 14,
+    "comparisons": 5505024,
+    "maps": 65536,
+    "moment_orders": [
+      0,
+      1
+    ],
+    "nonzero_output_masks": 3
+  }
+}

@@ -1,0 +1,40 @@
+date,surface,query_family,result,closest_source,disposition
+2026-07-28,arXiv,"""Affine Restriction Moment Kernels""",no exact match,,exact title
+2026-07-28,arXiv,"""Radical Incidence Geometry"" Boolean",no exact match,,exact title phrase
+2026-07-28,general scholarly,"""bidual moment incidence"" Boolean",no exact match,,project terminology
+2026-07-28,general scholarly,"""moment-kernel"" affine hyperplane Boolean",no exact match,,method synonym
+2026-07-28,Springer/DOI,algebraic degree stability Boolean affine spaces,closest scalar theory,10.1007/s10623-025-01702-z,Carlet-Feukoua-Salagean 2025
+2026-07-28,arXiv,algebraic degree stability vectorial Boolean affine subspaces,closest vectorial theory,arXiv:2504.03307,Carlet-Feukoua-Salagean 2025
+2026-07-28,arXiv/Springer,vectorial Boolean affine hyperplane trims restrictions,close application framework,arXiv:2108.13280; DOI 10.1007/s10623-022-01024-4,Beierle-Leander-Perrin
+2026-07-28,Zenodo,supplementary code trims extensions quadratic APN,close software record,10.5281/zenodo.5871840,source/code analogue
+2026-07-28,arXiv,affine-subspace sums Reed-Muller subcodes vectorial,close coding-theory bridge,arXiv:2605.22958,Heering-Kaspers-Taranchuk 2026
+2026-07-28,arXiv,rank subspaces symmetric bilinear forms radicals characteristic 2,close symmetric-form theory,arXiv:1602.03077,Gow 2016
+2026-07-28,arXiv,rank-related dimension bilinear forms finite fields radicals,close symmetric-form theory,arXiv:1703.07266,Gow 2017
+2026-07-28,arXiv,constant rank subspaces symmetric bilinear forms radical distribution,close symmetric-form theory,arXiv:1502.05547,Gow 2015
+2026-07-28,IACR ePrint,affinely equivalent Boolean functions invariant classification,close affine-invariant analogue,ePrint 2005/025,not restriction-moment theorem
+2026-07-28,IACR ePrint,vectorial Boolean affine hyperplane restriction algebraic degree,no exact match,,domain search; unrelated results screened
+2026-07-28,HAL,degree-drop Boolean affine hyperplane,no exact match,,domain search
+2026-07-28,HAL,vectorial Boolean affine subspace algebraic degree,no exact match,,domain search
+2026-07-28,Zenodo,affine restriction Boolean function algebraic degree,no exact match,,domain search
+2026-07-28,Zenodo,radical incidence symmetric matrix pencil GF(2),no exact match,,domain search
+2026-07-28,GitHub,"""130559"" ""119d5"" Boolean",no exact match,,exact numerical fingerprint
+2026-07-28,GitHub,"""95d64917af27fa1b827bda0b82364dc6e69de6376ccb0ad81e12ab22b82742fa""",no external match,,exact edge-atlas SHA-256
+2026-07-28,general scholarly,"""130,559"" ""511"" affine hyperplanes Boolean",no exact match,,exact count tuple
+2026-07-28,general scholarly,"""119d5"" ""8a"" ""9b"" radical",no exact match,,special parameter/masks
+2026-07-28,general scholarly,"""13:2"" ""14:15"" ""15:74"" ""16:112"" ""17:52""",no exact match,,rank histogram
+2026-07-28,general scholarly,"""469"" ""467"" affine parameter radical incidence",no exact match,,incidence tuple
+2026-07-28,general scholarly,"""201 components"" radical incidence forest",no exact match,,forest fingerprint
+2026-07-28,general scholarly,"""203"" ""202"" radical subspaces Boolean",no exact match,,corrected indexed/distinct counts
+2026-07-28,Google Books,Boolean functions affine restrictions Reed-Muller degree,book framework,Claude Carlet 2021,terminology and established theory
+2026-07-28,Google Books,cryptographic functions affine equivalence APN restrictions,book framework,Lilya Budaghyan 2015,equivalence/APN context
+2026-07-28,thesis discovery,Boolean function affine restriction algebraic degree thesis,no exact match,,public thesis search
+2026-07-28,public zbMATH/MathSciNet discovery,affine restriction algebraic degree Boolean function,closest known papers only,DOI 10.1007/s10623-025-01702-z,public indexed snippets
+2026-07-28,citation tracing,references/citations of Carlet-Feukoua-Salagean 2025,no exact ABF match,arXiv:2504.03307; related 2026 restriction paper,backward/forward tracing
+2026-07-28,citation tracing,references/citations of Beierle-Leander-Perrin 2022,no exact ABF match,arXiv:2108.13280; Zenodo 5871840,backward/forward tracing
+2026-07-28,citation tracing,related papers to Gow 2015/2016/2017,no exact ABF match,arXiv:1502.05547;1602.03077;1703.07266,rank/radical literature
+2026-07-28,Springer current,"""nonlinearity of restrictions"" direct sums monomials threshold",nearby 2026 restriction paper,online 25 July 2026,"nonlinearity, not ABF moment degree geometry"
+2026-07-28,exact equation,"""RM(r,d)^perp"" affine hyperplane restriction moment",no exact two-sided theorem,,equation/reformulation search
+2026-07-28,exact equation,"""Phi_{r,v}"" Boolean affine restriction",no exact match,,notation search
+2026-07-28,synonym,annihilator fiber kernel fiber Boolean restrictions,no exact match,,dual-fiber terminology
+2026-07-28,synonym,symmetric moment matrix pencil Boolean function restriction,no exact match,,order-one formulation
+2026-07-28,opposite/dual convention,affine indicator Boolean degree moment orthogonality Reed-Muller,closest general duality only,Carlet et al. 2025; Heering et al. 2026,equivalent-language search

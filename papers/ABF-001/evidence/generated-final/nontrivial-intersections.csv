@@ -1,0 +1,4 @@
+left_mask_hex,right_mask_hex,intersection_size,intersection_parameter_hex
+11,8a,1,119d5
+11,9b,1,119d5
+8a,9b,1,119d5

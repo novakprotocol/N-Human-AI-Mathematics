@@ -1,0 +1,11 @@
+{
+  "schema_version": "n.human_llm.mathematics.abf001.small_universe_c.v1",
+  "result": "PASS",
+  "maps": 65536,
+  "affine_hyperplanes_per_map": 14,
+  "nonzero_output_masks": 3,
+  "moment_orders": [0, 1],
+  "comparisons": 5505024,
+  "failures": 0,
+  "elapsed_cpu_seconds": 0.028791
+}

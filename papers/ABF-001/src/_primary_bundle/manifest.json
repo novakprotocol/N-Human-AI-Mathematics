@@ -1,0 +1,36 @@
+{
+  "base64_characters": 10412,
+  "compressed_bytes": 7809,
+  "encoding": "gzip+base64",
+  "parts": [
+    {
+      "characters": 2500,
+      "path": "src/_primary_bundle/abf001_verifier.py.gz.b64.part-00",
+      "sha256": "293c601a0545a4d6b6fd842cc8d92c692e1a47db9b8009791cf05ced25bd33cb"
+    },
+    {
+      "characters": 2500,
+      "path": "src/_primary_bundle/abf001_verifier.py.gz.b64.part-01",
+      "sha256": "e7eaefcb6702b72caaa627b1a5d349f92bc8416300fdd6f3881c23004983a3e7"
+    },
+    {
+      "characters": 2500,
+      "path": "src/_primary_bundle/abf001_verifier.py.gz.b64.part-02",
+      "sha256": "0ab69bbc22aaeb00ef0610fd7f3538280bf668306d7057bcdb880da4355aa7ed"
+    },
+    {
+      "characters": 2500,
+      "path": "src/_primary_bundle/abf001_verifier.py.gz.b64.part-03",
+      "sha256": "24c6847386f5deafb867621d25263b0680b1f06eb170a4ab67d68e9eafed8fb6"
+    },
+    {
+      "characters": 412,
+      "path": "src/_primary_bundle/abf001_verifier.py.gz.b64.part-04",
+      "sha256": "dfdf5b3c39b41ba180055d1458b12b678aed5e8447cb73de32a493a70fdaf4c2"
+    }
+  ],
+  "schema_version": "n.human_llm_mathematics.abf001_primary_bundle.v2",
+  "target": "src/abf001_verifier.py",
+  "target_bytes": 33194,
+  "target_sha256": "32731309081d2ef67b58ef7b446dafcaf0ea831a56988df9eaed16b4229d9ce3"
+}

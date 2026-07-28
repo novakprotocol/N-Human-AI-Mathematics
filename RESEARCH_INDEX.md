@@ -9,8 +9,8 @@ repository visibility:        public
 public-review release:        0.1.0-public-review
 public review active:         true
 visibility switch executed:   true
-complete candidate package:   HINC-001
-index-only hold entries:      ABF-001, FSG-001, ACM-001
+complete candidate packages:  HINC-001, ABF-001
+index-only hold entries:      FSG-001, ACM-001
 peer reviewed:                no
 journal submitted:            no
 historical priority:          unestablished
@@ -21,7 +21,7 @@ historical priority:          unestablished
 | Order | ID | Working title | Field | Current state |
 |---:|---|---|---|---|
 | 1 | `HINC-001` | Hidden Infinitesimal Noncommutativity in Two Binary-Gerstenhaber Endomorphism Monoid Schemes | Affine monoid schemes, binary Gerstenhaber algebras, nonreduced geometry | Active candidate package; open for public technical review |
-| 2 | `ABF-001` | Affine-Hyperplane Degree-Drop Spectra of a Vectorial Boolean Map | Boolean functions, finite linear algebra | Planned second package; exact finite theorem internally reproduced |
+| 2 | `ABF-001` | Affine Restriction Moment Kernels and Radical Incidence Geometry of a Vectorial Boolean Map | Boolean functions, Reed-Muller codes, finite linear algebra | Active candidate package; open for public technical review |
 | 3 | `FSG-001` | Fibonacci Critical Groups of Carry-Rees Petal Graphs | Critical groups, graph theory, Fibonacci divisibility | Hold pending specialist and formal review |
 | 4 | `ACM-001` | ANF Code and Matroid Geometry of a Reduced Vectorial Map | Coding theory, matroids, Boolean functions | Hold pending final consolidation |
 
@@ -92,11 +92,13 @@ Start with [`papers/HINC-001/README.md`](papers/HINC-001/README.md).
 
 ## ABF-001 — second package
 
-**Core claim:** For one fully specified map `GF(2)^16 -> GF(2)^8`, exactly 130,559 affine-hyperplane restrictions have degree 15, exactly 511 have degree 14, and none has degree 13 or lower. The 511 exceptional restrictions form a punctured nine-dimensional parameter flat certified by a second rank calculation.
+**Controlling source:** [`papers/ABF-001/manuscript/ABF-001_MANUSCRIPT.md`](papers/ABF-001/manuscript/ABF-001_MANUSCRIPT.md)
 
-**Internal evidence:** exhaustive classification of all 131,070 affine hyperplanes, separately written C reconstruction, and exhaustive small-universe controls.
+**Core result:** A Reed-Muller moment criterion yields dual output-mask annihilator and affine-parameter kernel descriptions of restriction degree drop. For the specified map `GF(2)^16 -> GF(2)^8`, the complete vectorial spectrum is `130,559 / 511 / 0`; the order-one symmetric pencil has rank multiplicities `2 / 15 / 74 / 112 / 52`; and its corrected radical geometry has 203 mask-indexed radicals, 202 distinct nonzero radical subspaces, 469 incidences, 467 covered parameters, and 201 forest components.
 
-**State:** index entry only; complete public package not yet prepared.
+**Evidence:** complete human proof, full 131,070-hyperplane enumeration, primary and integer/bitset implementations, complete 5,505,024-comparison small-universe control, tamper rejection, exact manifests, final hostile review with zero blockers, and a same-day systematic prior-art delta.
+
+**Public status:** candidate technical review active at `abf-001-public-review-v1`. Historical priority, external reproduction, peer review, and complete formal verification remain unestablished.
 
 ---
 

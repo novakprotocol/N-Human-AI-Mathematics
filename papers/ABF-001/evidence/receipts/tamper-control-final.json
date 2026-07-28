@@ -1,0 +1,9 @@
+{
+  "expected_identity_rejected": true,
+  "original_truth_sha256": "2a861e09dcb5b00e208ede53e1b29615a5309389a83da40f81d663ec760e7e52",
+  "result": "PASS",
+  "schema_version": "n.human_llm_mathematics.abf001.tamper_control.v1",
+  "tamper": "output bit 0 at input 0 flipped",
+  "tampered_signature_rank": 8,
+  "tampered_truth_sha256": "8317ae9d3be2f60cd7276c475a5a3fd3b46cf3b3f71e1dc2660feda7d8e1d666"
+}
