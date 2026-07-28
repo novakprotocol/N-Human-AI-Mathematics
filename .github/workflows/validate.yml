@@ -217,6 +217,7 @@ jobs:
           test: false
           lint: false
           use-github-cache: false
+          use-mathlib-cache: false
 
       - name: Update dependencies and build pinned Lean package
         shell: bash
