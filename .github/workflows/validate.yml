@@ -208,10 +208,34 @@ jobs:
             exit 1
           fi
 
-      - name: Build pinned Lean package
+      - name: Set up pinned Lean toolchain
         uses: leanprover/lean-action@v1.5.0
         with:
           lake-package-directory: papers/HINC-001/formal
-          build: true
+          auto-config: false
+          build: false
           test: false
           lint: false
+          use-github-cache: false
+
+      - name: Update dependencies and build pinned Lean package
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p reports
+          cd papers/HINC-001/formal
+          lake update 2>&1 | tee ../../../reports/hinc-lean-update-ci.txt
+          lake exe cache get 2>&1 | tee ../../../reports/hinc-lean-cache-ci.txt
+          lake build 2>&1 | tee ../../../reports/hinc-lean-build-ci.txt
+
+      - name: Upload Lean build receipts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: hinc-lean-validation-${{ github.run_id }}
+          path: |
+            reports/hinc-lean-update-ci.txt
+            reports/hinc-lean-cache-ci.txt
+            reports/hinc-lean-build-ci.txt
+          if-no-files-found: warn
+          retention-days: 90
