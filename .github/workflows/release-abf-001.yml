@@ -35,18 +35,15 @@ jobs:
           required = {
               'RELEASE_CONTROL_COMMIT': r'(?m)^release_control_commit:\s*([0-9a-f]{40})\s*$',
               'MATHEMATICAL_SOURCE_COMMIT': r'(?m)^mathematical_source_commit:\s*([0-9a-f]{40})\s*$',
-              'PACKAGE_SHA256': r'(?m)^package_sha256:\s*([0-9a-f]{64})\s*$',
+              'SOURCE_FREEZE_SHA256': r'(?m)^source_freeze_sha256:\s*([0-9a-f]{64})\s*$',
               'MANIFEST_SHA256': r'(?m)^manifest_sha256:\s*([0-9a-f]{64})\s*$',
               'AUTHORIZATION': r'(?m)^authorization:\s*(RELEASE-ABF-001-PUBLIC-TECHNICAL-REVIEW)\s*$',
           }
-          values = {}
           for key, pattern in required.items():
               match = re.search(pattern, body)
               if not match:
                   raise SystemExit(f'missing or invalid {key}')
-              values[key] = match.group(1)
-          for key, value in values.items():
-              print(f'{key}={value}')
+              print(f'{key}={match.group(1)}')
           PY
           cat /tmp/release.env >> "$GITHUB_ENV"
           cat /tmp/release.env
@@ -74,32 +71,24 @@ jobs:
           test -f staging/ABF-001/release-control/ABF-001_RELEASE_CANDIDATE.json
           test -f staging/ABF-001/release-control/ABF-001_RELEASE_NOTES.md
 
-      - name: Reconstruct exact mathematical source and publication package
+      - name: Reconstruct exact mathematical source
         run: |
           set -euo pipefail
           rm -rf /tmp/abf-source /tmp/abf-release
           mkdir -p /tmp/abf-source /tmp/abf-release
-          cat staging/ABF-001/source/ABF-001_COMPLETE_FROZEN_SOURCE_0.1.0.zip.b64.part-* \
-            | base64 --decode > /tmp/abf-release/ABF-001_COMPLETE_FROZEN_SOURCE_0.1.0.zip
-          cat staging/ABF-001/release-assets/ABF-001_Public_Technical_Review_Package_0.1.0.zip.b64.part-* \
-            | base64 --decode > /tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip
-          unzip -q /tmp/abf-release/ABF-001_COMPLETE_FROZEN_SOURCE_0.1.0.zip -d /tmp/abf-source
+          cat staging/ABF-001/source/ABF-001_MATHEMATICAL_SOURCE_FREEZE_0.1.0.zip.b64.part-* \
+            | base64 --decode > /tmp/abf-release/ABF-001_MATHEMATICAL_SOURCE_FREEZE_0.1.0.zip
+          ACTUAL_FREEZE="$(sha256sum /tmp/abf-release/ABF-001_MATHEMATICAL_SOURCE_FREEZE_0.1.0.zip | cut -d' ' -f1)"
+          test "$ACTUAL_FREEZE" = "$SOURCE_FREEZE_SHA256"
+          unzip -q /tmp/abf-release/ABF-001_MATHEMATICAL_SOURCE_FREEZE_0.1.0.zip -d /tmp/abf-source
           test -d /tmp/abf-source/ABF-001
           python - <<'PY'
           import hashlib, json, os, pathlib
           record = json.loads(pathlib.Path('staging/ABF-001/FREEZE_RECORD.json').read_text())
           assert record['schema_version'] == 'n.human_llm_mathematics.abf001.freeze.v1'
           assert record['mathematical_source_commit'] == os.environ['MATHEMATICAL_SOURCE_COMMIT']
-          assert record['professional_package_sha256'] == os.environ['PACKAGE_SHA256']
+          assert record['source_freeze_sha256'] == os.environ['SOURCE_FREEZE_SHA256']
           assert record['source_manifest_sha256'] == os.environ['MANIFEST_SHA256']
-          paths = {
-              'source_zip_sha256': pathlib.Path('/tmp/abf-release/ABF-001_COMPLETE_FROZEN_SOURCE_0.1.0.zip'),
-              'professional_package_sha256': pathlib.Path('/tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip'),
-          }
-          for field, path in paths.items():
-              digest = hashlib.sha256(path.read_bytes()).hexdigest()
-              assert digest == record[field], (field, digest, record[field])
-          assert record['professional_package_sha256'] == os.environ['PACKAGE_SHA256']
           manifest = pathlib.Path('/tmp/abf-source/ABF-001/SOURCE_SHA256SUMS.txt')
           assert hashlib.sha256(manifest.read_bytes()).hexdigest() == os.environ['MANIFEST_SHA256']
           PY
@@ -109,6 +98,7 @@ jobs:
           cp staging/ABF-001/release-control/OWNER_AUTHORIZATION.md /tmp/abf-source/ABF-001/
           cp staging/ABF-001/release-control/ABF-001_RELEASE_CANDIDATE.json /tmp/abf-source/ABF-001/
           cp staging/ABF-001/release-control/ABF-001_RELEASE_NOTES.md /tmp/abf-source/ABF-001/
+          cp staging/ABF-001/release-control/ABF-001_INTEGRATION_PR.md /tmp/abf-source/ABF-001/
 
       - name: Verify release-candidate identities and closed gates
         run: |
@@ -120,8 +110,8 @@ jobs:
           assert record['schema_version'] == 'n.human_llm.mathematics.abf001.release_candidate.v1'
           assert record['paper_id'] == 'ABF-001'
           assert record['mathematical_source_commit'] == os.environ['MATHEMATICAL_SOURCE_COMMIT']
-          assert record['release_control_commit'] == os.environ['RELEASE_CONTROL_COMMIT']
-          assert record['package_sha256'] == os.environ['PACKAGE_SHA256']
+          assert record['release_control_parent_commit'] == os.environ['MATHEMATICAL_SOURCE_COMMIT']
+          assert record['source_freeze_sha256'] == os.environ['SOURCE_FREEZE_SHA256']
           assert record['manifest_sha256'] == os.environ['MANIFEST_SHA256']
           assert record['hostile_review']['blocking_findings_open'] == 0
           assert record['prior_art']['search_completed_to_declared_scope'] is True
@@ -131,7 +121,7 @@ jobs:
           assert record['owner_authorization']['package_specific_authorization'] is True
           auth = (root / 'OWNER_AUTHORIZATION.md').read_text()
           assert os.environ['MATHEMATICAL_SOURCE_COMMIT'] in auth
-          assert os.environ['PACKAGE_SHA256'] in auth
+          assert os.environ['SOURCE_FREEZE_SHA256'] in auth
           assert 'abf-001-public-review-v1' in auth
           hostile = (root / 'review/FINAL_HOSTILE_REVIEW.md').read_text()
           assert 'blocking_findings_open: 0' in hostile
@@ -140,7 +130,7 @@ jobs:
           assert 'final_delta_search_date: 2026-07-28' in delta
           assert os.environ['MATHEMATICAL_SOURCE_COMMIT'] in delta
           digest = hashlib.sha256((root / 'SOURCE_SHA256SUMS.txt').read_bytes()).hexdigest()
-          assert digest == os.environ['MANIFEST_SHA256'], (digest, os.environ['MANIFEST_SHA256'])
+          assert digest == os.environ['MANIFEST_SHA256']
           PY
 
       - name: Set up Python
@@ -154,9 +144,9 @@ jobs:
           python -m pip install --disable-pip-version-check -r /tmp/abf-source/ABF-001/requirements-release.txt
 
       - name: Reconstruct and compile all ABF source
+        working-directory: /tmp/abf-source/ABF-001
         run: |
           set -euo pipefail
-          cd /tmp/abf-source/ABF-001
           python src/assemble_primary.py
           python -m py_compile \
             src/abf001_verifier.py \
@@ -165,21 +155,19 @@ jobs:
             src/abf001_tamper_control.py \
             tests/test_abf001.py \
             tools/build_abf001_publication.py
-          gcc -std=c11 -O3 -Wall -Wextra -Werror \
-            src/abf001_small_universe.c \
-            -o /tmp/abf001_small_universe
+          gcc -std=c11 -O3 -Wall -Wextra -Werror src/abf001_small_universe.c -o /tmp/abf001_small_universe
 
-      - name: Verify source manifest
+      - name: Verify mathematical-source manifest
         working-directory: /tmp/abf-source/ABF-001
         run: |
           set -euo pipefail
           sha256sum --check SOURCE_SHA256SUMS.txt
 
       - name: Run complete ABF challenge suite
+        working-directory: /tmp/abf-source/ABF-001
         run: |
           set -euo pipefail
           mkdir -p /tmp/abf-results
-          cd /tmp/abf-source/ABF-001
           python -m unittest discover -s tests -p 'test_*.py' -v 2>&1 | tee /tmp/abf-results/tests.txt
           python src/abf001_verifier.py --output-dir /tmp/abf-results/primary 2>&1 | tee /tmp/abf-results/primary.txt
           python src/abf001_independent_bitset.py --output-dir /tmp/abf-results/independent 2>&1 | tee /tmp/abf-results/independent.txt
@@ -189,18 +177,27 @@ jobs:
           test "$(sha256sum /tmp/abf-results/primary/incidence-edges.csv | cut -d' ' -f1)" = \
             "$(sha256sum /tmp/abf-results/independent/independent-incidence-edges.csv | cut -d' ' -f1)"
 
-      - name: Build final source package and release checksums
+      - name: Build professional publication assets and deterministic packages
+        working-directory: /tmp/abf-source/ABF-001
         run: |
           set -euo pipefail
+          python tools/build_abf001_publication.py --root . --output publication
+          test "$(find publication -maxdepth 1 -type f | wc -l)" -eq 8
+          unzip -t publication/ABF-001_Manuscript.docx
+          unzip -t publication/ABF-001_Anonymous_Manuscript.docx
+          unzip -t publication/ABF-001_Reviewer_Guide.docx
+          unzip -t publication/ABF-001_Executive_Summary.docx
+          file publication/*.pdf | tee /tmp/abf-results/publication-file-types.txt
           cd /tmp/abf-source
-          zip -qr /tmp/abf-release/ABF-001_Source_0.1.0.zip ABF-001
-          SOURCE_PACKAGE_SHA256="$(sha256sum /tmp/abf-release/ABF-001_Source_0.1.0.zip | cut -d' ' -f1)"
-          echo "SOURCE_PACKAGE_SHA256=$SOURCE_PACKAGE_SHA256" >> "$GITHUB_ENV"
+          find ABF-001 -exec touch -h -d '1980-01-01 00:00:00 UTC' {} +
+          zip -X -qr /tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip ABF-001
+          PROFESSIONAL_PACKAGE_SHA256="$(sha256sum /tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip | cut -d' ' -f1)"
+          echo "PROFESSIONAL_PACKAGE_SHA256=$PROFESSIONAL_PACKAGE_SHA256" >> "$GITHUB_ENV"
           sha256sum \
+            /tmp/abf-release/ABF-001_MATHEMATICAL_SOURCE_FREEZE_0.1.0.zip \
             /tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip \
-            /tmp/abf-release/ABF-001_Source_0.1.0.zip \
             | tee /tmp/abf-release/SHA256SUMS.txt
-          cp /tmp/abf-source/ABF-001/ABF-001_RELEASE_NOTES.md /tmp/abf-release/RELEASE_NOTES.md
+          cp ABF-001/ABF-001_RELEASE_NOTES.md /tmp/abf-release/RELEASE_NOTES.md
           python - <<'PY'
           import json, os, pathlib
           out = pathlib.Path('/tmp/abf-release')
@@ -211,8 +208,8 @@ jobs:
               'tag': 'abf-001-public-review-v1',
               'mathematical_source_commit': os.environ['MATHEMATICAL_SOURCE_COMMIT'],
               'release_control_commit': os.environ['RELEASE_CONTROL_COMMIT'],
-              'professional_package_sha256': os.environ['PACKAGE_SHA256'],
-              'source_package_sha256': os.environ['SOURCE_PACKAGE_SHA256'],
+              'source_freeze_sha256': os.environ['SOURCE_FREEZE_SHA256'],
+              'professional_package_sha256': os.environ['PROFESSIONAL_PACKAGE_SHA256'],
               'manifest_sha256': os.environ['MANIFEST_SHA256'],
               'historical_priority': 'unestablished',
               'external_reproduction': 'pending',
@@ -233,8 +230,8 @@ jobs:
             --release-control "$GITHUB_WORKSPACE/staging/ABF-001/release-control" \
             --mathematical-source-commit "$MATHEMATICAL_SOURCE_COMMIT" \
             --release-control-commit "$RELEASE_CONTROL_COMMIT" \
-            --package-sha256 "$PACKAGE_SHA256" \
-            --source-package-sha256 "$SOURCE_PACKAGE_SHA256" \
+            --package-sha256 "$PROFESSIONAL_PACKAGE_SHA256" \
+            --source-package-sha256 "$SOURCE_FREEZE_SHA256" \
             --manifest-sha256 "$MANIFEST_SHA256" \
             --release-url "https://github.com/${GITHUB_REPOSITORY}/releases/tag/abf-001-public-review-v1"
           cd /tmp/abf-integration
@@ -244,27 +241,20 @@ jobs:
           git diff --check
           git add --all
           git diff --cached --check
-          git -c user.name=novakprotocol \
-              -c user.email=245606744+novakprotocol@users.noreply.github.com \
-              commit -m 'Publish ABF-001 candidate technical-review package'
-          echo "INTEGRATION_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          git -c user.name=novakprotocol -c user.email=245606744+novakprotocol@users.noreply.github.com \
+            commit -m 'Publish ABF-001 candidate technical-review package'
 
-      - name: Create immutable tag
-        run: |
-          set -euo pipefail
-          test -z "$(git ls-remote --tags origin refs/tags/abf-001-public-review-v1)"
-          git tag -a abf-001-public-review-v1 "$RELEASE_CONTROL_COMMIT" \
-            -m 'ABF-001 candidate public technical review v1'
-          git push origin refs/tags/abf-001-public-review-v1
-
-      - name: Create GitHub release with governed assets
+      - name: Create immutable tag and GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          test -z "$(git ls-remote --tags origin refs/tags/abf-001-public-review-v1)"
+          git tag -a abf-001-public-review-v1 "$RELEASE_CONTROL_COMMIT" -m 'ABF-001 candidate public technical review v1'
+          git push origin refs/tags/abf-001-public-review-v1
           gh release create abf-001-public-review-v1 \
+            /tmp/abf-release/ABF-001_MATHEMATICAL_SOURCE_FREEZE_0.1.0.zip \
             /tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip \
-            /tmp/abf-release/ABF-001_Source_0.1.0.zip \
             /tmp/abf-release/SHA256SUMS.txt \
             /tmp/abf-release/ABF-001_RELEASE_ATTESTATION.json \
             --repo "$GITHUB_REPOSITORY" \
@@ -276,8 +266,8 @@ jobs:
         uses: actions/attest-build-provenance@v3
         with:
           subject-path: |
+            /tmp/abf-release/ABF-001_MATHEMATICAL_SOURCE_FREEZE_0.1.0.zip
             /tmp/abf-release/ABF-001_Public_Technical_Review_Package_0.1.0.zip
-            /tmp/abf-release/ABF-001_Source_0.1.0.zip
             /tmp/abf-release/SHA256SUMS.txt
             /tmp/abf-release/ABF-001_RELEASE_ATTESTATION.json
 
@@ -288,10 +278,7 @@ jobs:
           set -euo pipefail
           cd /tmp/abf-integration
           git push -u origin release/abf-001-public-review-v1
-          gh pr create \
-            --repo "$GITHUB_REPOSITORY" \
-            --base main \
-            --head release/abf-001-public-review-v1 \
+          gh pr create --repo "$GITHUB_REPOSITORY" --base main --head release/abf-001-public-review-v1 \
             --title 'Publish ABF-001 candidate technical-review package' \
             --body-file papers/ABF-001/ABF-001_INTEGRATION_PR.md
 
@@ -315,7 +302,7 @@ jobs:
           RELEASE_URL="https://github.com/${GITHUB_REPOSITORY}/releases/tag/abf-001-public-review-v1"
           PR_URL="$(gh pr view release/abf-001-public-review-v1 --repo "$GITHUB_REPOSITORY" --json url --jq .url)"
           gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body \
-            "ABF-001 release gate PASS. Tag and immutable release created from \`$RELEASE_CONTROL_COMMIT\`. Integration PR: $PR_URL. Release: $RELEASE_URL"
+            "ABF-001 release gate PASS. Tag and release created from \`$RELEASE_CONTROL_COMMIT\`. Integration PR: $PR_URL. Release: $RELEASE_URL"
           gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed
 
       - name: Clean up failed release attempt
