@@ -1,64 +1,42 @@
-# Final owner-controlled public switch
+# Final public-switch record
 
-## Preconditions
-
-The final switch must not begin until the guarded private preflight produces a receipt with:
+## Released source identity
 
 ```text
-result:                    PASS
-repository visibility:     PRIVATE
-PR state:                  OPEN DRAFT
-PR mergeability:           MERGEABLE
-publication validation:    PASS
-switch validation:         PASS
-HINC tests:                PASS
-common-core verifier:      PASS
-source hygiene:            PASS
-whitespace:                PASS
-public switch ready:       true
+repository:                   novakprotocol/N-Human-AI-Mathematics
+release branch source commit: 4b3d321bdfb34e561d76408f26e7b53a629e8893
+merge commit:                 af968322d078a48037bee91726b2ac77a9816f8b
+release channel:              public technical review
+version:                      0.1.0-public-review
 ```
 
-The receipt commit must equal the current head of PR #2.
-
-## Required artifact
+## Authoritative release asset
 
 ```text
-HINC-001_Candidate_Technical_Review_Package_0.1.0.zip
+file:
+HINC-001_Current_Source_Technical_Review_Package_0.1.0.zip
+
 SHA-256:
-4bd29a7fa58cf0e9f4f544c888c56c00e257b721aaaafbd860e62a07100a56a7
+e107e923eed6384bf71eb883783a15c94fd3ccb7b9addecebec14b05851f6294
 ```
 
-## Controlled sequence
+The source package is generated from the exact commit-anchored private-preflight archive and its signed receipt. It is the authoritative release artifact for this public-review launch.
 
-1. Verify `github.com` authentication and reject every Enterprise endpoint.
-2. Verify the private repository, default branch, PR state, and exact preflight commit.
-3. Mark PR #2 ready and squash-merge it into private `main`.
-4. Clone private `main` and rerun the private validators and HINC tests.
-5. Build a public-state activation commit locally and run the post-switch source validator against it.
-6. Change visibility to public.
-7. Fast-forward `main` to the validated activation commit.
-8. Re-read GitHub metadata and require public visibility and the expected main commit.
-9. Enable GitHub Pages with workflow builds.
-10. Dispatch `.github/workflows/pages.yml` with the exact confirmation phrase.
-11. Require successful public-state validation, HINC tests, and Pages deployment.
-12. Fetch the live site and verify its principal status language.
-13. Commit the final live-site receipt, tag `public-review-v1`, and create the GitHub release.
-14. Verify and attach the HINC artifact ZIP.
-15. Open counterexample, proof-gap, prior-art, reproduction, and formalization review channels.
-16. Write a local final receipt and checksum manifest.
-
-## Rollback rule
-
-If any gate fails after visibility changes, the release procedure must attempt to restore private visibility and preserve a failure receipt. No partial sequence may be described as a completed public release.
-
-## Hard boundary
+## Legacy derived artifact
 
 ```text
-allowed remote:
-github.com/novakprotocol/N-Human-AI-Mathematics
+recorded legacy file:
+HINC-001_Candidate_Technical_Review_Package_0.1.0.zip
 
-off limits:
-va.ghe.com
-all GitHub Enterprise repositories
-all VA or government enterprise resources
+recorded SHA-256:
+b357909077792a3e3b124359fa7348c21aea72c5d802c19562b46fa96350c123
+
+attached in this release:
+no
 ```
+
+The legacy PDF/DOCX package was not present in the user’s Downloads or searchable file library at release time. Its checksum is preserved as historical metadata, but the release does not claim that unavailable bytes were verified or attached.
+
+## Scientific boundary
+
+Public visibility does not establish peer review, journal acceptance, complete formal verification, independent external reproduction, or worldwide historical priority.

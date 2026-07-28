@@ -4,10 +4,10 @@
   "repository": "novakprotocol/N-Human-AI-Mathematics",
   "accountable_owner": "Matthew S. Novak",
   "operating_mode": "human-led-ai-assisted",
-  "public_release_authorized": false,
+  "public_release_authorized": true,
   "public_switch_ready": true,
-  "release_channel": "private_staging",
-  "release_version": "0.1.0-public-review-candidate",
+  "release_channel": "public_review",
+  "release_version": "0.1.0-public-review",
   "specific_model_disclosed": false,
   "specific_provider_disclosed": false,
   "papers": [
@@ -21,7 +21,7 @@
         "nonreduced algebraic geometry"
       ],
       "state": "active_review",
-      "claim_status": "self_contained_candidate_classification_ready_for_public_technical_review",
+      "claim_status": "self_contained_candidate_classification_open_for_public_technical_review",
       "human_proof": "consolidated_revised_manuscript_complete",
       "internal_reproduction": "passed_declared_python_c_groebner_artin_and_common_core_routes",
       "formal_verification": {
@@ -34,10 +34,10 @@
         "center_and_derived": "human_proof_complete_not_formalized",
         "full_manuscript": "not_formalized"
       },
-      "external_specialist_review": "pending_and_requested_by_public_release",
+      "external_specialist_review": "requested_by_public_release",
       "historical_priority": "unestablished",
       "peer_review": "not_submitted",
-      "public_release": "ready_pending_owner_visibility_switch"
+      "public_release": "active_public_review_0.1.0"
     },
     {
       "id": "ABF-001",

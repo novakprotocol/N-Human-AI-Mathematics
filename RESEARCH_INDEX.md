@@ -5,10 +5,10 @@ This index lists only results selected for paper-scale review packages. It is no
 ## Repository state
 
 ```text
-repository visibility:        private
-candidate release:            0.1.0-public-review-candidate
-public switch ready:          true
-visibility switch executed:   false
+repository visibility:        public
+public-review release:        0.1.0-public-review
+public review active:         true
+visibility switch executed:   true
 complete candidate package:   HINC-001
 index-only hold entries:      ABF-001, FSG-001, ACM-001
 peer reviewed:                no
@@ -20,7 +20,7 @@ historical priority:          unestablished
 
 | Order | ID | Working title | Field | Current state |
 |---:|---|---|---|---|
-| 1 | `HINC-001` | Hidden Infinitesimal Noncommutativity in Two Binary-Gerstenhaber Endomorphism Monoid Schemes | Affine monoid schemes, binary Gerstenhaber algebras, nonreduced geometry | Complete candidate package; ready for final public switch |
+| 1 | `HINC-001` | Hidden Infinitesimal Noncommutativity in Two Binary-Gerstenhaber Endomorphism Monoid Schemes | Affine monoid schemes, binary Gerstenhaber algebras, nonreduced geometry | Active candidate package; open for public technical review |
 | 2 | `ABF-001` | Affine-Hyperplane Degree-Drop Spectra of a Vectorial Boolean Map | Boolean functions, finite linear algebra | Planned second package; exact finite theorem internally reproduced |
 | 3 | `FSG-001` | Fibonacci Critical Groups of Carry-Rees Petal Graphs | Critical groups, graph theory, Fibonacci divisibility | Hold pending specialist and formal review |
 | 4 | `ACM-001` | ANF Code and Matroid Geometry of a Reduced Vectorial Map | Coding theory, matroids, Boolean functions | Hold pending final consolidation |
@@ -80,8 +80,8 @@ These are objectives of the public technical-review release. They are not falsel
 
 ```text
 candidate package:       complete
-public switch ready:     yes
-repository private:      yes
+public review active:    yes
+repository public:       yes
 peer reviewed:           no
 historical priority:     unestablished
 ```

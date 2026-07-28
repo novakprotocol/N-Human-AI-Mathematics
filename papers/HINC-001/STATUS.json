@@ -5,7 +5,7 @@
   "title": "Hidden Infinitesimal Noncommutativity in Two Binary-Gerstenhaber Endomorphism Monoid Schemes",
   "source": {
     "repository": "novakprotocol/N-Human-AI-Mathematics",
-    "commit": null,
+    "commit": "af968322d078a48037bee91726b2ac77a9816f8b",
     "paths": [
       "papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md",
       "papers/HINC-001/CLAIMS.md",
@@ -90,17 +90,17 @@
     "peer_review": "not submitted"
   },
   "release": {
-    "public_authorized": false,
+    "public_authorized": true,
     "public_switch_ready": true,
-    "channel": "private_staging",
-    "version": "0.1.0-public-review-candidate",
-    "release_date": null,
+    "channel": "public_review",
+    "version": "0.1.0-public-review",
+    "release_date": "2026-07-27",
     "doi": null,
     "specific_model_disclosed": false,
     "specific_provider_disclosed": false
   },
   "limitations": [
-    "The repository remains private until the final owner-controlled visibility switch.",
+    "The repository is public for candidate technical review; public visibility is not peer review or validation.",
     "The Lean PASS covers the base kernel and coefficient classifications, not the full revised manuscript.",
     "External specialist review and independent reproduction are pending and are objectives of public technical review, not prerequisites falsely represented as completed.",
     "No exact indexed prior-art match was located, but worldwide historical priority is not established.",

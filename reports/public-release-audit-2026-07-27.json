@@ -1,9 +1,9 @@
 {
   "schema_version": "n.human_ai_mathematics.public_release_audit.v2",
   "repository": "novakprotocol/N-Human-AI-Mathematics",
-  "candidate_version": "0.1.0-public-review-candidate",
+  "candidate_version": "0.1.0-public-review",
   "audit_date": "2026-07-27",
-  "result": "READY_PENDING_VISIBILITY_SWITCH",
+  "result": "PUBLIC_RELEASED",
   "release_scope": {
     "complete_candidate_public_review_packages": [
       "HINC-001"
@@ -13,9 +13,9 @@
       "FSG-001",
       "ACM-001"
     ],
-    "repository_visibility": "private",
+    "repository_visibility": "public",
     "public_switch_ready": true,
-    "visibility_change_executed": false,
+    "visibility_change_executed": true,
     "journal_submission": false,
     "peer_reviewed": false,
     "doi_assigned": false,
@@ -26,9 +26,10 @@
   "owner_control": {
     "accountable_owner": "Matthew S. Novak",
     "content_prepared_for_public_review": true,
-    "final_visibility_switch_executed": false,
+    "final_visibility_switch_executed": true,
     "approved_public_wording": "human-led, LLM-assisted",
-    "residual_scientific_gates_preserved": true
+    "residual_scientific_gates_preserved": true,
+    "public_review_authorized": true
   },
   "mathematical_package_checks": {
     "consolidated_revised_manuscript": "present",
@@ -135,5 +136,5 @@
     "Public technical review would solicit external correctness review and independent reproduction; it would not represent them as already completed.",
     "Private historical conversations are not cryptographically authenticated by this repository."
   ],
-  "final_switch_required": true
+  "final_switch_required": false
 }

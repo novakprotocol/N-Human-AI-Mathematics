@@ -1,12 +1,12 @@
 {
   "schema_version": "n.human_ai_mathematics.public_switch_readiness.v1",
   "repository": "novakprotocol/N-Human-AI-Mathematics",
-  "candidate_version": "0.1.0-public-review-candidate",
-  "result": "READY_PENDING_VISIBILITY_SWITCH",
-  "repository_visibility": "private",
+  "candidate_version": "0.1.0-public-review",
+  "result": "PUBLIC_RELEASED",
+  "repository_visibility": "public",
   "public_switch_ready": true,
-  "visibility_change_executed": false,
-  "pages_deployment_executed": false,
+  "visibility_change_executed": true,
+  "pages_deployment_executed": true,
   "owner": "Matthew S. Novak",
   "public_wording": "human-led, LLM-assisted",
   "specific_model_disclosed": false,
@@ -48,5 +48,9 @@
     "freeze and publish the final release receipt"
   ],
   "failure_policy": "fail_closed",
-  "generated_date": "2026-07-27"
+  "generated_date": "2026-07-27",
+  "pages_url": "https://novakprotocol.github.io/N-Human-AI-Mathematics/",
+  "release_tag": "public-review-v1",
+  "release_url": "https://github.com/novakprotocol/N-Human-AI-Mathematics/releases/tag/public-review-v1",
+  "release_date": "2026-07-27"
 }

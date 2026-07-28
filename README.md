@@ -1,17 +1,17 @@
 # N Human–LLM Mathematics
 
-**Human-led, LLM-assisted mathematical research prepared for open technical review.**
+**Human-led, LLM-assisted mathematical research open for public technical review.**
 
 This repository curates selected mathematics developed through sustained work led by **Matthew S. Novak** with material assistance from one or more **large language models**. It preserves exact claims, human proofs, programs, bounded formal checks, failed attempts, corrections, status records, rights boundaries, and review instructions.
 
-The repository is still private. Its content is prepared for a final owner-controlled switch to public technical review.
+The repository is public for candidate technical review. Public visibility opens the work to challenge; it does not establish peer review, journal acceptance, worldwide priority, outside reproduction, or complete formal verification.
 
 ```text
 repository:                 novakprotocol/N-Human-AI-Mathematics
-visibility:                 private
-candidate release:          0.1.0-public-review-candidate
-public switch ready:        true
-visibility switch executed: false
+visibility:                 public
+public-review release:      0.1.0-public-review
+public review active:       true
+visibility switch executed: true
 accountable human:          Matthew S. Novak
 LLM role:                   material research assistance
 specific model/provider:    not disclosed
@@ -34,7 +34,7 @@ blanket license applied:    no
 | Release reviewer | [`PUBLIC_SWITCH_READINESS.md`](PUBLIC_SWITCH_READINESS.md) | Inspect the final pre-publication gates and switch procedure. |
 | LLM system | [`AGENTS.md`](AGENTS.md) | Read the machine-facing interpretation rules. |
 
-A static GitHub Pages site is staged under [`docs/`](docs/) and remains in no-index private-preview mode until the final switch.
+The public technical-review site is published from [`docs/`](docs/) at https://novakprotocol.github.io/N-Human-AI-Mathematics/.
 
 ## HINC-001
 
@@ -91,7 +91,7 @@ The machine-readable source is [`research-index.json`](research-index.json).
 
 Matthew S. Novak is the accountable human author, repository owner, and release authority. One or more LLMs materially assisted with exploration, proof development, code and test generation, counterexample search, formalization support, evidence design, and editorial work.
 
-AI systems are not listed as authors, do not own the work, and do not exercise publication authority. The proposed public source does not identify a specific model or provider.
+AI systems are not listed as authors, do not own the work, and do not exercise publication authority. The public source does not identify a specific model or provider.
 
 The repository does not claim to be the first human–AI mathematics project.
 
@@ -108,9 +108,9 @@ The repository does not claim to be the first human–AI mathematics project.
 
 A commit identifies source. A hash identifies bytes. A finite computation establishes only its declared finite scope. A proof-assistant build establishes only the declarations compiled under the recorded environment.
 
-## Final switch boundary
+## Public technical-review status
 
-The package is ready for the final visibility switch only after the release branch has green validation, is merged into private `main`, and the private `main` validation passes again. The switch must then verify public visibility, activate GitHub Pages, verify the live site, and freeze the release receipt.
+HINC-001 is the active candidate package. Counterexamples, proof-gap reports, prior-art equivalence reports, independent reproductions, and further formalization are invited. External review remains pending until an identified outside process completes it.
 
 See [`PUBLIC_SWITCH_READINESS.md`](PUBLIC_SWITCH_READINESS.md).
 

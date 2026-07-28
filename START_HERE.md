@@ -6,9 +6,9 @@ N Human–LLM Mathematics is a curated repository for selected mathematics devel
 
 The accountable human researcher is **Matthew S. Novak**. One or more large language models materially assisted with exploration, candidate theorem formulation, proof decomposition, code and test generation, counterexample search, formal-proof drafting, literature-query design, and publication preparation.
 
-The proposed public source does not identify a specific model, provider, model family, or version.
+The public source does not identify a specific model, provider, model family, or version.
 
-The repository is currently private but prepared for a final switch to **public technical review**.
+The repository is public for **candidate technical review**.
 
 ## What public technical review means
 
@@ -119,11 +119,11 @@ Private chat transcripts and hidden model scratch work are not published. The co
 ## Release state
 
 ```text
-repository visibility:       private
-candidate package:           ready
-public switch ready:         true
-visibility switch executed:  false
-Pages deployment executed:   false
+repository visibility:       public
+candidate package:           active public review
+public review active:        true
+visibility switch executed:  true
+Pages deployment executed:   true
 peer reviewed:               no
 historical priority:         unestablished
 ```

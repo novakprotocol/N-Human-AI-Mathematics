@@ -5,10 +5,10 @@
 **Hidden Infinitesimal Noncommutativity in Two Binary-Gerstenhaber Endomorphism Monoid Schemes**
 
 ```text
-candidate version:           0.1.0-public-review-candidate
-repository visibility:       private
-public switch ready:         yes
-public switch executed:      no
+public-review version:       0.1.0-public-review
+repository visibility:       public
+public technical review:     active
+public switch executed:      yes
 peer reviewed:               no
 journal submitted:           no
 DOI:                         none
@@ -85,7 +85,7 @@ The candidate package now contains one integrated human proof rather than a manu
 | Independent external reproduction | Pending; a target of public technical review |
 | Historical priority | Unestablished |
 | Peer-review acceptance | Not established |
-| Public switch readiness | Ready after final repository checks |
+| Public technical review | Active; outside review remains pending |
 | Specific model/provider disclosure | Withheld |
 
 ## Exact formal receipts
@@ -119,11 +119,11 @@ The first classification checker attempt failed on recursive simplification in o
 
 ## Safe public claim
 
-> HINC-001 supplies a self-contained candidate arbitrary-base classification of binary-Gerstenhaber endomorphism monoid schemes for two explicit subalgebras of the characteristic-two Hochschild cohomology of the dual numbers. The algebraic kernel and coefficient classifications have bounded public Lean verification; the full revised manuscript does not. External correctness review, independent reproduction, and historical priority remain pending and are objectives of the proposed public technical-review release.
+> HINC-001 supplies a self-contained candidate arbitrary-base classification of binary-Gerstenhaber endomorphism monoid schemes for two explicit subalgebras of the characteristic-two Hochschild cohomology of the dual numbers. The algebraic kernel and coefficient classifications have bounded public Lean verification; the full revised manuscript does not. External correctness review, independent reproduction, and historical priority remain pending and are objectives of the public technical-review release.
 
 ## Human–LLM disclosure
 
-One or more large language models materially assisted the research under Matthew S. Novak’s direction. AI systems are not authors. Specific model and provider identities are not disclosed in this proposed public-review version. Read [`AI_DISCLOSURE.md`](AI_DISCLOSURE.md).
+One or more large language models materially assisted the research under Matthew S. Novak’s direction. AI systems are not authors. Specific model and provider identities are not disclosed in this public-review version. Read [`AI_DISCLOSURE.md`](AI_DISCLOSURE.md).
 
 ## Review request
 
