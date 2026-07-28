@@ -1,12 +1,11 @@
 name: Patch ABF-001 same-step hash propagation
 
 on:
-  issues:
-    types: [opened]
+  push:
+    branches: [main]
 
 permissions:
   contents: write
-  issues: write
   pull-requests: write
 
 concurrency:
@@ -16,8 +15,7 @@ concurrency:
 jobs:
   patch:
     if: >-
-      github.event.issue.user.login == github.repository_owner &&
-      github.event.issue.title == '[Patch ABF-001 release env propagation]'
+      startsWith(github.event.head_commit.message, 'Arm ABF same-step hash patch')
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -76,12 +74,3 @@ jobs:
             --head "$branch" \
             --title 'Export ABF package hashes within the generating step' \
             --body '## Exact defect\n\nThe guarded ABF release built both deterministic ZIPs, then failed because values appended to `GITHUB_ENV` are unavailable until the next step. The attestation Python process runs in the same step.\n\n## Narrow correction\n\nExport `PROFESSIONAL_PACKAGE_SHA256` and `FROZEN_GIT_SOURCE_SHA256` in the current shell immediately after computing them, while retaining the existing `GITHUB_ENV` writes for later steps.\n\n## Safety boundary\n\nThis changes one workflow file only. It does not alter ABF mathematics, HINC-001, `docs/`, source identities, claims, tags, releases, or assets.'
-
-      - name: Record patch pull request
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          url="$(gh pr view control/abf-release-same-step-env-fix-v1 --repo "$GITHUB_REPOSITORY" --json url --jq .url)"
-          gh issue comment "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --body "ABF release hash-propagation patch PR opened: ${url}"
-          gh issue close "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --reason completed
