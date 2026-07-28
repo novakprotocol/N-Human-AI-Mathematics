@@ -1,0 +1,73 @@
+{
+  "$schema": "../../schemas/paper-status.schema.json",
+  "claim": {
+    "globally_novel": "unestablished",
+    "level": 6,
+    "security_consequence": "not_claimed",
+    "status": "frozen mathematical source candidate; final hostile/prior-art/release control records intentionally not part of this source freeze"
+  },
+  "computation": {
+    "independent_status": "two separately written internal implementations PASS; historical C PASS",
+    "primary_status": "PASS",
+    "receipts": [
+      "evidence/receipts/fresh-validation.json",
+      "evidence/historical/local-proof-v32.json"
+    ],
+    "role": "reconstruct and classify the specified finite map; computations support but do not replace the general proof"
+  },
+  "formal_verification": {
+    "assistant": null,
+    "receipts": [],
+    "status": "not formalized",
+    "unverified_scope": [
+      "general moment-kernel theorem",
+      "finite rank and incidence certificates",
+      "full manuscript"
+    ],
+    "verified_scope": []
+  },
+  "limitations": [
+    "reduced finite map only",
+    "no full-width security claim",
+    "no external institutional reproduction",
+    "no proof-assistant verification",
+    "global historical priority unestablished",
+    "public GitHub release is not peer review"
+  ],
+  "paper_id": "ABF-001",
+  "proof": {
+    "dependency_map": "PROOF_MAP.md",
+    "human_proof_status": "self-contained complete human proof; final hostile review binds to the frozen Git commit",
+    "known_gaps": [
+      "no proof-assistant formalization",
+      "external specialist review pending"
+    ]
+  },
+  "release": {
+    "channel": "hold_pending_final_release_control",
+    "doi": null,
+    "public_authorized": false,
+    "public_switch_ready": false,
+    "release_date": null,
+    "specific_model_disclosed": false,
+    "specific_provider_disclosed": false,
+    "version": "0.1.0-public-review"
+  },
+  "review": {
+    "external": "pending",
+    "historical_priority": "unestablished; expanded search complete to declared scope; same-day delta review will bind to the frozen Git commit",
+    "internal": "initial hostile review corrected indexed-versus-distinct radicals; final review will bind to the frozen Git commit",
+    "peer_review": "not established"
+  },
+  "schema_version": "n.human_ai_mathematics.paper_status.v1",
+  "source": {
+    "commit": null,
+    "paths": [
+      "papers/ABF-001/manuscript/ABF-001_MANUSCRIPT.md",
+      "papers/ABF-001/src/abf001_verifier.py",
+      "papers/ABF-001/src/abf001_independent_bitset.py"
+    ],
+    "repository": "novakprotocol/N-Human-AI-Mathematics"
+  },
+  "title": "Affine Restriction Moment Kernels and Radical Incidence Geometry of a Vectorial Boolean Map"
+}
