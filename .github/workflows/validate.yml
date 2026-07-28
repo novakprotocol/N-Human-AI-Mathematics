@@ -208,23 +208,27 @@ jobs:
             exit 1
           fi
 
-      - name: Set up pinned Lean toolchain
-        uses: leanprover/lean-action@v1.5.0
-        with:
-          lake-package-directory: papers/HINC-001/formal
-          auto-config: false
-          build: false
-          test: false
-          lint: false
-          use-github-cache: false
-          use-mathlib-cache: false
+      - name: Install pinned Lean toolchain manager
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p reports
+          curl --proto '=https' --tlsv1.2 -sSfL \
+            https://raw.githubusercontent.com/leanprover/elan/v4.2.1/elan-init.sh \
+            -o /tmp/elan-init.sh
+          sha256sum /tmp/elan-init.sh | tee reports/elan-installer-sha256-ci.txt
+          sh /tmp/elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/elan" --version | tee reports/elan-version-ci.txt
 
       - name: Update dependencies and build pinned Lean package
         shell: bash
         run: |
           set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
           mkdir -p reports
           cd papers/HINC-001/formal
+          lake --version 2>&1 | tee ../../../reports/hinc-lake-version-ci.txt
           lake update 2>&1 | tee ../../../reports/hinc-lean-update-ci.txt
           lake exe cache get 2>&1 | tee ../../../reports/hinc-lean-cache-ci.txt
           lake build 2>&1 | tee ../../../reports/hinc-lean-build-ci.txt
@@ -235,6 +239,9 @@ jobs:
         with:
           name: hinc-lean-validation-${{ github.run_id }}
           path: |
+            reports/elan-installer-sha256-ci.txt
+            reports/elan-version-ci.txt
+            reports/hinc-lake-version-ci.txt
             reports/hinc-lean-update-ci.txt
             reports/hinc-lean-cache-ci.txt
             reports/hinc-lean-build-ci.txt
