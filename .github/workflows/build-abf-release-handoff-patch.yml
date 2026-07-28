@@ -1,0 +1,98 @@
+name: Build ABF release handoff patch
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: github.event.pull_request.title == '[Build ABF release handoff patch]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out proposed source
+        uses: actions/checkout@v7
+
+      - name: Build exact workflow replacement
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('.github/workflows/release-abf-001-object-tree.yml')
+          text = path.read_text(encoding='utf-8')
+
+          old_push = '''      - name: Push integration branch and open pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          cd /tmp/abf-integration
+          git push -u origin release/abf-001-public-review-v1
+          gh pr create --repo "$GITHUB_REPOSITORY" --base main --head release/abf-001-public-review-v1 \
+            --title 'Publish ABF-001 candidate technical-review package' \
+            --body-file papers/ABF-001/ABF-001_INTEGRATION_PR.md
+'''
+          new_push = '''      - name: Push validated integration branch
+        run: |
+          set -euo pipefail
+          cd /tmp/abf-integration
+          git push -u origin release/abf-001-public-review-v1
+'''
+
+          old_success = '''      - name: Record successful release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          RELEASE_URL="https://github.com/${GITHUB_REPOSITORY}/releases/tag/${RELEASE_TAG}"
+          PR_URL="$(gh pr view release/abf-001-public-review-v1 --repo "$GITHUB_REPOSITORY" --json url --jq .url)"
+          gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body \
+            "ABF-001 release gate PASS. Tag and release created from `${RELEASE_CONTROL_COMMIT}`. Integration PR: ${PR_URL}. Release: ${RELEASE_URL}"
+          gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed
+'''
+          new_success = '''      - name: Record successful release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          RELEASE_URL="https://github.com/${GITHUB_REPOSITORY}/releases/tag/${RELEASE_TAG}"
+          BRANCH_URL="https://github.com/${GITHUB_REPOSITORY}/tree/release/abf-001-public-review-v1"
+          gh issue comment "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --body \
+            "ABF-001 release gate PASS. Tag and release created from `${RELEASE_CONTROL_COMMIT}`. Validated integration branch: ${BRANCH_URL}. A connector-managed PR will be opened separately. Release: ${RELEASE_URL}"
+          gh issue close "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --reason completed
+'''
+
+          if text.count(old_push) != 1:
+              raise SystemExit(f'push/PR block count: {text.count(old_push)}')
+          if text.count(old_success) != 1:
+              raise SystemExit(f'success block count: {text.count(old_success)}')
+
+          text = text.replace(old_push, new_push, 1)
+          text = text.replace(old_success, new_success, 1)
+          output = Path('abf-release-handoff-patch')
+          output.mkdir()
+          (output / 'release-abf-001-object-tree.yml').write_text(text, encoding='utf-8', newline='\n')
+          (output / 'PATCH_RECEIPT.txt').write_text(
+              'result: PASS\n'
+              'change: workflow pushes the validated integration branch; the GitHub connector opens the PR separately\n'
+              'mathematics_changed: no\n'
+              'HINC_changed: no\n'
+              'docs_changed: no\n',
+              encoding='utf-8',
+              newline='\n',
+          )
+          PY
+
+      - name: Upload exact patched workflow
+        uses: actions/upload-artifact@v7
+        with:
+          name: abf-release-handoff-patch-${{ github.run_id }}
+          path: abf-release-handoff-patch
+          if-no-files-found: error
+          retention-days: 7
