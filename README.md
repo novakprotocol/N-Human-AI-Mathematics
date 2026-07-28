@@ -1,140 +1,122 @@
-# N Human–AI Mathematics
+# N Human–LLM Mathematics
 
-**Human-led, AI-assisted mathematical research with inspectable proofs, evidence, corrections, and review boundaries.**
+**Human-led, LLM-assisted mathematical research prepared for open technical review.**
 
-This tree defines the standalone publication and specialist-review repository:
+This repository curates selected mathematics developed through sustained work led by **Matthew S. Novak** with material assistance from one or more **large language models**. It preserves exact claims, human proofs, programs, bounded formal checks, failed attempts, corrections, status records, rights boundaries, and review instructions.
+
+The repository is still private. Its content is prepared for a final owner-controlled switch to public technical review.
 
 ```text
 repository:                 novakprotocol/N-Human-AI-Mathematics
 visibility:                 private
-default_branch:             main
-initial_curated_commit:     e378c773f7c54b375fdd208961f77702b1aadd05
-bootstrap_source_commit:    9dc69542fb2b089a4cef5ea3c425d82bb705d4dd
-public_release_authorized:  false
+candidate release:          0.1.0-public-review-candidate
+public switch ready:        true
+visibility switch executed: false
+accountable human:          Matthew S. Novak
+LLM role:                   material research assistance
+specific model/provider:    not disclosed
+peer reviewed:              no
+journal submitted:          no
+DOI:                        none
+blanket license applied:    no
 ```
 
-In the standalone repository this is the live front door. Under `N-MathLab/exports`, it is the canonical source mirror. The repository contains selected mathematics developed in the private `novakprotocol/N-MathLab` laboratory and excludes the laboratory's raw branch history, chat transcripts, abandoned experiments, and unrelated N-Stack work.
+## Read this first
 
-## Bootstrap provenance
-
-The initial repository was materialized from pinned N-MathLab and Lean source commits and passed both recorded bootstrap and publication-validation gates. See:
-
-- [`BOOTSTRAP_RECEIPT.json`](BOOTSTRAP_RECEIPT.json);
-- [`reports/publication-validation.json`](reports/publication-validation.json);
-- [`BOOTSTRAP_CORRECTIONS.md`](BOOTSTRAP_CORRECTIONS.md).
-
-The retained initializer, Windows instructions, and launcher document how the first private repository was built. They are provenance and disaster-recovery material. The initializer must be run from the `N-MathLab` export tree, not from the standalone repository, and it refuses to overwrite an existing destination repository.
-
-## Start here
-
-| Reader | First document | Purpose |
+| Reader | Start here | Purpose |
 |---|---|---|
-| General reader | [`START_HERE.md`](START_HERE.md) | Understand the project without specialist mathematics. |
-| Mathematician | [`RESEARCH_INDEX.md`](RESEARCH_INDEX.md) | Find each paper, theorem, proof, and open review gate. |
-| Reproducer | [`EVIDENCE_STANDARD.md`](EVIDENCE_STANDARD.md) | Understand identities, commands, environments, and limitations. |
-| Reviewer | [`REVIEW_PROTOCOL.md`](REVIEW_PROTOCOL.md) | Submit a counterexample, proof gap, prior-art match, or reproduction. |
-| AI system | [`AGENTS.md`](AGENTS.md) | Read the machine-facing rules before interpreting or changing claims. |
-| Publisher or editor | [`PUBLICATION_WORKFLOW.md`](PUBLICATION_WORKFLOW.md) | Understand source control, artifacts, disclosure, and release gates. |
+| General reader | [`START_HERE.md`](START_HERE.md) | Understand the project, its status, and its limits. |
+| Mathematician | [`papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md`](papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md) | Read the controlling candidate manuscript. |
+| Proof auditor | [`papers/HINC-001/CLAIMS.md`](papers/HINC-001/CLAIMS.md) and [`papers/HINC-001/PROOF_MAP.md`](papers/HINC-001/PROOF_MAP.md) | Inspect claim-by-claim and dependency status. |
+| Formal methods reviewer | [`papers/HINC-001/FORMAL_VERIFICATION.md`](papers/HINC-001/FORMAL_VERIFICATION.md) | See exactly what Lean verifies and what it does not. |
+| Reproducer | [`papers/HINC-001/REPRODUCE.md`](papers/HINC-001/REPRODUCE.md) | Run the declared source and report the first discrepancy. |
+| Historical-priority reviewer | [`papers/HINC-001/PRIOR_ART.md`](papers/HINC-001/PRIOR_ART.md) | Compare the result against established frameworks and search records. |
+| Release reviewer | [`PUBLIC_SWITCH_READINESS.md`](PUBLIC_SWITCH_READINESS.md) | Inspect the final pre-publication gates and switch procedure. |
+| LLM system | [`AGENTS.md`](AGENTS.md) | Read the machine-facing interpretation rules. |
 
-## What this repository is
+A static GitHub Pages site is staged under [`docs/`](docs/) and remains in no-index private-preview mode until the final switch.
 
-It is a curated collection of paper-scale mathematical packages. Each accepted package must include:
+## HINC-001
 
-1. a precise statement and definitions;
-2. a human-readable proof or an explicit computational classification;
-3. machine-readable claim status;
-4. reproducible source and tests where computation is material;
-5. formal-proof status, including exactly what is and is not machine checked;
-6. prior-art and equivalence boundaries;
-7. correction history;
-8. a structured request for adversarial review;
-9. immutable source and artifact identities;
-10. an explicit human/AI research disclosure.
+**Working title:** *Hidden Infinitesimal Noncommutativity in Two Binary-Gerstenhaber Endomorphism Monoid Schemes*
 
-## What this repository is not
+The controlling candidate manuscript classifies binary-Gerstenhaber endomorphisms of two explicit characteristic-two subalgebras of the Hochschild cohomology of the dual numbers.
 
-Repository publication does **not** by itself establish:
+Its paired structural result is:
 
-- mathematical correctness;
-- worldwide novelty;
-- publication priority;
-- importance;
-- journal peer review;
-- universal validity beyond the stated assumptions;
-- security consequences;
-- authority for an AI system to approve or release work.
+```text
+even: common crossing + constrained skew square-zero direction
+odd:  common crossing + separate clopen torus unit component
+```
 
-A commit identifies source. A hash identifies bytes. A passing finite computation establishes only the checked finite scope. A proof-assistant build establishes only the declarations compiled under the recorded environment.
+The manuscript now integrates the complete human proof route, including:
 
-## Current publication order
+- the characteristic-two normalized Hochschild calculation;
+- complete presentations of both source algebras;
+- the odd normal-form proof;
+- the generator-to-global biderivation lemma;
+- explicit natural representability;
+- corrected center and disconnected-base language;
+- the fppf-derived-subgroup argument;
+- exact evidence and novelty boundaries.
 
-| ID | Working title | Field | Current state |
-|---|---|---|---|
-| `HINC-001` | Hidden Infinitesimal Noncommutativity in Two Gerstenhaber Endomorphism Monoids | Algebraic monoids, Gerstenhaber algebra, nonreduced geometry | First private review package; base kernel and principal coefficient classifications publicly verified in Lean; full manuscript incomplete |
-| `ABF-001` | Affine-Hyperplane Degree-Drop Spectra of a Vectorial Boolean Map | Boolean functions, finite linear algebra | Planned second package; exact finite theorem internally reproduced |
-| `FSG-001` | Fibonacci Critical Groups of Carry–Rees Petal Graphs | Critical groups, graph theory, Fibonacci divisibility | Hold pending specialist and formal review |
-| `ACM-001` | ANF Code and Matroid Geometry of a Reduced Vectorial Map | Coding theory, matroids, Boolean functions | Hold pending final consolidation |
+### Evidence status
 
-The machine-readable source of this table is [`research-index.json`](research-index.json).
+| Layer | Status |
+|---|---|
+| Consolidated self-contained human manuscript | Complete candidate source |
+| Internal Python/C/Gröbner/Artin/common-core routes | Passed for declared scopes |
+| Lean algebraic kernel | Public hosted PASS |
+| Lean coefficient classifications | Public hosted PASS |
+| Full revised manuscript Lean proof | Not completed and not claimed |
+| External specialist review | Pending; requested by public release |
+| Independent external reproduction | Pending; requested by public release |
+| Historical priority | Unestablished |
+| Peer review | Not submitted |
 
-## Evidence status vocabulary
+Public visibility is intended to obtain the pending outside review. It does not pretend that review has already happened.
+
+## Paper order
+
+| Order | ID | State at first public launch |
+|---:|---|---|
+| 1 | `HINC-001` | Complete candidate technical-review package |
+| 2 | `ABF-001` | Index entry only; next publication package |
+| 3 | `FSG-001` | Hold |
+| 4 | `ACM-001` | Hold pending consolidation |
+
+The machine-readable source is [`research-index.json`](research-index.json).
+
+## Human + LLM boundary
+
+Matthew S. Novak is the accountable human author, repository owner, and release authority. One or more LLMs materially assisted with exploration, proof development, code and test generation, counterexample search, formalization support, evidence design, and editorial work.
+
+AI systems are not listed as authors, do not own the work, and do not exercise publication authority. The proposed public source does not identify a specific model or provider.
+
+The repository does not claim to be the first human–AI mathematics project.
+
+## Evidence vocabulary
 
 | Status | Meaning |
 |---|---|
-| `stated` | Precisely written but not yet fully checked. |
-| `proved_on_paper` | A complete human proof is supplied, pending external review. |
-| `computationally_exhaustive` | Exhaustive for the explicitly bounded finite domain. |
-| `internally_reproduced` | A separate internal route agrees. |
-| `proof_assistant_verified` | The listed declarations compiled in the pinned proof environment. |
-| `externally_reproduced` | An independent person or institution published a reproduction. |
-| `peer_reviewed` | Accepted through an identified external peer-review process. |
-| `historical_priority_established` | A qualified source-level review supports the stated priority boundary. |
-| `rejected` | A counterexample, proof failure, or decisive prior-art equivalence invalidated the claim as stated. |
-| `superseded` | Replaced by a later exact statement while preserving history. |
+| `candidate theorem` | A precise statement and human proof are supplied; outside review remains pending. |
+| `internally reproduced` | A separate route inside the project agrees; this is not external review. |
+| `proof-assistant verified` | Only the listed declarations compiled in the pinned environment. |
+| `externally reproduced` | An independent person or institution published a reproduction. |
+| `peer reviewed` | An identified external peer-review process completed. |
+| `historical priority established` | A qualified source-level review supports the exact priority statement. |
 
-## Repository architecture
+A commit identifies source. A hash identifies bytes. A finite computation establishes only its declared finite scope. A proof-assistant build establishes only the declarations compiled under the recorded environment.
 
-```text
-.
-├── README.md
-├── START_HERE.md
-├── STATUS.md
-├── RESEARCH_INDEX.md
-├── research-index.json
-├── AGENTS.md
-├── CLAIM_LEVELS.md
-├── EVIDENCE_STANDARD.md
-├── REVIEW_PROTOCOL.md
-├── PUBLICATION_WORKFLOW.md
-├── CONTRIBUTING.md
-├── CORRECTIONS.md
-├── RIGHTS_AND_LICENSING.md
-├── CITATION.cff
-├── BOOTSTRAP_RECEIPT.json
-├── BOOTSTRAP_CORRECTIONS.md
-├── reports/
-├── schemas/
-├── tools/
-├── .github/
-└── papers/
-    └── HINC-001/
-```
+## Final switch boundary
 
-## Authorship and AI assistance
+The package is ready for the final visibility switch only after the release branch has green validation, is merged into private `main`, and the private `main` validation passes again. The switch must then verify public visibility, activate GitHub Pages, verify the live site, and freeze the release receipt.
 
-The accountable human author and repository owner is **Matthew S. Novak**. Generative AI systems materially assist with exploration, proof development, code generation, counterexample search, formalization, documentation, and review preparation. AI systems are not authors, do not hold publication authority, and do not establish correctness or novelty by assertion.
-
-Every paper package must carry a disclosure describing:
-
-- what AI systems did;
-- what the human author checked;
-- what independent routes exist;
-- what remains unverified;
-- who accepts responsibility for the final manuscript.
+See [`PUBLIC_SWITCH_READINESS.md`](PUBLIC_SWITCH_READINESS.md).
 
 ## Rights
 
-No blanket MIT license applies to this repository. Manuscripts, code, data, formal proofs, and evidence may have different terms. Until a file-specific notice is supplied, the default is:
+No blanket MIT license applies. Manuscripts, code, data, evidence, figures, and formal source may have different terms. Unless a file-specific notice states otherwise:
 
 ```text
 Copyright © 2026 Matthew S. Novak. All rights reserved.
@@ -142,10 +124,4 @@ Copyright © 2026 Matthew S. Novak. All rights reserved.
 
 See [`RIGHTS_AND_LICENSING.md`](RIGHTS_AND_LICENSING.md).
 
-## Review principle
-
-The challenge is not "believe the repository." It is:
-
-> Inspect the exact statement, proof, source, evidence, and limitations. Provide a counterexample, identify a proof gap, locate an earlier equivalent theorem, or reproduce the result independently.
-
-All four outcomes improve the scientific record. Public visibility remains disabled until the explicit release gates are satisfied and the owner separately authorizes the visibility change.
+> Inspect the exact statement, proof, source, evidence, and limitations. Provide a counterexample, identify a proof gap, locate earlier equivalent work, or reproduce the result independently.

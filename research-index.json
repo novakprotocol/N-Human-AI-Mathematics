@@ -5,30 +5,39 @@
   "accountable_owner": "Matthew S. Novak",
   "operating_mode": "human-led-ai-assisted",
   "public_release_authorized": false,
+  "public_switch_ready": true,
+  "release_channel": "private_staging",
+  "release_version": "0.1.0-public-review-candidate",
+  "specific_model_disclosed": false,
+  "specific_provider_disclosed": false,
   "papers": [
     {
       "id": "HINC-001",
       "slug": "hidden-infinitesimal-noncommutativity",
-      "title": "Hidden Infinitesimal Noncommutativity in Endomorphism Monoids of Two Graded Gerstenhaber Algebras",
+      "title": "Hidden Infinitesimal Noncommutativity in Two Binary-Gerstenhaber Endomorphism Monoid Schemes",
       "fields": [
-        "algebraic monoids",
-        "Gerstenhaber algebras",
+        "affine monoid schemes",
+        "binary Gerstenhaber algebras",
         "nonreduced algebraic geometry"
       ],
       "state": "active_review",
-      "claim_status": "candidate_theorem_with_formally_verified_coefficient_layer",
-      "human_proof": "complete_candidate_manuscript",
-      "internal_reproduction": "passed_declared_routes",
+      "claim_status": "self_contained_candidate_classification_ready_for_public_technical_review",
+      "human_proof": "consolidated_revised_manuscript_complete",
+      "internal_reproduction": "passed_declared_python_c_groebner_artin_and_common_core_routes",
       "formal_verification": {
         "base_kernel": "public_hosted_pass",
         "principal_classification": "public_hosted_pass",
-        "generator_to_global": "not_formalized",
-        "full_manuscript": "incomplete"
+        "characteristic_two_foundation": "human_proof_complete_not_formalized",
+        "odd_presentation": "human_proof_complete_not_formalized",
+        "generator_to_global": "human_proof_complete_not_formalized",
+        "representability": "human_proof_complete_not_formalized",
+        "center_and_derived": "human_proof_complete_not_formalized",
+        "full_manuscript": "not_formalized"
       },
-      "external_specialist_review": "pending",
+      "external_specialist_review": "pending_and_requested_by_public_release",
       "historical_priority": "unestablished",
       "peer_review": "not_submitted",
-      "public_release": "not_authorized"
+      "public_release": "ready_pending_owner_visibility_switch"
     },
     {
       "id": "ABF-001",
@@ -47,7 +56,7 @@
       "external_specialist_review": "pending",
       "historical_priority": "unestablished",
       "peer_review": "not_submitted",
-      "public_release": "not_authorized"
+      "public_release": "index_entry_only_package_not_released"
     },
     {
       "id": "FSG-001",
@@ -67,7 +76,7 @@
       "external_specialist_review": "pending_two_specialties",
       "historical_priority": "unestablished",
       "peer_review": "not_submitted",
-      "public_release": "not_authorized"
+      "public_release": "index_entry_only_package_not_released"
     },
     {
       "id": "ACM-001",
@@ -86,7 +95,7 @@
       "external_specialist_review": "pending",
       "historical_priority": "unestablished",
       "peer_review": "not_submitted",
-      "public_release": "not_authorized"
+      "public_release": "index_entry_only_package_not_released"
     }
   ]
 }

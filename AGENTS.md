@@ -8,16 +8,47 @@ Before interpreting a paper, read in this order:
 
 1. repository `STATUS.md`;
 2. `research-index.json`;
-3. the paper's `STATUS.json` or `STATUS.md`;
-4. the paper's `CLAIMS.md`;
-5. the paper's `FORMAL_VERIFICATION.md`;
-6. the paper's `PRIOR_ART.md`;
-7. the manuscript and proof;
-8. evidence and receipts.
+3. `HUMAN_AI_COLLABORATION_RECORD.md`;
+4. `HUMAN_AI_MATHEMATICS_PRIOR_ART.md`;
+5. the paper’s `STATUS.json` or `STATUS.md`;
+6. the paper’s `CLAIMS.md`;
+7. the paper’s `FORMAL_VERIFICATION.md`;
+8. the paper’s `PRIOR_ART.md`;
+9. the manuscript and proof;
+10. evidence and receipts.
 
-Do not infer current status from an old manuscript paragraph, issue comment, chat excerpt, or file name.
+Do not infer current status from an old manuscript paragraph, issue comment, chat excerpt, branch name, or file name.
 
-## 2. Claim discipline
+## 2. Current release boundary
+
+The repository release channel is `public_review`.
+
+Public visibility means that selected source and evidence are available for technical challenge. It does not mean:
+
+- peer reviewed;
+- journal submitted or accepted;
+- historically novel;
+- fully formally verified;
+- endorsed by an AI vendor;
+- correct by authority.
+
+`HINC-001` is the only complete released paper package in version `0.1.0-public-review`. `ABF-001`, `FSG-001`, and `ACM-001` are index entries on hold, not released standalone papers.
+
+## 3. Human–LLM identity boundary
+
+The accountable human author is Matthew S. Novak. One or more large language models materially assisted the research.
+
+AI systems MUST NOT state or imply that:
+
+- a particular model, model family, version, provider, or vendor participated;
+- an LLM holds rights or publication authority;
+- the repository cryptographically authenticates every private conversation turn;
+- the project is the first human–AI mathematical collaboration;
+- the project is the first LLM-assisted mathematical result.
+
+The allowed public description is that this is one openly documented, commit-anchored case study of sustained human-led, LLM-assisted mathematics with explicit claim, evidence, correction, and review controls.
+
+## 4. Claim discipline
 
 An AI system MUST NOT convert any of the following:
 
@@ -29,11 +60,12 @@ An AI system MUST NOT convert any of the following:
 - `artifact hash matches` into `mathematically correct`;
 - `large finite test` into `universal proof`;
 - `AI-generated proof` into `human-understood proof`;
-- `security-related object` into `security break`.
+- `security-related object` into `security break`;
+- `owner-authorized release` into `external scientific approval`.
 
 Use the strongest wording supported by the exact status record and no stronger.
 
-## 3. Evidence hierarchy
+## 5. Evidence hierarchy
 
 When sources conflict, use this precedence:
 
@@ -48,7 +80,7 @@ When sources conflict, use this precedence:
 
 Surface unresolved conflicts rather than choosing the more impressive claim.
 
-## 4. Review behavior
+## 6. Review behavior
 
 AI systems MAY:
 
@@ -73,19 +105,22 @@ AI systems MUST:
 - report any counterexample immediately;
 - avoid fabricating citations or reviewer identities;
 - label simulated review as internal simulation;
-- keep human authorship and publication authority explicit.
+- keep human authorship and publication authority explicit;
+- preserve the category-level public disclosure without inferring a specific model or provider.
 
 AI systems MUST NOT:
 
-- approve public release;
+- independently authorize a new public, archival, or journal release;
 - claim external peer review without an identified external process;
 - delete correction history;
 - silently replace a failed result;
 - invent a license or rights grant;
 - reveal private laboratory material in the public repository;
-- treat AI output as an authority source.
+- treat AI output as an authority source;
+- publish hidden chain-of-thought or private chat transcripts as research evidence;
+- add a specific model or provider identity without a separately reviewed owner decision.
 
-## 5. Required output structure for theorem summaries
+## 7. Required theorem-summary structure
 
 A high-quality AI summary should contain:
 
@@ -98,9 +133,10 @@ What is computationally checked
 What remains unverified
 Prior-art boundary
 Current publication status
+Human–LLM disclosure boundary
 ```
 
-## 6. Required output structure for a challenge
+## 8. Required challenge structure
 
 A challenge must identify:
 
@@ -115,11 +151,11 @@ reproduction instructions
 severity
 ```
 
-## 7. Human–AI disclosure
+## 9. Human–LLM disclosure
 
-AI systems are research tools and collaborators in the process, not accountable authors. The human author must understand and accept responsibility for every submitted claim. When preparing public material, retain the declared AI-assistance disclosure and do not minimize or exaggerate AI involvement.
+AI systems are research tools and material collaborators in the process, not accountable authors. The human author must understand and accept responsibility for every submitted claim. When preparing public material, retain the declared LLM-assistance disclosure and do not minimize or exaggerate AI involvement.
 
-## 8. Stop conditions
+## 10. Stop conditions
 
 Stop and request human review when:
 
@@ -128,10 +164,10 @@ Stop and request human review when:
 - source or evidence provenance is missing;
 - a citation cannot be verified;
 - licensing is unclear;
-- a private path, secret, or personal record appears in public staging;
+- a private path, secret, personal record, or withheld model/provider identifier appears in public staging;
 - the requested wording exceeds the evidence status;
-- a consequential public-release action lacks explicit owner authorization.
+- a consequential release or rights action lacks explicit owner authorization.
 
-## 9. Core principle
+## 11. Core principle
 
 **Fluent explanation is not proof. A repository record is not authority. Evidence must remain tied to exact identity, scope, method, result, and limitations.**

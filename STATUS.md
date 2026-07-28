@@ -1,58 +1,62 @@
-# Repository Status
+# Repository status
 
 ## Current lifecycle state
 
 ```text
 repository_name:             N-Human-AI-Mathematics
-repository_role:             curated publication and external-review layer
+public_title:                N Human–LLM Mathematics
+repository_role:             curated candidate-review and reproduction layer
 repository:                  novakprotocol/N-Human-AI-Mathematics
-current_visibility:          private
+visibility:                  private
+release_channel:             private staging
+candidate_version:           0.1.0-public-review-candidate
 default_branch:              main
-standalone_repository:       created
-initial_curated_commit:      e378c773f7c54b375fdd208961f77702b1aadd05
-bootstrap_source_commit:     9dc69542fb2b089a4cef5ea3c425d82bb705d4dd
-bootstrap_result:            PASS
-publication_validation:      PASS
+release_branch:              release/public-review-v1
 public_release_authorized:   false
+public_switch_ready:         true
+visibility_switch_executed:  false
+Pages_deployment_executed:   false
 blanket_license_applied:     false
+peer_reviewed:               false
+journal_submitted:           false
+historical_priority:         unestablished
+specific_model_disclosed:    false
+specific_provider_disclosed: false
 ```
+
+The package is prepared so that the remaining release operation is an owner-controlled switch: merge the validated release branch into private `main`, validate `main`, change visibility, activate Pages, and verify the live release.
 
 ## What is complete
 
-- The standalone GitHub repository exists and is private.
-- `main` is the default branch.
-- The initial curated repository was created from exact pinned N-MathLab and `novak-sdt` commits.
-- `BOOTSTRAP_RECEIPT.json` records `PASS`.
-- `reports/publication-validation.json` records zero errors and zero warnings.
-- Repository name, purpose, and separation from the private laboratory are fixed.
-- Human-readable and AI-readable evidence rules are defined.
-- Strict machine-readable research-index and paper-status schemas are included.
-- Structured counterexample, proof-gap, prior-art, and reproduction workflows are defined.
-- A dependency-free publication validator and GitHub validation workflow are included.
-- The first paper identifier is fixed as `HINC-001`.
-- The HINC standalone manuscript, review packet, verifier, tests, and receipts were materialized from immutable N-MathLab commit `e6adac212150177d4afa56e643d37533a208693c`.
-- The HINC formal sources were materialized from immutable `novak-sdt` commit `d7751d1de76253407016ef4bf92738cffa800e82`.
-- The existing HINC algebraic kernel has a public hosted Lean PASS.
-- The principal even and odd coefficient classifications and normalized monoid laws have a second public hosted Lean PASS.
-- The failed bootstrap and formal-proof attempts, their causes, and their repairs remain preserved separately from successful evidence.
-
-## Bootstrap and validation receipts
+- The standalone private repository exists with `main` as the default branch.
+- The guarded bootstrap and initial publication validation passed.
+- Human-readable and machine-readable evidence rules are defined.
+- Counterexample, proof-gap, prior-art, and reproduction channels are defined.
+- No blanket MIT license is applied.
+- The public wording is category-level **Human-led, LLM-assisted**; no specific model or provider is disclosed.
+- The 2026-07-27 hostile review found no explicit counterexample to the controlling coefficient systems.
+- HINC-001 now has one controlling consolidated manuscript:
 
 ```text
-bootstrap created UTC:       2026-07-26T00:04:30.6333559Z
-bootstrap source commit:     9dc69542fb2b089a4cef5ea3c425d82bb705d4dd
-standalone initial commit:   e378c773f7c54b375fdd208961f77702b1aadd05
-bootstrap result:            PASS
-validation result:           PASS
-validation errors:           0
-validation warnings:         0
-validated inventory:         68 files before the two generated receipt files
-committed initial inventory: 70 files
-public visibility authorized:no
-blanket license applied:     no
+papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md
 ```
 
-The two-file inventory difference is expected: the validator inventories the staged tree before the bootstrap receipt and its own generated validation report are committed.
+- The consolidated manuscript integrates:
+  - the characteristic-two normalized Hochschild derivation;
+  - complete even and odd source presentations;
+  - the odd normal-form theorem;
+  - generator-to-global binary-bracket preservation;
+  - explicit natural representability;
+  - corrected cross-references and terminology;
+  - the center subfunctor and pointwise-center distinction;
+  - disconnected-base clopen language;
+  - the fppf-derived-subgroup argument;
+  - idempotent, geometric, finite-field, and finite-Artin results;
+  - current computational, formal, and historical-priority boundaries.
+- The HINC algebraic kernel has a public hosted Lean PASS.
+- The principal even and odd coefficient classifications and normalized monoid laws have a second public hosted Lean PASS.
+- Failed bootstrap, formal-proof, test-harness, and publication attempts remain preserved separately from successful evidence.
+- The publication order remains HINC-001, ABF-001, FSG-001, ACM-001.
 
 ## Formal verification checkpoint
 
@@ -67,28 +71,45 @@ classification artifact hash: 2dee88b9a248dee8719c27aa23a27ca3281e697cf67202bb50
 sorryAx:                      absent
 ```
 
-## What remains before public visibility or journal submission
-
-1. Review all materialized manuscript references and third-party notices.
-2. Obtain at least one qualified outside algebra/monoid review.
-3. Complete a focused historical-equivalence review.
-4. Decide whether to formalize the generator-to-global Gerstenhaber-preservation theorem before submission.
-5. Resolve any counterexample, proof-gap, prior-art, or reproduction reports.
-6. Freeze a reviewed release identity and publication package.
-7. Obtain a separate, explicit owner decision before changing visibility to public.
-8. Record any journal submission, DOI, peer-review, or acceptance state only after it actually occurs.
-
-Repository creation and owner operational authorization do not satisfy these external scientific gates.
+These receipts cover the listed algebraic kernel and coefficient-classification declarations only. The full revised manuscript is not formally verified and is not described as such.
 
 ## Current paper states
 
-| Paper | Statement/proof | Internal reproduction | Formal proof | External review | Repository state |
-|---|---|---|---|---|---|
-| `HINC-001` | Complete candidate manuscript | Passed for declared finite/symbolic routes | Base kernel PASS; principal coefficient classifications PASS; full manuscript incomplete | Pending | Active private review |
-| `ABF-001` | Exact finite theorem complete | Python/C/small-universe controls passed | Pending | Pending | Hold |
-| `FSG-001` | Candidate all-parameter theorem package | Multiple internal routes passed | Pending | Pending | Hold |
-| `ACM-001` | Exact finite code/matroid classification | Multiple routes passed for merged scope | Pending | Pending | Hold |
+| Paper | Mathematical state | External review | First-launch state |
+|---|---|---|---|
+| `HINC-001` | Self-contained revised candidate classification; internal evidence and bounded Lean scopes passed | Pending and requested | Complete candidate technical-review package |
+| `ABF-001` | Exact finite theorem package preserved | Pending | Index entry only; next package |
+| `FSG-001` | Candidate all-parameter theorem package preserved | Pending | Hold |
+| `ACM-001` | Exact finite code/matroid line preserved | Pending | Hold pending consolidation |
+
+## Why external review remains pending
+
+Public technical review is intended to obtain:
+
+1. outside algebraic-monoid and Gerstenhaber review;
+2. independent reproduction;
+3. source-level historical-equivalence analysis;
+4. optional independent formalization of unformalized proof nodes.
+
+Those are not blockers to honestly releasing a **candidate technical-review package**, provided they remain visibly pending. They remain blockers to claiming external validation, peer review, journal acceptance, or historical priority.
+
+## Final switch gates
+
+Before the repository becomes public, all of the following must pass in one controlled sequence:
+
+1. release-branch CI;
+2. repository privacy, rights, citation, and withheld-identity scans;
+3. HINC standalone tests;
+4. website static and accessibility checks;
+5. branch merge into private `main`;
+6. fresh validation of private `main`;
+7. public visibility change and metadata re-read;
+8. GitHub Pages activation and live-site verification;
+9. public-review tag, release, and checksum receipt;
+10. structured review-channel creation.
+
+See [`PUBLIC_SWITCH_READINESS.md`](PUBLIC_SWITCH_READINESS.md).
 
 ## Claim boundary
 
-The successful bootstrap establishes a controlled private publication architecture and exact provenance for the imported source. It does not establish mathematical correctness, worldwide novelty, publication priority, peer-review acceptance, importance, or authority to make the repository public. Those statuses remain governed by the paper-level records and explicit release decisions.
+The repository establishes a controlled candidate-review architecture and strong internal evidence for HINC-001. It does not establish complete formal verification, outside correctness review, outside reproduction, worldwide novelty, publication priority, peer-review acceptance, journal submission, DOI assignment, security impact, or a specific model/provider identity.

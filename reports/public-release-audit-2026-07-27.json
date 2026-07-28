@@ -1,0 +1,139 @@
+{
+  "schema_version": "n.human_ai_mathematics.public_release_audit.v2",
+  "repository": "novakprotocol/N-Human-AI-Mathematics",
+  "candidate_version": "0.1.0-public-review-candidate",
+  "audit_date": "2026-07-27",
+  "result": "READY_PENDING_VISIBILITY_SWITCH",
+  "release_scope": {
+    "complete_candidate_public_review_packages": [
+      "HINC-001"
+    ],
+    "indexed_not_released_as_complete_packages": [
+      "ABF-001",
+      "FSG-001",
+      "ACM-001"
+    ],
+    "repository_visibility": "private",
+    "public_switch_ready": true,
+    "visibility_change_executed": false,
+    "journal_submission": false,
+    "peer_reviewed": false,
+    "doi_assigned": false,
+    "historical_priority_established": false,
+    "specific_model_disclosed": false,
+    "specific_provider_disclosed": false
+  },
+  "owner_control": {
+    "accountable_owner": "Matthew S. Novak",
+    "content_prepared_for_public_review": true,
+    "final_visibility_switch_executed": false,
+    "approved_public_wording": "human-led, LLM-assisted",
+    "residual_scientific_gates_preserved": true
+  },
+  "mathematical_package_checks": {
+    "consolidated_revised_manuscript": "present",
+    "hostile_review_integrated": "yes",
+    "characteristic_two_foundation": "human proof present",
+    "odd_presentation_normal_form": "human proof present",
+    "generator_to_global_lemma": "human proof present",
+    "representability_argument": "integrated human proof present",
+    "scheme_center_pointwise_distinction": "integrated",
+    "clopen_disconnected_base_qualification": "integrated",
+    "fppf_derived_subgroup_argument": "integrated human proof present",
+    "bounded_lean_kernel": "pass",
+    "bounded_lean_coefficient_classification": "pass",
+    "full_manuscript_lean": "not completed and not claimed",
+    "external_specialist_review": "pending and requested by public release",
+    "independent_external_reproduction": "pending and requested by public release"
+  },
+  "repository_hygiene_checks": {
+    "personal_windows_user_paths": "no indexed match located",
+    "github_classic_token_pattern": "no indexed match located",
+    "github_fine_grained_token_pattern": "no indexed match located",
+    "private_key_header": "no indexed match located",
+    "appdata_path": "no indexed match located",
+    "blanket_mit_grant_sentence": "no indexed match located",
+    "private_chat_transcripts": "not included by repository policy",
+    "hidden_chain_of_thought": "not included by repository policy",
+    "specific_model_or_provider_names": "prohibited in proposed public source",
+    "third_party_figures": "none identified in HINC-001 package",
+    "required_rights_files": "present",
+    "required_llm_disclosure": "present at category level",
+    "required_claim_and_limitation_records": "present"
+  },
+  "bibliography_checks": [
+    {
+      "key": "Gerstenhaber1963",
+      "identifier": "Annals of Mathematics 78 (1963), 267-288",
+      "result": "metadata included"
+    },
+    {
+      "key": "Gerstenhaber1964",
+      "identifier": "Annals of Mathematics 79 (1964), 59-103",
+      "result": "metadata included"
+    },
+    {
+      "key": "SanchezFlores2012",
+      "identifier": "arXiv:1103.3218",
+      "result": "direct characteristic-p foundation included"
+    },
+    {
+      "key": "NegronWitherspoon2014",
+      "identifier": "arXiv:1406.0036",
+      "result": "alternate bracket source included"
+    },
+    {
+      "key": "Holm2000",
+      "identifier": "Contributions to Algebra and Geometry 41 (2000), 291-301",
+      "result": "truncated-polynomial Hochschild source included"
+    },
+    {
+      "key": "Brion2014",
+      "identifier": "arXiv:1208.0675",
+      "result": "metadata matched"
+    },
+    {
+      "key": "Brion2014II",
+      "identifier": "arXiv:1303.3955",
+      "result": "metadata matched"
+    },
+    {
+      "key": "Rittatore1998",
+      "identifier": "arXiv:math/9802073",
+      "result": "metadata matched"
+    },
+    {
+      "key": "Perepechko2009",
+      "identifier": "DOI:10.1090/S0002-9939-09-09913-4; arXiv:0809.2356",
+      "result": "metadata matched"
+    },
+    {
+      "key": "Hermann2016",
+      "identifier": "arXiv:1403.3597",
+      "result": "corrected metadata included"
+    },
+    {
+      "key": "Elduque2025",
+      "identifier": "arXiv:2507.12321",
+      "result": "first-posting year aligned"
+    }
+  ],
+  "historical_priority_boundary": {
+    "exact_indexed_match_located": false,
+    "worldwide_priority_established": false,
+    "allowed_statement": "A broad exact-form and primary-source search did not locate the complete paired classification.",
+    "prohibited_statements": [
+      "first",
+      "nobody has done this",
+      "globally novel"
+    ]
+  },
+  "known_limitations": [
+    "Code-search absence is not proof that no secret or personal identifier exists.",
+    "Bibliographic metadata review is not a source-level mathematical equivalence ruling.",
+    "The bounded Lean receipts do not cover the full revised manuscript.",
+    "Public technical review would solicit external correctness review and independent reproduction; it would not represent them as already completed.",
+    "Private historical conversations are not cryptographically authenticated by this repository."
+  ],
+  "final_switch_required": true
+}

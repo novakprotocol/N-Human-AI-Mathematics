@@ -1,0 +1,140 @@
+name: Deploy public technical-review site
+
+# This workflow is deliberately inactive until the final visibility switch.
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_public_switch:
+        description: "Type PUBLISH-HINC-001 after repository visibility is PUBLIC"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: public-pages
+  cancel-in-progress: false
+
+jobs:
+  validate-public-state:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Require exact owner confirmation phrase
+        run: |
+          test "${{ inputs.confirm_public_switch }}" = "PUBLISH-HINC-001"
+
+      - name: Check out public main
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Verify GitHub repository is public
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${GITHUB_REPOSITORY}" > /tmp/repository.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path("/tmp/repository.json").read_text())
+          assert data["visibility"] == "public", data["visibility"]
+          assert data["default_branch"] == "main", data["default_branch"]
+          print("repository visibility: PUBLIC")
+          PY
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install HINC requirements
+        run: |
+          python -m pip install --disable-pip-version-check -r papers/HINC-001/requirements.txt
+
+      - name: Compile release and HINC sources
+        run: |
+          python -m py_compile tools/validate_publication.py
+          python -m py_compile tools/validate_publication_v2.py
+          python -m py_compile tools/validate_public_state.py
+          python -m py_compile papers/HINC-001/src/mcrc_hidden_infinitesimal_noncommutativity_standalone.py
+          python -m py_compile papers/HINC-001/src/standalone_common_core_verifier.py
+          python -m py_compile papers/HINC-001/tests/test_hinc_standalone.py
+
+      - name: Validate the public source state
+        run: |
+          mkdir -p reports
+          python tools/validate_publication_v2.py \
+            --root . \
+            --allow-public \
+            --json-output reports/publication-validation-public.json
+          python tools/validate_public_state.py \
+            --root . \
+            --json-output reports/public-state-validation.json
+
+      - name: Run HINC standalone tests
+        run: |
+          python -m unittest discover \
+            -s papers/HINC-001/tests \
+            -p 'test_*.py' \
+            -v 2>&1 | tee reports/hinc-public-test-log.txt
+
+      - name: Verify deployable website
+        run: |
+          test -f docs/index.html
+          test -f docs/styles.css
+          test -f docs/404.html
+          test -f docs/.nojekyll
+          grep -q "Public technical review" docs/index.html
+          grep -q "Candidate mathematics open for technical review" docs/index.html
+          grep -q "Peer reviewed</span><strong>No" docs/index.html
+          grep -q "Model/provider</span><strong>Not disclosed" docs/index.html
+          if grep -qi "noindex" docs/index.html; then
+            echo "Public site still contains noindex" >&2
+            exit 1
+          fi
+
+      - name: Upload public validation receipts
+        uses: actions/upload-artifact@v7
+        with:
+          name: public-release-validation-${{ github.run_id }}
+          path: |
+            reports/publication-validation-public.json
+            reports/public-state-validation.json
+            reports/public-release-audit-2026-07-27.json
+            reports/public-switch-readiness.json
+            reports/hinc-public-test-log.txt
+          if-no-files-found: error
+          retention-days: 90
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: validate-public-state
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out validated public main
+        uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload static site
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: docs
+          include-hidden-files: true
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

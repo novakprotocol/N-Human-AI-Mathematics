@@ -2,43 +2,46 @@
   "$schema": "../../schemas/paper-status.schema.json",
   "schema_version": "n.human_ai_mathematics.paper_status.v1",
   "paper_id": "HINC-001",
-  "title": "Hidden Infinitesimal Noncommutativity in Endomorphism Monoids of Two Graded Gerstenhaber Algebras",
+  "title": "Hidden Infinitesimal Noncommutativity in Two Binary-Gerstenhaber Endomorphism Monoid Schemes",
   "source": {
-    "repository": "novakprotocol/N-MathLab",
-    "commit": "e6adac212150177d4afa56e643d37533a208693c",
+    "repository": "novakprotocol/N-Human-AI-Mathematics",
+    "commit": null,
     "paths": [
-      "papers/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/",
-      "src/n_mathlab/mcrc_hidden_infinitesimal_noncommutativity_standalone.py",
-      "tests/test_mcrc_hidden_infinitesimal_noncommutativity_standalone.py"
+      "papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md",
+      "papers/HINC-001/CLAIMS.md",
+      "papers/HINC-001/PROOF_MAP.md",
+      "papers/HINC-001/FORMAL_VERIFICATION.md",
+      "papers/HINC-001/PRIOR_ART.md",
+      "papers/HINC-001/REPRODUCE.md"
     ]
   },
   "claim": {
     "level": 3,
-    "status": "self-contained candidate theorem with internal proof and reproduction routes; core and coefficient classifications formally verified",
+    "status": "self-contained candidate arbitrary-base binary-Gerstenhaber classification prepared for public technical review",
     "globally_novel": "unestablished",
     "security_consequence": "not_applicable"
   },
   "proof": {
-    "human_proof_status": "complete candidate manuscript pending external specialist audit",
+    "human_proof_status": "consolidated revised manuscript complete",
     "dependency_map": "PROOF_MAP.md",
     "known_gaps": [
-      "external audit of arbitrary-base odd coefficient elimination and generator-to-global sufficiency",
-      "external audit of representability and the common-core scheme isomorphisms",
-      "external audit of the complete center and fppf-derived subgroup claims",
-      "source-level historical equivalence review"
+      "the full revised manuscript is not formalized in Lean",
+      "external algebraic-monoid and Gerstenhaber specialist review is pending",
+      "independent external reproduction is pending",
+      "source-level historical-equivalence review is pending"
     ]
   },
   "computation": {
-    "role": "finite Artin-ring and symbolic consistency verification; not a substitute for the all-base proof",
-    "primary_status": "five focused tests passed",
-    "independent_status": "fresh copied workspace passed and reproduced the deterministic certificate byte-identically",
+    "role": "finite Artin-ring, native, symbolic, and common-core challenge routes; not a substitute for the arbitrary-base proof",
+    "primary_status": "declared Python, C, Groebner, Artin-ring, and standalone common-core routes passed",
+    "independent_status": "fresh copied workspace and separately structured internal routes agreed; no outside reproduction yet",
     "receipts": [
       "N-MathLab PR #406",
       "evidence SHA-256 20d883988da7818f73de0b4ccab68bc7adea5097a4af7a6ef5a72c23b4e1ea4b"
     ]
   },
   "formal_verification": {
-    "status": "base algebraic kernel and principal even/odd coefficient classifications public hosted PASS",
+    "status": "base algebraic kernel and principal even/odd coefficient classifications public hosted PASS; full revised manuscript not formalized",
     "assistant": "Lean 4.30.0 with Mathlib v4.30.0",
     "verified_scope": [
       "crossing closure, associativity, identity, and commutativity",
@@ -55,13 +58,15 @@
       "odd coefficient-level principal classification"
     ],
     "unverified_scope": [
-      "generator-to-global preservation of all cup products and Gerstenhaber brackets",
-      "representability of the complete endomorphism functors",
-      "coordinate bialgebra formulas as full affine monoid-scheme structures",
-      "odd clopen decomposition",
+      "characteristic-two normalized Hochschild derivation",
+      "presented even and odd source algebras",
+      "odd presentation normal-form theorem",
+      "generator-to-global preservation of all cup products and binary Gerstenhaber brackets",
+      "complete natural representability bijections",
+      "clopen decomposition as a functorial scheme theorem",
       "complete scheme-theoretic center equality",
-      "fppf-derived subgroup theorem",
-      "full manuscript"
+      "fppf-derived subgroup theorem and abelianization",
+      "full revised manuscript"
     ],
     "receipts": [
       "N-MathLab PR #412",
@@ -79,22 +84,27 @@
     ]
   },
   "review": {
-    "internal": "complete candidate package with independent project routes, two public hosted Lean PASS scopes, and preserved formal failure/repair history",
-    "external": "pending",
-    "historical_priority": "unestablished",
+    "internal": "hostile review completed; no coefficient-system counterexample found; all release-blocking proof and scheme-language corrections integrated into the controlling manuscript",
+    "external": "pending and explicitly requested by the proposed public technical-review release",
+    "historical_priority": "unestablished; broad search found established component frameworks but no exact indexed paired classification",
     "peer_review": "not submitted"
   },
   "release": {
     "public_authorized": false,
-    "version": null,
-    "doi": null
+    "public_switch_ready": true,
+    "channel": "private_staging",
+    "version": "0.1.0-public-review-candidate",
+    "release_date": null,
+    "doi": null,
+    "specific_model_disclosed": false,
+    "specific_provider_disclosed": false
   },
   "limitations": [
-    "The paper remains a candidate theorem until qualified external review.",
-    "The public Lean PASS covers the base kernel and coefficient classifications, not the complete manuscript.",
-    "The generator-to-global strict Gerstenhaber preservation theorem remains outside the formalized scope.",
-    "A negative literature search does not establish worldwide priority.",
-    "The finite Artin-ring checks do not prove arbitrary-base statements by themselves.",
-    "No public release or journal submission is authorized in this status snapshot."
+    "The repository remains private until the final owner-controlled visibility switch.",
+    "The Lean PASS covers the base kernel and coefficient classifications, not the full revised manuscript.",
+    "External specialist review and independent reproduction are pending and are objectives of public technical review, not prerequisites falsely represented as completed.",
+    "No exact indexed prior-art match was located, but worldwide historical priority is not established.",
+    "Finite and symbolic checks do not replace the arbitrary-base human proof.",
+    "Journal submission, DOI assignment, peer review, and specific model/provider disclosure are not claimed."
   ]
 }

@@ -1,0 +1,47 @@
+category,query,target,result,claim_effect
+exact title,"\"Hidden Infinitesimal Noncommutativity\" mathematics",general web,No exact indexed match located,None; search absence is not priority
+exact field,"\"binary Gerstenhaber endomorphism\"",general web,No exact indexed match located,None
+exact field,"\"strict graded Gerstenhaber endomorphism\"",general web,No exact indexed match located,None
+exact field,"\"Gerstenhaber endomorphism monoid\"",general web,No exact indexed match located,None
+exact field,"\"Gerstenhaber endomorphism scheme\"",general web,No exact indexed match located,None
+exact framework,"\"automorphism group scheme\" \"Gerstenhaber algebra\"",general web,No exact HINC classification located,Scheme-valued symmetry framework exists elsewhere
+exact framework,"\"endomorphism monoid\" \"Gerstenhaber algebra\"",general web,No exact HINC classification located,None
+ambient object,"\"dual numbers\" Hochschild endomorphism monoid",general web,No exact HINC classification located,None
+even presentation,"\"F[r,s]/(s^2)\" \"[r,s]=r\"",general web,No exact indexed match located,None
+even equations,"\"eta^2\" \"lambda(delta-1)\" endomorphism",general web,No exact indexed match located,None
+even coordinate ring,"\"F[lambda,delta,eta]\" \"lambda(delta-1)\"",general web,No exact indexed match located,None
+even multiplication,"\"x e' + y' e\" monoid",general web,No exact HINC match located,Upper-triangular matrix mechanism is standard
+odd equations,"\"p=lambda rho\" \"rho=lambda p^2\"",general web,No exact indexed match located,None
+odd equations,"\"lambda(mu-1)\" \"rho(mu-1)\" monoid",general web,No exact indexed match located,None
+odd relations,"\"ab-epsilon c\" \"ac-epsilon b^2\" \"c^2-b^3\"",general web,No exact indexed match located,None
+odd subalgebra,"\"D + F epsilon u + u^2 D[u]\"",general web,No exact indexed match located,None
+common core,"\"Spec F[x,y]/(x(y-1))\" monoid",general web,No exact indexed match located,None
+project terminology,"\"unit doubling\" algebraic monoid",general web,No relevant exact mathematical match located,Term should not carry novelty
+project terminology,"\"bilateral square-zero skew extension\"",general web,No relevant exact match located,Term is project-specific shorthand
+project terminology,"\"crossing core\" algebraic monoid",general web,No relevant exact match located,Term is project-specific shorthand
+GitHub exact,"\"lambda(delta-1)\" eta^2 Gerstenhaber",GitHub code search,No exact code match located,None
+GitHub exact,"\"rho=lambda p^2\" \"p=lambda rho\"",GitHub code search,No exact code match located,None
+GitHub exact,"\"ab-epsilon c\" \"ac-epsilon b^2\"",GitHub code search,No exact code match located,None
+arXiv ambient,"Hochschild cohomology dual numbers characteristic 2 Gerstenhaber bracket",arXiv/search,Truncated-polynomial and modular bracket literature located,Ambient structure is established
+arXiv ambient,"truncated polynomial algebra Hochschild cohomology Gerstenhaber bracket characteristic p",arXiv/search,Yang and related literature located,Ambient BV/Gerstenhaber theory is established
+arXiv positive characteristic,"restricted Lie algebra Hochschild cohomology characteristic p",arXiv/search,Briggs and Rubio y Degrassi located,Must distinguish binary bracket from restricted structure
+journal ring,"Hochschild cohomology rings algebras k[X]/(f) Holm",journal/EMIS/EuDML,Holm 2000 located,Ambient cup ring is established
+modular bracket,"Lie structure Hochschild cohomology modular group algebra cyclic",arXiv,Sanchez-Flores located,Nontrivial positive-characteristic bracket is established
+functorial bracket,"Monoidal Categories Gerstenhaber Bracket Hochschild Hermann",arXiv/Memoirs AMS,Hermann located,Functorial bracket and squaring machinery established
+monoid framework,"On Algebraic Semigroups and Monoids Brion 1208.0675",arXiv,Brion located,Matrix monoids units idempotents curves and nonreduced examples established
+idempotent framework,"On Algebraic Semigroups and Monoids II Brion 1303.3955",arXiv,Brion II located,Idempotent-scheme theory established
+endomorphism realization,"Affine algebraic monoids endomorphisms monoids finite-dimensional algebras",arXiv/AMS,Perepechko located,Unusual endomorphism monoids are not new by themselves
+nonreduced symmetry,"Non-reduced automorphism schemes",journal DOI,Positive-characteristic nonreduced automorphism schemes located,Infinitesimal symmetry schemes are established
+arbitrary-base symmetry,"automorphism group schemes gradings arbitrary fields",arXiv,Elduque located,Arbitrary-base scheme methodology established
+commutative surface classification,"commutative algebraic monoid structures normal affine surfaces",arXiv,Dzhunusov-Zaitseva located,Does not subsume nonnormal/nonreduced characteristic-two HINC
+noncommutative surface classification,"noncommutative monoid structures normal affine surfaces",arXiv,Bilich located,Does not subsume nonreduced HINC even scheme
+curve classification,"algebraic semigroup structures irreducible curves",Brion/arXiv,General irreducible curve classification located,HINC crossing is reducible and even object nonreduced
+HAL,"site:hal.science Gerstenhaber endomorphism monoid dual numbers",HAL search,No exact match located,Search absence only
+Zenodo,"site:zenodo.org Gerstenhaber endomorphism monoid",Zenodo search,No exact match located,Search absence only
+theses France,"site:theses.fr Gerstenhaber endomorphism monoid",theses.fr search,No exact match located,Search absence only
+zbMATH public,"site:zbmath.org Gerstenhaber endomorphism monoid",public web surface,No surfaced exact result,Subscription/source-level review still required
+MathSciNet public,"site:mathscinet.ams.org Gerstenhaber endomorphism",public web surface,No surfaced exact result,Subscription/source-level review still required
+scheme definitions,"Stacks Project group schemes subgroup schemes functor of points",Stacks Project,Definitions and base-change framework located,Center and derived claims must be functorial
+fppf commutator,"scheme theoretic image commutator derived subgroup fppf",general/arXiv/Stacks,General framework located but no exact HINC theorem,Derived alpha_2 statement needs specialist audit
+matrix reframing,"upper triangular matrix monoid constrained nilpotent",Brion/general algebraic monoid literature,Standard mechanism located,Even multiplication mechanism is not novel
+process conclusion,"all exact and framework searches above",combined,No exact indexed paired HINC classification located,Historical priority remains unestablished

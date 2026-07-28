@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/novakprotocol/N-Human-AI-Mathematics/schemas/research-index.schema.json",
-  "title": "N Human-AI Mathematics Research Index",
+  "title": "N Human-LLM Mathematics Research Index",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -10,6 +10,11 @@
     "accountable_owner",
     "operating_mode",
     "public_release_authorized",
+    "public_switch_ready",
+    "release_channel",
+    "release_version",
+    "specific_model_disclosed",
+    "specific_provider_disclosed",
     "papers"
   ],
   "properties": {
@@ -19,6 +24,11 @@
     "accountable_owner": {"type": "string", "minLength": 1},
     "operating_mode": {"const": "human-led-ai-assisted"},
     "public_release_authorized": {"type": "boolean"},
+    "public_switch_ready": {"type": "boolean"},
+    "release_channel": {"enum": ["private_staging", "public_review", "archival_release", "journal_submission"]},
+    "release_version": {"type": ["string", "null"]},
+    "specific_model_disclosed": {"type": "boolean"},
+    "specific_provider_disclosed": {"type": "boolean"},
     "papers": {
       "type": "array",
       "items": {"$ref": "#/$defs/paper"},

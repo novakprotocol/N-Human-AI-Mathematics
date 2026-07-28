@@ -1,8 +1,8 @@
-# HINC-001 Human–AI Research Disclosure
+# HINC-001 Human–LLM Research Disclosure
 
 ## Operating model
 
-This work was developed through a **human-led, AI-assisted mathematical research process**.
+This work was developed through a **human-led, LLM-assisted mathematical research process**.
 
 The accountable human author is:
 
@@ -10,15 +10,21 @@ The accountable human author is:
 Matthew S. Novak
 ```
 
-AI systems are not listed as authors, do not own the work, and do not possess publication authority.
+The public AI-assistance category is:
 
-## Material AI assistance
+```text
+one or more large language models (LLMs)
+```
 
-Generative AI systems materially assisted with:
+AI systems are not listed as authors, do not own the work, and do not possess publication authority. The public package does not identify a specific model, family, version, provider, or vendor.
 
-- translating long-standing human intuitions and research questions into formal candidate objects;
+## Material LLM assistance
+
+LLMs materially assisted with:
+
+- translating human intuitions and research questions into formal candidate objects;
 - exploratory algebraic derivation;
-- proposing theorem statements and proof decompositions;
+- proposing theorem statements, normal forms, and proof decompositions;
 - generating and revising Python, C, symbolic, and Lean source;
 - constructing finite test universes and semantic negative controls;
 - searching for counterexamples and contradictions;
@@ -27,19 +33,30 @@ Generative AI systems materially assisted with:
 - identifying overclaims and preparing correction language;
 - packaging reproducible evidence and formal-verification receipts.
 
+This was substantive research assistance rather than grammar correction.
+
 ## Human responsibilities
 
-Before any submission, the human author must:
+Matthew S. Novak:
 
-1. read and understand every definition, theorem, and proof;
+1. selected and repeatedly redirected the research questions;
+2. supplied project context, constraints, and desired evidence standards;
+3. challenged shallow or unsupported outputs;
+4. decided which candidate claims and research lanes were retained;
+5. executed or supervised local computational and publication gates;
+6. approved authorship, rights, disclosure level, release channel, and public visibility;
+7. accepts responsibility for errors, corrections, and withdrawal decisions.
+
+Before any journal submission, the human author must additionally:
+
+1. read and understand every retained definition, theorem, and proof;
 2. verify every reference against its original source;
 3. rerun or supervise all material computational evidence;
 4. inspect formal source and the exact scope of machine verification;
 5. decide which claims are retained, revised, or withdrawn;
-6. approve authorship, rights, disclosure, venue, and public release;
-7. accept responsibility for errors and corrections.
+6. determine whether a more specific AI disclosure is legally and editorially appropriate for the selected venue.
 
-## Independent evidence
+## Independent evidence layers
 
 The project separates AI-generated prose from evidence through:
 
@@ -48,29 +65,47 @@ The project separates AI-generated prose from evidence through:
 - semantic mutations that must fail;
 - fresh copied-workspace execution;
 - separately structured implementations;
-- a public hosted Lean build for a bounded kernel;
+- public hosted Lean builds for bounded scopes;
 - preserved failed formal runs and explicit repairs;
 - machine-readable claim and limitation records;
-- planned outside specialist review.
+- public requests for outside specialist review.
 
 These controls reduce risk. They do not transform internal work into external peer review.
 
+## Model and provider identity boundary
+
+The public release intentionally stops at **LLM-assisted**. It does not name a model, model family, version, provider, or vendor and does not claim cryptographic attestation of the system behind every historical interaction.
+
+A more specific disclosure may be added only after a separate human legal and editorial review and an exact owner-approved release change.
+
 ## Suggested manuscript disclosure
 
-> **AI-assisted research disclosure.** Generative AI systems were used under human direction for exploratory theorem formulation, proof development, code and test generation, counterexample search, literature-query formulation, formal-proof drafting, manuscript organization, and editorial revision. The human author selected the claims, reviewed and revised the mathematical arguments, verified cited sources, inspected the reported computational and formal evidence, resolved corrections, and accepts full responsibility for the manuscript. Exact source identities, deterministic programs, execution receipts, known failures, and formal-verification scope are supplied in the accompanying repository. AI systems are not authors and did not exercise publication authority.
+> **AI-assisted research disclosure.** One or more large language models were used under human direction for exploratory theorem formulation, proof development, code and test generation, counterexample search, literature-query formulation, formal-proof drafting, manuscript organization, and editorial revision. Matthew S. Novak selected the research goals and retained claims, reviewed and revised the mathematical arguments, supervised material evidence and release gates, resolved corrections, and accepts responsibility for the manuscript. Exact source identities, deterministic programs, execution receipts, known failures, and formal-verification scope are supplied in the accompanying repository. AI systems are not authors and did not exercise publication authority. Specific model and provider identities are not disclosed in this public-review version.
 
-The final wording must be adapted to the selected venue's current policy and must remain factually accurate.
+The final wording must be adapted to the selected venue’s current policy and remain factually accurate.
 
 ## Nonclaims
 
 This disclosure does not claim that:
 
-- AI independently certified correctness;
-- AI established historical novelty;
-- the work was produced without human intellectual input;
-- the human author may rely on AI confidence instead of understanding the proof;
-- internal AI role simulation constitutes peer review.
+- an LLM independently certified correctness;
+- an LLM established historical novelty;
+- the work was produced without human intellectual direction;
+- the human author may rely on model confidence instead of understanding the proof;
+- internal AI role simulation constitutes peer review;
+- a specific model or provider is established by the public record;
+- the repository is the first human–AI mathematical collaboration;
+- every private interaction is publicly or cryptographically authenticated.
+
+## Public process record
+
+The repository-level role allocation and evidence limits are stated in:
+
+- `HUMAN_AI_COLLABORATION_RECORD.md`;
+- `HUMAN_AI_MATHEMATICS_PRIOR_ART.md`;
+- `PUBLIC_REVIEW_RELEASE.md`;
+- `reports/public-release-audit-2026-07-27.json`.
 
 ## Why the disclosure is prominent
 
-The AI role was substantive, not limited to grammar correction. Transparent disclosure allows reviewers to evaluate both the mathematics and the evidence process without misrepresenting authorship or accountability.
+The LLM role was material. Transparent category-level disclosure allows reviewers to evaluate both the mathematics and the evidence process without misrepresenting authorship, accountability, or the public identity boundary.
