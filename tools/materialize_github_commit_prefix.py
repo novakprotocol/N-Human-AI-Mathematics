@@ -11,6 +11,11 @@ release-control child may add a strict allowlist of disclosure, rights, and
 package records. It may also replace one exact release-runtime dependency file;
 that replacement is identified by both its old and new SHA-256 values and does
 not alter mathematical source or claims.
+
+The owner-authorized temporary release-input branch is also fetched into the
+runner's local Git object database. This enables deterministic `git archive` and
+annotated-tag creation from the exact release-control commit after its object API
+identity and parent chain have already been verified.
 """
 
 from __future__ import annotations
@@ -22,13 +27,17 @@ import json
 import os
 import shutil
 import stat
+import subprocess
 import urllib.error
 import urllib.request
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+ABF_REPOSITORY = "novakprotocol/N-Human-AI-Mathematics"
+ABF_RELEASE_PREFIX = "staging/ABF-001"
 ABF_MATHEMATICAL_PREFIX = "staging/ABF-001/mathematical-source"
 ABF_RELEASE_OVERLAY = Path("/tmp/abf-freeze/mathematical-source")
+ABF_RELEASE_INPUT_BRANCH = "release-input/abf-001-locked-v1"
 ABF_ALLOWED_ADDITIONS = frozenset(
     {
         "AI_DISCLOSURE.md",
@@ -106,6 +115,54 @@ def should_descend(path: str, prefix: str) -> bool:
     )
 
 
+def run_checked(arguments: list[str]) -> str:
+    completed = subprocess.run(
+        arguments,
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    return completed.stdout.strip()
+
+
+def ensure_abf_release_commit_in_local_git(
+    *, repository: str, commit: str, prefix: str
+) -> dict[str, Any] | None:
+    """Fetch the exact owner-authorized input ref for archive and tag steps."""
+
+    if prefix != ABF_RELEASE_PREFIX:
+        return None
+    if repository != ABF_REPOSITORY:
+        raise RuntimeError(f"unexpected ABF repository: {repository}")
+
+    remote_ref = f"refs/heads/{ABF_RELEASE_INPUT_BRANCH}"
+    local_ref = f"refs/remotes/origin/{ABF_RELEASE_INPUT_BRANCH}"
+    run_checked(
+        [
+            "git",
+            "fetch",
+            "--force",
+            "--no-tags",
+            "origin",
+            f"{remote_ref}:{local_ref}",
+        ]
+    )
+    actual = run_checked(["git", "rev-parse", local_ref])
+    if actual != commit:
+        raise RuntimeError(
+            "release-input ref does not identify the authorized commit: "
+            f"{actual} != {commit}"
+        )
+    run_checked(["git", "cat-file", "-e", f"{commit}^{{commit}}"])
+    return {
+        "remote_ref": remote_ref,
+        "local_ref": local_ref,
+        "commit": actual,
+        "purpose": "local archive and annotated-tag operations after API verification",
+    }
+
+
 def walk_tree(
     *,
     repository: str,
@@ -151,7 +208,6 @@ def walk_tree(
         if entry_type != "blob":
             raise RuntimeError(f"unsupported Git tree entry {entry_type} at {path}")
 
-        owner, name = repository.split("/", 1)
         blob = api_json(
             f"https://api.github.com/repos/{owner}/{name}/git/blobs/{sha}",
             token,
@@ -313,6 +369,12 @@ def main() -> int:
     if parents != [args.expected_parent]:
         raise RuntimeError(f"unexpected commit parents: {parents}")
 
+    local_git = ensure_abf_release_commit_in_local_git(
+        repository=args.repository,
+        commit=args.commit,
+        prefix=args.prefix.strip("/"),
+    )
+
     output = args.output.resolve()
     if output.exists() and any(output.iterdir()):
         raise RuntimeError(f"output directory is not empty: {output}")
@@ -331,7 +393,7 @@ def main() -> int:
 
     receipt = {
         "schema_version": (
-            "n.human_llm.mathematics.github_object_materialization.v3"
+            "n.human_llm.mathematics.github_object_materialization.v4"
         ),
         "result": "PASS",
         "repository": args.repository,
@@ -341,6 +403,7 @@ def main() -> int:
         "prefix": prefix,
         "file_count": len(entries),
         "total_bytes": sum(item["bytes"] for item in entries),
+        "local_git_object": local_git,
         "files": sorted(entries, key=lambda item: item["repository_path"]),
         "release_control_overlay": {
             "applied": bool(overlay),
@@ -369,7 +432,10 @@ def main() -> int:
                     "total_bytes",
                 )
             }
-            | {"release_control_overlay_files": len(overlay)},
+            | {
+                "release_control_overlay_files": len(overlay),
+                "local_git_object_ready": bool(local_git),
+            },
             sort_keys=True,
         )
     )
