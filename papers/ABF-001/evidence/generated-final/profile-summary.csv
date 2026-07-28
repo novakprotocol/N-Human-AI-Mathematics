@@ -1,0 +1,6 @@
+moment_rank_0,moment_rank_1,moment_rank_2,hyperplanes,degree15_masks_per_hyperplane,degree14_masks_per_hyperplane,degree13_masks_per_hyperplane,degree12_or_lower_masks_per_hyperplane
+0,7,8,3,0,254,1,0
+0,8,8,508,0,255,0,0
+1,6,8,1,128,124,3,0
+1,7,8,463,128,126,1,0
+1,8,8,130095,128,127,0,0

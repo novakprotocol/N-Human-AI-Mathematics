@@ -1,0 +1,22 @@
+{
+  "edge_atlas_sha256": "95d64917af27fa1b827bda0b82364dc6e69de6376ccb0ad81e12ab22b82742fa",
+  "external_institutional_replication": false,
+  "focused_test_count": 7,
+  "focused_tests": "PASS",
+  "full_width_security_statement": false,
+  "global_historical_novelty_established": false,
+  "independent_c_byte_identical": true,
+  "independent_c_edge_sha256": "95d64917af27fa1b827bda0b82364dc6e69de6376ccb0ad81e12ab22b82742fa",
+  "independent_c_result": "PASS",
+  "independent_c_stdout_sha256": "2d26bb0283149d85783112e1b293374976c6b63dae62da74ff4f86e2d5e1e334",
+  "primary_evidence_sha256": "3cbaaa5c0c60c58afb8ea7f8001cc513f93d4e324a0f5440ed87e71afbdfb6c3",
+  "proof_assistant_verified": false,
+  "python_compilation": "PASS",
+  "result": "PASS",
+  "schema_version": "n.mathlab.black_box_radical_incidence_proof.v1",
+  "small_universe_checks": 5505024,
+  "small_universe_functions": 65536,
+  "small_universe_mismatches": 0,
+  "small_universe_stream_sha256": "49469ce29fa3f71d91cc8a4409b92fd9d1303538145db9cbb6eab95df5bb3f28",
+  "tamper_control": "PASS"
+}

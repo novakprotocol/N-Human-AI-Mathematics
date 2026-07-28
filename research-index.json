@@ -41,22 +41,24 @@
     },
     {
       "id": "ABF-001",
-      "slug": "affine-hyperplane-degree-drop",
-      "title": "Affine-Hyperplane Degree-Drop Spectra of a Vectorial Boolean Map",
+      "slug": "affine-restriction-moment-kernels",
+      "title": "Affine Restriction Moment Kernels and Radical Incidence Geometry of a Vectorial Boolean Map",
       "fields": [
         "Boolean functions",
         "vectorial Boolean functions",
-        "finite linear algebra"
+        "Reed-Muller codes",
+        "finite linear algebra",
+        "symmetric bilinear forms"
       ],
-      "state": "hold",
-      "claim_status": "exact_finite_theorem",
-      "human_proof": "complete_candidate_manuscript",
-      "internal_reproduction": "python_c_and_exhaustive_small_universe_pass",
-      "formal_verification": "pending",
-      "external_specialist_review": "pending",
+      "state": "active_review",
+      "claim_status": "candidate_theorem_and_exact_finite_classification_open_for_public_technical_review",
+      "human_proof": "complete_self_contained_candidate_manuscript",
+      "internal_reproduction": "primary_bitset_small_universe_and_tamper_routes_pass",
+      "formal_verification": "not_completed_and_not_claimed",
+      "external_specialist_review": "requested_by_public_release",
       "historical_priority": "unestablished",
       "peer_review": "not_submitted",
-      "public_release": "index_entry_only_package_not_released"
+      "public_release": "active_public_review_0.1.0"
     },
     {
       "id": "FSG-001",

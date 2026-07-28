@@ -1,0 +1,52 @@
+{
+  "schema_version": "n.human_llm.mathematics.abf001.release_candidate.v1",
+  "paper_id": "ABF-001",
+  "title": "Affine Restriction Moment Kernels and Radical Incidence Geometry of a Vectorial Boolean Map",
+  "repository": "novakprotocol/N-Human-AI-Mathematics",
+  "mathematical_source_commit": "45dbf87cb4a46dcbbce690da7a22cdd7f88cb052",
+  "release_control_parent_commit": "45dbf87cb4a46dcbbce690da7a22cdd7f88cb052",
+  "release_target": "public_technical_review",
+  "tag": "abf-001-public-review-v1",
+  "claim_boundary": {
+    "candidate_theorem": true,
+    "exact_finite_classification": true,
+    "full_width_security_claim": false,
+    "globally_novel_claim": false,
+    "peer_reviewed": false,
+    "external_reproduction": "pending",
+    "formal_verification": "not_completed"
+  },
+  "hostile_review": {
+    "record": "review/FINAL_HOSTILE_REVIEW.md",
+    "blocking_findings_open": 0,
+    "review_date": "2026-07-28"
+  },
+  "prior_art": {
+    "search_completed_to_declared_scope": true,
+    "final_delta_search_completed": true,
+    "final_delta_search_date": "2026-07-28",
+    "historical_priority": "unestablished",
+    "authorized_no_match_wording": "No exact indexed match was located in the recorded search as of 28 July 2026."
+  },
+  "owner_authorization": {
+    "owner": "Matthew S. Novak",
+    "github_account": "novakprotocol",
+    "authorization": "RELEASE-ABF-001-PUBLIC-TECHNICAL-REVIEW",
+    "package_specific_authorization": true,
+    "website_update_authorized": false
+  },
+  "finite_results": {
+    "affine_hyperplanes": 131070,
+    "vector_degree_15": 130559,
+    "vector_degree_14": 511,
+    "vector_degree_13_or_lower": 0,
+    "rank_histogram": {"13": 2, "14": 15, "15": 74, "16": 112, "17": 52},
+    "singular_mask_indexed_radicals": 203,
+    "distinct_nonzero_radical_subspaces": 202,
+    "incidence_edges": 469,
+    "covered_parameters": 467,
+    "forest_components": 201
+  },
+  "release_gate": "owner-triggered repository workflow",
+  "status": "AUTHORIZED_PENDING_EXECUTION"
+}

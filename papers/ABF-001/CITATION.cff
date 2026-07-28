@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "Please cite the ABF-001 release and exact repository commit."
+title: "Affine Restriction Moment Kernels and Radical Incidence Geometry of a Vectorial Boolean Map"
+type: article
+authors:
+  - family-names: Novak
+    given-names: Matthew S.
+identifiers:
+  - type: other
+    value: ABF-001
+version: 0.1.0-public-review
+date-released: 2026-07-28
+repository-code: "https://github.com/novakprotocol/N-Human-AI-Mathematics"
+abstract: >-
+  A self-contained moment-kernel certificate for affine restriction degree
+  drops, together with a complete exact radical-incidence classification for
+  a specified 16-to-8 vectorial Boolean map. External review and historical
+  priority remain pending.
+keywords:
+  - vectorial Boolean functions
+  - affine restrictions
+  - Reed-Muller codes
+  - symmetric bilinear forms
+  - radical incidence
+  - reproducible mathematics
+license: "All rights reserved; see file-specific terms."

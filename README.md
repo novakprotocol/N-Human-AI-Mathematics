@@ -76,12 +76,21 @@ The manuscript now integrates the complete human proof route, including:
 
 Public visibility is intended to obtain the pending outside review. It does not pretend that review has already happened.
 
+
+## ABF-001
+
+**Title:** *Affine Restriction Moment Kernels and Radical Incidence Geometry of a Vectorial Boolean Map*
+
+ABF-001 supplies a self-contained moment-kernel theorem and a complete finite classification of a specified `GF(2)^16 -> GF(2)^8` map. Its exact public-review package records the `130,559 / 511 / 0` restriction spectrum, corrected `203 / 202` radical distinction, 469-edge incidence atlas, independent implementations, complete finite controls, hostile review, and bounded prior-art conclusion.
+
+Start with [`papers/ABF-001/README.md`](papers/ABF-001/README.md). The immutable candidate release is [`abf-001-public-review-v1`](https://github.com/novakprotocol/N-Human-AI-Mathematics/releases/tag/abf-001-public-review-v1).
+
 ## Paper order
 
 | Order | ID | State at first public launch |
 |---:|---|---|
 | 1 | `HINC-001` | Complete candidate technical-review package |
-| 2 | `ABF-001` | Index entry only; next publication package |
+| 2 | `ABF-001` | Complete candidate technical-review package |
 | 3 | `FSG-001` | Hold |
 | 4 | `ACM-001` | Hold pending consolidation |
 
@@ -110,7 +119,7 @@ A commit identifies source. A hash identifies bytes. A finite computation establ
 
 ## Public technical-review status
 
-HINC-001 is the active candidate package. Counterexamples, proof-gap reports, prior-art equivalence reports, independent reproductions, and further formalization are invited. External review remains pending until an identified outside process completes it.
+HINC-001 and ABF-001 are active candidate packages. Counterexamples, proof-gap reports, prior-art equivalence reports, independent reproductions, and further formalization are invited. External review remains pending until an identified outside process completes it.
 
 See [`PUBLIC_SWITCH_READINESS.md`](PUBLIC_SWITCH_READINESS.md).
 

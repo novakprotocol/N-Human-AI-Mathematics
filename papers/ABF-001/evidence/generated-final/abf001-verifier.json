@@ -1,0 +1,256 @@
+{
+  "claim_boundaries": {
+    "external_institutional_replication": false,
+    "full_width_collision_or_preimage": false,
+    "global_historical_priority_established": false,
+    "proof_assistant_verified": false,
+    "security_or_insecurity_established": false
+  },
+  "evidence_sha256": "ebf4d164512339f4cf3fb14d22b7ba98253ad0726f4b5258ef5f52b2d17e34a9",
+  "historical_v32_primary_evidence_sha256": "3cbaaa5c0c60c58afb8ea7f8001cc513f93d4e324a0f5440ed87e71afbdfb6c3",
+  "hyperplane_side": {
+    "covered_hyperplanes": 467,
+    "profile_count": 5,
+    "profiles": [
+      {
+        "degree12_or_lower_masks_per_hyperplane": 0,
+        "degree13_masks_per_hyperplane": 1,
+        "degree14_masks_per_hyperplane": 254,
+        "degree15_masks_per_hyperplane": 0,
+        "hyperplanes": 3,
+        "moment_rank_0": 0,
+        "moment_rank_1": 7,
+        "moment_rank_2": 8
+      },
+      {
+        "degree12_or_lower_masks_per_hyperplane": 0,
+        "degree13_masks_per_hyperplane": 0,
+        "degree14_masks_per_hyperplane": 255,
+        "degree15_masks_per_hyperplane": 0,
+        "hyperplanes": 508,
+        "moment_rank_0": 0,
+        "moment_rank_1": 8,
+        "moment_rank_2": 8
+      },
+      {
+        "degree12_or_lower_masks_per_hyperplane": 0,
+        "degree13_masks_per_hyperplane": 3,
+        "degree14_masks_per_hyperplane": 124,
+        "degree15_masks_per_hyperplane": 128,
+        "hyperplanes": 1,
+        "moment_rank_0": 1,
+        "moment_rank_1": 6,
+        "moment_rank_2": 8
+      },
+      {
+        "degree12_or_lower_masks_per_hyperplane": 0,
+        "degree13_masks_per_hyperplane": 1,
+        "degree14_masks_per_hyperplane": 126,
+        "degree15_masks_per_hyperplane": 128,
+        "hyperplanes": 463,
+        "moment_rank_0": 1,
+        "moment_rank_1": 7,
+        "moment_rank_2": 8
+      },
+      {
+        "degree12_or_lower_masks_per_hyperplane": 0,
+        "degree13_masks_per_hyperplane": 0,
+        "degree14_masks_per_hyperplane": 127,
+        "degree15_masks_per_hyperplane": 128,
+        "hyperplanes": 130095,
+        "moment_rank_0": 1,
+        "moment_rank_1": 8,
+        "moment_rank_2": 8
+      }
+    ],
+    "right_degree_histogram": {
+      "1": 466,
+      "3": 1
+    },
+    "scalar_restriction_pair_counts": {
+      "12_or_lower": 0,
+      "13": 469,
+      "14": 16710829,
+      "15": 16711552
+    }
+  },
+  "incidence_edge_sha256": "95d64917af27fa1b827bda0b82364dc6e69de6376ccb0ad81e12ab22b82742fa",
+  "incidence_graph": {
+    "active_left_vertices": 203,
+    "active_right_vertices": 467,
+    "component_shape_counts": {
+      "exceptional_tree": 1,
+      "star_K1_1": 110,
+      "star_K1_15": 2,
+      "star_K1_3": 74,
+      "star_K1_7": 14
+    },
+    "components": 201,
+    "edges": 469,
+    "forest": true,
+    "special_component": {
+      "edges": 9,
+      "masks_hex": [
+        "11",
+        "8a",
+        "9b"
+      ],
+      "parameters_hex": [
+        "02e4f",
+        "090df",
+        "0be90",
+        "119d5",
+        "1379a",
+        "1890a",
+        "1a745"
+      ],
+      "vertices": 10
+    }
+  },
+  "mask_side": {
+    "left_degree_histogram": {
+      "1": 112,
+      "15": 2,
+      "3": 74,
+      "7": 15
+    },
+    "nonsingular_output_masks": 52,
+    "rank_histogram": {
+      "13": 2,
+      "14": 15,
+      "15": 74,
+      "16": 112,
+      "17": 52
+    },
+    "singular_output_masks": 203,
+    "total_nonzero_radical_incidence": 469
+  },
+  "radical_arrangement": {
+    "distinct_nonzero_radical_subspaces": 202,
+    "distinct_subspace_geometry": {
+      "description": "After identifying the duplicated one-dimensional radical for masks 8a and 9b, the 202 distinct radical subspaces have exactly one nontrivial containment: the shared one-dimensional radical is contained in the rank-14 radical for mask 11; all other distinct pairs intersect only at zero."
+    },
+    "duplicate_radical_sets": [
+      {
+        "mask_multiplicity": 2,
+        "masks_hex": [
+          "8a",
+          "9b"
+        ],
+        "parameter_hex": "119d5"
+      }
+    ],
+    "incidence_multiplicity": 469,
+    "mask_intersection_graph": {
+      "edges": 3,
+      "isolated_vertices": 200,
+      "nonisolated_component": "K3",
+      "vertices": 203
+    },
+    "nontrivial_pairwise_intersections": [
+      {
+        "intersection_parameter_hex": "119d5",
+        "intersection_size": 1,
+        "left_mask_hex": "11",
+        "right_mask_hex": "8a"
+      },
+      {
+        "intersection_parameter_hex": "119d5",
+        "intersection_size": 1,
+        "left_mask_hex": "11",
+        "right_mask_hex": "9b"
+      },
+      {
+        "intersection_parameter_hex": "119d5",
+        "intersection_size": 1,
+        "left_mask_hex": "8a",
+        "right_mask_hex": "9b"
+      }
+    ],
+    "nonzero_point_union_size": 467,
+    "overlap_defect": 2,
+    "singular_mask_indexed_radicals": 203,
+    "special_normal_hex": "8cea",
+    "special_offset": 0,
+    "special_output_subspace_basis_hex": [
+      "11",
+      "8a"
+    ],
+    "special_output_subspace_nonzero_hex": [
+      "11",
+      "8a",
+      "9b"
+    ],
+    "special_parameter_hex": "119d5"
+  },
+  "result": "PASS",
+  "schema_version": "n.human_llm_mathematics.abf001_verifier.v1",
+  "scope": {
+    "codomain": "GF(2)^8",
+    "domain": "GF(2)^16",
+    "full_width_security_statement": false,
+    "map": "specified one-bit reduced block-to-fixed-state map",
+    "nonzero_output_masks": 255,
+    "truth_table_sha256": "2a861e09dcb5b00e208ede53e1b29615a5309389a83da40f81d663ec760e7e52",
+    "valid_affine_hyperplanes": 131070
+  },
+  "top_layer": {
+    "augmented_kernel_dimension": 9,
+    "augmented_signature_rank": 8,
+    "degree_15_coefficients_hex": [
+      "47",
+      "c3",
+      "5c",
+      "f4",
+      "20",
+      "97",
+      "6c",
+      "33",
+      "4c",
+      "d2",
+      "d2",
+      "7d",
+      "89",
+      "3e",
+      "bb",
+      "10"
+    ],
+    "exceptional_hyperplanes": 511,
+    "full_degree_16_coefficient_hex": "f3",
+    "signature_columns_hex": [
+      "b4",
+      "30",
+      "af",
+      "07",
+      "d3",
+      "64",
+      "9f",
+      "c0",
+      "bf",
+      "21",
+      "21",
+      "8e",
+      "7a",
+      "cd",
+      "48",
+      "e3"
+    ],
+    "signature_rank": 8,
+    "vector_restriction_degree_counts": {
+      "13_or_lower": 0,
+      "14": 511,
+      "15": 130559
+    }
+  },
+  "validation": {
+    "all_components_are_trees": true,
+    "double_count_left": 469,
+    "double_count_right": 469,
+    "edge_sets_identical": true,
+    "euler_forest_identity": true,
+    "hyperplane_first_edges": 469,
+    "mask_first_edges": 469,
+    "profile_hyperplane_sum": 131070,
+    "rank_histogram_mask_sum": 255
+  }
+}

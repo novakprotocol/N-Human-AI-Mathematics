@@ -13,7 +13,7 @@ release_version:             0.1.0-public-review
 release_tag:                 public-review-v1
 release_date:                2026-07-27
 GitHub_Pages:                https://novakprotocol.github.io/N-Human-AI-Mathematics/
-active_package:              HINC-001
+active_packages:             HINC-001, ABF-001
 blanket_license_applied:     false
 peer_reviewed:               false
 journal_submitted:           false
@@ -28,7 +28,7 @@ HINC-001 is public as a candidate technical-review package. Public visibility do
 ## Publication order
 
 1. `HINC-001` — active public technical review.
-2. `ABF-001` — index entry only; next package.
+2. `ABF-001` — active public technical review.
 3. `FSG-001` — hold.
 4. `ACM-001` — hold pending consolidation.
 

@@ -1,0 +1,44 @@
+{
+  "schema_version": "n.human_ai_mathematics.source_manifest.v1",
+  "paper_id": "ABF-001",
+  "generated_repository": "novakprotocol/N-Human-AI-Mathematics",
+  "sources": [
+    {
+      "repository": "novakprotocol/N-MathLab",
+      "commit": "4376321b33f5a8fd8b5a9c63240cc5823eed7bbb",
+      "role": "v30 affine-hyperplane theorem and evidence",
+      "files": [
+        {
+          "source": "docs/research/BLACK_BOX_AFFINE_HYPERPLANE_SPECTRUM_V30_PAPER.md",
+          "target": "papers/ABF-001/evidence/historical/V30_SOURCE_RECORD.md"
+        },
+        {
+          "source": "docs/research/BLACK_BOX_AFFINE_HYPERPLANE_SPECTRUM_V30_INDEPENDENT_REVIEW.md",
+          "target": "papers/ABF-001/evidence/historical/V30_REVIEW_RECORD.md"
+        }
+      ]
+    },
+    {
+      "repository": "novakprotocol/N-MathLab",
+      "commit": "d530494329163ad1ecc3eb8c72a945b159935bc9",
+      "role": "v32 bidual incidence theorem and finite radical geometry",
+      "files": [
+        {
+          "source": "docs/research/BLACK_BOX_RADICAL_INCIDENCE_DUALITY_V32_PAPER.md",
+          "target": "papers/ABF-001/evidence/historical/V32_SOURCE_RECORD.md"
+        },
+        {
+          "source": "docs/research/BLACK_BOX_RADICAL_INCIDENCE_DUALITY_V32_INDEPENDENT_REVIEW.md",
+          "target": "papers/ABF-001/evidence/historical/V32_REVIEW_RECORD.md"
+        },
+        {
+          "source": "receipts/black-box-text-inference-v32/local-proof-v32.json",
+          "target": "papers/ABF-001/evidence/historical/local-proof-v32.json"
+        }
+      ]
+    }
+  ],
+  "external_evidence": [],
+  "materialization_status": "historical source records materialized; consolidated manuscript, frozen source, fresh verifiers, and release receipts control the candidate public-review package",
+  "public_release_authorized": false
+}
