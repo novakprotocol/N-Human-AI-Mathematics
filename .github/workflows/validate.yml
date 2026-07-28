@@ -41,6 +41,7 @@ jobs:
           python -m py_compile tools/validate_public_release.py
           python -m py_compile tools/validate_public_release_v2.py
           python -m py_compile tools/validate_public_state.py
+          python -m py_compile tools/validate_publication_gate.py
           python -m py_compile papers/HINC-001/src/mcrc_hidden_infinitesimal_noncommutativity_standalone.py
           python -m py_compile papers/HINC-001/src/standalone_common_core_verifier.py
           python -m py_compile papers/HINC-001/tests/test_hinc_standalone.py
@@ -98,6 +99,9 @@ jobs:
               ]
           subprocess.run(command, check=True)
           PY
+          python tools/validate_publication_gate.py \
+            --root . \
+            --json-output reports/publication-gate-validation-ci.json
 
       - name: Run HINC standalone tests
         run: |
@@ -179,6 +183,7 @@ jobs:
             reports/publication-validation-ci.json
             reports/public-review-validation-ci.json
             reports/public-state-validation-ci.json
+            reports/publication-gate-validation-ci.json
             reports/hinc-test-log-ci.txt
             reports/public-release-audit-2026-07-27.json
             reports/public-switch-readiness.json
