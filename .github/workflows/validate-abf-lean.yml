@@ -1,0 +1,151 @@
+name: Validate ABF-001 Lean formalization
+
+on:
+  push:
+    branches:
+      - formal/abf-full-lean-v1
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'papers/ABF-001/formal/**'
+      - '.github/workflows/validate-abf-lean.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out ABF formal source
+        uses: actions/checkout@v7
+
+      - name: Reject proof placeholders and project axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          formal='papers/ABF-001/formal'
+          if grep -RInE '(^|[^A-Za-z])(sorry|admit)([^A-Za-z]|$)' \
+              "$formal" --include='*.lean'; then
+            echo 'Lean placeholder found.' >&2
+            exit 1
+          fi
+          if grep -RInE '^[[:space:]]*axiom[[:space:]]' \
+              "$formal" --include='*.lean'; then
+            echo 'Project axiom declaration found.' >&2
+            exit 1
+          fi
+
+      - name: Install pinned Lean toolchain manager
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .artifacts/abf-lean
+          curl --proto '=https' --tlsv1.2 -sSfL \
+            https://raw.githubusercontent.com/leanprover/elan/v4.2.1/elan-init.sh \
+            -o /tmp/elan-init.sh
+          sha256sum /tmp/elan-init.sh \
+            | tee .artifacts/abf-lean/elan-installer-sha256.txt
+          sh /tmp/elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          "$HOME/.elan/bin/elan" --version \
+            | tee .artifacts/abf-lean/elan-version.txt
+
+      - name: Resolve dependencies and build ABF declarations
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cd papers/ABF-001/formal
+          lake --version 2>&1 \
+            | tee ../../../.artifacts/abf-lean/lake-version.txt
+          lake update 2>&1 \
+            | tee ../../../.artifacts/abf-lean/lake-update.log
+          sha256sum lake-manifest.json \
+            | tee ../../../.artifacts/abf-lean/lake-manifest-sha256.txt
+          lake exe cache get 2>&1 \
+            | tee ../../../.artifacts/abf-lean/cache.log
+          lake build 2>&1 \
+            | tee ../../../.artifacts/abf-lean/build.log
+
+      - name: Write bounded formal receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from __future__ import annotations
+
+          import hashlib
+          import json
+          import re
+          from pathlib import Path
+
+          root = Path('papers/ABF-001/formal')
+          artifact = Path('.artifacts/abf-lean')
+          files = sorted(root.rglob('*.lean'))
+          source = '\n'.join(path.read_text(encoding='utf-8') for path in files)
+          build = (artifact / 'build.log').read_text(encoding='utf-8')
+          manifest = root / 'lake-manifest.json'
+          declarations = re.compile(
+              r'^\s*(?:theorem|lemma|def|abbrev|structure|inductive)\s+',
+              re.MULTILINE,
+          )
+
+          assert 'sorryAx' not in build
+          assert manifest.is_file()
+          receipt = {
+              'schema': 'n.human_ai_mathematics.abf001.lean_build.v1',
+              'result': 'PASS',
+              'exact_head': '${{ github.sha }}',
+              'toolchain': (root / 'lean-toolchain').read_text().strip(),
+              'mathlib_request': 'v4.30.0',
+              'lean_files': [str(path) for path in files],
+              'compiled_source_declaration_count': len(declarations.findall(source)),
+              'sorry_admit_count': 0,
+              'project_axiom_count': 0,
+              'sorryAx_in_build_log': False,
+              'formal_lanes_complete': {
+                  'A01': False,
+                  'A02': False,
+                  'A03': False,
+                  'A04': False,
+                  'A05': False,
+                  'A06': False,
+              },
+              'full_manuscript_lean_verified': False,
+              'existing_public_formal_pass_claim': False,
+          }
+          (artifact / 'ABF001_LEAN_BUILD_RECEIPT.json').write_text(
+              json.dumps(receipt, indent=2, sort_keys=True) + '\n',
+              encoding='utf-8',
+              newline='\n',
+          )
+          print(json.dumps(receipt, indent=2, sort_keys=True))
+          PY
+
+      - name: Check ABF formal branch whitespace
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == 'pull_request' ]]; then
+            git fetch origin "${{ github.base_ref }}"
+            base="$(git merge-base "origin/${{ github.base_ref }}" HEAD)"
+            git diff --check "$base" HEAD --
+          elif git rev-parse HEAD^ >/dev/null 2>&1; then
+            git diff --check HEAD^ HEAD --
+          else
+            git diff --check --
+          fi
+
+      - name: Upload ABF Lean receipts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: abf001-lean-${{ github.sha }}
+          path: .artifacts/abf-lean/
+          if-no-files-found: error
+          retention-days: 90
