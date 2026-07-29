@@ -1,0 +1,21 @@
+{
+  "schema": "n.human_ai_mathematics.hinc001.full_formalization_status.v2",
+  "paper_id": "HINC-001",
+  "status": "EXPANSION_COMPILE_PENDING",
+  "toolchain": "leanprover/lean4:v4.30.0",
+  "mathlib": "v4.30.0",
+  "lanes": {
+    "H01_existing_algebraic_kernel": "COMPILED_PASS",
+    "H02_existing_coefficient_classification": "COMPILED_PASS",
+    "H03_dual_number_hochschild_foundation": "SOURCE_COMMITTED_COMPILE_PENDING",
+    "H04_complete_normalized_cochains_and_bracket": "NOT_STARTED",
+    "H05_generator_to_global_extension": "NOT_STARTED",
+    "H06_odd_presentation_normal_form": "NOT_STARTED",
+    "H07_representability_and_bialgebras": "NOT_STARTED",
+    "H08_complete_scheme_centers": "NOT_STARTED",
+    "H09_clopen_split_units_and_fppf_derived": "NOT_STARTED"
+  },
+  "full_manuscript_lean_verified": false,
+  "public_release_authorized": true,
+  "existing_public_bounded_formal_boundary_remains_valid": true
+}
