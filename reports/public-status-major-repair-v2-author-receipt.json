@@ -1,0 +1,240 @@
+{
+  "acceptance_metrics": {
+    "abf_active_status_present": "yes",
+    "acm_hold_present": "yes",
+    "conflicting_formal_states": 0,
+    "conflicting_publication_states": 0,
+    "credential_pattern_findings": 0,
+    "fsg_mathematical_hold_present": "yes",
+    "full_lean_overclaim": 0,
+    "hinc_active_status_present": "yes",
+    "historical_priority_overclaim": 0,
+    "internal_link_validation": "PASS",
+    "json_schema_validation": "PASS",
+    "learning_workflow_equivalent": "PASS",
+    "pages_build_equivalent": "PASS",
+    "peer_review_overclaim": 0,
+    "per_file_state_mismatches": 0,
+    "personal_path_findings": 0,
+    "private_branch_path_findings": 0,
+    "private_detector_literals": 0,
+    "private_fsg_references_in_changed_files": 0,
+    "private_reference_findings": 0,
+    "status_mutation_tests_passed": "14/14",
+    "validator_workflow_private_scan_exclusions": 0
+  },
+  "base_head": "d1edab648bd842dec20f8b21625f17258e5e9e9c",
+  "branch": "fix/restore-hinc-abf-active-fsg-math-hold-v1",
+  "canonical_state": {
+    "ABF-001": {
+      "active_public_review_authorized": true,
+      "bounded_phrase": "bounded a01 lean",
+      "compiled_bounded_lane": "A01",
+      "formal_state": "PARTIAL_PASS",
+      "full_manuscript_lean_verified": false,
+      "matrix_public_state": "ACTIVE_PUBLIC_CANDIDATE_TECHNICAL_REVIEW",
+      "portfolio_public_state": "ACTIVE_PUBLIC_CANDIDATE_TECHNICAL_REVIEW",
+      "research_state": "active_review",
+      "status_formal_state": "PARTIAL_PASS_BOUNDED_A01_LEAN_VERIFICATION"
+    },
+    "ACM-001": {
+      "controlling_manuscript_complete": false,
+      "formal_state": "HOLD_PENDING_CONSOLIDATION",
+      "full_manuscript_lean_verified": false,
+      "matrix_public_state": "HOLD_PENDING_CONSOLIDATION",
+      "portfolio_public_state": "HOLD_PENDING_CONSOLIDATION",
+      "public_release_authorized": false,
+      "research_state": "hold"
+    },
+    "FSG-001": {
+      "formal_state": "HOLD_MATHEMATICAL_BLOCKER",
+      "full_manuscript_lean_verified": false,
+      "mathematical_blocker": true,
+      "matrix_public_state": "PRIVATE_CANDIDATE_MATHEMATICAL_BLOCKER_HOLD",
+      "portfolio_public_state": "PRIVATE_CANDIDATE_MATHEMATICAL_BLOCKER_HOLD",
+      "private_candidate": true,
+      "public_release_authorized": false,
+      "public_theorem_package_released": false,
+      "research_state": "hold"
+    },
+    "HINC-001": {
+      "active_public_review_authorized": true,
+      "bounded_phrase": "bounded lean",
+      "formal_state": "PARTIAL_PASS",
+      "full_manuscript_lean_verified": false,
+      "matrix_public_state": "ACTIVE_PUBLIC_CANDIDATE_TECHNICAL_REVIEW",
+      "portfolio_public_state": "ACTIVE_PUBLIC_CANDIDATE_TECHNICAL_REVIEW",
+      "research_state": "active_review",
+      "status_formal_state": "PARTIAL_PASS_BOUNDED_LEAN_VERIFICATION"
+    }
+  },
+  "commands": [
+    {
+      "command": "python -m py_compile <changed validators>",
+      "result": "PASS"
+    },
+    {
+      "command": "python -c <json syntax validation for *.json>",
+      "result": "PASS"
+    },
+    {
+      "command": "python tools/validate_json_schema.py --root . --output reports/json-schema-validation-major-repair-v2.json",
+      "receipt": "reports/json-schema-validation-major-repair-v2.json",
+      "result": "PASS"
+    },
+    {
+      "command": "python tools/validate_status_consistency.py --root . --output reports/status-consistency-validation-major-repair-v2.json",
+      "receipt": "reports/status-consistency-validation-major-repair-v2.json",
+      "result": "PASS"
+    },
+    {
+      "command": "python tools/test_public_status_mutations.py --root . --output reports/public-status-mutation-tests-major-repair-v2.json --log reports/public-status-mutation-tests-major-repair-v2.log",
+      "log": "reports/public-status-mutation-tests-major-repair-v2.log",
+      "receipt": "reports/public-status-mutation-tests-major-repair-v2.json",
+      "result": "PASS"
+    },
+    {
+      "command": "python tools/validate_public_surface_scan.py --root . --output reports/public-surface-scan-major-repair-v2.json",
+      "receipt": "reports/public-surface-scan-major-repair-v2.json",
+      "result": "PASS"
+    },
+    {
+      "command": "python tools/validate_internal_links.py --root . --output reports/internal-link-validation-major-repair-v2.json",
+      "receipt": "reports/internal-link-validation-major-repair-v2.json",
+      "result": "PASS"
+    },
+    {
+      "command": "python tools/validate_learning_page.py . --output reports/learning-page-validation-major-repair-v2.json --javascript-output reports/learn-inline-major-repair-v2.js",
+      "receipt": "reports/learning-page-validation-major-repair-v2.json",
+      "result": "PASS"
+    },
+    {
+      "command": "python <inline serve/fetch checker for docs/index.html and docs/learn.html>",
+      "receipt": "reports/learning-serve-major-repair-v2/serve-fetch-receipt.json",
+      "result": "PASS"
+    },
+    {
+      "command": "node --check reports/learn-inline-major-repair-v2.js",
+      "result": "PASS"
+    },
+    {
+      "command": "python tools/validate_publication.py --root . --allow-public --json-output reports/publication-v1-validation-major-repair-v2.json",
+      "receipt": "reports/publication-v1-validation-major-repair-v2.json",
+      "result": "PASS"
+    },
+    {
+      "command": "python tools/validate_publication_v2.py --root . --allow-public --json-output reports/publication-validation-major-repair-v2.json",
+      "receipt": "reports/publication-validation-major-repair-v2.json",
+      "result": "PASS"
+    },
+    {
+      "command": "python tools/validate_public_release.py --root . --json-output reports/public-release-validation-major-repair-v2.json",
+      "receipt": "reports/public-release-validation-major-repair-v2.json",
+      "result": "PASS"
+    },
+    {
+      "command": "python tools/validate_public_release_v2.py --root . --json-output reports/public-release-v2-validation-major-repair-v2.json",
+      "receipt": "reports/public-release-v2-validation-major-repair-v2.json",
+      "result": "PASS"
+    },
+    {
+      "command": "python tools/validate_public_state.py --root . --json-output reports/public-state-validation-major-repair-v2.json",
+      "receipt": "reports/public-state-validation-major-repair-v2.json",
+      "result": "PASS"
+    },
+    {
+      "command": "python tools/validate_publication_gate.py --root . --json-output reports/publication-gate-validation-major-repair-v2.json",
+      "receipt": "reports/publication-gate-validation-major-repair-v2.json",
+      "result": "PASS"
+    },
+    {
+      "command": "python tools/validate_full_lean_portfolio.py --root . --output reports/full-lean-portfolio-validation-major-repair-v2.json",
+      "receipt": "reports/full-lean-portfolio-validation-major-repair-v2.json",
+      "result": "PASS"
+    },
+    {
+      "command": "python -m unittest discover -s papers/HINC-001/tests -p test_*.py -v",
+      "log": "reports/hinc-test-log-major-repair-v2.txt",
+      "result": "PASS",
+      "tests_discovered": 5
+    },
+    {
+      "command": "ABF001_TEST_OUTPUT_DIR=reports/abf-test-output-major-repair-v2 python -m unittest discover -s papers/ABF-001/tests -p test_*.py -v",
+      "log": "reports/abf-test-log-major-repair-v2.txt",
+      "result": "PASS",
+      "tests_discovered": 6
+    },
+    {
+      "command": "ELAN_TOOLCHAIN=leanprover/lean4:v4.30.0 lake exe cache get",
+      "log": "reports/hinc-lean-cache-major-repair-v2.txt",
+      "result": "PASS",
+      "working_directory": "papers/HINC-001/formal"
+    },
+    {
+      "command": "ELAN_TOOLCHAIN=leanprover/lean4:v4.30.0 lake build",
+      "log": "reports/hinc-lean-build-major-repair-v2.txt",
+      "result": "PASS",
+      "working_directory": "papers/HINC-001/formal"
+    },
+    {
+      "command": "ELAN_TOOLCHAIN=leanprover/lean4:v4.30.0 lake exe cache get",
+      "log": "reports/abf-lean-cache-major-repair-v2.txt",
+      "result": "PASS",
+      "working_directory": "papers/ABF-001/formal"
+    },
+    {
+      "command": "ELAN_TOOLCHAIN=leanprover/lean4:v4.30.0 lake build",
+      "log": "reports/abf-lean-build-major-repair-v2.txt",
+      "result": "PASS",
+      "working_directory": "papers/ABF-001/formal"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS"
+    }
+  ],
+  "old_pr_head": "2e5226d7f30b904d800e09626a606308dc6ea31d",
+  "pr": 60,
+  "preserved": {
+    "merge_performed": false,
+    "pages_disabled": false,
+    "pr_57_history": true,
+    "release_action": false,
+    "repository_visibility_changed": false,
+    "theorem_source_changed": false
+  },
+  "python_version": "3.13.14",
+  "receipt_sha256": {
+    "reports/abf-lake-version-major-repair-v2.txt": "38fdd57d50d67c5fe93bb87c80aeb12baba047f45f2909637555691c7337d64b",
+    "reports/abf-lean-build-major-repair-v2.txt": "18b01e4af3dca08b69f60e318c5eaddd1ac15302db9009d709578ce5b61267a5",
+    "reports/abf-lean-cache-major-repair-v2.txt": "ef8ab38163f207e031c0ebef3e0cd652e9a41ae1b3f9edc0339be3ab6b51b2e2",
+    "reports/abf-test-log-major-repair-v2.txt": "53e8572c59717d691c4100967da15f44112a142bc7a4e4e39493c1d4f25e864f",
+    "reports/full-lean-portfolio-validation-major-repair-v2.json": "3e13b285360ebcc965a4d5785a7f72fc143c9aff2c648bac28916e5871b7a08d",
+    "reports/hinc-lake-version-major-repair-v2.txt": "38fdd57d50d67c5fe93bb87c80aeb12baba047f45f2909637555691c7337d64b",
+    "reports/hinc-lean-build-major-repair-v2.txt": "3c717d279a20a39f0611f61869e9d8c1e96f7691b31018473f8ce0830cf7cf80",
+    "reports/hinc-lean-cache-major-repair-v2.txt": "c83b6307320ab80f1e538fcc9e903349c92da55112b1ba5d6b29f9761e88e7d6",
+    "reports/hinc-test-log-major-repair-v2.txt": "a5c574d6bec7c993f60d7c16e5f6b51af799b7d4c7ef0b60ef2c8ec0b2ba5621",
+    "reports/internal-link-validation-major-repair-v2.json": "91e352d175e861021f932aeca7add2a7d598a311758a252cc673dc02ba6b553e",
+    "reports/json-schema-validation-major-repair-v2.json": "047d4a4fb091dbf4bc829aa0fb80df87d50ad527fe8a17eb1773225a33c505b1",
+    "reports/learn-inline-major-repair-v2.js": "2290b95fc65be7ee7d67ed6895c5cfd467a54c50e188423b81ceb7ba49f816db",
+    "reports/learning-page-validation-major-repair-v2.json": "dda77bc591bbaaeb324c65d2efb4156c007e04265339636a96d225bd83542ede",
+    "reports/learning-serve-major-repair-v2/serve-fetch-receipt.json": "5eca90197eef39e44c5033f7bcaf839f4b2c6b5f4a4ad242b9b6eddc1672d1a9",
+    "reports/public-release-v2-validation-major-repair-v2.json": "77a726d6a430c126f57557752b7a0f53d8c78e0f7929ddcb61aab71ddeff1f40",
+    "reports/public-release-validation-major-repair-v2.json": "77a726d6a430c126f57557752b7a0f53d8c78e0f7929ddcb61aab71ddeff1f40",
+    "reports/public-state-validation-major-repair-v2.json": "2219a8f704aecd8d834483e7a948e6ab80d7d8cc8664e9b49d268ada037be8a6",
+    "reports/public-status-mutation-tests-major-repair-v2.json": "29307299539834abe0443aa841c75ad378c30c5e15da88953d39d591c758b590",
+    "reports/public-status-mutation-tests-major-repair-v2.log": "27184fd570eea1d576e3363df695e0b5970b34bd6f436321160acb8fc366ef3e",
+    "reports/public-surface-scan-major-repair-v2.json": "25d02d21a47458be37eeb080031933764510f7b3dacef702e5d83b181a6f0d3f",
+    "reports/publication-gate-validation-major-repair-v2.json": "08e74209afc7a27a8875afcc7cb18acfe0d0cd16d48f5d7f624a653a95d26f57",
+    "reports/publication-v1-validation-major-repair-v2.json": "4322d76d0db6b651aea2bebb1147479864122130579ac95e9a26a77c6e5d25ec",
+    "reports/publication-validation-major-repair-v2.json": "4322d76d0db6b651aea2bebb1147479864122130579ac95e9a26a77c6e5d25ec",
+    "reports/status-consistency-validation-major-repair-v2.json": "866f0e3ed85c8ddbefd2d73874bca0b7187134e7847d603f4083e38dad1faff3"
+  },
+  "repository": "novakprotocol/N-Human-AI-Mathematics",
+  "result": "PASS",
+  "role": "NHAIM-01-CODEX-PUBLIC-STATUS-CORRECTION",
+  "schema": "n.human_ai_mathematics.public_status_major_repair_v2_author_receipt.v1",
+  "tests_not_run": [
+    "Remote GitHub Actions execution: NOT RUN; local workflow-equivalent checks were run without deployment."
+  ]
+}

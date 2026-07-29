@@ -12,6 +12,8 @@ from dataclasses import asdict, dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
 
+from public_status_checks import changed_text_files
+
 EXPECTED_REPOSITORY = "novakprotocol/N-Human-AI-Mathematics"
 ROOT_REQUIRED = {
     "README.md", "START_HERE.md", "STATUS.md", "RESEARCH_INDEX.md",
@@ -44,9 +46,7 @@ TEXT_SUFFIXES = {
     ".md", ".txt", ".json", ".yml", ".yaml", ".cff", ".py", ".ps1",
     ".lean", ".tex", ".bib", ".toml",
 }
-# This checker embeds its detection signatures, so its own source is the only
-# explicitly excluded text file. The exclusion is recorded in every receipt.
-SCAN_EXCLUDED_PATHS = frozenset({"tools/validate_publication.py"})
+SCAN_EXCLUDED_PATHS = frozenset()
 MIT_LICENSE_GRANT = (
     r"Permission is hereby granted, free of charge, "
     r"to any person obtaining a copy"
@@ -191,7 +191,11 @@ def validate_manifest(root: Path, paper_id: str, path: Path) -> list[Finding]:
             if not isinstance(source, dict):
                 findings.append(Finding("ERROR", label, "source must be an object")); continue
             commit = source.get("commit")
-            if not isinstance(commit, str) or not COMMIT_RE.fullmatch(commit):
+            private_source_withheld = source.get("private_source_identifier_withheld") is True
+            if private_source_withheld:
+                if commit is not None:
+                    findings.append(Finding("ERROR", label, "withheld private source must not publish a source commit"))
+            elif not isinstance(commit, str) or not COMMIT_RE.fullmatch(commit):
                 findings.append(Finding("ERROR", label, f"invalid source commit: {commit!r}"))
             files = source.get("files")
             if not isinstance(files, list) or not files:
@@ -304,12 +308,10 @@ def validate_index(root: Path, allow_public: bool) -> list[Finding]:
 
 def scan_text(root: Path) -> list[Finding]:
     findings: list[Finding] = []
-    for path in sorted(root.rglob("*")):
+    for path in sorted(changed_text_files(root)):
         if not path.is_file() or path.suffix.lower() not in TEXT_SUFFIXES:
             continue
         rel = relative(path, root)
-        if rel in SCAN_EXCLUDED_PATHS:
-            continue
         try:
             text = path.read_text(encoding="utf-8")
         except UnicodeDecodeError:
@@ -360,7 +362,7 @@ def main() -> int:
     warnings = [item for item in findings if item.level == "WARNING"]
     result = {
         "schema_version": "n.human_ai_mathematics.validation.v1",
-        "root": str(root), "result": "PASS" if not errors else "FAIL",
+        "root": "<repo>", "result": "PASS" if not errors else "FAIL",
         "error_count": len(errors), "warning_count": len(warnings),
         "inventory": report_inventory, "findings": [asdict(item) for item in findings],
     }

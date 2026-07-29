@@ -1,0 +1,22 @@
+✔ [7713/8477] Built Mathlib.Data.Char (3.7s)
+✔ [7715/8477] Built Mathlib.Algebra.GroupWithZero.Action.ConjAct (7.3s)
+✔ [7717/8477] Built Mathlib.RingTheory.Localization.NumDen (8.5s)
+✔ [7723/8477] Built Mathlib.AlgebraicTopology.SimplicialSet.Op (9.2s)
+✔ [7800/8477] Built Mathlib.RingTheory.Localization.Algebra (10s)
+✔ [8331/8477] Built Mathlib.Algebra.Colimit.Ring (11s)
+✔ [8332/8477] Built Mathlib.Analysis.Normed.Module.MStructure (10s)
+✔ [8333/8477] Built Mathlib.CategoryTheory.Bicategory.Kan.Adjunction (10s)
+✔ [8334/8477] Built Mathlib.Tactic.Widget.StringDiagram (11s)
+✔ [8335/8477] Built Mathlib.Analysis.Convex.Integral (12s)
+✔ [8343/8477] Built Mathlib.RingTheory.AdicCompletion.Functoriality (13s)
+✔ [8359/8477] Built Mathlib.Topology.ContinuousMap.ZeroAtInfty (14s)
+✔ [8437/8477] Built Mathlib.AlgebraicGeometry.Morphisms.Separated (8.0s)
+✔ [8473/8477] Built Mathlib.Tactic (7.3s)
+✔ [8474/8477] Built Mathlib (10s)
+ℹ [8475/8477] Built ABF.MomentKernel (12s)
+info: ABF/MomentKernel.lean:74:0: 'ABF.generatorSpan_le_ker_iff' depends on axioms: [propext, Quot.sound]
+info: ABF/MomentKernel.lean:75:0: 'ABF.mem_ker_iff_coordinatesZero' depends on axioms: [propext, Quot.sound]
+info: ABF/MomentKernel.lean:76:0: 'ABF.bidual_moment_incidence' depends on axioms: [propext, Quot.sound]
+info: ABF/MomentKernel.lean:77:0: 'ABF.bidual_span_kernel_incidence' depends on axioms: [propext, Quot.sound]
+✔ [8476/8477] Built ABF (10s)
+Build completed successfully (8477 jobs).

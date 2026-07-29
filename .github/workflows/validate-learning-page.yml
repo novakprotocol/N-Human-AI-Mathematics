@@ -9,6 +9,11 @@ on:
       - 'tools/validate_learning_page.py'
       - '.github/workflows/validate-learning-page.yml'
   workflow_dispatch:
+    inputs:
+      target_sha:
+        description: "Immutable commit SHA to validate"
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -20,7 +25,42 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.event_name == 'workflow_dispatch' && inputs.target_sha || github.sha }}
           fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify exact workflow checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            expected="${{ github.event.pull_request.head.sha }}"
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            expected="${{ inputs.target_sha }}"
+          else
+            expected="${{ github.sha }}"
+          fi
+          actual="$(git rev-parse HEAD)"
+          echo "event=${{ github.event_name }}"
+          echo "expected_sha=$expected"
+          echo "actual_checked_out_sha=$actual"
+          test "$actual" = "$expected"
+          mkdir -p .artifacts/exact-head
+          python - <<PY
+          import json
+          from pathlib import Path
+
+          payload = {
+              "schema": "nhaim.workflow_exact_head_checkout.v1",
+              "event": "${{ github.event_name }}",
+              "expected_sha": "$expected",
+              "actual_checked_out_sha": "$actual",
+              "match": "$actual" == "$expected",
+          }
+          path = Path(".artifacts/exact-head/${{ github.job }}-checkout.json")
+          path.parent.mkdir(parents=True, exist_ok=True)
+          path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          PY
 
       - uses: actions/setup-python@v5
         with:
@@ -33,41 +73,51 @@ jobs:
       - name: Validate status, interactions, boundaries, and identities
         run: |
           set -euo pipefail
-          mkdir -p .artifacts/learning-page-v13
+          mkdir -p .artifacts/learning-page-v14
           python -m py_compile tools/validate_learning_page.py
           python tools/validate_learning_page.py "$GITHUB_WORKSPACE" \
-            --output .artifacts/learning-page-v13/validation.json \
-            --javascript-output .artifacts/learning-page-v13/learn-inline.js \
-            > .artifacts/learning-page-v13/validation.stdout
+            --output .artifacts/learning-page-v14/validation.json \
+            --javascript-output .artifacts/learning-page-v14/learn-inline.js \
+            > .artifacts/learning-page-v14/validation.stdout
 
       - name: Check learning-page JavaScript syntax
-        run: node --check .artifacts/learning-page-v13/learn-inline.js
+        run: node --check .artifacts/learning-page-v14/learn-inline.js
 
       - name: Serve and fetch both public pages
         run: |
           set -euo pipefail
           python -m http.server 8765 --directory docs \
-            > .artifacts/learning-page-v13/http-server.log 2>&1 &
+            > .artifacts/learning-page-v14/http-server.log 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid" 2>/dev/null || true' EXIT
           for attempt in {1..20}; do
             curl -fsS http://127.0.0.1:8765/learn.html \
-              -o .artifacts/learning-page-v13/learn-fetched.html && break
+              -o .artifacts/learning-page-v14/learn-fetched.html && break
             sleep 0.25
           done
           curl -fsS http://127.0.0.1:8765/ \
-            -o .artifacts/learning-page-v13/index-fetched.html
-          cmp docs/learn.html .artifacts/learning-page-v13/learn-fetched.html
-          cmp docs/index.html .artifacts/learning-page-v13/index-fetched.html
-          grep -F 'No active theorem packages under the current rule' \
-            .artifacts/learning-page-v13/learn-fetched.html
-          grep -F 'Three papers. One strict Lean standard.' \
-            .artifacts/learning-page-v13/index-fetched.html
+            -o .artifacts/learning-page-v14/index-fetched.html
+          cmp docs/learn.html .artifacts/learning-page-v14/learn-fetched.html
+          cmp docs/index.html .artifacts/learning-page-v14/index-fetched.html
+          grep -F 'Active candidate public technical review' \
+            .artifacts/learning-page-v14/learn-fetched.html
+          grep -F 'Bounded Lean PASS' \
+            .artifacts/learning-page-v14/learn-fetched.html
+          grep -F 'Bounded A01 Lean PASS' \
+            .artifacts/learning-page-v14/learn-fetched.html
+          grep -F 'HOLD -- MATHEMATICAL BLOCKER' \
+            .artifacts/learning-page-v14/learn-fetched.html
+          grep -F 'No FSG theorem package has been publicly released' \
+            .artifacts/learning-page-v14/learn-fetched.html
+          grep -F 'Hold pending consolidation' \
+            .artifacts/learning-page-v14/learn-fetched.html
+          grep -F 'Active candidate review, bounded formal status.' \
+            .artifacts/learning-page-v14/index-fetched.html
           grep -F 'href="learn.html"' \
-            .artifacts/learning-page-v13/index-fetched.html
-          if grep -Fq 'github.com/novakprotocol/N-MathLab' \
-            .artifacts/learning-page-v13/learn-fetched.html; then
-            echo 'Private FSG repository reference exposed.' >&2
+            .artifacts/learning-page-v14/index-fetched.html
+          if grep -Eiq 'No active theorem packages|historical artifacts only|fully Lean verified' \
+            .artifacts/learning-page-v14/learn-fetched.html; then
+            echo 'Superseded or overclaiming learning-page wording exposed.' >&2
             exit 1
           fi
 
@@ -82,7 +132,9 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: learning-page-v13-${{ github.sha }}
-          path: .artifacts/learning-page-v13/
+          name: learning-page-v14-${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.event_name == 'workflow_dispatch' && inputs.target_sha || github.sha }}
+          path: |
+            .artifacts/learning-page-v14/
+            .artifacts/exact-head/
           if-no-files-found: error
           retention-days: 90

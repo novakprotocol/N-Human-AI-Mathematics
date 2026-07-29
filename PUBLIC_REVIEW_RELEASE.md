@@ -1,34 +1,134 @@
-# Public review release record
+<!--
+NHAIM_STATUS_BLOCK_V1
+HINC-001:
+  paper_id: HINC-001
+  public_state: active_review
+  formal_state: PARTIAL_PASS
+  bounded_formal_scope: bounded_Lean
+  claim_map_complete: false
+  full_manuscript_lean_verified: false
+  external_specialist_review: pending
+  historical_priority: not_established
+  peer_review: not_submitted
+  journal_status: not_submitted
+  public_release_authorized: true
+ABF-001:
+  paper_id: ABF-001
+  public_state: active_review
+  formal_state: PARTIAL_PASS
+  bounded_formal_scope: bounded_A01_Lean
+  compiled_lane: A01
+  a02_a06_status: incomplete
+  claim_map_complete: false
+  full_manuscript_lean_verified: false
+  external_specialist_review: pending
+  historical_priority: not_established
+  peer_review: not_submitted
+  journal_status: not_submitted
+  public_release_authorized: true
+FSG-001:
+  paper_id: FSG-001
+  public_state: hold
+  private_candidate: true
+  mathematical_blocker: true
+  public_theorem_released: false
+  correction_status: private_correction_under_internal_review
+  external_review: not_started
+  formal_status: HOLD_MATHEMATICAL_BLOCKER
+  public_release_authorized: false
+ACM-001:
+  paper_id: ACM-001
+  public_state: hold
+  manuscript_complete: false
+  claim_map_complete: false
+  full_manuscript_lean_verified: false
+  public_theorem_released: false
+  public_release_authorized: false
+END_NHAIM_STATUS_BLOCK_V1
+-->
 
-## Current controlling status — 29 July 2026
+# Public Review Release Record
 
-The 27–28 July 2026 HINC-001 and ABF-001 releases remain preserved as immutable historical public artifacts. The accountable owner has since adopted a stricter rule:
+## Current Controlling Status -- 29 July 2026
 
-> Every retained mathematical claim in an active theorem package must be covered by compiled Lean, with a complete manuscript-to-declaration map and zero unresolved formal scope.
+The 27-28 July 2026 HINC-001 and ABF-001 candidate-review packages remain public
+and active for technical review. PR #57 is preserved in history, but the owner
+has clarified that its full-Lean-hold interpretation does not convert those
+releases into inactive or withdrawn artifacts.
 
-Accordingly, the current status is:
+The current distinction is:
 
 ```text
-HINC-001  public archive; full-Lean requalification hold
-ABF-001   public archive; full-Lean requalification hold
-FSG-001   private; full-Lean completion hold
-ACM-001   blocked until papers 1–3 align
-active theorem packages under the current rule: none
+HINC-001  active public candidate technical review; PARTIAL_PASS bounded Lean
+ABF-001   active public candidate technical review; PARTIAL_PASS bounded A01 Lean
+FSG-001   private candidate; HOLD -- MATHEMATICAL BLOCKER
+ACM-001   hold pending consolidation
+FULL_PASS none
 ```
 
-See:
+Full-manuscript Lean verification remains a gold-standard improvement program.
+It must not be claimed until every retained manuscript claim is mapped to
+compiled Lean declarations or exact imported theorems, the unresolved formal
+scope is zero, and the manuscript-to-formal-statement fidelity gate passes.
 
-- `FULL_LEAN_RELEASE_STANDARD.md`;
-- `PUBLIC_REVIEW_FORMALIZATION_HOLD_2026-07-29.md`;
-- `PAPER_1_3_FULL_LEAN_STATUS.json`.
+## Public Candidate Releases
 
-This is a status correction, not a claim that a counterexample has been found. The prior artifacts remain readable for chronology, review, and correction. They MUST NOT be described as currently active or fully Lean-verified while requalification is incomplete.
+### HINC-001
 
-## Historical release identity
+HINC-001 remains an active candidate public technical-review package. Its
+bounded Lean scopes are genuine:
+
+```text
+formal status:                PARTIAL_PASS
+bounded Lean verification:    PASS
+full manuscript formalized:   no
+external review:              pending
+historical priority:          unestablished
+```
+
+The bounded Lean PASS covers the algebraic kernel and coefficient
+classifications. The complete revised manuscript remains unformalized,
+including major Hochschild, source-algebra, global-preservation,
+representability, center, clopen, derived-subgroup, and downstream consequence
+claims.
+
+### ABF-001
+
+ABF-001 remains an active candidate public technical-review package. Its bounded
+A01 Lean lane is genuine:
+
+```text
+formal status:                PARTIAL_PASS
+bounded A01 Lean verification: PASS
+full manuscript formalized:   no
+external review:              pending
+historical priority:          unestablished
+```
+
+A02-A06 and the complete proof-connected finite atlas remain unformalized.
+
+### FSG-001
+
+FSG-001 is private and paused. A universal arithmetic criterion in the private
+candidate manuscript was disproved before public release. The private statement,
+proof, tests, formal map, and status records are being corrected and
+independently re-audited. No public FSG theorem package has been released. No FSG theorem package has been publicly released.
+
+```text
+public state:       private candidate
+mathematical state: HOLD -- MATHEMATICAL BLOCKER
+public release:     not authorized
+```
+
+### ACM-001
+
+ACM-001 remains on hold pending consolidation.
+
+## Historical Release Identity
 
 ```text
 release channel:             public review
-historical version:          0.1.0-public-review
+version:                     0.1.0-public-review
 initial release date:        2026-07-27
 repository:                  novakprotocol/N-Human-AI-Mathematics
 accountable owner:           Matthew S. Novak
@@ -42,86 +142,34 @@ peer-review status:          not peer reviewed
 historical priority:         unestablished
 ```
 
-## Historical public artifacts
+## Scientific-Status Boundaries
 
-### HINC-001
+Do not describe HINC-001 or ABF-001 as fully Lean verified, peer reviewed,
+externally reproduced, historically first, journal accepted, or formally proved
+as complete manuscripts.
 
-The historical HINC-001 package includes a self-contained human candidate manuscript, proof and claim maps, bounded Lean evidence, computational checks, prior-art boundaries, reproduction instructions, rights notices, and review channels.
+Do not describe FSG-001 as released, corrected, review-passed, or authorized for
+public theorem release.
 
-Its bounded Lean scopes are genuine. The complete manuscript remains unformalized, including major Hochschild, source-algebra, global-preservation, representability, center, clopen, derived-subgroup, and downstream consequence claims.
-
-Current status:
-
-```text
-formal status:  PARTIAL_PASS
-active status:  SUSPENDED_PENDING_FULL_LEAN
-```
-
-### ABF-001
-
-The historical ABF-001 package includes a complete human candidate manuscript, exhaustive finite evidence, independent internal implementations, mutation controls, provenance, reproduction instructions, and a bounded A01 Lean lane.
-
-A02–A06 and the complete proof-connected finite atlas remain unformalized.
-
-Current status:
-
-```text
-formal status:  PARTIAL_PASS
-active status:  SUSPENDED_PENDING_FULL_LEAN
-```
-
-### FSG-001
-
-FSG-001 is not publicly released as a theorem package. Its private exact-head Lean bootstrap compiles the Fibonacci foundation and literal graph adjacency, but the complete F01–F07 program remains open.
-
-Current status:
-
-```text
-formal status:  PARTIAL_BOOTSTRAP_PASS
-active status:  PRIVATE_FULL_LEAN_COMPLETION_HOLD
-```
-
-## Required reactivation gate
-
-For each exact paper source:
-
-1. freeze one controlling manuscript;
-2. inventory every retained theorem, lemma, equation, classification, exact count, and boundary case;
-3. map every item to compiled Lean declarations or exact imported theorems;
-4. formalize from the literal manuscript objects;
-5. eliminate `sorry`, `admit`, project-result axioms, and `sorryAx`;
-6. connect finite computations to kernel-checked certificates or exhaustive decidable proofs;
-7. build from a committed manifest in a fresh exact-head environment;
-8. retain axiom reports, source hashes, logs, manifests, and deterministic bundles;
-9. pass an independent manuscript-to-Lean fidelity review;
-10. complete the remaining hostile, prior-art, rights, packaging, and owner-authorization gates.
-
-Only then may the package return to active public technical review.
-
-## Scientific-status boundaries
-
-Lean verification does not establish:
-
-- external specialist correctness review;
-- independent outside reproduction;
-- historical priority;
-- novelty or significance;
-- peer review;
-- journal acceptance;
-- DOI or archival status.
-
-Those remain separate gates and must be described separately.
+Lean verification does not establish external specialist correctness review,
+independent outside reproduction, historical priority, novelty, significance,
+peer review, journal acceptance, DOI status, or archival publication status.
 
 ## Rights
 
-Public visibility permits reading and review. It does not create a blanket open-source or open-content license. Unless a file-specific notice states otherwise:
+Public visibility permits reading and review. It does not create a blanket
+open-source or open-content license. Unless a file-specific notice states
+otherwise:
 
 ```text
-Copyright © 2026 Matthew S. Novak. All rights reserved.
+Copyright (c) 2026 Matthew S. Novak. All rights reserved.
 ```
 
-See `RIGHTS_AND_LICENSING.md` and each paper’s terms files.
+See `RIGHTS_AND_LICENSING.md` and each paper's terms files.
 
-## Correction policy
+## Correction Policy
 
-Historical releases will not be silently rewritten. Any material correction, narrowing, supersession, formal completion, or withdrawal must identify the affected source, claim, evidence, impact, repaired source, and disposition.
+Historical releases and correction records are preserved. Any material
+correction, narrowing, supersession, formal completion, or withdrawal must
+identify the affected source, claim, evidence, impact, repaired source, and
+disposition.

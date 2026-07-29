@@ -14,7 +14,7 @@
   },
   "claim": {
     "level": 6,
-    "status": "human candidate theorem and exact finite classification preserved as a public historical artifact; active theorem status suspended pending complete manuscript Lean verification",
+    "status": "active public candidate technical review; human candidate theorem and exact finite classification",
     "globally_novel": "unestablished",
     "security_consequence": "not_claimed"
   },
@@ -42,7 +42,7 @@
   },
   "formal_verification": {
     "assistant": "Lean 4.30.0 with Mathlib 4.30.0",
-    "status": "PARTIAL_PASS_FULL_MANUSCRIPT_REQUALIFICATION_HOLD",
+    "status": "PARTIAL_PASS_BOUNDED_A01_LEAN_VERIFICATION",
     "full_manuscript_lean_verified": false,
     "claim_map_complete": false,
     "receipts": [
@@ -67,21 +67,36 @@
     "peer_review": "not submitted"
   },
   "release": {
-    "public_authorized": false,
-    "public_switch_ready": false,
-    "channel": "public_archive_full_lean_requalification_hold",
-    "historical_version": "0.1.0-public-review",
-    "historical_release_date": "2026-07-28",
+    "public_authorized": true,
+    "public_switch_ready": true,
+    "channel": "public_review",
+    "version": "0.1.0-public-review",
+    "release_date": "2026-07-28",
     "doi": null,
     "specific_model_disclosed": false,
     "specific_provider_disclosed": false
   },
   "limitations": [
-    "The historical public artifact is preserved for provenance but is not an active theorem package under the 29 July 2026 owner rule.",
+    "ABF-001 is active for public candidate technical review; public visibility is not peer review or validation.",
     "The A01 Lean PASS is genuine but does not prove Reed-Muller duality, the degree-drop criterion, the complete finite classification, or the exact incidence counts.",
     "The finite result is for the specified reduced map and does not claim a full-width security break.",
     "External specialist review and independent outside reproduction are pending.",
     "Global historical priority is unestablished.",
     "Public GitHub visibility is not peer review."
-  ]
+  ],
+  "status_controls": {
+    "public_state": "active_review",
+    "formal_state": "PARTIAL_PASS",
+    "bounded_formal_scope": "bounded_A01_Lean",
+    "compiled_lane": "A01",
+    "a02_a06_status": "incomplete",
+    "claim_map_complete": false,
+    "full_manuscript_lean_verified": false,
+    "external_specialist_review": "pending",
+    "historical_priority": "not_established",
+    "peer_review": "not_submitted",
+    "journal_status": "not_submitted",
+    "public_release_authorized": true,
+    "limitations_confirmed": true
+  }
 }

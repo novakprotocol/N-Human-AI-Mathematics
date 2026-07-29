@@ -1,0 +1,45 @@
+{
+  "boundaries": {
+    "abf_001_active_review": true,
+    "acm_001_hold": true,
+    "fsg_001_private_mathematical_hold": true,
+    "fsg_interactive_preview_disabled": true,
+    "hinc_001_active_review": true,
+    "private_fsg_source_exposed": false
+  },
+  "checks": {
+    "correction_file": 1,
+    "correction_record": 6,
+    "forbidden_text_absent": 8,
+    "fsg_noninteractive": 1,
+    "index_file": 1,
+    "index_integration": 7,
+    "index_overclaim_absent": 4,
+    "interactive_abf": 1,
+    "interactive_acm": 1,
+    "interactive_hinc": 1,
+    "one_inline_script": 1,
+    "page_file": 1,
+    "page_size": 1,
+    "required_boundary_text": 9,
+    "unique_ids": 1
+  },
+  "failures": [],
+  "files": {
+    "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md": {
+      "bytes": 2202,
+      "sha256": "785ff465f33d1c2154c5b0408a6d70039100e62d5667bc60ec41809aaa1f44eb"
+    },
+    "docs/index.html": {
+      "bytes": 9639,
+      "sha256": "dcc63b1b9cff7ee6350dfc7f6605501012dd06b8e82d087e7d6436e2d02aa2d1"
+    },
+    "docs/learn.html": {
+      "bytes": 21229,
+      "sha256": "a544ccb3a0716a756d8e4c9c53afadcee4a686a7bd4c85f97ba48081940fd6a5"
+    }
+  },
+  "result": "PASS",
+  "schema": "n.human_ai_mathematics.learning_page_validation.v14",
+  "total_checks": 44
+}

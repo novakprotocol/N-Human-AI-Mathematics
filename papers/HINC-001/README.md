@@ -93,7 +93,7 @@ The candidate package now contains one integrated human proof rather than a manu
 ### Base Lean kernel
 
 ```text
-N-MathLab PR:      #412
+private source reference: identifier withheld
 checker repo:      novakprotocol/novak-sdt
 checker PR:        #57
 run:               30119931881
@@ -103,7 +103,7 @@ artifact SHA-256:  63b2b160da40f722818820679da7c9d22eb7640694e48a5abc08fccf78f47
 ### Principal coefficient classification
 
 ```text
-N-MathLab PR:             #416
+private source reference: identifier withheld
 public checker:           novakprotocol/novak-sdt PR #58
 immutable source:         d7751d1de76253407016ef4bf92738cffa800e82
 workflow run:             30174213006

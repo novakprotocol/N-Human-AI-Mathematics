@@ -1,0 +1,26 @@
+{
+  "records": [
+    {
+      "actual_exit": 1,
+      "changed_file": "docs/index.html",
+      "command": [
+        "python",
+        "tools/validate_internal_links.py",
+        "--root",
+        "<internal-link-mutation-repo>"
+      ],
+      "control_id": "INTERNAL_LINK_NEG_01",
+      "expected_category": "missing fragment",
+      "expected_category_present": true,
+      "expected_nonzero_exit": true,
+      "expected_path": "docs/index.html",
+      "expected_path_present": true,
+      "mutation": "Add a local link to a missing synthetic fragment in docs/learn.html.",
+      "result": "PASS",
+      "stderr": "",
+      "stdout": "{\n  \"error_count\": 1,\n  \"findings\": [\n    {\n      \"level\": \"ERROR\",\n      \"message\": \"missing fragment #missing-fragment-synthetic in docs/learn.html\",\n      \"path\": \"docs/index.html\"\n    }\n  ],\n  \"html_files\": [\n    \"docs/index.html\",\n    \"docs/learn.html\"\n  ],\n  \"result\": \"FAIL\",\n  \"schema\": \"n.human_ai_mathematics.internal_link_validation.v1\"\n}\n"
+    }
+  ],
+  "result": "PASS",
+  "schema": "n.human_ai_mathematics.internal_link_negative_control.v1"
+}

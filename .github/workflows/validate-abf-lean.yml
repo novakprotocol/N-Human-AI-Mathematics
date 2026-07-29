@@ -15,6 +15,11 @@ on:
       - 'tools/validate_full_lean_portfolio.py'
       - '.github/workflows/validate-abf-lean.yml'
   workflow_dispatch:
+    inputs:
+      target_sha:
+        description: "Immutable commit SHA to validate"
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -28,7 +33,42 @@ jobs:
       - name: Check out ABF formal source
         uses: actions/checkout@v7
         with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.event_name == 'workflow_dispatch' && inputs.target_sha || github.sha }}
           fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify exact workflow checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            expected="${{ github.event.pull_request.head.sha }}"
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            expected="${{ inputs.target_sha }}"
+          else
+            expected="${{ github.sha }}"
+          fi
+          actual="$(git rev-parse HEAD)"
+          echo "event=${{ github.event_name }}"
+          echo "expected_sha=$expected"
+          echo "actual_checked_out_sha=$actual"
+          test "$actual" = "$expected"
+          mkdir -p .artifacts/exact-head
+          python - <<PY
+          import json
+          from pathlib import Path
+
+          payload = {
+              "schema": "nhaim.workflow_exact_head_checkout.v1",
+              "event": "${{ github.event_name }}",
+              "expected_sha": "$expected",
+              "actual_checked_out_sha": "$actual",
+              "match": "$actual" == "$expected",
+          }
+          path = Path(".artifacts/exact-head/${{ github.job }}-checkout.json")
+          path.parent.mkdir(parents=True, exist_ok=True)
+          path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          PY
 
       - name: Reject proof placeholders and project axioms
         shell: bash
@@ -107,7 +147,7 @@ jobs:
           receipt = {
               'schema': 'n.human_ai_mathematics.abf001.lean_build.v1',
               'result': 'PASS',
-              'exact_head': '${{ github.sha }}',
+              'exact_head': "${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.event_name == 'workflow_dispatch' && inputs.target_sha || github.sha }}",
               'toolchain': (root / 'lean-toolchain').read_text().strip(),
               'mathlib_request': 'v4.30.0',
               'lake_manifest_sha256': hashlib.sha256(manifest.read_bytes()).hexdigest(),
@@ -163,7 +203,9 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: abf001-lean-${{ github.sha }}
-          path: .artifacts/abf-lean/
+          name: abf001-lean-${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.event_name == 'workflow_dispatch' && inputs.target_sha || github.sha }}
+          path: |
+            .artifacts/abf-lean/
+            .artifacts/exact-head/
           if-no-files-found: error
           retention-days: 90

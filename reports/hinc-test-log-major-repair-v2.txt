@@ -1,0 +1,10 @@
+test_certificate (test_hinc_standalone.CommonCoreTests.test_certificate) ... ok
+test_deterministic_certificate (test_hinc_standalone.CommonCoreTests.test_deterministic_certificate) ... ok
+test_even_identity (test_hinc_standalone.CommonCoreTests.test_even_identity) ... ok
+test_field_point_counts (test_hinc_standalone.CommonCoreTests.test_field_point_counts) ... ok
+test_odd_identity_and_local_identity (test_hinc_standalone.CommonCoreTests.test_odd_identity_and_local_identity) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 4.081s
+
+OK

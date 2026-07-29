@@ -1,0 +1,76 @@
+✔ [6832/8478] Built Mathlib.Tactic.ComputeDegree (7.8s)
+✔ [8111/8478] Built Mathlib.Algebra.GroupWithZero.Range (8.1s)
+✔ [8304/8478] Built Mathlib.Analysis.SumOverResidueClass (7.9s)
+✔ [8316/8478] Built Mathlib.CategoryTheory.CopyDiscardCategory.Cartesian (7.4s)
+✔ [8363/8478] Built Mathlib.Combinatorics.SimpleGraph.Walk.Basic (8.0s)
+✔ [8411/8478] Built Mathlib.Tactic.Widget.CommDiag (8.4s)
+✔ [8412/8478] Built Mathlib.Tactic.Widget.StringDiagram (8.5s)
+✔ [8413/8478] Built Mathlib.RingTheory.Etale.Basic (7.2s)
+✔ [8473/8478] Built Mathlib.Tactic (6.8s)
+✔ [8474/8478] Built Mathlib (12s)
+⚠ [8475/8478] Built HINC.Core (14s)
+warning: HINC/Core.lean:32:0: automatically included section variable(s) unused in theorem `HINC.CrossingPoint.ext`:
+  [CharP R 2]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CharP R 2] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: HINC/Core.lean:82:0: automatically included section variable(s) unused in theorem `HINC.EvenPoint.ext`:
+  [CharP R 2]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CharP R 2] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: HINC/Core.lean:190:19: unused variable `a`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: HINC/Core.lean:202:0: automatically included section variable(s) unused in theorem `HINC.affine_commutator_first`:
+  [CharP R 2]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CharP R 2] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+info: HINC/Core.lean:247:0: 'HINC.CrossingPoint.mul_assoc' depends on axioms: [propext, Quot.sound]
+info: HINC/Core.lean:248:0: 'HINC.EvenPoint.mul_assoc' depends on axioms: [propext, Quot.sound]
+info: HINC/Core.lean:249:0: 'HINC.EvenPoint.defect_formula' depends on axioms: [propext, Quot.sound]
+info: HINC/Core.lean:250:0: 'HINC.EvenPoint.mul_comm_iff_defect_zero' depends on axioms: [propext, Quot.sound]
+info: HINC/Core.lean:251:0: 'HINC.EvenPoint.center_equations_commute' depends on axioms: [propext, Quot.sound]
+info: HINC/Core.lean:252:0: 'HINC.EvenPoint.center_equations_force_idempotent_x' depends on axioms: [propext]
+info: HINC/Core.lean:253:0: 'HINC.affine_commutator_formula' depends on axioms: [propext, Quot.sound]
+⚠ [8476/8478] Built HINC.Classification (12s)
+warning: HINC/Classification.lean:63:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: HINC/Classification.lean:45:0: automatically included section variable(s) unused in theorem `HINC.EvenRawCoeffs.generatorEquations_iff_normalForm`:
+  [CharP R 2]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CharP R 2] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: HINC/Classification.lean:78:0: automatically included section variable(s) unused in theorem `HINC.EvenEndoData.ext`:
+  [CharP R 2]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CharP R 2] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: HINC/Classification.lean:206:0: automatically included section variable(s) unused in theorem `HINC.OddRawCoeffs.generatorEquations_iff_normalForm`:
+  [CharP R 2]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CharP R 2] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: HINC/Classification.lean:250:0: automatically included section variable(s) unused in theorem `HINC.OddEndoData.ext`:
+  [CharP R 2]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CharP R 2] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+info: HINC/Classification.lean:364:0: 'HINC.EvenRawCoeffs.generatorEquations_iff_normalForm' depends on axioms: [propext, Quot.sound]
+info: HINC/Classification.lean:365:0: 'HINC.EvenEndoData.comp_assoc' depends on axioms: [propext, Quot.sound]
+info: HINC/Classification.lean:366:0: 'HINC.EvenEndoData.principal_classification' depends on axioms: [propext, Quot.sound]
+info: HINC/Classification.lean:367:0: 'HINC.OddRawCoeffs.generatorEquations_iff_normalForm' depends on axioms: [propext, Quot.sound]
+info: HINC/Classification.lean:368:0: 'HINC.OddEndoData.comp_assoc' depends on axioms: [propext, Quot.sound]
+info: HINC/Classification.lean:369:0: 'HINC.OddEndoData.comp_comm' depends on axioms: [propext, Quot.sound]
+info: HINC/Classification.lean:370:0: 'HINC.OddEndoData.principal_classification' depends on axioms: [propext, Quot.sound]
+✔ [8477/8478] Built HINC (10s)
+Build completed successfully (8478 jobs).

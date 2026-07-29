@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/novakprotocol/N-Human-AI-Mathematics/schemas/full-lean-portfolio.schema.json",
+  "title": "N Human-LLM Mathematics Full Lean Portfolio Status",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema",
+    "effective_date_utc",
+    "policy",
+    "portfolio",
+    "full_pass_definition",
+    "portfolio_full_lean_verified",
+    "papers_with_full_pass",
+    "fully_lean_verified_manuscripts",
+    "active_public_candidate_review_packages",
+    "fsg_public_release_authorized"
+  ],
+  "properties": {
+    "schema": {"const": "n.human_ai_mathematics.full_lean_portfolio.v2"},
+    "effective_date_utc": {"type": "string", "format": "date"},
+    "policy": {"type": "object"},
+    "portfolio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["HINC-001", "ABF-001", "FSG-001", "ACM-001"],
+      "properties": {
+        "HINC-001": {"$ref": "#/$defs/paper"},
+        "ABF-001": {"$ref": "#/$defs/paper"},
+        "FSG-001": {"$ref": "#/$defs/paper"},
+        "ACM-001": {"$ref": "#/$defs/paper"}
+      }
+    },
+    "full_pass_definition": {"type": "object"},
+    "portfolio_full_lean_verified": {"const": false},
+    "papers_with_full_pass": {"type": "array", "maxItems": 0},
+    "fully_lean_verified_manuscripts": {"type": "array", "maxItems": 0},
+    "active_public_candidate_review_packages": {
+      "const": ["HINC-001", "ABF-001"]
+    },
+    "fsg_public_release_authorized": {"const": false}
+  },
+  "$defs": {
+    "paper": {
+      "type": "object",
+      "required": [
+        "public_state",
+        "formal_status",
+        "full_manuscript_lean_verified"
+      ],
+      "properties": {
+        "public_state": {"type": "string"},
+        "formal_status": {"type": "string"},
+        "full_manuscript_lean_verified": {"const": false}
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+﻿{
+    "schema":  "n.human_ai_mathematics.javascript_syntax.v3",
+    "result":  "PASS",
+    "command":  "node --check reports/learn-inline-v3.js",
+    "exit":  0,
+    "stdout":  "",
+    "checked_file":  "reports/learn-inline-v3.js"
+}

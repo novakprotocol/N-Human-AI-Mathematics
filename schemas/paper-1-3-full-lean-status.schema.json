@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/novakprotocol/N-Human-AI-Mathematics/schemas/paper-1-3-full-lean-status.schema.json",
+  "title": "N Human-LLM Mathematics Paper 1-3 Full Lean Status",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema",
+    "effective_date_utc",
+    "owner_rule",
+    "global_state",
+    "papers",
+    "portfolio_gate",
+    "hinc_abf_public_candidate_review_authorized",
+    "fsg_public_release_authorized"
+  ],
+  "properties": {
+    "schema": {"const": "n.human_ai_mathematics.paper_1_3_full_lean_status.v1"},
+    "effective_date_utc": {"type": "string", "format": "date"},
+    "owner_rule": {"type": "string", "minLength": 1},
+    "global_state": {"const": "HINC_ABF_ACTIVE_REVIEW_FSG_MATHEMATICAL_HOLD"},
+    "papers": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["HINC-001", "ABF-001", "FSG-001", "ACM-001"],
+      "properties": {
+        "HINC-001": {"$ref": "#/$defs/paper"},
+        "ABF-001": {"$ref": "#/$defs/paper"},
+        "FSG-001": {"$ref": "#/$defs/paper"},
+        "ACM-001": {"$ref": "#/$defs/paper"}
+      }
+    },
+    "portfolio_gate": {"type": "object"},
+    "hinc_abf_public_candidate_review_authorized": {"const": true},
+    "fsg_public_release_authorized": {"const": false}
+  },
+  "$defs": {
+    "paper": {
+      "type": "object",
+      "required": [
+        "public_artifact_state",
+        "formal_status",
+        "full_manuscript_lean_verified"
+      ],
+      "properties": {
+        "public_artifact_state": {"type": "string"},
+        "formal_status": {"type": "string"},
+        "full_manuscript_lean_verified": {"const": false}
+      }
+    }
+  }
+}

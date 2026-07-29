@@ -9,6 +9,11 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      target_sha:
+        description: "Immutable commit SHA to validate"
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -22,17 +27,54 @@ jobs:
       - name: Check out complete source history
         uses: actions/checkout@v7
         with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.event_name == 'workflow_dispatch' && inputs.target_sha || github.sha }}
           fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify exact workflow checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            expected="${{ github.event.pull_request.head.sha }}"
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            expected="${{ inputs.target_sha }}"
+          else
+            expected="${{ github.sha }}"
+          fi
+          actual="$(git rev-parse HEAD)"
+          echo "event=${{ github.event_name }}"
+          echo "expected_sha=$expected"
+          echo "actual_checked_out_sha=$actual"
+          test "$actual" = "$expected"
+          mkdir -p .artifacts/exact-head
+          python - <<PY
+          import json
+          from pathlib import Path
+
+          payload = {
+              "schema": "nhaim.workflow_exact_head_checkout.v1",
+              "event": "${{ github.event_name }}",
+              "expected_sha": "$expected",
+              "actual_checked_out_sha": "$actual",
+              "match": "$actual" == "$expected",
+          }
+          path = Path(".artifacts/exact-head/${{ github.job }}-checkout.json")
+          path.parent.mkdir(parents=True, exist_ok=True)
+          path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          PY
 
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
           python-version: "3.13"
 
-      - name: Install HINC requirements
+      - name: Install validation and paper requirements
         run: |
           python -m pip install --disable-pip-version-check \
-            -r papers/HINC-001/requirements.txt
+            -r requirements-validation.txt \
+            -r papers/HINC-001/requirements.txt \
+            -r papers/ABF-001/requirements.txt
 
       - name: Compile validators and bounded HINC source
         run: |
@@ -42,11 +84,18 @@ jobs:
           python -m py_compile tools/validate_full_lean_portfolio.py
           python -m py_compile tools/validate_status_consistency.py
           python -m py_compile tools/validate_learning_page.py
+          python -m py_compile tools/public_status_checks.py
+          python -m py_compile tools/validate_json_schema.py
+          python -m py_compile tools/validate_internal_links.py
+          python -m py_compile tools/validate_public_surface_scan.py
+          python -m py_compile tools/test_public_status_mutations.py
+          python -m py_compile tools/test_json_schema_negative_controls.py
+          python -m py_compile tools/test_internal_link_negative_control.py
           python -m py_compile papers/HINC-001/src/mcrc_hidden_infinitesimal_noncommutativity_standalone.py
           python -m py_compile papers/HINC-001/src/standalone_common_core_verifier.py
           python -m py_compile papers/HINC-001/tests/test_hinc_standalone.py
 
-      - name: Verify public archive visibility and inactive theorem state
+      - name: Verify public candidate-review status correction
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -67,15 +116,20 @@ jobs:
               repository["visibility"],
           )
           assert repository["default_branch"] == "main"
-          assert index["public_release_authorized"] is False
-          assert index["release_channel"] == "full_lean_requalification_hold"
-          assert portfolio["active_theorem_packages"] == []
+          papers = {item["id"]: item for item in index["papers"]}
+          assert index["public_release_authorized"] is True
+          assert index["release_channel"] == "public_review"
+          assert papers["HINC-001"]["state"] == "active_review"
+          assert papers["ABF-001"]["state"] == "active_review"
+          assert papers["FSG-001"]["state"] == "hold"
+          assert papers["ACM-001"]["state"] == "hold"
+          assert portfolio["active_public_candidate_review_packages"] == ["HINC-001", "ABF-001"]
           assert portfolio["papers_with_full_pass"] == []
-          assert portfolio["public_release_authorized"] is False
-          print("repository visibility: PUBLIC ARCHIVE")
-          print("active theorem packages: NONE")
+          assert portfolio["fsg_public_release_authorized"] is False
+          print("repository visibility: PUBLIC")
+          print("active candidate review: HINC-001, ABF-001")
+          print("FSG mathematical hold: PRESENT")
           PY
-
       - name: Validate publication, full-Lean, status, and learning boundaries
         run: |
           set -euo pipefail
@@ -89,7 +143,27 @@ jobs:
             --output reports/full-lean-portfolio-validation-ci.json
           python tools/validate_status_consistency.py \
             --root . \
+            --scan-all \
             --output reports/status-consistency-validation-ci.json
+          python tools/validate_json_schema.py \
+            --root . \
+            --output reports/json-schema-validation-ci.json
+          python tools/test_json_schema_negative_controls.py \
+            --root . \
+            --output reports/json-schema-negative-controls-ci.json
+          python tools/validate_internal_links.py \
+            --root . \
+            --output reports/internal-link-validation-ci.json
+          python tools/test_internal_link_negative_control.py \
+            --root . \
+            --output reports/internal-link-negative-control-ci.json
+          python tools/test_public_status_mutations.py \
+            --root . \
+            --output reports/public-status-mutation-tests-ci.json \
+            --log reports/public-status-mutation-tests-ci.log
+          python tools/validate_public_surface_scan.py \
+            --root . \
+            --output reports/public-surface-scan-ci.json
           python tools/validate_learning_page.py . \
             --output reports/learning-page-validation-ci.json \
             --javascript-output .artifacts/publication/learn-inline.js
@@ -97,7 +171,7 @@ jobs:
             --root . \
             --json-output reports/publication-gate-validation-ci.json
 
-      - name: Verify requalification HOLD receipts
+      - name: Verify active candidate-review receipts
         run: |
           set -euo pipefail
           python - <<'PY'
@@ -111,29 +185,38 @@ jobs:
           hinc_gate = json.loads(Path("reports/publication-gates/HINC-001.json").read_text(encoding="utf-8"))
           abf_gate = json.loads(Path("reports/publication-gates/ABF-001.json").read_text(encoding="utf-8"))
 
+          papers = {item["id"]: item for item in index["papers"]}
           assert index["repository_visibility_required"] == "public"
-          assert index["public_release_authorized"] is False
-          assert index["public_switch_ready"] is False
-          assert index["release_channel"] == "full_lean_requalification_hold"
-          assert portfolio["active_theorem_packages"] == []
+          assert index["public_release_authorized"] is True
+          assert index["public_switch_ready"] is True
+          assert index["release_channel"] == "public_review"
+          assert papers["HINC-001"]["state"] == "active_review"
+          assert papers["ABF-001"]["state"] == "active_review"
+          assert papers["FSG-001"]["state"] == "hold"
+          assert papers["ACM-001"]["state"] == "hold"
+          assert portfolio["active_public_candidate_review_packages"] == ["HINC-001", "ABF-001"]
           assert portfolio["papers_with_full_pass"] == []
           assert hinc["formal_verification"]["full_manuscript_lean_verified"] is False
-          assert hinc["release"]["public_authorized"] is False
+          assert hinc["release"]["public_authorized"] is True
           assert abf["formal_verification"]["full_manuscript_lean_verified"] is False
-          assert abf["release"]["public_authorized"] is False
-          assert hinc_gate["status"] == "HOLD"
-          assert abf_gate["status"] == "HOLD"
-          assert any(gate["status"] == "HOLD" for gate in hinc_gate["gates"].values())
-          assert any(gate["status"] == "HOLD" for gate in abf_gate["gates"].values())
-          print("full-Lean requalification HOLD state: PASS")
+          assert abf["release"]["public_authorized"] is True
+          assert hinc_gate["status"] == "PASS_PUBLIC_TECHNICAL_REVIEW"
+          assert abf_gate["status"] == "PASS_PUBLIC_TECHNICAL_REVIEW"
+          print("corrected public candidate-review state: PASS")
           PY
-
       - name: Run HINC historical bounded tests
         run: |
           python -m unittest discover \
             -s papers/HINC-001/tests \
             -p 'test_*.py' \
             -v 2>&1 | tee reports/hinc-test-log-ci.txt
+
+      - name: Run ABF bounded A01 tests
+        run: |
+          python -m unittest discover \
+            -s papers/ABF-001/tests \
+            -p 'test_*.py' \
+            -v 2>&1 | tee reports/abf-test-log-ci.txt
 
       - name: Verify deterministic HINC certificate identity
         run: |
@@ -182,8 +265,17 @@ jobs:
             reports/status-consistency-validation-ci.json
             reports/learning-page-validation-ci.json
             reports/publication-gate-validation-ci.json
+            reports/json-schema-validation-ci.json
+            reports/internal-link-validation-ci.json
+            reports/internal-link-negative-control-ci.json
+            reports/json-schema-negative-controls-ci.json
+            reports/public-surface-scan-ci.json
+            reports/public-status-mutation-tests-ci.json
+            reports/public-status-mutation-tests-ci.log
             reports/hinc-test-log-ci.txt
+            reports/abf-test-log-ci.txt
             .artifacts/publication/learn-inline.js
+            .artifacts/exact-head/
           if-no-files-found: warn
           retention-days: 90
 
@@ -194,6 +286,43 @@ jobs:
     steps:
       - name: Check out bounded HINC formal source
         uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.event_name == 'workflow_dispatch' && inputs.target_sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify exact workflow checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            expected="${{ github.event.pull_request.head.sha }}"
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            expected="${{ inputs.target_sha }}"
+          else
+            expected="${{ github.sha }}"
+          fi
+          actual="$(git rev-parse HEAD)"
+          echo "event=${{ github.event_name }}"
+          echo "expected_sha=$expected"
+          echo "actual_checked_out_sha=$actual"
+          test "$actual" = "$expected"
+          mkdir -p .artifacts/exact-head
+          python - <<PY
+          import json
+          from pathlib import Path
+
+          payload = {
+              "schema": "nhaim.workflow_exact_head_checkout.v1",
+              "event": "${{ github.event_name }}",
+              "expected_sha": "$expected",
+              "actual_checked_out_sha": "$actual",
+              "match": "$actual" == "$expected",
+          }
+          path = Path(".artifacts/exact-head/${{ github.job }}-checkout.json")
+          path.parent.mkdir(parents=True, exist_ok=True)
+          path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          PY
 
       - name: Reject proof placeholders
         shell: bash
@@ -246,5 +375,6 @@ jobs:
             reports/hinc-lean-update-ci.txt
             reports/hinc-lean-cache-ci.txt
             reports/hinc-lean-build-ci.txt
+            .artifacts/exact-head/
           if-no-files-found: warn
           retention-days: 90

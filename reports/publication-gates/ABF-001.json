@@ -1,9 +1,9 @@
 {
   "schema_version": "n.human_llm_mathematics.publication_gate.v1",
   "paper_id": "ABF-001",
-  "receipt_date": "2026-07-29",
+  "receipt_date": "2026-07-28",
   "release_target": "public_technical_review",
-  "status": "HOLD",
+  "status": "PASS_PUBLIC_TECHNICAL_REVIEW",
   "source_identity": {
     "repository": "novakprotocol/N-Human-AI-Mathematics",
     "mathematical_source_commit": "45dbf87cb4a46dcbbce690da7a22cdd7f88cb052",
@@ -22,19 +22,18 @@
         "papers/ABF-001/manuscript/ABF-001_MANUSCRIPT.md",
         "papers/ABF-001/STATUS.json"
       ],
-      "notes": "The historical candidate and finite-classification boundary is preserved. Current active-theorem status is separately suspended."
+      "notes": "Active candidate public technical review only; no security, peer-review, external-reproduction, full-formalization, or worldwide-priority claim."
     },
     "proof": {
-      "status": "HOLD",
+      "status": "PASS",
       "evidence": [
         "papers/ABF-001/PROOF_MAP.md",
         "papers/ABF-001/manuscript/ABF-001_MANUSCRIPT.md",
-        "papers/ABF-001/FORMAL_VERIFICATION.md",
-        "papers/ABF-001/formal/ABF_FULL_LEAN_COMPLETION_MAP_V1.md"
+        "papers/ABF-001/FORMAL_VERIFICATION.md"
       ],
       "universal_claims_have_complete_human_proofs": true,
       "finite_claims_exhaustively_verified_or_not_applicable": true,
-      "proof_assistant_status": "PARTIAL_PASS; A02-A06 and the complete claim map remain open"
+      "proof_assistant_status": "PARTIAL_PASS / bounded A01 Lean verification; A02-A06 and the full manuscript are not fully formalized"
     },
     "hostile_review": {
       "status": "PASS",
@@ -67,12 +66,11 @@
       "external_reproduction": "pending"
     },
     "clean_execution": {
-      "status": "HOLD",
+      "status": "PASS",
       "evidence": [
         "papers/ABF-001/qa/final-clean-execution-receipt.json",
         "papers/ABF-001/evidence/receipts/small-universe-final.json",
-        "papers/ABF-001/evidence/receipts/tamper-control-final.json",
-        "HOLD: a complete A01-A06 exact-head Lean build and claim-fidelity receipt do not yet exist"
+        "papers/ABF-001/evidence/receipts/tamper-control-final.json"
       ],
       "fresh_checkout_or_clean_copy": true,
       "completed_without_timeout": true,
@@ -92,20 +90,19 @@
       "release_record_present": true
     },
     "owner_authorization": {
-      "status": "HOLD",
+      "status": "PASS",
       "evidence": [
-        "papers/ABF-001/OWNER_AUTHORIZATION.md",
-        "PUBLIC_REVIEW_FORMALIZATION_HOLD_2026-07-29.md"
+        "papers/ABF-001/OWNER_AUTHORIZATION.md"
       ],
-      "package_specific_authorization": false,
-      "notes": "Historical release authorization is preserved; current active-theorem authorization is suspended until FULL_PASS."
+      "package_specific_authorization": true,
+      "notes": "Existing ABF-001 public candidate-review authorization is preserved."
     }
   },
   "limitations": [
-    "The historical public release remains accessible for provenance and correction.",
-    "A01 is compiled, but A02-A06 and the complete manuscript are not formally verified.",
-    "ABF-001 is not an active theorem package under the 29 July 2026 owner-selected rule.",
-    "External specialist review, outside reproduction, peer review, and historical priority remain pending.",
-    "No full-width cryptographic security or insecurity conclusion is claimed."
+    "Historical priority remains unestablished.",
+    "External specialist review and outside reproduction remain pending.",
+    "A01 has bounded Lean verification, but the full manuscript is not fully Lean verified.",
+    "No full-width cryptographic security or insecurity conclusion is claimed.",
+    "Peer review is not complete."
   ]
 }

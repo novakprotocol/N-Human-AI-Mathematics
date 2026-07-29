@@ -1,237 +1,129 @@
 #!/usr/bin/env python3
-"""Cross-check publication and formal states across all public control surfaces."""
+"""Reconcile each public status surface against the canonical corrected state."""
+
 from __future__ import annotations
 
 import argparse
 import hashlib
 import json
+from dataclasses import asdict
 from pathlib import Path
-from typing import Any
 
-SCHEMA = "n.human_ai_mathematics.status_consistency_validation.v1"
+from public_status_checks import (
+    CANONICAL_STATE,
+    CONTROLLED_JSON_FILES,
+    CONTROLLED_TEXT_FILES,
+    changed_text_files,
+    scan_paths,
+    status_surface_findings,
+    tracked_text_files,
+)
 
 
-def digest(path: Path) -> str:
+SCHEMA = "n.human_ai_mathematics.status_consistency_validation.v3"
+
+
+def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def load_json(path: Path) -> dict[str, Any]:
-    value = json.loads(path.read_text(encoding="utf-8"))
-    if not isinstance(value, dict):
-        raise TypeError(f"expected JSON object: {path}")
-    return value
+def validate(root: Path, scan_changed_against: str | None = "origin/main") -> dict:
+    findings = status_surface_findings(root)
 
+    if scan_changed_against:
+        try:
+            paths = changed_text_files(root, scan_changed_against)
+        except Exception:
+            paths = tracked_text_files(root)
+    else:
+        paths = tracked_text_files(root)
+    findings.extend(scan_paths(root, paths))
 
-def validate(root: Path) -> dict[str, Any]:
-    files = {
-        "status": root / "STATUS.md",
-        "agents": root / "AGENTS.md",
-        "release": root / "PUBLIC_REVIEW_RELEASE.md",
-        "hold": root / "PUBLIC_REVIEW_FORMALIZATION_HOLD_2026-07-29.md",
-        "standard": root / "FULL_LEAN_RELEASE_STANDARD.md",
-        "paper_matrix": root / "PAPER_1_3_FULL_LEAN_STATUS.json",
-        "portfolio": root / "formal-verification-status.json",
-        "research_index": root / "research-index.json",
-        "hinc_status": root / "papers/HINC-001/STATUS.json",
-        "hinc_formal": root / "papers/HINC-001/FORMAL_VERIFICATION.md",
-        "abf_status": root / "papers/ABF-001/STATUS.json",
-        "abf_formal": root / "papers/ABF-001/FORMAL_VERIFICATION.md",
-        "abf_lane": root / "papers/ABF-001/formal/FORMAL_STATUS_V1.json",
-        "index": root / "docs/index.html",
-        "learn": root / "docs/learn.html",
-    }
-
-    failures: list[dict[str, Any]] = []
-    counts: dict[str, int] = {}
-
-    def check(category: str, condition: bool, **context: Any) -> None:
-        counts[category] = counts.get(category, 0) + 1
-        if not condition:
-            failures.append({"category": category, **context})
-
-    for name, path in files.items():
-        check("required_file", path.is_file(), name=name, path=str(path.relative_to(root)))
-    if not all(path.is_file() for path in files.values()):
-        return {"schema": SCHEMA, "result": "FAIL", "checks": counts, "failures": failures}
-
-    portfolio = load_json(files["portfolio"])
-    matrix = load_json(files["paper_matrix"])
-    index_data = load_json(files["research_index"])
-    hinc = load_json(files["hinc_status"])
-    abf = load_json(files["abf_status"])
-    abf_lane = load_json(files["abf_lane"])
-
-    text = {
-        name: path.read_text(encoding="utf-8")
-        for name, path in files.items()
-        if path.suffix in {".md", ".html"}
-    }
-    combined = "\n".join(text.values()).lower()
-    current_status_text = "\n".join(
-        text[name]
-        for name in (
-            "status",
-            "release",
-            "hold",
-            "hinc_formal",
-            "abf_formal",
-            "index",
-            "learn",
-        )
-    ).lower()
-
-    canonical = {
-        "HINC-001": {
-            "public": "PUBLIC_ARCHIVE_FULL_LEAN_REQUALIFICATION_HOLD",
-            "formal": "PARTIAL_PASS",
-            "full": False,
-        },
-        "ABF-001": {
-            "public": "PUBLIC_ARCHIVE_FULL_LEAN_REQUALIFICATION_HOLD",
-            "formal": "PARTIAL_PASS",
-            "full": False,
-        },
-        "FSG-001": {
-            "public": "PRIVATE_FULL_LEAN_COMPLETION_HOLD",
-            "formal": "PARTIAL_BOOTSTRAP_PASS",
-            "full": False,
-        },
-        "ACM-001": {
-            "public": "TEACHING_PREVIEW_BLOCKED_UNTIL_PAPERS_1_3_FULL_PASS",
-            "formal": "BLOCKED_BY_CONSOLIDATION",
-            "full": False,
-        },
-    }
-
-    for paper_id, expected in canonical.items():
-        record = portfolio.get("portfolio", {}).get(paper_id, {})
-        check(
-            "canonical_public_state",
-            record.get("public_state") == expected["public"],
-            paper_id=paper_id,
-            expected=expected["public"],
-            actual=record.get("public_state"),
-        )
-        check(
-            "canonical_formal_state",
-            record.get("formal_status") == expected["formal"],
-            paper_id=paper_id,
-            expected=expected["formal"],
-            actual=record.get("formal_status"),
-        )
-        check(
-            "canonical_full_state",
-            record.get("full_manuscript_lean_verified") is expected["full"],
-            paper_id=paper_id,
-        )
-        matrix_record = matrix.get("papers", {}).get(paper_id, {})
-        check(
-            "matrix_formal_state",
-            matrix_record.get("formal_status") == expected["formal"],
-            paper_id=paper_id,
-            expected=expected["formal"],
-            actual=matrix_record.get("formal_status"),
-        )
-
-    research = {
-        item.get("id"): item for item in index_data.get("papers", []) if isinstance(item, dict)
-    }
-    expected_index_states = {
-        "HINC-001": "public_archive_full_lean_requalification_hold",
-        "ABF-001": "public_archive_full_lean_requalification_hold",
-        "FSG-001": "private_full_lean_completion_hold",
-        "ACM-001": "blocked_until_papers_1_3_full_pass",
-    }
-    for paper_id, expected in expected_index_states.items():
-        check(
-            "research_index_state",
-            research.get(paper_id, {}).get("state") == expected,
-            paper_id=paper_id,
-            expected=expected,
-            actual=research.get(paper_id, {}).get("state"),
-        )
-
-    check(
-        "hinc_formal_state",
-        hinc.get("formal_verification", {}).get("status")
-        == "PARTIAL_PASS_FULL_MANUSCRIPT_REQUALIFICATION_HOLD",
+    errors = [item for item in findings if item.level == "ERROR"]
+    per_file_state_mismatches = sum(1 for item in errors if item.category == "per_file_state_mismatch")
+    publication_conflicts = sum(
+        1
+        for item in errors
+        if item.category
+        in {
+            "publication_state",
+            "current_release_channel",
+            "per_file_state_mismatch",
+            "obsolete_current_state",
+            "fsg_hold",
+            "fsg_release",
+            "acm_hold",
+        }
     )
-    check("hinc_not_authorized", hinc.get("release", {}).get("public_authorized") is False)
-    check(
-        "abf_formal_state",
-        abf.get("formal_verification", {}).get("status")
-        == "PARTIAL_PASS_FULL_MANUSCRIPT_REQUALIFICATION_HOLD",
+    formal_conflicts = sum(
+        1
+        for item in errors
+        if item.category in {"formal_state", "full_lean_boundary", "full_lean_overclaim"}
     )
-    check("abf_not_authorized", abf.get("release", {}).get("public_authorized") is False)
-    check("abf_a01_pass", abf_lane.get("lanes", {}).get("A01_bidual_moment_kernel") == "COMPILED_PASS")
-    check("abf_lane_not_full", abf_lane.get("full_manuscript_lean_verified") is False)
-    check("abf_lane_not_authorized", abf_lane.get("public_release_authorized") is False)
+    private_references = sum(1 for item in errors if item.category == "private_reference")
+    validator_exclusions = sum(1 for item in errors if item.category == "validator_workflow_exclusion")
+    credential_or_personal = sum(1 for item in errors if item.category == "credential_or_personal_path")
+    full_lean_overclaim = sum(1 for item in errors if item.category == "full_lean_overclaim")
+    peer_review_overclaim = sum(1 for item in errors if item.category == "peer_review_overclaim")
+    priority_overclaim = sum(1 for item in errors if item.category == "historical_priority_overclaim")
 
-    required_phrases = (
-        "active theorem packages under the current rule: none",
-        "historical public artifacts",
-        "full-lean requalification hold",
-        "full-lean completion",
-        "blocked until papers 1–3",
-        "full-manuscript lean",
-    )
-    for phrase in required_phrases:
-        check("required_status_wording", phrase in combined, phrase=phrase)
-
-    contradictions = (
-        "hinc-001 and abf-001 are active candidate packages",
-        "hinc-001 is the only released package",
-        "abf-001 — standalone public package pending",
-        "active public review",
-        "two active packages",
-        "private release edge",
-        "public technical review:     active",
-    )
-    for phrase in contradictions:
-        check("contradiction_absent", phrase not in current_status_text, phrase=phrase)
-
-    check("portfolio_no_active", portfolio.get("active_theorem_packages") == [])
-    check("portfolio_no_full", portfolio.get("papers_with_full_pass") == [])
-    check("portfolio_no_auth", portfolio.get("public_release_authorized") is False)
-    check("matrix_no_auth", matrix.get("public_release_authorized") is False)
-
+    controlled_files = [root / rel for rel in (*CONTROLLED_JSON_FILES, *CONTROLLED_TEXT_FILES)]
     return {
         "schema": SCHEMA,
-        "result": "PASS" if not failures else "FAIL",
-        "total_checks": sum(counts.values()),
-        "checks": dict(sorted(counts.items())),
-        "failures": failures,
-        "conflicting_publication_states": sum(
-            1
-            for item in failures
-            if item["category"]
-            in {"canonical_public_state", "research_index_state", "contradiction_absent"}
-        ),
-        "conflicting_formal_states": sum(
-            1
-            for item in failures
-            if item["category"]
-            in {"canonical_formal_state", "matrix_formal_state", "hinc_formal_state", "abf_formal_state"}
-        ),
+        "result": "PASS" if not errors else "FAIL",
+        "canonical_state": CANONICAL_STATE,
+        "total_findings": len(findings),
+        "error_count": len(errors),
+        "findings": [asdict(item) for item in findings],
+        "conflicting_publication_states": publication_conflicts,
+        "conflicting_formal_states": formal_conflicts,
+        "per_file_state_mismatches": per_file_state_mismatches,
+        "private_fsg_references_in_changed_files": private_references,
+        "private_detector_literals": private_references,
+        "validator_workflow_private_scan_exclusions": validator_exclusions,
+        "credential_or_personal_path_findings": credential_or_personal,
+        "hinc_active_status_present": "yes"
+        if not any("HINC-001" in item.message for item in errors if item.category == "per_file_state_mismatch")
+        else "no",
+        "abf_active_status_present": "yes"
+        if not any("ABF-001" in item.message for item in errors if item.category == "per_file_state_mismatch")
+        else "no",
+        "fsg_mathematical_hold_present": "yes"
+        if not any(item.category in {"fsg_hold", "fsg_release"} for item in errors)
+        else "no",
+        "acm_hold_present": "yes"
+        if not any(item.category == "acm_hold" for item in errors)
+        else "no",
+        "full_lean_overclaim": full_lean_overclaim,
+        "peer_review_overclaim": peer_review_overclaim,
+        "historical_priority_overclaim": priority_overclaim,
+        "scanned_text_file_count": len(paths),
         "files": {
-            str(path.relative_to(root)): {"sha256": digest(path), "bytes": path.stat().st_size}
-            for path in files.values()
+            path.relative_to(root).as_posix(): {
+                "bytes": path.stat().st_size,
+                "sha256": sha256(path),
+            }
+            for path in controlled_files
+            if path.is_file()
         },
     }
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path.cwd())
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--scan-all", action="store_true")
+    parser.add_argument("--changed-against", default="origin/main")
     args = parser.parse_args()
-    result = validate(args.root.resolve())
-    text = json.dumps(result, indent=2, sort_keys=True) + "\n"
+
+    payload = validate(args.root.resolve(), None if args.scan_all else args.changed_against)
+    text = json.dumps(payload, indent=2, sort_keys=True) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(text, encoding="utf-8", newline="\n")
     print(text, end="")
-    return 0 if result["result"] == "PASS" else 1
+    return 0 if payload["result"] == "PASS" else 1
 
 
 if __name__ == "__main__":

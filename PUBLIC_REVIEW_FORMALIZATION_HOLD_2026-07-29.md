@@ -1,37 +1,96 @@
-# Public formalization hold — 29 July 2026
+<!--
+NHAIM_STATUS_BLOCK_V1
+HINC-001:
+  paper_id: HINC-001
+  public_state: active_review
+  formal_state: PARTIAL_PASS
+  bounded_formal_scope: bounded_Lean
+  claim_map_complete: false
+  full_manuscript_lean_verified: false
+  external_specialist_review: pending
+  historical_priority: not_established
+  peer_review: not_submitted
+  journal_status: not_submitted
+  public_release_authorized: true
+ABF-001:
+  paper_id: ABF-001
+  public_state: active_review
+  formal_state: PARTIAL_PASS
+  bounded_formal_scope: bounded_A01_Lean
+  compiled_lane: A01
+  a02_a06_status: incomplete
+  claim_map_complete: false
+  full_manuscript_lean_verified: false
+  external_specialist_review: pending
+  historical_priority: not_established
+  peer_review: not_submitted
+  journal_status: not_submitted
+  public_release_authorized: true
+FSG-001:
+  paper_id: FSG-001
+  public_state: hold
+  private_candidate: true
+  mathematical_blocker: true
+  public_theorem_released: false
+  correction_status: private_correction_under_internal_review
+  external_review: not_started
+  formal_status: HOLD_MATHEMATICAL_BLOCKER
+  public_release_authorized: false
+ACM-001:
+  paper_id: ACM-001
+  public_state: hold
+  manuscript_complete: false
+  claim_map_complete: false
+  full_manuscript_lean_verified: false
+  public_theorem_released: false
+  public_release_authorized: false
+END_NHAIM_STATUS_BLOCK_V1
+-->
 
-## Status correction
+# Public Formalization Hold Record -- 29 July 2026
 
-The owner has adopted a stricter release rule: every retained mathematical claim must be covered by compiled Lean before a theorem package is described as active.
+This file is preserved as the PR #57 full-Lean policy record. Its status
+interpretation has been superseded by the 29 July 2026 owner clarification:
+HINC-001 and ABF-001 are not inactive or withdrawn. They remain active public
+candidate technical-review packages with exact bounded formal-verification
+statements.
 
-Accordingly:
+The full-manuscript Lean program remains active as a gold-standard improvement
+program:
+
+- `FULL_PASS` requires complete retained manuscript claim-to-Lean coverage;
+- bounded Lean PASS must not be described as full-manuscript verification;
+- manuscript-to-formal-statement fidelity remains a separate required gate;
+- Lean does not establish peer review, historical priority, journal acceptance,
+  external reproduction, novelty, significance, or prose correctness.
+
+## Corrected Current State
 
 ```text
-HINC-001  public historical artifact; full-Lean requalification hold
-ABF-001   public historical artifact; full-Lean requalification hold
-FSG-001   private; full-Lean completion hold
-ACM-001   consolidation hold; work does not advance until papers 1–3 align
+HINC-001  active public candidate technical review
+          PARTIAL_PASS / bounded Lean verification
+          full manuscript not fully formalized
+          external review pending
+          historical priority unestablished
+
+ABF-001   active public candidate technical review
+          PARTIAL_PASS / bounded A01 Lean verification
+          full manuscript not fully formalized
+          external review pending
+          historical priority unestablished
+
+FSG-001   private candidate
+          HOLD -- MATHEMATICAL BLOCKER
+          C06 / main theorem item (v) false as written
+          private correction under internal review
+          no public theorem package released
+          no public release authorized
+
+ACM-001   hold pending consolidation
 ```
 
-This is a status correction, not a retraction of a demonstrated counterexample. The existing HINC-001 and ABF-001 releases are preserved for provenance, including their exact bounded formal evidence and limitations. They are no longer represented as active packages while complete manuscript formalization remains open.
+## Supersession Boundary
 
-## Current formal facts
-
-- HINC-001 has two substantial bounded Lean PASS scopes, but its complete revised manuscript is not formalized.
-- ABF-001 has a bounded A01 Lean PASS, but A02–A06 and the complete manuscript are not formalized.
-- FSG-001 has a successful exact-head Lean bootstrap for its Fibonacci and literal-graph foundations, but F01–F07 and the complete manuscript are not formalized.
-
-## Release requirement
-
-Each package must independently reach:
-
-- zero unmapped mathematical claims;
-- zero unresolved formal claims;
-- zero `sorry`, `admit`, project-result axioms, or `sorryAx`;
-- clean immutable Lean build PASS;
-- complete claim-to-declaration and manuscript-fidelity PASS;
-- deterministic source, evidence, and release manifests;
-- final prior-art and hostile review at the frozen head;
-- exact owner authorization.
-
-No new paper package will be activated until this standard is met. Historical priority, peer review, journal acceptance, and significance remain separate questions that Lean cannot establish.
+PR #57 is not deleted or rewritten. The public interpretation that HINC-001 and
+ABF-001 are historical artifacts on inactive full-Lean requalification hold is
+superseded. The prohibition on claiming complete Lean verification is preserved.

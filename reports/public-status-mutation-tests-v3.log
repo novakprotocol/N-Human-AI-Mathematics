@@ -1,0 +1,22 @@
+baseline: PASS exit=0: no finding emitted
+worktree_unchanged: True
+M01: PASS: exit=1: category=True: path=True: per_file_state_mismatch: research-index.json: HINC-001 state mismatch
+M02: PASS: exit=1: category=True: path=True: per_file_state_mismatch: research-index.json: ABF-001 state mismatch
+M03: PASS: exit=1: category=True: path=True: per_file_state_mismatch: research-index.json: FSG-001 state mismatch
+M04: PASS: exit=1: category=True: path=True: fsg_blocker_contradiction: FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md: forbidden current-status wording: zero blocking findings
+M05: PASS: exit=1: category=True: path=True: private_reference: docs/learn.html:67: synthetic or nonpublic repository token
+M06: PASS: exit=1: category=True: path=True: full_lean_overclaim: README.md: HINC full-Lean overclaim
+M07: PASS: exit=1: category=True: path=True: peer_review_overclaim: README.md: forbidden current-status wording: peer reviewed: yes
+M08: PASS: exit=1: category=True: path=True: historical_priority_overclaim: README.md: forbidden current-status wording: world-first
+M09: PASS: exit=1: category=True: path=True: obsolete_current_state: docs/index.html: forbidden current-status wording: hold pending full lean
+M10: PASS: exit=1: category=True: path=True: obsolete_current_state: docs/index.html: forbidden current-status wording: no active theorem packages
+M11: PASS: exit=1: category=True: path=True: obsolete_current_state: README.md: forbidden current-status wording: historical artifacts only
+M12: PASS: exit=1: category=True: path=True: fsg_correction_overclaim: docs/learn.html: FSG corrected theorem overclaim
+M13: PASS: exit=1: category=True: path=True: private_reference: FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md:55: private-style branch name
+M14: PASS: exit=1: category=True: path=True: current_release_channel: research-index.json: current release channel must be public_review
+P01: PASS: exit=1: category=True: path=True: private_reference: docs/learn.html:67: non-allowlisted project repository URL
+P02: PASS: exit=1: category=True: path=True: private_reference: FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md:55: private-style PR or issue reference
+P03: PASS: exit=1: category=True: path=True: private_reference: tools/synthetic_private_url.py:1: synthetic or nonpublic repository token
+P04: PASS: exit=1: category=True: path=True: private_reference: .github/workflows/synthetic-private.yml:1: dynamically constructed private-style branch
+P05: PASS: exit=1: category=True: path=True: private_reference: FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md:55: private manuscript/source/evidence/artifact path
+P06: PASS: exit=1: category=True: path=True: private_reference: FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md:55: private manuscript/source/evidence/artifact path

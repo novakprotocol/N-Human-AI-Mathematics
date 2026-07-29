@@ -1,0 +1,37 @@
+﻿{
+    "schema":  "n.human_ai_mathematics.pages_build_equivalent.v3",
+    "result":  "PASS",
+    "deployed":  false,
+    "required_text":  [
+                          "HINC-001\u003c/dt\u003e\u003cdd\u003eActive candidate public technical review",
+                          "ABF-001\u003c/dt\u003e\u003cdd\u003eActive candidate public technical review",
+                          "Bounded Lean PASS",
+                          "Bounded A01 Lean PASS",
+                          "FSG private mathematical hold",
+                          "HOLD -- MATHEMATICAL BLOCKER",
+                          "ACM consolidation hold",
+                          "Hold pending consolidation",
+                          "Peer reviewed\u003c/span\u003e\u003cstrong\u003eNo"
+                      ],
+    "files":  [
+                  {
+                      "file":  "docs/index.html",
+                      "sha256":  "dcc63b1b9cff7ee6350dfc7f6605501012dd06b8e82d087e7d6436e2d02aa2d1"
+                  },
+                  {
+                      "file":  "docs/styles.css",
+                      "sha256":  "d7930f7d51e0fb854b39dcffb16141b612d361ff1be5360092d5780cad377a16"
+                  },
+                  {
+                      "file":  "docs/404.html",
+                      "sha256":  "d11bf14fac335106f7fcc525bee07c7e0a450a4ec6851004d549ec896a792f16"
+                  },
+                  {
+                      "file":  "docs/.nojekyll",
+                      "sha256":  "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+                  }
+              ],
+    "failures":  [
+
+                 ]
+}

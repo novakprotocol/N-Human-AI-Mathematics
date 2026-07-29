@@ -54,7 +54,7 @@ The page may state only the current private release-edge facts:
 
 The page does not expose or link:
 
-- the private `N-MathLab` repository;
+- the private `private research source` repository;
 - the private FSG branch;
 - private manuscript, source, evidence, or review paths;
 - a tag, release, DOI, or public theorem package that does not exist.

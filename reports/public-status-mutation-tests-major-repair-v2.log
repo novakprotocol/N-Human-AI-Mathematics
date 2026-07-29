@@ -1,0 +1,14 @@
+M01: PASS: exit=1: per_file_state_mismatch: research-index.json: HINC-001 state mismatch
+M02: PASS: exit=1: per_file_state_mismatch: research-index.json: ABF-001 state mismatch
+M03: PASS: exit=1: per_file_state_mismatch: research-index.json: FSG-001 state mismatch
+M04: PASS: exit=1: fsg_blocker_contradiction: FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md: forbidden current-status wording: zero blocking findings
+M05: PASS: exit=1: private_reference: docs/learn.html:34: synthetic or nonpublic repository token
+M06: PASS: exit=1: full_lean_overclaim: README.md: fully Lean verified paper claim
+M07: PASS: exit=1: peer_review_overclaim: README.md: forbidden current-status wording: peer reviewed: yes
+M08: PASS: exit=1: historical_priority_overclaim: README.md: forbidden current-status wording: world-first
+M09: PASS: exit=1: obsolete_current_state: docs/index.html: forbidden current-status wording: hold pending full lean
+M10: PASS: exit=1: obsolete_current_state: docs/index.html: forbidden current-status wording: no active theorem packages
+M11: PASS: exit=1: obsolete_current_state: README.md: forbidden current-status wording: historical artifacts only
+M12: PASS: exit=1: fsg_correction_overclaim: docs/learn.html: forbidden current-status wording: fsg-001 correction has passed
+M13: PASS: exit=1: private_reference: FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md:22: synthetic or nonpublic repository token
+M14: PASS: exit=1: current_release_channel: research-index.json: current release channel must be public_review

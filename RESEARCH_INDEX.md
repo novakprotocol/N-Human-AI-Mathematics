@@ -1,122 +1,122 @@
-# Research index
+<!--
+NHAIM_STATUS_BLOCK_V1
+HINC-001:
+  paper_id: HINC-001
+  public_state: active_review
+  formal_state: PARTIAL_PASS
+  bounded_formal_scope: bounded_Lean
+  claim_map_complete: false
+  full_manuscript_lean_verified: false
+  external_specialist_review: pending
+  historical_priority: not_established
+  peer_review: not_submitted
+  journal_status: not_submitted
+  public_release_authorized: true
+ABF-001:
+  paper_id: ABF-001
+  public_state: active_review
+  formal_state: PARTIAL_PASS
+  bounded_formal_scope: bounded_A01_Lean
+  compiled_lane: A01
+  a02_a06_status: incomplete
+  claim_map_complete: false
+  full_manuscript_lean_verified: false
+  external_specialist_review: pending
+  historical_priority: not_established
+  peer_review: not_submitted
+  journal_status: not_submitted
+  public_release_authorized: true
+FSG-001:
+  paper_id: FSG-001
+  public_state: hold
+  private_candidate: true
+  mathematical_blocker: true
+  public_theorem_released: false
+  correction_status: private_correction_under_internal_review
+  external_review: not_started
+  formal_status: HOLD_MATHEMATICAL_BLOCKER
+  public_release_authorized: false
+ACM-001:
+  paper_id: ACM-001
+  public_state: hold
+  manuscript_complete: false
+  claim_map_complete: false
+  full_manuscript_lean_verified: false
+  public_theorem_released: false
+  public_release_authorized: false
+END_NHAIM_STATUS_BLOCK_V1
+-->
 
-This index lists only results selected for paper-scale review packages. It is not an inventory of every N-MathLab experiment.
+# Research Index
 
-## Repository state
+This index lists only results selected for paper-scale review packages. It is not an inventory of every the private laboratory experiment.
+
+## Repository State
 
 ```text
 repository visibility:        public
 public-review release:        0.1.0-public-review
 public review active:         true
-visibility switch executed:   true
-complete candidate packages:  HINC-001, ABF-001
-index-only hold entries:      FSG-001, ACM-001
+active candidate packages:    HINC-001, ABF-001
+private mathematical hold:    FSG-001
+consolidation hold:           ACM-001
 peer reviewed:                no
 journal submitted:            no
 historical priority:          unestablished
+FULL_PASS manuscripts:        none
 ```
 
-## Publication order
+## Publication Order
 
 | Order | ID | Working title | Field | Current state |
 |---:|---|---|---|---|
-| 1 | `HINC-001` | Hidden Infinitesimal Noncommutativity in Two Binary-Gerstenhaber Endomorphism Monoid Schemes | Affine monoid schemes, binary Gerstenhaber algebras, nonreduced geometry | Active candidate package; open for public technical review |
-| 2 | `ABF-001` | Affine Restriction Moment Kernels and Radical Incidence Geometry of a Vectorial Boolean Map | Boolean functions, Reed-Muller codes, finite linear algebra | Active candidate package; open for public technical review |
-| 3 | `FSG-001` | Fibonacci Critical Groups of Carry-Rees Petal Graphs | Critical groups, graph theory, Fibonacci divisibility | Hold pending specialist and formal review |
-| 4 | `ACM-001` | ANF Code and Matroid Geometry of a Reduced Vectorial Map | Coding theory, matroids, Boolean functions | Hold pending final consolidation |
+| 1 | `HINC-001` | Hidden Infinitesimal Noncommutativity in Two Binary-Gerstenhaber Endomorphism Monoid Schemes | Affine monoid schemes, binary Gerstenhaber algebras, nonreduced geometry | Active public candidate technical review; `PARTIAL_PASS` bounded Lean |
+| 2 | `ABF-001` | Affine Restriction Moment Kernels and Radical Incidence Geometry of a Vectorial Boolean Map | Boolean functions, Reed-Muller codes, finite linear algebra | Active public candidate technical review; `PARTIAL_PASS` bounded A01 Lean |
+| 3 | `FSG-001` | Fibonacci Critical Groups of Carry-Rees Petal Graphs | Critical groups, graph theory, Fibonacci divisibility | Private candidate; HOLD -- MATHEMATICAL BLOCKER |
+| 4 | `ACM-001` | ANF Code and Matroid Geometry of a Reduced Vectorial Map | Coding theory, matroids, Boolean functions | Hold pending consolidation |
 
-## Status rules
+## Status Rules
 
-- `active_review`: a complete candidate package prepared for public technical review.
-- `hold`: mathematically substantial but not yet released as a complete package.
-- `archived_case_study`: retained mainly as process history.
-- `rejected`: invalidated as stated.
-- `superseded`: replaced while preserving the prior record.
+- `active_review`: a complete candidate package prepared for public technical review with its evidence limits stated.
+- `hold`: not released as an active public candidate package, or paused by a current blocker.
 - `published`: reserved for an identified archival or journal publication, not ordinary GitHub visibility.
+- `FULL_PASS`: reserved for complete full-manuscript Lean verification. No paper currently has this status.
 
-## HINC-001 — first package
+## HINC-001 -- First Package
 
-### Controlling source
+**Controlling source:** [`papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md`](papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md)
 
-- [`papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md`](papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md)
+**Public status:** active candidate technical review.
 
-### Core claim
+**Formal boundary:** `PARTIAL_PASS` / bounded Lean verification. The complete revised manuscript is not fully formalized.
 
-Two explicit characteristic-two binary-Gerstenhaber endomorphism monoid schemes share the crossing
-
-```text
-C = Spec F[x,y]/(x(y-1)).
-```
-
-The even object adds a constrained skew square-zero direction. The odd object adds a separate clopen torus unit component.
-
-### Current evidence
-
-- one consolidated, self-contained revised human manuscript;
-- complete characteristic-two Hochschild foundation;
-- complete even and odd presentations;
-- odd normal-form proof;
-- generator-to-global proof;
-- explicit natural representability arguments;
-- corrected center and disconnected-base language;
-- expanded fppf-derived-subgroup proof;
-- Python, C, Gröbner, finite-Artin, and common-core internal challenge routes;
-- public hosted Lean PASS for the algebraic kernel;
-- public hosted Lean PASS for the even and odd coefficient classifications and normalized monoid laws;
-- preserved failed runs and correction records;
-- exact formal and historical-priority limits.
-
-### Pending outside work
-
-- qualified external algebraic-monoid and Gerstenhaber review;
-- independent external reproduction;
-- source-level historical-equivalence review;
-- optional formalization of presently unformalized manuscript nodes;
-- journal submission and peer review, if pursued later.
-
-These are objectives of the public technical-review release. They are not falsely represented as already completed.
-
-### Public status
-
-```text
-candidate package:       complete
-public review active:    yes
-repository public:       yes
-peer reviewed:           no
-historical priority:     unestablished
-```
+**Review boundary:** external specialist review, independent external reproduction, and historical-priority review remain pending.
 
 Start with [`papers/HINC-001/README.md`](papers/HINC-001/README.md).
 
----
-
-## ABF-001 — second package
+## ABF-001 -- Second Package
 
 **Controlling source:** [`papers/ABF-001/manuscript/ABF-001_MANUSCRIPT.md`](papers/ABF-001/manuscript/ABF-001_MANUSCRIPT.md)
 
-**Core result:** A Reed-Muller moment criterion yields dual output-mask annihilator and affine-parameter kernel descriptions of restriction degree drop. For the specified map `GF(2)^16 -> GF(2)^8`, the complete vectorial spectrum is `130,559 / 511 / 0`; the order-one symmetric pencil has rank multiplicities `2 / 15 / 74 / 112 / 52`; and its corrected radical geometry has 203 mask-indexed radicals, 202 distinct nonzero radical subspaces, 469 incidences, 467 covered parameters, and 201 forest components.
+**Public status:** active candidate technical review at `abf-001-public-review-v1`.
 
-**Evidence:** complete human proof, full 131,070-hyperplane enumeration, primary and integer/bitset implementations, complete 5,505,024-comparison small-universe control, tamper rejection, exact manifests, final hostile review with zero blockers, and a same-day systematic prior-art delta.
+**Formal boundary:** `PARTIAL_PASS` / bounded A01 Lean verification. A02-A06 and the complete proof-connected finite atlas are not fully formalized.
 
-**Public status:** candidate technical review active at `abf-001-public-review-v1`. Historical priority, external reproduction, peer review, and complete formal verification remain unestablished.
+**Review boundary:** historical priority, external reproduction, peer review, and complete formal verification remain unestablished.
 
----
+## FSG-001 -- Third Package
 
-## FSG-001 — third package
+**Public status:** private candidate; no public theorem package released.
 
-**Core package:** spanning-tree, forest, resistance, critical-group Smith-form, Fibonacci-divisibility, torsion, density, and chip-firing results for Carry-Rees petal graphs.
+**Mathematical state:** HOLD -- MATHEMATICAL BLOCKER. C06 / main theorem item (v) is false as written in the private candidate manuscript. A private correction is under internal review. No public FSG release is authorized.
 
-**State:** hold pending complete standalone packaging, critical-groups review, Fibonacci-divisibility review, formal proof work, and deeper equivalence review.
+The public teaching preview is paused; see [`FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md`](FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md).
 
----
+## ACM-001 -- Fourth Package
 
-## ACM-001 — fourth package
+**State:** hold pending consolidation of the v36-v40 line, equivalence review, and exact benchmark framing.
 
-**Core package:** ANF degree-layer codes, generalized Hamming weights, complete support spectra, chain-condition behavior, coefficient-multiplicity rigidity, automorphism groups, and top-layer code/matroid geometry.
-
-**State:** hold pending consolidation of the v36–v40 line, equivalence review, and exact benchmark framing.
-
-## Process record
+## Process Record
 
 The mathematical paper index is separate from the Human + LLM process record. Read:
 
@@ -124,16 +124,4 @@ The mathematical paper index is separate from the Human + LLM process record. Re
 - [`HUMAN_AI_MATHEMATICS_PRIOR_ART.md`](HUMAN_AI_MATHEMATICS_PRIOR_ART.md)
 - [`PUBLIC_SWITCH_READINESS.md`](PUBLIC_SWITCH_READINESS.md)
 
-The project does not claim to be the first human–AI mathematics collaboration.
-
-## Selection rule
-
-A result enters the principal index only when it has:
-
-- a precise object and bounded claims;
-- a coherent proof or exact finite classification;
-- reproducible evidence where relevant;
-- explicit formal-verification limits;
-- a Human + LLM disclosure boundary;
-- a credible external-review question;
-- a fail-closed correction and release process.
+The project does not claim to be the first human-AI mathematics collaboration.

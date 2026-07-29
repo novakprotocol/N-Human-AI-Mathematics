@@ -1,0 +1,10 @@
+{
+  "error_count": 0,
+  "findings": [],
+  "html_files": [
+    "docs/index.html",
+    "docs/learn.html"
+  ],
+  "result": "PASS",
+  "schema": "n.human_ai_mathematics.internal_link_validation.v1"
+}

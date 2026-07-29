@@ -31,7 +31,7 @@ The paper has two layers.
 1. **General method.** A Reed-Muller duality argument converts affine-restriction degree thresholds into moment vanishing, then into output annihilators and affine-parameter kernels.
 2. **Exact finite instance.** The complete restriction and radical geometry of a specified 16-to-8 map is classified and independently reproduced.
 
-The finite map is the one-bit reduced block-to-fixed-state map used in the N-MathLab black-box research lane. Its truth table consists of 65,536 output bytes with SHA-256 identity
+The finite map is the one-bit reduced block-to-fixed-state map used in the private research source black-box research lane. Its truth table consists of 65,536 output bytes with SHA-256 identity
 
 ```text
 2a861e09dcb5b00e208ede53e1b29615a5309389a83da40f81d663ec760e7e52
@@ -427,7 +427,7 @@ c47b5a4b3e7c12e2c42da27ce0d2da440adfcce1ae82906d862e2eaf9904c96b
 
 The final package contains a standalone direct restriction-ANF versus ambient-moment verifier. It exhaustively processes all 65,536 functions $\mathbb F_2^3\to\mathbb F_2^2$, all 14 affine hyperplanes, all three nonzero output masks, and moment orders zero and one. This gives 5,505,024 exact comparisons and zero mismatches.
 
-The N-MathLab record additionally contains:
+The private research source record additionally contains:
 
 - a separately written C reconstruction;
 - byte-identical Python/C edge CSVs with SHA-256 `95d64917...742fa`;

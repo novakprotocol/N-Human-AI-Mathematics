@@ -1,175 +1,36 @@
-# Windows bootstrap: N Human–AI Mathematics
+# Windows Bootstrap Note
 
-This guide creates the standalone private repository:
+This file is retained as historical bootstrap documentation for the original public repository setup.
+It is not an executable public release instruction.
 
-```text
-novakprotocol/N-Human-AI-Mathematics
-```
+## Current Boundary
 
-from the curated export stored in the private `novakprotocol/N-MathLab` repository.
+The repository `novakprotocol/N-Human-AI-Mathematics` is already public. Current status is governed by `STATUS.md`, `research-index.json`, and the publication/status validators in `tools/`.
 
-## Critical repository boundary
+Private lab repository locations, local filesystem paths, private branch names, private manuscript paths, and private review links are intentionally omitted from this public note.
 
-Run the bootstrap from **N-MathLab**, not from `N-LMS` or another N repository.
-
-The correct local source directory is normally:
+## Current Public State
 
 ```text
-C:\Git\N-MathLab
+HINC-001  active public candidate technical review; PARTIAL_PASS / bounded Lean verification
+ABF-001   active public candidate technical review; PARTIAL_PASS / bounded A01 Lean verification
+FSG-001   private candidate; HOLD -- MATHEMATICAL BLOCKER; no public theorem package released
+ACM-001   hold pending consolidation
 ```
 
-The bootstrap script verifies the `origin` remote and refuses to proceed when the detected repository is not `N-MathLab`.
+This note does not authorize a visibility change, GitHub Pages change, release, tag, theorem-source change, FSG release, or publication action.
 
-## Supported shell
+## Validation
 
-Windows PowerShell 5.1 is supported.
-
-You do **not** need PowerShell 7, and the command `pwsh` is not required. Use:
-
-```text
-powershell.exe
-```
-
-## Prerequisites
-
-The following commands must be available:
+Use the repository validators instead of the historical bootstrap command sequence:
 
 ```powershell
-git --version
-python --version
-gh --version
-gh auth status
+python tools/validate_public_state.py --root .
+python tools/validate_status_consistency.py --root .
+python tools/validate_learning_page.py .
+python tools/validate_publication.py --root . --allow-public
+python tools/validate_publication_v2.py --root . --allow-public
+python tools/validate_publication_gate.py --root .
+python tools/validate_public_release.py --root .
+python tools/validate_public_release_v2.py --root .
 ```
-
-The active `github.com` account must have permission to create repositories under `novakprotocol`.
-
-## Exact clean-run commands
-
-Open Windows PowerShell and run this block:
-
-```powershell
-$ErrorActionPreference = "Stop"
-
-$Lab = "C:\Git\N-MathLab"
-$Branch = "agent/n-human-ai-mathematics-publication-bootstrap-v1"
-
-if (-not (Test-Path -LiteralPath "$Lab\.git" -PathType Container)) {
-    New-Item -ItemType Directory -Force -Path (Split-Path -Parent $Lab) | Out-Null
-    git clone https://github.com/novakprotocol/N-MathLab.git $Lab
-}
-
-Set-Location -LiteralPath $Lab
-
-git fetch origin --prune
-git switch --force-create $Branch --track "origin/$Branch"
-
-powershell.exe `
-    -NoLogo `
-    -NoProfile `
-    -ExecutionPolicy Bypass `
-    -File ".\exports\N-Human-AI-Mathematics\tools\Initialize-N-Human-AI-Mathematics.ps1"
-```
-
-The initialization script also resolves the remote-tracking branch directly after `git fetch`, so the source identity remains stable even when the local tracking branch did not previously exist.
-
-## One-click launcher
-
-After switching to the bootstrap branch, this launcher runs the same process and keeps the window open so that failures remain visible:
-
-```powershell
-& ".\exports\N-Human-AI-Mathematics\RUN-INITIALIZE-N-HUMAN-AI-MATHEMATICS.cmd"
-```
-
-## Safe local-only validation
-
-To materialize and validate the complete repository without creating anything on GitHub:
-
-```powershell
-powershell.exe `
-    -NoLogo `
-    -NoProfile `
-    -ExecutionPolicy Bypass `
-    -File ".\exports\N-Human-AI-Mathematics\tools\Initialize-N-Human-AI-Mathematics.ps1" `
-    -SkipGitHubCreate `
-    -KeepWorkDirectory
-```
-
-The staged repository is written beneath:
-
-```text
-%TEMP%\N-Human-AI-Mathematics-Bootstrap\repository
-```
-
-## Expected final state
-
-A successful full run produces:
-
-```text
-GitHub repository:  novakprotocol/N-Human-AI-Mathematics
-Visibility:         private
-Default branch:     main
-Public release:     unauthorized
-Blanket MIT license:no
-Initial paper:      HINC-001
-Validation receipt: reports/publication-validation.json
-Bootstrap receipt:  BOOTSTRAP_RECEIPT.json
-```
-
-The script refuses to overwrite an existing GitHub repository with the same name.
-
-## Verification commands
-
-After a successful run:
-
-```powershell
-gh repo view novakprotocol/N-Human-AI-Mathematics `
-    --json nameWithOwner,visibility,defaultBranchRef,url
-
-git -C "$env:TEMP\N-Human-AI-Mathematics-Bootstrap\repository" status --short
-git -C "$env:TEMP\N-Human-AI-Mathematics-Bootstrap\repository" log -1 --oneline
-```
-
-The local status should be clean.
-
-## Common failures
-
-### `fatal: invalid reference`
-
-Cause: the branch was requested from the wrong repository or the remote refs were not fetched.
-
-Repair:
-
-```powershell
-Set-Location C:\Git\N-MathLab
-git fetch origin --prune
-git branch -r --list "origin/agent/n-human-ai-mathematics-publication-bootstrap-v1"
-```
-
-### `pwsh is not recognized`
-
-Cause: PowerShell 7 is not installed.
-
-Repair: use `powershell.exe`, which is included with Windows PowerShell 5.1.
-
-### Script path not found
-
-Cause: the bootstrap branch is not checked out, or the current directory is not `N-MathLab`.
-
-Repair:
-
-```powershell
-Set-Location C:\Git\N-MathLab
-git fetch origin --prune
-git switch --force-create agent/n-human-ai-mathematics-publication-bootstrap-v1 `
-    --track origin/agent/n-human-ai-mathematics-publication-bootstrap-v1
-```
-
-### Target repository already exists
-
-The bootstrap stops deliberately. Inspect the existing repository before deciding whether to retain, rename, archive, or delete it:
-
-```powershell
-gh repo view novakprotocol/N-Human-AI-Mathematics
-```
-
-Do not rerun with destructive workarounds.

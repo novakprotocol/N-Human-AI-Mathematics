@@ -1,0 +1,39 @@
+{
+  "schema": "n.human_ai_mathematics.learning_pages_serve_fetch.v2",
+  "command": "python <inline serve/fetch checker>",
+  "served_directory": "docs",
+  "files": {
+    "docs/index.html": "7c996e6b9da7abeec624b12b7fd60c59c7230a7266d42d39791f9979eb52f387",
+    "docs/learn.html": "50291016a4c40150b8b1006253470f108794c55616d05b8c7d7d0f67d8fafa9a"
+  },
+  "required_text": {
+    "docs/index.html": [
+      "HINC-001</dt><dd>Active candidate public technical review",
+      "ABF-001</dt><dd>Active candidate public technical review",
+      "Bounded Lean PASS",
+      "Bounded A01 Lean PASS",
+      "FSG private mathematical hold",
+      "HOLD -- MATHEMATICAL BLOCKER",
+      "ACM consolidation hold",
+      "Hold pending consolidation"
+    ],
+    "docs/learn.html": [
+      "Active candidate public technical review",
+      "Bounded Lean PASS",
+      "Bounded A01 Lean PASS",
+      "HOLD -- MATHEMATICAL BLOCKER",
+      "No FSG theorem package has been publicly released",
+      "Hold pending consolidation"
+    ]
+  },
+  "forbidden_patterns": [
+    "no_active_packages",
+    "historical_artifact_only",
+    "active_status_suspended",
+    "full_lean_claim",
+    "peer_review_complete_claim",
+    "historical_priority_claim"
+  ],
+  "errors": [],
+  "result": "PASS"
+}

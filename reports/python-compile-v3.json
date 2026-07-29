@@ -1,0 +1,127 @@
+﻿{
+    "schema":  "n.human_ai_mathematics.python_compile.v3",
+    "result":  "PASS",
+    "file_count":  17,
+    "failure_count":  0,
+    "records":  [
+                    {
+                        "file":  "tools/public_status_checks.py",
+                        "command":  "python -m py_compile tools/public_status_checks.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    },
+                    {
+                        "file":  "tools/validate_status_consistency.py",
+                        "command":  "python -m py_compile tools/validate_status_consistency.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    },
+                    {
+                        "file":  "tools/validate_json_schema.py",
+                        "command":  "python -m py_compile tools/validate_json_schema.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    },
+                    {
+                        "file":  "tools/validate_internal_links.py",
+                        "command":  "python -m py_compile tools/validate_internal_links.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    },
+                    {
+                        "file":  "tools/validate_public_surface_scan.py",
+                        "command":  "python -m py_compile tools/validate_public_surface_scan.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    },
+                    {
+                        "file":  "tools/test_public_status_mutations.py",
+                        "command":  "python -m py_compile tools/test_public_status_mutations.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    },
+                    {
+                        "file":  "tools/test_json_schema_negative_controls.py",
+                        "command":  "python -m py_compile tools/test_json_schema_negative_controls.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    },
+                    {
+                        "file":  "tools/test_internal_link_negative_control.py",
+                        "command":  "python -m py_compile tools/test_internal_link_negative_control.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    },
+                    {
+                        "file":  "tools/validate_publication.py",
+                        "command":  "python -m py_compile tools/validate_publication.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    },
+                    {
+                        "file":  "tools/validate_publication_v2.py",
+                        "command":  "python -m py_compile tools/validate_publication_v2.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    },
+                    {
+                        "file":  "tools/validate_publication_gate.py",
+                        "command":  "python -m py_compile tools/validate_publication_gate.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    },
+                    {
+                        "file":  "tools/validate_full_lean_portfolio.py",
+                        "command":  "python -m py_compile tools/validate_full_lean_portfolio.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    },
+                    {
+                        "file":  "tools/validate_learning_page.py",
+                        "command":  "python -m py_compile tools/validate_learning_page.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    },
+                    {
+                        "file":  "tools/validate_public_release.py",
+                        "command":  "python -m py_compile tools/validate_public_release.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    },
+                    {
+                        "file":  "tools/validate_public_release_v2.py",
+                        "command":  "python -m py_compile tools/validate_public_release_v2.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    },
+                    {
+                        "file":  "tools/validate_public_state.py",
+                        "command":  "python -m py_compile tools/validate_public_state.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    },
+                    {
+                        "file":  "tools/prepare_abf001_integration_v3.py",
+                        "command":  "python -m py_compile tools/prepare_abf001_integration_v3.py",
+                        "exit":  0,
+                        "stdout":  "",
+                        "result":  "PASS"
+                    }
+                ]
+}

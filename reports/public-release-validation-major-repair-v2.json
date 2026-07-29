@@ -1,0 +1,11 @@
+{
+  "error_count": 0,
+  "finding_count": 0,
+  "findings": [],
+  "private_detector_literals": 0,
+  "private_reference_findings": 0,
+  "result": "PASS",
+  "root": "<repo>",
+  "schema_version": "n.human_ai_mathematics.corrected_public_review_validation.v3",
+  "validator_workflow_private_scan_exclusions": 0
+}

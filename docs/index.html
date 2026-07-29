@@ -1,28 +1,151 @@
 <!doctype html>
+<!--
+NHAIM_STATUS_BLOCK_V1
+HINC-001:
+  paper_id: HINC-001
+  public_state: active_review
+  formal_state: PARTIAL_PASS
+  bounded_formal_scope: bounded_Lean
+  claim_map_complete: false
+  full_manuscript_lean_verified: false
+  external_specialist_review: pending
+  historical_priority: not_established
+  peer_review: not_submitted
+  journal_status: not_submitted
+  public_release_authorized: true
+ABF-001:
+  paper_id: ABF-001
+  public_state: active_review
+  formal_state: PARTIAL_PASS
+  bounded_formal_scope: bounded_A01_Lean
+  compiled_lane: A01
+  a02_a06_status: incomplete
+  claim_map_complete: false
+  full_manuscript_lean_verified: false
+  external_specialist_review: pending
+  historical_priority: not_established
+  peer_review: not_submitted
+  journal_status: not_submitted
+  public_release_authorized: true
+FSG-001:
+  paper_id: FSG-001
+  public_state: hold
+  private_candidate: true
+  mathematical_blocker: true
+  public_theorem_released: false
+  correction_status: private_correction_under_internal_review
+  external_review: not_started
+  formal_status: HOLD_MATHEMATICAL_BLOCKER
+  public_release_authorized: false
+ACM-001:
+  paper_id: ACM-001
+  public_state: hold
+  manuscript_complete: false
+  claim_map_complete: false
+  full_manuscript_lean_verified: false
+  public_theorem_released: false
+  public_release_authorized: false
+END_NHAIM_STATUS_BLOCK_V1
+-->
+
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Human-led, LLM-assisted candidate mathematics undergoing complete claim-to-Lean requalification before active public release.">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta name="theme-color" content="#0b1320">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:; script-src 'none'; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action https://github.com; upgrade-insecure-requests">
-  <title>N Human–LLM Mathematics | Full-Lean Requalification</title>
+  <meta name="description" content="Human-led, LLM-assisted candidate mathematics under public technical review with exact bounded Lean status and correction records.">
+  <title>N Human-LLM Mathematics | Public Candidate Review Status</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to main content</a>
-  <header class="site-header"><div class="shell nav-wrap"><a class="brand" href="#top" aria-label="N Human-LLM Mathematics home"><span class="brand-mark" aria-hidden="true">N</span><span><strong>N Human–LLM Mathematics</strong><small>Full-Lean requalification</small></span></a><nav aria-label="Primary navigation"><a href="learn.html">Learn</a><a href="#research">Papers 1–3</a><a href="#standard">Release standard</a><a href="#review">Review</a><a href="#portfolio">Portfolio</a></nav></div></header>
-  <main id="main">
-    <section class="hero" id="top"><div class="shell hero-grid"><div><p class="eyebrow">Human-led · LLM-assisted · fail-closed formal release gate</p><h1>Three papers. One strict Lean standard.</h1><p class="lede">HINC-001 and ABF-001 remain accessible as historical public artifacts but are no longer classified as active theorem packages. FSG-001 remains private. Under the owner’s 29 July 2026 rule, every retained mathematical claim in each paper must map to compiled Lean before active release.</p><div class="actions"><a class="button primary" href="#research">Inspect papers 1–3</a><a class="button secondary" href="../FULL_LEAN_RELEASE_STANDARD.md">Read the full-Lean standard</a><a class="button secondary" href="../PUBLIC_REVIEW_FORMALIZATION_HOLD_2026-07-29.md">Read the status correction</a></div><ul class="status-row"><li><span>Channel</span><strong>Full-Lean requalification</strong></li><li><span>Active theorem packages</span><strong>None</strong></li><li><span>Public archives on hold</span><strong>HINC-001 · ABF-001</strong></li><li><span>Private completion hold</span><strong>FSG-001</strong></li><li><span>Peer reviewed</span><strong>No</strong></li><li><span>Historical priority</span><strong>Unestablished</strong></li></ul></div><aside class="instrument" aria-label="Status visualization, not mathematical evidence"><div class="instrument-head"><span>FORMAL GATE V1</span><span class="live-dot">REQUALIFICATION HOLD</span></div><dl><div><dt>HINC-001</dt><dd>Public archive · bounded Lean only</dd></div><div><dt>ABF-001</dt><dd>Public archive · A01 Lean only</dd></div><div><dt>FSG-001</dt><dd>Private · bootstrap Lean PASS</dd></div><div><dt>ACM-001</dt><dd>Blocked until papers 1–3 align</dd></div><div><dt>Active release condition</dt><dd>Complete manuscript claim-to-Lean PASS</dd></div></dl><p class="instrument-note">This panel records release state. It is not proof, peer review, historical-priority evidence, or a claim that full formalization is already complete.</p></aside></div></section>
-    <section class="section section-rule"><div class="shell two-column"><div><p class="eyebrow">Immediate citation warning</p><h2>Do not describe HINC-001, ABF-001, or FSG-001 as fully Lean-verified.</h2></div><div><p>HINC-001 and ABF-001 have genuine bounded Lean results, and FSG-001 has a genuine exact-head bootstrap PASS. None currently has complete manuscript formalization. The historical public artifacts are preserved for provenance while active status is suspended.</p><a class="text-link" href="../PAPER_1_3_FULL_LEAN_STATUS.json">Open the machine-readable status →</a></div></div></section>
-    <section class="section section-dark" id="research"><div class="shell"><div class="section-heading split-heading"><div><p class="eyebrow">Paper 1</p><h2>HINC-001</h2></div><span class="pill">Public archive · full-Lean hold</span></div><div class="research-grid"><article><h3>Hidden Infinitesimal Noncommutativity</h3><p class="large-copy">The human candidate manuscript remains available. Two immutable Lean gates verify the base algebraic kernel and principal coefficient classifications, but the complete manuscript is not formalized.</p><blockquote>Open formal work includes the Hochschild derivation, complete source-algebra presentations, odd normal form, generator-to-global preservation, representability, scheme center, clopen split, fppf-derived subgroup, and downstream geometric and counting claims.</blockquote><div class="link-list"><a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/blob/main/papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md">Revised manuscript</a><a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/blob/main/papers/HINC-001/CLAIMS.md">Claim matrix</a><a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/blob/main/papers/HINC-001/FORMAL_VERIFICATION.md">Current formal boundary</a></div></article><aside class="evidence-panel"><h3>Current state</h3><ul class="check-list"><li><strong>Human candidate proof</strong><span>Complete within its stated scope</span></li><li><strong>Bounded Lean gates</strong><span>PASS with no sorryAx</span></li><li class="pending"><strong>Full claim map</strong><span>Incomplete</span></li><li class="pending"><strong>Active theorem status</strong><span>Suspended pending full Lean</span></li></ul></aside></div></div></section>
-    <section class="section" id="abf-001" aria-labelledby="abf-title"><div class="shell"><div class="section-heading split-heading"><div><p class="eyebrow">Paper 2</p><h2 id="abf-title">ABF-001</h2></div><span class="pill">Public archive · full-Lean hold</span></div><div class="research-grid"><article><h3>Affine Restriction Moment Kernels</h3><p class="large-copy">The human proof and exhaustive computational record remain available. The A01 bidual moment-kernel bridge compiles in Lean; A02–A06 and the full finite classification are not yet formalized.</p><blockquote>Open formal work includes Reed–Muller duality, affine-hyperplane coordinates, the order-zero and order-one classifications, and a proof-connected Lean verification of every declared census value.</blockquote><div class="link-list"><a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/blob/main/papers/ABF-001/manuscript/ABF-001_MANUSCRIPT.md">Controlling manuscript</a><a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/blob/main/papers/ABF-001/CLAIMS.md">Claim ledger</a><a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/blob/main/papers/ABF-001/FORMAL_VERIFICATION.md">Current formal boundary</a></div></article><aside class="evidence-panel" aria-label="ABF-001 current state"><h3>Current state</h3><ul class="check-list"><li><strong>Human candidate proof</strong><span>Complete within its stated scope</span></li><li><strong>A01 Lean lane</strong><span>PASS with placeholder gates</span></li><li class="pending"><strong>A02–A06</strong><span>Incomplete</span></li><li class="pending"><strong>Active theorem status</strong><span>Suspended pending full Lean</span></li></ul></aside></div></div></section>
-    <section class="section section-dark" id="fsg-001"><div class="shell"><div class="section-heading split-heading"><div><p class="eyebrow">Paper 3</p><h2>FSG-001</h2></div><span class="pill">Private · full-Lean completion hold</span></div><div class="research-grid"><article><h3>Fibonacci Critical Groups of Carry–Rees Petal Graphs</h3><p class="large-copy">The private human proof and hostile-review package are extensive. The exact-head Lean bootstrap compiles the Fibonacci foundation and literal graph adjacency, but the complete theorem is not yet formalized.</p><blockquote>Open formal work includes complete Fibonacci/Lucas arithmetic, connectedness and Laplacians, the integral graph-to-3×3 bridge, tree and forest formulas, Smith factors, chip-firing equivalence, and valuation/CRT/density claims.</blockquote><div class="link-list"><a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/blob/main/PAPER_1_3_FULL_LEAN_STATUS.json">Public status ledger</a><a href="learn.html#fsg">Teaching preview only</a></div></article><aside class="evidence-panel"><h3>Current state</h3><ul class="check-list"><li><strong>Lean bootstrap</strong><span>PASS at exact private head</span></li><li><strong>Human and hostile review</strong><span>Strong private candidate record</span></li><li class="pending"><strong>F01–F07</strong><span>Incomplete</span></li><li class="pending"><strong>Public theorem package</strong><span>Not released</span></li></ul></aside></div></div></section>
-    <section class="section" id="standard"><div class="shell"><div class="section-heading"><p class="eyebrow">Release standard</p><h2>“Lean-verified” now means the complete retained mathematics.</h2></div><div class="ledger"><div><span>Claim inventory</span><strong>Every retained mathematical statement has a stable ID</strong></div><div><span>Formal map</span><strong>Every claim maps to compiled declarations or exact imported theorems</strong></div><div><span>Placeholder gate</span><strong>Zero sorry, admit, project-result axioms, or sorryAx</strong></div><div><span>Object fidelity</span><strong>The manuscript objects and hypotheses match the formal objects</strong></div><div><span>Finite results</span><strong>Kernel-checked certificates or exhaustive decidable proofs cover the exact universe</strong></div><div><span>Immutable execution</span><strong>Pinned clean build, receipts, manifests, logs, and hashes</strong></div></div></div></section>
-    <section class="section review-section" id="review"><div class="shell review-grid"><div><p class="eyebrow">Review remains welcome</p><h2>Challenge the archived proofs or the formalization program.</h2><p>Substantive reports should identify the exact paper, claim ID, source identity, assumptions, and effect.</p></div><div class="review-actions"><a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/issues/new?template=counterexample.yml"><strong>Counterexample</strong><span>Supply a complete object violating a stated conclusion</span></a><a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/issues/new?template=proof-gap.yml"><strong>Proof gap</strong><span>Identify the exact unsupported inference</span></a><a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/issues/new?template=prior-art.yml"><strong>Prior art</strong><span>Translate an earlier source to the exact paper</span></a><a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/issues/new?template=reproduction.yml"><strong>Formal reproduction</strong><span>Report source, environment, command, and first discrepancy</span></a></div></div></section>
-    <section class="section" id="portfolio"><div class="shell"><div class="section-heading"><p class="eyebrow">Publication order</p><h2>Papers 1–3 must align before paper 4 advances.</h2></div><div class="portfolio-table" role="region" aria-label="Paper portfolio" tabindex="0"><table><thead><tr><th>Order</th><th>ID</th><th>Field</th><th>State</th></tr></thead><tbody><tr><td>1</td><td>HINC-001</td><td>Affine monoid schemes and binary Gerstenhaber algebra</td><td><span class="state hold">Public archive · full-Lean hold</span></td></tr><tr><td>2</td><td>ABF-001</td><td>Boolean functions, Reed–Muller codes, and finite linear algebra</td><td><span class="state hold">Public archive · full-Lean hold</span></td></tr><tr><td>3</td><td>FSG-001</td><td>Critical groups and Fibonacci divisibility</td><td><span class="state hold">Private · full-Lean completion</span></td></tr><tr><td>4</td><td>ACM-001</td><td>Coding theory, matroids, Boolean functions</td><td><span class="state hold">Blocked until papers 1–3 align</span></td></tr></tbody></table></div></div></section>
-  </main>
-  <footer><div class="shell footer-grid"><div><strong>N Human–LLM Mathematics</strong><p>Copyright © 2026 Matthew S. Novak. All rights reserved unless a file-specific notice states otherwise.</p></div><div><p>Lean verification, external review, peer review, historical priority, journal submission, and DOI assignment are distinct states.</p><a href="learn.html">Learn the ideas</a><a href="../FULL_LEAN_RELEASE_STANDARD.md">Full-Lean standard</a><a href="../PUBLIC_REVIEW_FORMALIZATION_HOLD_2026-07-29.md">Status correction</a><a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/blob/main/RIGHTS_AND_LICENSING.md">Rights</a></div></div></footer>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="shell nav-wrap">
+    <a class="brand" href="#top" aria-label="N Human-LLM Mathematics home"><span class="brand-mark" aria-hidden="true">N</span><span><strong>N Human-LLM Mathematics</strong><small>Public candidate review</small></span></a>
+    <nav aria-label="Primary navigation"><a href="learn.html">Learn</a><a href="#research">Status</a><a href="#full-lean">Full-Lean</a><a href="#review">Review</a></nav>
+  </div>
+</header>
+<main id="main">
+  <section class="hero" id="top">
+    <div class="shell hero-grid">
+      <div>
+        <p class="eyebrow">Owner clarification -- 29 July 2026</p>
+        <h1>Active candidate review, bounded formal status.</h1>
+        <p class="lede">HINC-001 and ABF-001 remain active public candidate technical-review packages. Their Lean status is bounded `PARTIAL_PASS`, not full-manuscript verification. FSG-001 is private on a mathematical-blocker hold; FSG private mathematical hold is in force. ACM-001 is held for consolidation; ACM consolidation hold remains.</p>
+        <div class="actions">
+          <a class="button primary" href="#research">Inspect current states</a>
+          <a class="button secondary" href="../STATUS.md">Read repository status</a>
+          <a class="button secondary" href="../FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md">Read FSG hold</a>
+        </div>
+        <ul class="status-row">
+          <li><span>Active review</span><strong>HINC-001 / ABF-001</strong></li>
+          <li><span>FULL_PASS</span><strong>None</strong></li>
+          <li><span>FSG-001</span><strong>Private hold</strong></li>
+          <li><span>Peer reviewed</span><strong>No</strong></li>
+          <li><span>Historical priority</span><strong>Unestablished</strong></li>
+        </ul>
+      </div>
+      <aside class="instrument" aria-label="Current paper status">
+        <div class="instrument-head"><span>STATUS V2</span><span class="live-dot">CORRECTED</span></div>
+        <dl>
+          <div><dt>HINC-001</dt><dd>Active candidate public technical review / bounded Lean PASS / full manuscript incomplete</dd></div>
+          <div><dt>ABF-001</dt><dd>Active candidate public technical review / bounded A01 Lean PASS / full manuscript incomplete</dd></div>
+          <div><dt>FSG-001</dt><dd>Private / HOLD -- MATHEMATICAL BLOCKER / no public theorem package released</dd></div>
+          <div><dt>ACM-001</dt><dd>Hold pending consolidation</dd></div>
+        </dl>
+        <p class="instrument-note">This status panel is not proof, peer review, external reproduction, historical-priority evidence, or a claim that any full manuscript has FULL_PASS.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section-rule">
+    <div class="shell two-column">
+      <div><p class="eyebrow">Citation boundary</p><h2>Do not upgrade bounded verification into FULL_PASS.</h2></div>
+      <div><p>Full-manuscript Lean verification remains a gold-standard improvement program. Existing HINC-001 and ABF-001 candidate-review packages stay active only with exact bounded formal-verification statements. Fully Lean-verified manuscript status requires FULL_PASS and is not currently claimed.</p><a class="text-link" href="../formal-verification-status.json">Open machine-readable formal status</a></div>
+    </div>
+  </section>
+
+  <section class="section section-dark" id="research">
+    <div class="shell">
+      <div class="section-heading"><p class="eyebrow">Current public states</p><h2>Four records, one corrected control plane.</h2></div>
+      <div class="card-grid three">
+        <article class="card"><span class="card-number">HINC-001</span><h3>Active candidate public technical review</h3><p>`PARTIAL_PASS` / bounded Lean verification. The full revised manuscript is incomplete in Lean. External review is pending; historical priority is unestablished.</p></article>
+        <article class="card"><span class="card-number">ABF-001</span><h3>Active candidate public technical review</h3><p>`PARTIAL_PASS` / bounded A01 Lean verification. A02-A06 and the complete manuscript are incomplete in Lean. External review is pending; historical priority is unestablished.</p></article>
+        <article class="card"><span class="card-number">FSG-001</span><h3>Private mathematical-blocker hold</h3><p>A universal arithmetic criterion in the private candidate manuscript was disproved before public release. No public FSG theorem package has been released.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="full-lean">
+    <div class="shell">
+      <div class="section-heading"><p class="eyebrow">Full-Lean standard</p><h2>FULL_PASS is stricter than active candidate review.</h2><p>To claim a fully Lean-verified manuscript, every retained claim must map to compiled Lean or exact imported theorems, with zero unresolved formal scope and a passed fidelity review.</p></div>
+      <div class="ledger">
+        <div><span>HINC-001</span><strong>Bounded Lean PASS; complete manuscript not fully formalized</strong></div>
+        <div><span>ABF-001</span><strong>Bounded A01 Lean PASS; complete manuscript not fully formalized</strong></div>
+        <div><span>FSG-001</span><strong>Private correction under internal review; no public release authorized</strong></div>
+        <div><span>ACM-001</span><strong>Hold pending consolidation</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section review-section" id="review">
+    <div class="shell review-grid">
+      <div><p class="eyebrow">Review routes</p><h2>Challenge the active candidate packages.</h2><p>Counterexamples, proof-gap reports, prior-art equivalence reports, independent reproductions, and further formalization are invited for HINC-001 and ABF-001.</p></div>
+      <div class="review-actions">
+        <a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/issues/new?template=counterexample.yml"><strong>Counterexample</strong><span>Identify the exact assumptions and failing conclusion.</span></a>
+        <a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/issues/new?template=proof-gap.yml"><strong>Proof gap</strong><span>Point to the precise inference or missing hypothesis.</span></a>
+        <a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/issues/new?template=prior-art.yml"><strong>Prior art</strong><span>Supply earlier equivalent work and claim-by-claim effect.</span></a>
+        <a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/issues/new?template=reproduction.yml"><strong>Reproduction</strong><span>Record environment, commands, outputs, and discrepancy.</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="portfolio">
+    <div class="shell">
+      <div class="section-heading"><p class="eyebrow">Portfolio</p><h2>Current machine-readable state.</h2></div>
+      <div class="portfolio-table" role="region" aria-label="Paper portfolio" tabindex="0"><table><thead><tr><th>Order</th><th>ID</th><th>State</th><th>Formal boundary</th></tr></thead><tbody><tr><td>1</td><td>HINC-001</td><td><span class="state active">Active review</span></td><td>PARTIAL_PASS / bounded Lean; full manuscript incomplete</td></tr><tr><td>2</td><td>ABF-001</td><td><span class="state active">Active review</span></td><td>PARTIAL_PASS / bounded A01 Lean; full manuscript incomplete</td></tr><tr><td>3</td><td>FSG-001</td><td><span class="state hold">Private hold</span></td><td>HOLD -- MATHEMATICAL BLOCKER; no public theorem package released</td></tr><tr><td>4</td><td>ACM-001</td><td><span class="state hold">Hold</span></td><td>Pending consolidation</td></tr></tbody></table></div>
+    </div>
+  </section>
+</main>
+<footer><div class="shell footer-grid"><div><strong>N Human-LLM Mathematics</strong><p>Copyright (c) 2026 Matthew S. Novak. All rights reserved unless a file-specific notice states otherwise.</p></div><div><p>Lean verification, external review, peer review, historical priority, journal submission, and DOI assignment are distinct states.</p><a href="learn.html">Learn the ideas</a><a href="../FULL_LEAN_RELEASE_STANDARD.md">Full-Lean standard</a><a href="../STATUS.md">Status</a><a href="https://github.com/novakprotocol/N-Human-AI-Mathematics/blob/main/RIGHTS_AND_LICENSING.md">Rights</a></div></div></footer>
 </body>
 </html>

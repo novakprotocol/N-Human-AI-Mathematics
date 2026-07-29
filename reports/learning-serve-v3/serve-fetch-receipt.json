@@ -1,0 +1,28 @@
+﻿{
+    "schema":  "n.human_ai_mathematics.learning_serve_fetch.v3",
+    "result":  "PASS",
+    "port":  8766,
+    "fetched":  [
+                    "learn.html",
+                    "index.html"
+                ],
+    "learn_sha256":  "a544ccb3a0716a756d8e4c9c53afadcee4a686a7bd4c85f97ba48081940fd6a5",
+    "index_sha256":  "dcc63b1b9cff7ee6350dfc7f6605501012dd06b8e82d087e7d6436e2d02aa2d1",
+    "required_learning_text":  [
+                                   "Active candidate public technical review",
+                                   "Bounded Lean PASS",
+                                   "Bounded A01 Lean PASS",
+                                   "HOLD -- MATHEMATICAL BLOCKER",
+                                   "No FSG theorem package has been publicly released",
+                                   "Hold pending consolidation"
+                               ],
+    "required_index_text":  [
+                                "HINC-001\u003c/dt\u003e\u003cdd\u003eActive candidate public technical review",
+                                "ABF-001\u003c/dt\u003e\u003cdd\u003eActive candidate public technical review",
+                                "FSG private mathematical hold",
+                                "ACM consolidation hold"
+                            ],
+    "failures":  [
+
+                 ]
+}

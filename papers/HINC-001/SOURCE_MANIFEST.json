@@ -4,41 +4,114 @@
   "generated_repository": "novakprotocol/N-Human-AI-Mathematics",
   "sources": [
     {
-      "repository": "novakprotocol/N-MathLab",
-      "commit": "e6adac212150177d4afa56e643d37533a208693c",
+      "repository": "derived from a private research source",
+      "commit": null,
       "role": "standalone manuscript, review packet, verifier, tests, and local receipts",
       "files": [
-        {"source": "papers/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/MANUSCRIPT_INDEX.md", "target": "papers/HINC-001/manuscript/MANUSCRIPT_INDEX.md"},
-        {"source": "papers/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/MANUSCRIPT_PART_1.md", "target": "papers/HINC-001/manuscript/MANUSCRIPT_PART_1.md"},
-        {"source": "papers/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/MANUSCRIPT_PART_2.md", "target": "papers/HINC-001/manuscript/MANUSCRIPT_PART_2.md"},
-        {"source": "papers/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/MANUSCRIPT_PART_3.md", "target": "papers/HINC-001/manuscript/MANUSCRIPT_PART_3.md"},
-        {"source": "papers/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/MANUSCRIPT_PART_4.md", "target": "papers/HINC-001/manuscript/MANUSCRIPT_PART_4.md"},
-        {"source": "papers/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/CITATION.bib", "target": "papers/HINC-001/manuscript/references.bib"},
-        {"source": "papers/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/COVER_LETTER.md", "target": "papers/HINC-001/review/COVER_LETTER.md"},
-        {"source": "papers/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/SPECIALIST_REVIEW_PACKET.md", "target": "papers/HINC-001/review/SPECIALIST_REVIEW_PACKET_SOURCE.md"},
-        {"source": "papers/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/TEACHING_HANDOUT.md", "target": "papers/HINC-001/teaching/TEACHING_HANDOUT.md"},
-        {"source": "papers/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/BINARY_ARTIFACTS.md", "target": "papers/HINC-001/evidence/BINARY_ARTIFACT_IDENTITIES.md"},
-        {"source": "papers/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/SUBMISSION_METADATA_TEMPLATE.json", "target": "papers/HINC-001/review/SUBMISSION_METADATA_TEMPLATE.json"},
-        {"source": "papers/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/requirements.txt", "target": "papers/HINC-001/requirements.txt"},
-        {"source": "src/n_mathlab/mcrc_hidden_infinitesimal_noncommutativity_standalone.py", "target": "papers/HINC-001/src/mcrc_hidden_infinitesimal_noncommutativity_standalone.py"},
-        {"source": "src/standalone_common_core_verifier.py", "target": "papers/HINC-001/src/standalone_common_core_verifier.py"},
-        {"source": "tests/test_mcrc_hidden_infinitesimal_noncommutativity_standalone.py", "target": "papers/HINC-001/tests/test_hinc_standalone.py"},
-        {"source": "receipts/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/standalone-certificate.json", "target": "papers/HINC-001/evidence/standalone-certificate.json"},
-        {"source": "receipts/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/submission-execution-receipt.json", "target": "papers/HINC-001/evidence/submission-execution-receipt.json"},
-        {"source": "receipts/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/local-test-log.txt", "target": "papers/HINC-001/evidence/local-test-log.txt"},
-        {"source": "receipts/mcrc-hidden-infinitesimal-noncommutativity-submission-v1/local-fresh-copy-log.txt", "target": "papers/HINC-001/evidence/local-fresh-copy-log.txt"}
-      ]
+        {
+          "source": "source-records/HINC-001/export-01-manuscript-index-md",
+          "target": "papers/HINC-001/manuscript/MANUSCRIPT_INDEX.md"
+        },
+        {
+          "source": "source-records/HINC-001/export-02-manuscript-part-1-md",
+          "target": "papers/HINC-001/manuscript/MANUSCRIPT_PART_1.md"
+        },
+        {
+          "source": "source-records/HINC-001/export-03-manuscript-part-2-md",
+          "target": "papers/HINC-001/manuscript/MANUSCRIPT_PART_2.md"
+        },
+        {
+          "source": "source-records/HINC-001/export-04-manuscript-part-3-md",
+          "target": "papers/HINC-001/manuscript/MANUSCRIPT_PART_3.md"
+        },
+        {
+          "source": "source-records/HINC-001/export-05-manuscript-part-4-md",
+          "target": "papers/HINC-001/manuscript/MANUSCRIPT_PART_4.md"
+        },
+        {
+          "source": "source-records/HINC-001/export-06-references-bib",
+          "target": "papers/HINC-001/manuscript/references.bib"
+        },
+        {
+          "source": "source-records/HINC-001/export-07-cover-letter-md",
+          "target": "papers/HINC-001/review/COVER_LETTER.md"
+        },
+        {
+          "source": "source-records/HINC-001/export-08-specialist-review-packet-source-md",
+          "target": "papers/HINC-001/review/SPECIALIST_REVIEW_PACKET_SOURCE.md"
+        },
+        {
+          "source": "source-records/HINC-001/export-09-teaching-handout-md",
+          "target": "papers/HINC-001/teaching/TEACHING_HANDOUT.md"
+        },
+        {
+          "source": "source-records/HINC-001/export-10-binary-artifact-identities-md",
+          "target": "papers/HINC-001/evidence/BINARY_ARTIFACT_IDENTITIES.md"
+        },
+        {
+          "source": "source-records/HINC-001/export-11-submission-metadata-template-json",
+          "target": "papers/HINC-001/review/SUBMISSION_METADATA_TEMPLATE.json"
+        },
+        {
+          "source": "source-records/HINC-001/export-12-requirements-txt",
+          "target": "papers/HINC-001/requirements.txt"
+        },
+        {
+          "source": "source-records/HINC-001/export-13-mcrc-hidden-infinitesimal-noncommutativity-standalone-py",
+          "target": "papers/HINC-001/src/mcrc_hidden_infinitesimal_noncommutativity_standalone.py"
+        },
+        {
+          "source": "source-records/HINC-001/export-14-standalone-common-core-verifier-py",
+          "target": "papers/HINC-001/src/standalone_common_core_verifier.py"
+        },
+        {
+          "source": "source-records/HINC-001/export-15-test-hinc-standalone-py",
+          "target": "papers/HINC-001/tests/test_hinc_standalone.py"
+        },
+        {
+          "source": "source-records/HINC-001/export-16-standalone-certificate-json",
+          "target": "papers/HINC-001/evidence/standalone-certificate.json"
+        },
+        {
+          "source": "source-records/HINC-001/export-17-submission-execution-receipt-json",
+          "target": "papers/HINC-001/evidence/submission-execution-receipt.json"
+        },
+        {
+          "source": "source-records/HINC-001/export-18-local-test-log-txt",
+          "target": "papers/HINC-001/evidence/local-test-log.txt"
+        },
+        {
+          "source": "source-records/HINC-001/export-19-local-fresh-copy-log-txt",
+          "target": "papers/HINC-001/evidence/local-fresh-copy-log.txt"
+        }
+      ],
+      "private_source_identifier_withheld": true
     },
     {
       "repository": "novakprotocol/novak-sdt",
       "commit": "d7751d1de76253407016ef4bf92738cffa800e82",
       "role": "publicly compiled Lean source for the base kernel and principal coefficient classifications",
       "files": [
-        {"source": "formal/hinc-lean-kernel-v1/HINC.lean", "target": "papers/HINC-001/formal/HINC.lean"},
-        {"source": "formal/hinc-lean-kernel-v1/HINC/Core.lean", "target": "papers/HINC-001/formal/HINC/Core.lean"},
-        {"source": "formal/hinc-lean-kernel-v1/HINC/Classification.lean", "target": "papers/HINC-001/formal/HINC/Classification.lean"},
-        {"source": "formal/hinc-lean-kernel-v1/lakefile.lean", "target": "papers/HINC-001/formal/lakefile.lean"},
-        {"source": "formal/hinc-lean-kernel-v1/lean-toolchain", "target": "papers/HINC-001/formal/lean-toolchain"}
+        {
+          "source": "formal/hinc-lean-kernel-v1/HINC.lean",
+          "target": "papers/HINC-001/formal/HINC.lean"
+        },
+        {
+          "source": "formal/hinc-lean-kernel-v1/HINC/Core.lean",
+          "target": "papers/HINC-001/formal/HINC/Core.lean"
+        },
+        {
+          "source": "formal/hinc-lean-kernel-v1/HINC/Classification.lean",
+          "target": "papers/HINC-001/formal/HINC/Classification.lean"
+        },
+        {
+          "source": "formal/hinc-lean-kernel-v1/lakefile.lean",
+          "target": "papers/HINC-001/formal/lakefile.lean"
+        },
+        {
+          "source": "formal/hinc-lean-kernel-v1/lean-toolchain",
+          "target": "papers/HINC-001/formal/lean-toolchain"
+        }
       ]
     }
   ],

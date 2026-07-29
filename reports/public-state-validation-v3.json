@@ -1,0 +1,8 @@
+{
+  "error_count": 0,
+  "findings": [],
+  "private_reference_findings": 0,
+  "result": "PASS",
+  "root": "<repo>",
+  "schema_version": "n.human_ai_mathematics.public_state_validation.v3"
+}

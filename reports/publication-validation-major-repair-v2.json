@@ -1,0 +1,16 @@
+{
+  "error_count": 0,
+  "findings": [],
+  "inventory": {
+    "file_count": 352,
+    "hinc_status_sha256": "9bc102b3cdf4ac05ba0c7a3c796bb50842cca5b5ce9452b6c2345139e0f529ee",
+    "research_index_sha256": "906e83bcfc1af5df5adf7072db89be7a9c9d5852dc11ab76f4503ac2a70a2369",
+    "scan_excluded_paths": [],
+    "text_file_count": 218,
+    "total_bytes": 7361714
+  },
+  "result": "PASS",
+  "root": "<repo>",
+  "schema_version": "n.human_ai_mathematics.validation.v1",
+  "warning_count": 0
+}
