@@ -1,73 +1,87 @@
 {
   "$schema": "../../schemas/paper-status.schema.json",
-  "claim": {
-    "globally_novel": "unestablished",
-    "level": 6,
-    "security_consequence": "not_claimed",
-    "status": "candidate theorem and exact finite classification open for public technical review"
-  },
-  "computation": {
-    "independent_status": "two separately written internal implementations PASS; historical C PASS",
-    "primary_status": "PASS",
-    "receipts": [
-      "evidence/receipts/fresh-validation.json",
-      "evidence/historical/local-proof-v32.json"
-    ],
-    "role": "reconstruct and classify the specified finite map; computations support but do not replace the general proof"
-  },
-  "formal_verification": {
-    "assistant": null,
-    "receipts": [],
-    "status": "not formalized",
-    "unverified_scope": [
-      "general moment-kernel theorem",
-      "finite rank and incidence certificates",
-      "full manuscript"
-    ],
-    "verified_scope": []
-  },
-  "limitations": [
-    "reduced finite map only",
-    "no full-width security claim",
-    "no external institutional reproduction",
-    "no proof-assistant verification",
-    "global historical priority unestablished",
-    "public GitHub release is not peer review"
-  ],
-  "paper_id": "ABF-001",
-  "proof": {
-    "dependency_map": "PROOF_MAP.md",
-    "human_proof_status": "self-contained complete human proof; final hostile review reports zero release blockers",
-    "known_gaps": [
-      "no proof-assistant formalization",
-      "external specialist review pending"
-    ]
-  },
-  "release": {
-    "public_authorized": true,
-    "public_switch_ready": true,
-    "channel": "public_review",
-    "version": "0.1.0-public-review",
-    "release_date": "2026-07-28",
-    "doi": null,
-    "specific_model_disclosed": false,
-    "specific_provider_disclosed": false
-  },
-  "review": {
-    "external": "pending; requested by public release",
-    "historical_priority": "unestablished; no exact indexed match located in the recorded search",
-    "internal": "final hostile review bound to the frozen mathematical source reports zero blocking findings",
-    "peer_review": "not submitted"
-  },
   "schema_version": "n.human_ai_mathematics.paper_status.v1",
+  "paper_id": "ABF-001",
+  "title": "Affine Restriction Moment Kernels and Radical Incidence Geometry of a Vectorial Boolean Map",
   "source": {
+    "repository": "novakprotocol/N-Human-AI-Mathematics",
     "commit": "45dbf87cb4a46dcbbce690da7a22cdd7f88cb052",
     "paths": [
       "papers/ABF-001/manuscript/ABF-001_MANUSCRIPT.md",
       "papers/ABF-001/src/abf001_verifier.py",
       "papers/ABF-001/src/abf001_independent_bitset.py"
-    ],
-    "repository": "novakprotocol/N-Human-AI-Mathematics"
+    ]
   },
-  "title": "Affine Restriction Moment Kernels and Radical Incidence Geometry of a Vectorial Boolean Map"
+  "claim": {
+    "level": 6,
+    "status": "human candidate theorem and exact finite classification preserved as a public historical artifact; active theorem status suspended pending complete manuscript Lean verification",
+    "globally_novel": "unestablished",
+    "security_consequence": "not_claimed"
+  },
+  "proof": {
+    "human_proof_status": "self-contained complete human candidate proof; final hostile review reports zero release blockers for the human/computational package",
+    "dependency_map": "PROOF_MAP.md",
+    "known_gaps": [
+      "A02 Reed-Muller duality and degree criterion are not formalized",
+      "A03 affine coordinates and complete moment spaces are not formalized",
+      "A04 order-zero signature and radical classification are not formalized",
+      "A05 order-one matrix pencil and affine-parameter identity are not formalized",
+      "A06 proof-connected complete 16-to-8 atlas is not formalized",
+      "the complete manuscript claim-to-declaration map is incomplete",
+      "external specialist review is pending"
+    ]
+  },
+  "computation": {
+    "role": "reconstruct and classify the specified finite map; computations support but do not replace the general proof or complete formalization",
+    "primary_status": "PASS",
+    "independent_status": "two separately written internal implementations PASS; historical C PASS",
+    "receipts": [
+      "evidence/receipts/fresh-validation.json",
+      "evidence/historical/local-proof-v32.json"
+    ]
+  },
+  "formal_verification": {
+    "assistant": "Lean 4.30.0 with Mathlib 4.30.0",
+    "status": "PARTIAL_PASS_FULL_MANUSCRIPT_REQUALIFICATION_HOLD",
+    "full_manuscript_lean_verified": false,
+    "claim_map_complete": false,
+    "receipts": [
+      "papers/ABF-001/formal/evidence/ABF001_A01_LEAN_BUILD_RECEIPT.json"
+    ],
+    "verified_scope": [
+      "A01 bidual moment-kernel bridge: annihilation of displayed moment generators iff annihilation of their span iff the compatible affine-parameter moment map sends q to zero"
+    ],
+    "unverified_scope": [
+      "A02 Reed-Muller duality and the degree/coefficient criterion",
+      "A03 affine-hyperplane coordinates and complete moment-space construction",
+      "A04 order-zero signature and rank-one radical classification",
+      "A05 order-one alternating matrix pencil and affine-parameter identity",
+      "A06 exact truth table through all masks, restrictions, ranks, kernels, exact counts, and incidence atlas",
+      "full manuscript"
+    ]
+  },
+  "review": {
+    "internal": "final hostile review bound to the frozen mathematical source reports zero blocking findings for the human/computational package",
+    "external": "pending",
+    "historical_priority": "unestablished; no exact indexed match located in the recorded search",
+    "peer_review": "not submitted"
+  },
+  "release": {
+    "public_authorized": false,
+    "public_switch_ready": false,
+    "channel": "public_archive_full_lean_requalification_hold",
+    "historical_version": "0.1.0-public-review",
+    "historical_release_date": "2026-07-28",
+    "doi": null,
+    "specific_model_disclosed": false,
+    "specific_provider_disclosed": false
+  },
+  "limitations": [
+    "The historical public artifact is preserved for provenance but is not an active theorem package under the 29 July 2026 owner rule.",
+    "The A01 Lean PASS is genuine but does not prove Reed-Muller duality, the degree-drop criterion, the complete finite classification, or the exact incidence counts.",
+    "The finite result is for the specified reduced map and does not claim a full-width security break.",
+    "External specialist review and independent outside reproduction are pending.",
+    "Global historical priority is unestablished.",
+    "Public GitHub visibility is not peer review."
+  ]
 }
