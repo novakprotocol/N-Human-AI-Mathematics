@@ -30,7 +30,7 @@ def epsilon (R : Type*) [CommRing R] : DualNumber R :=
 characteristic two. -/
 theorem epsilon_boundary_cancel (x : DualNumber R) :
     epsilon R * x + x * epsilon R = 0 := by
-  ext <;> simp [epsilon, CharTwo.add_self]
+  ext <;> simp [epsilon, CharTwo.add_self_eq_zero]
 
 /-- Evaluation of the normalized differential on the unique basis tensor after
 all interior `epsilon^2` terms have vanished. -/
@@ -66,7 +66,7 @@ def epsilonCoefficient : DualNumber R →ₗ[R] R :=
 theorem epsilonCoefficient_mul (x y : DualNumber R) :
     epsilonCoefficient (x * y) =
       x.fst * epsilonCoefficient y + y.fst * epsilonCoefficient x := by
-  rfl
+  simp [epsilonCoefficient, TrivSqZeroExt.snd_mul, mul_comm]
 
 #print axioms epsilon_sq
 #print axioms epsilon_boundary_cancel
