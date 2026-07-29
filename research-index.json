@@ -2,6 +2,7 @@
   "$schema": "./schemas/research-index.schema.json",
   "schema_version": "n.human_ai_mathematics.research_index.v1",
   "repository": "novakprotocol/N-Human-AI-Mathematics",
+  "repository_visibility_required": "public",
   "accountable_owner": "Matthew S. Novak",
   "operating_mode": "human-led-ai-assisted",
   "public_release_authorized": false,
