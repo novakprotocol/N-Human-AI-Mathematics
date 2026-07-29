@@ -18,13 +18,17 @@
     },
     "ABF-001": {
       "public_state": "ACTIVE_CANDIDATE_TECHNICAL_REVIEW",
-      "formal_status": "NOT_STARTED",
-      "proof_assistant_project_present": false,
+      "formal_status": "PARTIAL_PASS",
+      "proof_assistant_project_present": true,
+      "compiled_bounded_lanes": [
+        "A01_bidual_moment_kernel"
+      ],
       "human_candidate_proof_present": true,
       "computational_verification_present": true,
       "claim_map_complete": false,
+      "unresolved_formal_scope": true,
       "full_manuscript_lean_verified": false,
-      "public_release_with_no_formal_pass_claim_remains_valid": true
+      "public_release_with_bounded_formal_boundary_remains_valid": true
     },
     "FSG-001": {
       "public_state": "PRIVATE_RELEASE_EDGE_TEACHING_PREVIEW",
