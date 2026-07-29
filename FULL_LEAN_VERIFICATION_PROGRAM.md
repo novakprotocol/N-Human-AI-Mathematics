@@ -75,17 +75,26 @@ Any missing condition leaves the result at `PARTIAL`, `BOOTSTRAP`, `HOLD`, or
 
 ```text
 public state:                     active candidate technical review
-compiled Lean boundary:           algebraic kernel and principal coefficient laws
+proof-assistant project:          Lean 4.30.0 / Mathlib 4.30.0
+compiled Lean boundary:           H01 algebraic kernel
+                                  H02 coefficient classification
+                                  H03 dual-number Hochschild foundation
 full revised manuscript:          not formalized
 formal status:                    PARTIAL_PASS
 fully Lean-verified:              no
 ```
 
-The next formal lanes are the normalized Hochschild calculation, complete source
-algebras, odd presentation normal form, generator-to-global bracket extension,
-natural representability, coordinate bialgebras, clopen decomposition, complete
-scheme centers, fppf-derived subgroup/abelianization, and the remaining geometric
-and arithmetic consequences.
+The compiled H03 lane establishes the square-zero generator, characteristic-two
+boundary cancellation, represented normalized-differential vanishing, represented
+cup associativity, and the epsilon-coefficient product rule. It does not yet
+construct the complete normalized cochain complex, insertion operation, closed
+Gerstenhaber bracket formula, or generator-to-global extension.
+
+The remaining formal lanes are the complete normalized Hochschild/bracket
+calculation, complete source algebras, odd presentation normal form,
+generator-to-global bracket extension, natural representability, coordinate
+bialgebras, clopen decomposition, complete scheme centers, fppf-derived
+subgroup/abelianization, and the remaining geometric and arithmetic consequences.
 
 ### ABF-001
 
@@ -161,7 +170,7 @@ and `all claims machine-checked` are prohibited for a non-`FULL_PASS` paper.
 ## Release decision
 
 ```text
-HINC-001: remain active with bounded formal boundary
+HINC-001: remain active with bounded H01-H03 formal PASS
 ABF-001:  remain active with bounded A01 formal PASS
 FSG-001:  HOLD under the selected full-Lean gold standard
 ACM-001:  HOLD pending consolidation and full formalization
