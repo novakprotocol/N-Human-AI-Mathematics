@@ -2,6 +2,8 @@
 
 Effective 29 July 2026, the accountable owner requires every retained mathematical claim in a released theorem package to be covered by compiled Lean before that package is treated as active.
 
+This is a **full-manuscript Lean** requirement: bounded samples, selected kernels, downstream normal forms, and unconnected computational receipts do not qualify as complete coverage.
+
 ## Required result
 
 A paper may be marked `ACTIVE_PUBLIC_REVIEW` only when all of the following hold for one exact frozen source identity:
