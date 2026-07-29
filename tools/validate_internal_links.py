@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Validate local HTML links, fragment IDs, and duplicate IDs."""
 
 from __future__ import annotations

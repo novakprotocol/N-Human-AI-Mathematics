@@ -1,4 +1,4 @@
-﻿name: Validate repository status consistency
+name: Validate repository status consistency
 
 on:
   pull_request:

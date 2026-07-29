@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Run the publication validator for the corrected current public-review state."""
 
 from __future__ import annotations
