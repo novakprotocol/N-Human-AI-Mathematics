@@ -1,171 +1,131 @@
 # Full-portfolio Lean verification program
 
-## Owner-selected standard
+## Controlling rule
 
-The portfolio now uses one fail-closed gold standard for the mathematical claims
-presented on the public research and learning pages:
+Effective 29 July 2026, the accountable owner requires a complete-manuscript Lean `FULL_PASS` before any theorem package is classified as active.
 
-> A paper may be described as **fully Lean-verified** only when every theorem,
-> lemma, structural equivalence, finite classification, and imported mathematical
-> dependency used by its controlling manuscript has an exact compiled declaration
-> or an explicitly identified imported theorem, with a complete claim-to-
-> declaration map and no unresolved formal scope.
+> A paper reaches `FULL_PASS` only when every retained theorem, lemma, equation, structural equivalence, exact finite classification, boundary case, and imported mathematical dependency used by the controlling manuscript maps to compiled Lean declarations or exact documented imported theorems, with zero unresolved formal scope.
 
-This policy does not retroactively relabel bounded verification as full proof. It
-also does not withdraw HINC-001 or ABF-001 from public technical review. Their
-current public packages remain valid under their stated bounded boundaries while
-the stronger formalization program proceeds.
+The historical HINC-001 and ABF-001 public releases remain accessible for chronology, correction, and review. Their active theorem status is suspended while complete-manuscript requalification proceeds. FSG-001 remains private. ACM-001 remains blocked until papers 1–3 align.
 
-FSG-001 and ACM-001 are not eligible for a new public mathematical release under
-this owner-selected standard until their complete controlling manuscripts satisfy
-the gold gate.
+This file and `FULL_LEAN_RELEASE_STANDARD.md` are controlling together. Where an older release record conflicts with them, the 29 July 2026 hold and correction records control current status.
 
 ## What Lean can and cannot establish
 
-Lean can kernel-check formal statements, definitions, reductions, calculations,
-and proofs inside an exact toolchain and dependency graph. It can also check a
-finite classification when the declared finite universe and the computation are
-connected to a proof-producing or kernel-evaluated declaration.
+Lean can kernel-check formal statements, definitions, reductions, calculations, certificates, and proofs inside an exact toolchain and dependency graph. It can check a finite classification when the declared universe and computation are connected to proof-producing or kernel-evaluated declarations.
 
 Lean does not by itself establish:
 
-- that the formal statement faithfully captures the intended prose theorem;
+- that the encoded theorem faithfully matches the intended manuscript;
 - historical priority or worldwide novelty;
 - significance or publication value;
-- independent reproduction;
-- peer review, journal acceptance, or correctness of external factual claims.
+- independent outside reproduction;
+- external correctness review;
+- peer review or journal acceptance.
 
-Those remain separate review gates.
+Those remain separate gates.
 
-## Mandatory gold gate
+## Mandatory FULL_PASS gate
 
-For each paper `P`, the formal receipt must establish all of the following:
+For each paper `P`, the accepted formal receipt must establish:
 
-1. **Exact source identity** — controlling manuscript, formal source commit,
-   Lean toolchain, Lake version, Mathlib revision, and dependency manifest.
-2. **Complete claim map** — every mathematical claim in the controlling
-   manuscript maps to one or more compiled declarations or to an exact imported
-   theorem with its use documented.
-3. **No placeholders** — zero `sorry`, zero `admit`, zero project `axiom`
-   declarations used to assume a project result, and no `sorryAx` in the build.
-4. **Axiom report** — every remaining kernel axiom dependency is recorded and
-   compared against an explicit allowlist.
-5. **Literal-source bridge** — formalization begins from the paper's actual
-   objects and hypotheses, not merely from a downstream matrix, count, or normal
-   form that assumes the difficult bridge.
-6. **Universal/finite separation** — universal theorems receive universal
-   proofs; finite claims receive complete exact finite declarations over the
-   stated universe. Numerical spot checks are never substituted for a universal
-   proof.
-7. **Clean immutable build** — a fresh exact-head build completes without
-   timeout, skipped required declaration, missing log, or accepted partial
-   output.
-8. **Fidelity review** — a human mathematical reviewer checks that formal
-   statements match the controlling manuscript and that no hypothesis or
-   conclusion was weakened silently.
-9. **Machine-readable receipt** — result `FULL_PASS`, unresolved claim count
-   zero, and `full_manuscript_lean_verified: true`.
+1. **Frozen source identity** — one controlling manuscript, formal source commit, Lean toolchain, Lake version, Mathlib revision, and committed dependency manifest.
+2. **Complete claim inventory** — every retained theorem, lemma, corollary, formula, exact count, asymptotic statement, and boundary case has a stable claim ID.
+3. **Complete claim map** — every claim maps to compiled declarations or exact imported theorems, with unresolved claims equal to zero.
+4. **Literal-source bridge** — the formalization starts from the manuscript’s actual objects and hypotheses, not a downstream matrix, table, count, or normal form that assumes the hardest step.
+5. **Universal/finite separation** — universal claims have universal proofs; finite claims cover the complete stated finite universe.
+6. **No placeholders** — zero `sorry`, zero `admit`, zero project axioms used to assume project results, and no `sorryAx`.
+7. **Axiom audit** — every exported theorem has a retained `#print axioms` report checked against an explicit allowlist.
+8. **Trusted-code audit** — any use of `native_decide`, `bv_decide`, `trustCompiler`, `implemented_by`, `extern`, unsafe code, or custom metaprogramming is disclosed and bounded.
+9. **Immutable build** — a fresh exact-head build uses the committed manifest and completes without timeout, skipped stage, or dependency mutation.
+10. **Independent kernel validation** — controlling modules are replayed by the selected checker program and any required trusted-challenge comparison.
+11. **Fidelity review** — a mathematically qualified reviewer compares manuscript and Lean definitions, hypotheses, quantifiers, boundary cases, and conclusions.
+12. **Machine receipt** — result `FULL_PASS`, unresolved formal claims `0`, fidelity blockers `0`, and `full_manuscript_lean_verified: true`.
 
-Any missing condition leaves the result at `PARTIAL`, `BOOTSTRAP`, `HOLD`, or
-`FAIL`; it may not be rounded up.
+Any missing condition leaves the result at `PARTIAL_PASS`, `PARTIAL_BOOTSTRAP_PASS`, `HOLD`, `BLOCKED`, or `FAIL`. No rounding up is allowed.
 
 ## Current portfolio status
 
 ### HINC-001
 
 ```text
-public state:                     active candidate technical review
-compiled Lean boundary:           algebraic kernel and principal coefficient laws
-full revised manuscript:          not formalized
+public state:                     historical public artifact
+active theorem state:             suspended pending full Lean
+compiled Lean lanes:              H01, H02, H03 bounded PASS
+remaining lanes:                  H04–H09
 formal status:                    PARTIAL_PASS
-fully Lean-verified:              no
+full manuscript Lean verified:    no
 ```
 
-The next formal lanes are the normalized Hochschild calculation, complete source
-algebras, odd presentation normal form, generator-to-global bracket extension,
-natural representability, coordinate bialgebras, clopen decomposition, complete
-scheme centers, fppf-derived subgroup/abelianization, and the remaining geometric
-and arithmetic consequences.
+Required completion includes the complete normalized Hochschild cochain and Gerstenhaber-bracket construction, presented source algebras, odd normal form, generator-to-global extension, representability and bialgebras, complete scheme centers, clopen decomposition, fppf-derived subgroup and abelianization, and all retained geometric, idempotent, tangent, counting, and zeta consequences.
 
 ### ABF-001
 
 ```text
-public state:                     active candidate technical review
-proof-assistant project:          Lean 4.30.0 / Mathlib 4.30.0
-compiled Lean boundary:           A01 bidual moment-kernel bridge
-human proof:                      complete candidate
-computational evidence:           extensive
+public state:                     historical public artifact
+active theorem state:             suspended pending full Lean
+compiled Lean lane:               A01 bidual moment-kernel bridge
+remaining lanes:                  A02–A06
 formal status:                    PARTIAL_PASS
-fully Lean-verified:              no
+full manuscript Lean verified:    no
 ```
 
-The compiled A01 lane proves the abstract equivalence between annihilating the
-moment generators, annihilating their generated span, and lying in the kernel of
-a compatible affine-parameter moment map. It does not prove the Reed--Muller
-degree criterion or the finite atlas.
-
-The remaining formal order is Reed--Muller duality, affine-hyperplane
-coordinates, complete moment spaces, the degree-drop criterion, order-zero
-signature, order-one matrix identity, and proof-connected finite rank/kernel
-certificates for the complete declared atlas.
+Required completion includes Reed–Muller duality and the degree criterion; affine-hyperplane coordinates and complete moment spaces; order-zero signature and radical classification; order-one matrix-pencil identity; and a proof-connected complete 16-to-8 atlas from the exact map through all masks, restrictions, ranks, kernels, counts, and incidence data.
 
 ### FSG-001
 
 ```text
-public state:                     private release-edge teaching preview
-formal project:                   private gold-standard bootstrap
-compiled complete manuscript:     no
-clean immutable execution:        not yet passed
-formal status:                    BOOTSTRAP_COMPILE_PENDING
-fully Lean-verified:              no
+public state:                     private
+bootstrap exact head:             462395ad89ee3fa20b1fccd4ecf86c15dd156879
+compiled bootstrap:               Fibonacci foundation and literal adjacency
+formal status:                    PARTIAL_BOOTSTRAP_PASS
+remaining lanes:                  F01–F07
+clean immutable execution:        not yet accepted
+full manuscript Lean verified:    no
 public mathematical release:      HOLD
 ```
 
-The required lanes are Fibonacci/Lucas identities; literal graph, boundary cases,
-connectedness, and reduced Laplacian; integral graph-to-3x3 cokernel equivalence;
-trees, forests, gluing, and resistance; all Smith determinantal divisors; chip-
-class signature and original-vertex firing equivalence; and the complete
-arithmetic/CRT/density layer for every claim retained in the manuscript.
+Required completion includes complete Fibonacci and Lucas arithmetic; literal graph connectedness, degrees, and Laplacian; the integral graph-to-3×3 bridge; tree, forest, gluing, and resistance results; complete determinantal divisors and Smith factors; chip signatures and firing reconstruction; and the full valuation, CRT, torsion, Wall–Sun–Sun condition, and density layer. F03 and F05 are release-critical.
 
 ### ACM-001
 
 ```text
-public state:                     teaching preview / consolidation hold
+public state:                     teaching preview only
 controlling manuscript:           absent
 proof-assistant project:          absent
 formal status:                    BLOCKED_BY_CONSOLIDATION
-fully Lean-verified:              no
+full manuscript Lean verified:    no
 public mathematical release:      HOLD
 ```
 
-Formal work begins only after one controlling manuscript, exact map/source
-identity, complete finite-result ledger, and claim map are frozen. The expected
-lanes are the ANF coefficient code, support floor, all generalized support
-weights, minimizer uniqueness and non-nesting, matroid translation, and exact
-automorphism/stabilizer classification.
+ACM work begins only after papers 1–3 reach the same complete professional state and one ACM controlling manuscript, exact map identity, complete result ledger, overlap decision, correction ledger, and claim map are frozen.
 
 ## Public wording rule
 
-Until a paper has a `FULL_PASS` receipt, public wording must use one of these
-bounded forms:
+Until a paper has `FULL_PASS`, public wording may say:
 
 - `bounded Lean verification`;
 - `selected declarations compile in Lean`;
+- `partial formalization`;
 - `formalization in progress`;
 - `not fully formalized`;
-- `no proof-assistant verification`.
+- `historical public artifact on full-Lean requalification hold`.
 
-The phrases `formally proved`, `fully formalized`, `Lean-verified manuscript`,
-and `all claims machine-checked` are prohibited for a non-`FULL_PASS` paper.
+For a non-`FULL_PASS` paper, the following are prohibited:
+
+- `formally proved`;
+- `fully formalized`;
+- `Lean-verified manuscript`;
+- `all claims machine checked`;
+- `active theorem package` under the current owner rule.
 
 ## Release decision
 
 ```text
-HINC-001: remain active with bounded formal boundary
-ABF-001:  remain active with bounded A01 formal PASS
-FSG-001:  HOLD under the selected full-Lean gold standard
-ACM-001:  HOLD pending consolidation and full formalization
+HINC-001: public archive; PARTIAL_PASS; active status suspended
+ABF-001:  public archive; PARTIAL_PASS; active status suspended
+FSG-001:  private; PARTIAL_BOOTSTRAP_PASS; HOLD
+ACM-001:  BLOCKED until papers 1–3 reach FULL_PASS
 ```
 
-This policy changes no theorem, source identity, release asset, or historical-
-priority conclusion. It strengthens future release language and acceptance.
+This correction changes no theorem, historical source identity, or prior-art conclusion. It changes the current release classification and the work required before reactivation.

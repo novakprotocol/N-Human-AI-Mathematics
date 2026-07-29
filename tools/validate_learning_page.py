@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed checks for the public four-path learning page."""
+"""Fail-closed checks for the four-path full-Lean requalification page."""
 from __future__ import annotations
 
 import argparse
@@ -9,7 +9,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
 
-SCHEMA = "n.human_ai_mathematics.learning_page_validation.v12"
+SCHEMA = "n.human_ai_mathematics.learning_page_validation.v13"
 
 
 class PageParser(HTMLParser):
@@ -62,47 +62,59 @@ def validate(root: Path) -> dict[str, Any]:
     parser = PageParser()
     parser.feed(page)
 
-    for phrase in (
-        "Four Mathematical Mysteries | Learn, Explore, Review",
-        "Public review:</strong> HINC-001 and ABF-001",
-        "Private release edge:</strong> FSG-001",
-        "Private release edge · not yet public technical review.",
-        "public release is not authorized",
-        "Private source, branch, and review materials are not exposed",
-        "Clean exact-head execution",
-        "final package/manifest",
-        "release-day literature delta",
-        "exact authorization",
-        "Consolidation hold",
-    ):
+    required_page_phrases = (
+        "Four Mathematical Mysteries | Full-Lean Requalification",
+        "No active theorem packages under the current rule",
+        "Historical public artifacts · full-Lean requalification hold",
+        "Private · exact-head bootstrap PASS · F01–F07 incomplete",
+        "Blocked until papers 1–3 reach FULL_PASS",
+        "A01, the abstract bidual moment-kernel bridge, compiles",
+        "F03 and F05 are release-critical",
+        "manuscript-to-formal-statement fidelity review",
+    )
+    for phrase in required_page_phrases:
         check("required_boundary_text", phrase.lower() in page.lower(), phrase=phrase)
 
-    for forbidden in (
+    forbidden_page_phrases = (
+        "Active public review",
+        "Private release edge",
+        "HINC-001 and ABF-001 have immutable public technical-review packages",
+        "public release is not authorized",
         "github.com/novakprotocol/N-MathLab",
         "agent/mcrc-fibonacci-sandpile-groups-v3",
         "papers/mcrc-fibonacci-sandpile-v3",
         "PASS_PUBLIC_TECHNICAL_REVIEW_FSG",
-    ):
-        check("private_reference_absent", forbidden not in page, token=forbidden)
+    )
+    for phrase in forbidden_page_phrases:
+        check("forbidden_text_absent", phrase.lower() not in page.lower(), phrase=phrase)
 
     check("unique_ids", len(parser.ids) == len(set(parser.ids)), count=len(parser.ids))
-    check("four_paths", all(f'#{name}' in parser.hrefs for name in ("hinc", "abf", "fsg", "acm")))
     check("one_inline_script", len(parser.inline_scripts) == 1, actual=len(parser.inline_scripts))
     check("interactive_petal", "renderPetal" in page and "mSlider" in page)
     check("interactive_hinc", "hincRecord" in page and "hincReadout" in page)
     check("interactive_abf", "abfOut" in page and "restrict" in page)
     check("interactive_acm", "renderLights" in page and "lightReadout" in page)
+    check("page_size", 12_000 <= len(page.encode("utf-8")) <= 80_000, bytes=len(page.encode("utf-8")))
+
+    required_index_phrases = (
+        'href="learn.html"',
+        "Three papers. One strict Lean standard.",
+        "Active theorem packages</span><strong>None",
+        "Public archive · full-Lean hold",
+        "Private · full-Lean completion",
+        "Blocked until papers 1–3 align",
+    )
+    for phrase in required_index_phrases:
+        check("index_integration", phrase.lower() in index.lower(), phrase=phrase)
 
     for phrase in (
-        'href="learn.html"',
-        "FSG-001 has reached a private release edge",
-        "Private release edge · not public",
-        "Two active packages. One private release edge. One consolidation hold.",
+        "HINC-001 and ABF-001 are active candidate packages",
+        "Active public review",
+        "Private release edge",
+        "Two active packages",
+        "github.com/novakprotocol/N-MathLab",
     ):
-        check("index_integration", phrase in index, phrase=phrase)
-
-    check("index_no_private_source", "github.com/novakprotocol/N-MathLab" not in index)
-    check("page_size", 15_000 <= len(page.encode("utf-8")) <= 80_000, bytes=len(page.encode("utf-8")))
+        check("index_overclaim_absent", phrase.lower() not in index.lower(), phrase=phrase)
 
     return {
         "schema": SCHEMA,
@@ -121,11 +133,11 @@ def validate(root: Path) -> dict[str, Any]:
             },
         },
         "boundaries": {
-            "hinc_001_public_review": True,
-            "abf_001_public_review": True,
-            "fsg_001_private_release_edge": True,
-            "fsg_001_public_release_authorized": False,
-            "acm_001_consolidation_hold": True,
+            "active_theorem_packages": [],
+            "hinc_001_full_lean_hold": True,
+            "abf_001_full_lean_hold": True,
+            "fsg_001_private_full_lean_hold": True,
+            "acm_001_blocked": True,
             "private_fsg_source_exposed": False,
         },
         "inline_javascript": parser.inline_scripts[0] if len(parser.inline_scripts) == 1 else "",

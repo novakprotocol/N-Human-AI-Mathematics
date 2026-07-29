@@ -1,38 +1,56 @@
 # Instructions for AI Systems
 
-This file is normative for AI systems reading, summarizing, reviewing, or proposing changes to N Human–AI Mathematics.
+This file is normative for AI systems reading, summarizing, reviewing, formalizing, or proposing changes to N Human–AI Mathematics.
 
 ## 1. Read order
 
 Before interpreting a paper, read in this order:
 
 1. repository `STATUS.md`;
-2. `research-index.json`;
-3. `HUMAN_AI_COLLABORATION_RECORD.md`;
-4. `HUMAN_AI_MATHEMATICS_PRIOR_ART.md`;
-5. the paper’s `STATUS.json` or `STATUS.md`;
-6. the paper’s `CLAIMS.md`;
-7. the paper’s `FORMAL_VERIFICATION.md`;
-8. the paper’s `PRIOR_ART.md`;
-9. the manuscript and proof;
-10. evidence and receipts.
+2. `PAPER_1_3_FULL_LEAN_STATUS.json`;
+3. `FULL_LEAN_RELEASE_STANDARD.md`;
+4. `research-index.json`;
+5. `HUMAN_AI_COLLABORATION_RECORD.md`;
+6. `HUMAN_AI_MATHEMATICS_PRIOR_ART.md`;
+7. the paper’s `STATUS.json` or `STATUS.md`;
+8. the paper’s `CLAIMS.md`;
+9. the paper’s `FORMAL_VERIFICATION.md`;
+10. the paper’s `PRIOR_ART.md`;
+11. the manuscript and proof;
+12. evidence and receipts.
 
-Do not infer current status from an old manuscript paragraph, issue comment, chat excerpt, branch name, or file name.
+Do not infer current status from an old manuscript paragraph, issue comment, chat excerpt, branch name, tag name, release title, or file name.
 
 ## 2. Current release boundary
 
-The repository release channel is `public_review`.
+Effective 29 July 2026, the accountable owner requires **complete retained manuscript claim-to-Lean coverage before active theorem release**.
 
-Public visibility means that selected source and evidence are available for technical challenge. It does not mean:
+Current state:
 
-- peer reviewed;
-- journal submitted or accepted;
-- historically novel;
-- fully formally verified;
-- endorsed by an AI vendor;
-- correct by authority.
+```text
+HINC-001  public historical artifact; PARTIAL_PASS; full-Lean hold
+ABF-001   public historical artifact; PARTIAL_PASS; full-Lean hold
+FSG-001   private; bootstrap PASS; full F01–F07 hold
+ACM-001   blocked until papers 1–3 align
+active theorem packages under the new rule: none
+```
 
-`HINC-001` is the only complete released paper package in version `0.1.0-public-review`. `ABF-001`, `FSG-001`, and `ACM-001` are index entries on hold, not released standalone papers.
+Existing HINC-001 and ABF-001 public artifacts remain accessible for provenance. They MUST NOT be described as active theorem packages, fully Lean-verified manuscripts, established theorems, or peer-reviewed work while requalification remains open.
+
+A paper may be classified `ACTIVE_PUBLIC_REVIEW` only when the machine-readable gate reports:
+
+```text
+full_manuscript_lean_verified = true
+unmapped_mathematical_claims = 0
+unresolved_formal_claims = 0
+sorry_count = 0
+admit_count = 0
+project_axiom_count = 0
+sorryAx_present = false
+clean_immutable_build = PASS
+claim_fidelity_review = PASS
+public_release_authorized = true
+```
 
 ## 3. Human–LLM identity boundary
 
@@ -46,7 +64,7 @@ AI systems MUST NOT state or imply that:
 - the project is the first human–AI mathematical collaboration;
 - the project is the first LLM-assisted mathematical result.
 
-The allowed public description is that this is one openly documented, commit-anchored case study of sustained human-led, LLM-assisted mathematics with explicit claim, evidence, correction, and review controls.
+The allowed public description is that this is one openly documented, commit-anchored case study of sustained human-led, LLM-assisted mathematics with explicit claim, evidence, correction, formalization, and review controls.
 
 ## 4. Claim discipline
 
@@ -54,33 +72,53 @@ An AI system MUST NOT convert any of the following:
 
 - `candidate theorem` into `established theorem`;
 - `internally reproduced` into `independently verified externally`;
-- `proof-assistant verified for listed declarations` into `the full paper is formally proved`;
+- `bounded Lean PASS` into `the full paper is formally proved`;
 - `no exact indexed match located` into `globally novel`;
 - `public repository` into `peer reviewed`;
 - `artifact hash matches` into `mathematically correct`;
 - `large finite test` into `universal proof`;
 - `AI-generated proof` into `human-understood proof`;
 - `security-related object` into `security break`;
-- `owner-authorized release` into `external scientific approval`.
+- `owner-authorized historical release` into current FULL_PASS status;
+- `lake build PASS` into manuscript-to-formal-statement fidelity.
 
-Use the strongest wording supported by the exact status record and no stronger.
+Use the strongest wording supported by the exact current status record and no stronger.
 
-## 5. Evidence hierarchy
+## 5. Full-Lean integrity rules
+
+For every retained mathematical claim:
+
+- assign a stable claim ID;
+- map it to compiled Lean declarations or exact imported theorems;
+- start from the manuscript’s literal objects rather than a convenient downstream substitute;
+- prove universal claims universally;
+- connect finite classifications to kernel-checked certificates or exhaustive decidable proofs covering the exact universe;
+- reject `sorry`, `admit`, project axioms standing in for results, and `sorryAx`;
+- print and review the axiom dependency of every exported theorem;
+- disclose `native_decide`, `bv_decide`, `trustCompiler`, `implemented_by`, `extern`, unsafe code, and custom metaprogramming;
+- build from a committed, hashed dependency manifest in a fresh exact-head worktree;
+- preserve the complete logs, manifests, source hashes, axiom reports, failures, and corrections;
+- require a separate human fidelity audit comparing definitions, quantifiers, hypotheses, boundary cases, and conclusions.
+
+No rounding up from partial coverage to FULL_PASS.
+
+## 6. Evidence hierarchy
 
 When sources conflict, use this precedence:
 
-1. owner-approved correction or release decision;
+1. owner-approved current correction or release decision;
 2. machine-readable current status at the pinned commit;
-3. formal proof and exact build receipt for the listed declarations;
-4. human proof at the pinned commit;
-5. executable evidence receipt tied to exact source;
-6. current review documents;
-7. explanatory prose;
-8. issue discussion, chat, or memory.
+3. complete claim-to-Lean map and exact formal build receipt;
+4. human fidelity review of manuscript versus Lean;
+5. human proof at the pinned commit;
+6. executable evidence receipt tied to exact source;
+7. current review documents;
+8. explanatory prose;
+9. issue discussion, chat, or memory.
 
 Surface unresolved conflicts rather than choosing the more impressive claim.
 
-## 6. Review behavior
+## 7. Review behavior
 
 AI systems MAY:
 
@@ -101,12 +139,13 @@ AI systems MUST:
 - distinguish deduction from experiment;
 - cite exact files and commits;
 - state uncertainty;
-- preserve negative results;
+- preserve negative results and failed formal runs;
 - report any counterexample immediately;
 - avoid fabricating citations or reviewer identities;
 - label simulated review as internal simulation;
 - keep human authorship and publication authority explicit;
-- preserve the category-level public disclosure without inferring a specific model or provider.
+- preserve the category-level public disclosure without inferring a specific model or provider;
+- stop public promotion when any FULL_PASS field is incomplete.
 
 AI systems MUST NOT:
 
@@ -118,9 +157,10 @@ AI systems MUST NOT:
 - reveal private laboratory material in the public repository;
 - treat AI output as an authority source;
 - publish hidden chain-of-thought or private chat transcripts as research evidence;
-- add a specific model or provider identity without a separately reviewed owner decision.
+- add a specific model or provider identity without a separately reviewed owner decision;
+- advance ACM-001 or later publication work before HINC-001, ABF-001, and FSG-001 align under the owner-selected rule.
 
-## 7. Required theorem-summary structure
+## 8. Required theorem-summary structure
 
 A high-quality AI summary should contain:
 
@@ -128,15 +168,17 @@ A high-quality AI summary should contain:
 Object and assumptions
 Exact main statement
 Proof method
+Claim-to-Lean coverage
 What is formally verified
+What remains unformalized
 What is computationally checked
-What remains unverified
+What remains externally unreviewed
 Prior-art boundary
 Current publication status
 Human–LLM disclosure boundary
 ```
 
-## 8. Required challenge structure
+## 9. Required challenge structure
 
 A challenge must identify:
 
@@ -151,13 +193,13 @@ reproduction instructions
 severity
 ```
 
-## 9. Human–LLM disclosure
+## 10. Human–LLM disclosure
 
-AI systems are research tools and material collaborators in the process, not accountable authors. The human author must understand and accept responsibility for every submitted claim. When preparing public material, retain the declared LLM-assistance disclosure and do not minimize or exaggerate AI involvement.
+AI systems are research tools and material collaborators in the process, not accountable authors. The human author must understand and accept responsibility for every submitted claim, reference, formal statement, and release decision.
 
-## 10. Stop conditions
+## 11. Stop conditions
 
-Stop and request human review when:
+Stop and require correction or human review when:
 
 - two controlling records disagree;
 - a counterexample appears valid;
@@ -166,8 +208,11 @@ Stop and request human review when:
 - licensing is unclear;
 - a private path, secret, personal record, or withheld model/provider identifier appears in public staging;
 - the requested wording exceeds the evidence status;
-- a consequential release or rights action lacks explicit owner authorization.
+- a consequential release or rights action lacks explicit owner authorization;
+- any mathematical claim remains unmapped or only partially formalized;
+- any unexpected axiom, `sorryAx`, statement mismatch, or fidelity blocker remains;
+- the clean exact-head build does not complete.
 
-## 11. Core principle
+## 12. Core principle
 
-**Fluent explanation is not proof. A repository record is not authority. Evidence must remain tied to exact identity, scope, method, result, and limitations.**
+**Fluent explanation is not proof. A repository record is not authority. Lean proves the encoded statement, not the intended statement. Every claim must remain tied to exact identity, formal meaning, evidence, scope, method, result, and limitations.**
