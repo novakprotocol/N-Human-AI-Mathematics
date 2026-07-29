@@ -1,0 +1,98 @@
+name: Validate repository status consistency
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'STATUS.md'
+      - 'AGENTS.md'
+      - 'PUBLIC_REVIEW_RELEASE.md'
+      - 'PUBLIC_REVIEW_FORMALIZATION_HOLD_2026-07-29.md'
+      - 'FULL_LEAN_RELEASE_STANDARD.md'
+      - 'PAPER_1_3_FULL_LEAN_STATUS.json'
+      - 'formal-verification-status.json'
+      - 'research-index.json'
+      - 'papers/HINC-001/STATUS.json'
+      - 'papers/HINC-001/FORMAL_VERIFICATION.md'
+      - 'papers/ABF-001/STATUS.json'
+      - 'papers/ABF-001/FORMAL_VERIFICATION.md'
+      - 'papers/ABF-001/formal/FORMAL_STATUS_V1.json'
+      - 'docs/index.html'
+      - 'docs/learn.html'
+      - 'tools/validate_status_consistency.py'
+      - '.github/workflows/validate-status-consistency.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'STATUS.md'
+      - 'AGENTS.md'
+      - 'PUBLIC_REVIEW_RELEASE.md'
+      - 'PUBLIC_REVIEW_FORMALIZATION_HOLD_2026-07-29.md'
+      - 'FULL_LEAN_RELEASE_STANDARD.md'
+      - 'PAPER_1_3_FULL_LEAN_STATUS.json'
+      - 'formal-verification-status.json'
+      - 'research-index.json'
+      - 'papers/HINC-001/STATUS.json'
+      - 'papers/HINC-001/FORMAL_VERIFICATION.md'
+      - 'papers/ABF-001/STATUS.json'
+      - 'papers/ABF-001/FORMAL_VERIFICATION.md'
+      - 'papers/ABF-001/formal/FORMAL_STATUS_V1.json'
+      - 'docs/index.html'
+      - 'docs/learn.html'
+      - 'tools/validate_status_consistency.py'
+      - '.github/workflows/validate-status-consistency.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  consistency:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Validate publication and formal-state consistency
+        run: |
+          set -euo pipefail
+          mkdir -p .artifacts/status-consistency
+          python -m py_compile tools/validate_status_consistency.py
+          python tools/validate_status_consistency.py \
+            --root . \
+            --output .artifacts/status-consistency/validation.json \
+            | tee .artifacts/status-consistency/validation.stdout
+
+      - name: Validate JSON and whitespace
+        run: |
+          set -euo pipefail
+          python -m json.tool PAPER_1_3_FULL_LEAN_STATUS.json >/dev/null
+          python -m json.tool formal-verification-status.json >/dev/null
+          python -m json.tool research-index.json >/dev/null
+          python -m json.tool papers/HINC-001/STATUS.json >/dev/null
+          python -m json.tool papers/ABF-001/STATUS.json >/dev/null
+          python -m json.tool papers/ABF-001/formal/FORMAL_STATUS_V1.json >/dev/null
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            git fetch origin "${{ github.base_ref }}"
+            base="$(git merge-base "origin/${{ github.base_ref }}" HEAD)"
+            git diff --check "$base" HEAD --
+          elif git rev-parse HEAD^ >/dev/null 2>&1; then
+            git diff --check HEAD^ HEAD --
+          else
+            git diff --check --
+          fi
+
+      - name: Upload consistency receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: status-consistency-${{ github.sha }}
+          path: .artifacts/status-consistency/
+          if-no-files-found: error
+          retention-days: 90
