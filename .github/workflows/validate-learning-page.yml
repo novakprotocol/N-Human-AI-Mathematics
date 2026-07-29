@@ -1,0 +1,78 @@
+name: Validate four-path learning page
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/index.html'
+      - 'docs/learn.html'
+      - 'tools/validate_learning_page.py'
+      - '.github/workflows/validate-learning-page.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  learning-page:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate status, links, boundaries, and identities
+        run: |
+          mkdir -p .artifacts/learning-page-v12
+          python -m py_compile tools/validate_learning_page.py
+          python tools/validate_learning_page.py "$GITHUB_WORKSPACE" \
+            --output .artifacts/learning-page-v12/validation.json \
+            --javascript-output .artifacts/learning-page-v12/learn-inline.js \
+            > .artifacts/learning-page-v12/validation.stdout
+
+      - name: Check learning-page JavaScript syntax
+        run: node --check .artifacts/learning-page-v12/learn-inline.js
+
+      - name: Serve and fetch both public pages
+        run: |
+          python -m http.server 8765 --directory docs \
+            > .artifacts/learning-page-v12/http-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for attempt in {1..20}; do
+            curl -fsS http://127.0.0.1:8765/learn.html \
+              -o .artifacts/learning-page-v12/learn-fetched.html && break
+            sleep 0.25
+          done
+          curl -fsS http://127.0.0.1:8765/ \
+            -o .artifacts/learning-page-v12/index-fetched.html
+          cmp docs/learn.html .artifacts/learning-page-v12/learn-fetched.html
+          cmp docs/index.html .artifacts/learning-page-v12/index-fetched.html
+          grep -F 'Private release edge · not yet public technical review.' \
+            .artifacts/learning-page-v12/learn-fetched.html
+          grep -F 'href="learn.html"' \
+            .artifacts/learning-page-v12/index-fetched.html
+          if grep -Fq 'github.com/novakprotocol/N-MathLab' \
+            .artifacts/learning-page-v12/learn-fetched.html; then
+            echo 'Private FSG repository reference exposed.' >&2
+            exit 1
+          fi
+
+      - name: Check whitespace
+        run: git diff --check origin/main...HEAD
+
+      - name: Upload validation receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: learning-page-v12-${{ github.sha }}
+          path: .artifacts/learning-page-v12/
+          if-no-files-found: error
+          retention-days: 90
