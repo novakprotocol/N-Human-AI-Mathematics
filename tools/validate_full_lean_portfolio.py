@@ -10,6 +10,7 @@ from typing import Any
 
 SCHEMA = "n.human_ai_mathematics.full_lean_portfolio_validation.v1"
 STATUS_SCHEMA = "n.human_ai_mathematics.full_lean_portfolio.v1"
+ABF_STATUS_SCHEMA = "n.human_ai_mathematics.abf001.formal_status.v1"
 
 
 def sha256(path: Path) -> str:
@@ -21,8 +22,25 @@ def validate(root: Path) -> dict[str, Any]:
     policy_path = root / "FULL_LEAN_VERIFICATION_PROGRAM.md"
     hinc_path = root / "papers/HINC-001/FORMAL_VERIFICATION.md"
     abf_path = root / "papers/ABF-001/FORMAL_VERIFICATION.md"
+    abf_status_path = root / "papers/ABF-001/formal/FORMAL_STATUS_V1.json"
+    abf_root_path = root / "papers/ABF-001/formal/ABF.lean"
+    abf_lane_path = root / "papers/ABF-001/formal/ABF/MomentKernel.lean"
+    abf_toolchain_path = root / "papers/ABF-001/formal/lean-toolchain"
     index_path = root / "docs/index.html"
     learn_path = root / "docs/learn.html"
+
+    required_paths = (
+        status_path,
+        policy_path,
+        hinc_path,
+        abf_path,
+        abf_status_path,
+        abf_root_path,
+        abf_lane_path,
+        abf_toolchain_path,
+        index_path,
+        learn_path,
+    )
 
     failures: list[dict[str, Any]] = []
     checks: dict[str, int] = {}
@@ -32,10 +50,10 @@ def validate(root: Path) -> dict[str, Any]:
         if not condition:
             failures.append({"category": category, **context})
 
-    for path in (status_path, policy_path, hinc_path, abf_path, index_path, learn_path):
+    for path in required_paths:
         check("required_file", path.is_file(), path=str(path.relative_to(root)))
 
-    if not all(path.is_file() for path in (status_path, policy_path, hinc_path, abf_path, index_path, learn_path)):
+    if not all(path.is_file() for path in required_paths):
         return {
             "schema": SCHEMA,
             "result": "FAIL",
@@ -47,6 +65,9 @@ def validate(root: Path) -> dict[str, Any]:
     policy = policy_path.read_text(encoding="utf-8")
     hinc = hinc_path.read_text(encoding="utf-8")
     abf = abf_path.read_text(encoding="utf-8")
+    abf_status = json.loads(abf_status_path.read_text(encoding="utf-8"))
+    abf_root = abf_root_path.read_text(encoding="utf-8")
+    abf_lane = abf_lane_path.read_text(encoding="utf-8")
     index = index_path.read_text(encoding="utf-8")
     learn = learn_path.read_text(encoding="utf-8")
 
@@ -65,7 +86,7 @@ def validate(root: Path) -> dict[str, Any]:
 
     expected = {
         "HINC-001": ("PARTIAL_PASS", False),
-        "ABF-001": ("NOT_STARTED", False),
+        "ABF-001": ("PARTIAL_PASS", False),
         "FSG-001": ("BOOTSTRAP_COMPILE_PENDING", False),
         "ACM-001": ("BLOCKED_BY_CONSOLIDATION", False),
     }
@@ -84,6 +105,14 @@ def validate(root: Path) -> dict[str, Any]:
             paper_id=paper_id,
         )
 
+    abf_portfolio = status["portfolio"].get("ABF-001", {})
+    check("abf_project_present", abf_portfolio.get("proof_assistant_project_present") is True)
+    check(
+        "abf_compiled_lane",
+        abf_portfolio.get("compiled_bounded_lanes") == ["A01_bidual_moment_kernel"],
+    )
+    check("abf_scope_unresolved", abf_portfolio.get("unresolved_formal_scope") is True)
+
     check(
         "hinc_boundary",
         "The full revised manuscript is **not** formalized" in hinc,
@@ -92,12 +121,32 @@ def validate(root: Path) -> dict[str, Any]:
         "hinc_wording_rule",
         "Do not replace that with “HINC-001 is formally proved.”" in hinc,
     )
-    check("abf_no_assistant", "proof assistant:             none" in abf)
-    check("abf_no_pass", "formal PASS:                 no" in abf)
+
+    check("abf_status_schema", abf_status.get("schema") == ABF_STATUS_SCHEMA)
+    check("abf_partial_status", abf_status.get("status") == "PARTIAL_PASS")
     check(
-        "abf_boundary",
-        "No ABF-001 theorem is represented as formally verified." in abf,
+        "abf_a01_pass",
+        abf_status.get("lanes", {}).get("A01_bidual_moment_kernel") == "COMPILED_PASS",
     )
+    check("abf_not_full", abf_status.get("full_manuscript_lean_verified") is False)
+    check("abf_toolchain", abf_toolchain_path.read_text(encoding="utf-8").strip() == "leanprover/lean4:v4.30.0")
+    check("abf_root_import", "import ABF.MomentKernel" in abf_root)
+    for declaration in (
+        "generatorSpan_le_ker_iff",
+        "mem_ker_iff_coordinatesZero",
+        "bidual_moment_incidence",
+        "bidual_span_kernel_incidence",
+    ):
+        check("abf_required_declaration", f"theorem {declaration}" in abf_lane, declaration=declaration)
+    for forbidden in ("sorry", "admit", "axiom "):
+        check("abf_placeholder_absent", forbidden not in abf_lane, token=forbidden)
+
+    for phrase in (
+        "bounded formal PASS:             yes — A01 bidual moment-kernel bridge",
+        "full-manuscript formal PASS:     no",
+        "partially formalized candidate manuscript",
+    ):
+        check("abf_boundary", phrase in abf, phrase=phrase)
 
     for phrase in (
         "fully Lean-verified",
@@ -107,6 +156,7 @@ def validate(root: Path) -> dict[str, Any]:
         "Fidelity review",
         "FSG-001:  HOLD",
         "ACM-001:  HOLD",
+        "ABF-001:  remain active with bounded A01 formal PASS",
     ):
         check("policy_content", phrase.lower() in policy.lower(), phrase=phrase)
 
@@ -125,7 +175,7 @@ def validate(root: Path) -> dict[str, Any]:
         "Private release edge · not public",
         "Hold pending consolidation",
         "Lean verification</span><strong>Covers listed declarations—not the full manuscript",
-        "Formal verification</strong><span>Not completed or claimed",
+        "Formal verification</strong><span>Bounded A01 Lean PASS; full manuscript incomplete",
     ):
         check("public_boundary_present", required in index, phrase=required)
 
@@ -137,13 +187,13 @@ def validate(root: Path) -> dict[str, Any]:
         "failures": failures,
         "files": {
             str(path.relative_to(root)): {"sha256": sha256(path), "bytes": path.stat().st_size}
-            for path in (status_path, policy_path, hinc_path, abf_path, index_path, learn_path)
+            for path in required_paths
         },
         "portfolio_full_lean_verified": False,
         "papers_with_full_pass": [],
         "public_release_effect": {
             "HINC-001": "UNCHANGED_BOUNDED_PUBLIC_REVIEW",
-            "ABF-001": "UNCHANGED_PUBLIC_REVIEW_NO_FORMAL_PASS",
+            "ABF-001": "UNCHANGED_PUBLIC_REVIEW_BOUNDED_A01_PASS",
             "FSG-001": "HOLD",
             "ACM-001": "HOLD",
         },
