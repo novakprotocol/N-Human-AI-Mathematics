@@ -30,6 +30,8 @@ on:
       - 'tools/validate_internal_links.py'
       - 'tools/validate_public_surface_scan.py'
       - 'tools/test_public_status_mutations.py'
+      - 'tools/test_json_schema_negative_controls.py'
+      - 'tools/test_internal_link_negative_control.py'
       - 'requirements-validation.txt'
       - '.github/workflows/validate-status-consistency.yml'
   push:
@@ -61,6 +63,8 @@ on:
       - 'tools/validate_internal_links.py'
       - 'tools/validate_public_surface_scan.py'
       - 'tools/test_public_status_mutations.py'
+      - 'tools/test_json_schema_negative_controls.py'
+      - 'tools/test_internal_link_negative_control.py'
       - 'requirements-validation.txt'
       - '.github/workflows/validate-status-consistency.yml'
   workflow_dispatch:
@@ -94,9 +98,12 @@ jobs:
             tools/validate_json_schema.py \
             tools/validate_internal_links.py \
             tools/validate_public_surface_scan.py \
-            tools/test_public_status_mutations.py
+            tools/test_public_status_mutations.py \
+            tools/test_json_schema_negative_controls.py \
+            tools/test_internal_link_negative_control.py
           python tools/validate_status_consistency.py \
             --root . \
+            --scan-all \
             --output .artifacts/status-consistency/validation.json \
             | tee .artifacts/status-consistency/validation.stdout
           python tools/validate_json_schema.py \
@@ -107,6 +114,14 @@ jobs:
             --root . \
             --output .artifacts/status-consistency/internal-links.json \
             | tee .artifacts/status-consistency/internal-links.stdout
+          python tools/test_json_schema_negative_controls.py \
+            --root . \
+            --output .artifacts/status-consistency/json-schema-negative-controls.json \
+            | tee .artifacts/status-consistency/json-schema-negative-controls.stdout
+          python tools/test_internal_link_negative_control.py \
+            --root . \
+            --output .artifacts/status-consistency/internal-link-negative-control.json \
+            | tee .artifacts/status-consistency/internal-link-negative-control.stdout
           python tools/test_public_status_mutations.py \
             --root . \
             --output .artifacts/status-consistency/mutation-tests.json \

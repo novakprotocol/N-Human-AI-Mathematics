@@ -8,7 +8,7 @@ This ledger preserves bootstrap failures separately from successful evidence. A 
 
 **Effect:** execution stopped before the publication export was located.
 
-**Correction:** the guarded bootstrap now resolves `N-MathLab`, verifies its `origin`, and invokes Windows PowerShell 5.1 through `powershell.exe`.
+**Correction:** the guarded bootstrap now resolves `private research source`, verifies its `origin`, and invokes Windows PowerShell 5.1 through `powershell.exe`.
 
 **Status:** resolved.
 
@@ -26,7 +26,7 @@ This ledger preserves bootstrap failures separately from successful evidence. A 
 
 ## BSTR-CORR-003 — validator matched its own embedded MIT-license signature
 
-**Observed:** the full local materialization reached the publication validator after pinned N-MathLab and Lean sources were copied. The validator reported:
+**Observed:** the full local materialization reached the publication validator after pinned private research source and Lean sources were copied. The validator reported:
 
 ```text
 ERROR: tools/validate_publication.py:101: forbidden blanket MIT license text
@@ -65,9 +65,9 @@ A complete Windows PowerShell 5.1 rerun used bootstrap source commit:
 The run:
 
 - authenticated the `novakprotocol` GitHub account;
-- fetched the current N-MathLab bootstrap source;
+- fetched the current private research source bootstrap source;
 - created a detached worktree;
-- materialized the manuscript and verifier sources from N-MathLab commit `e6adac212150177d4afa56e643d37533a208693c`;
+- materialized the manuscript and verifier sources from a private research source with the private commit withheld;
 - materialized the Lean sources from `novak-sdt` commit `d7751d1de76253407016ef4bf92738cffa800e82`;
 - completed publication validation with zero errors and zero warnings;
 - created `novakprotocol/N-Human-AI-Mathematics` as a private repository;
@@ -103,7 +103,7 @@ The successful guarded local run above is the controlling bootstrap acceptance r
 
 ## Current merge and release boundary
 
-- N-MathLab bootstrap PR: `novakprotocol/N-MathLab#417`
+- private source bootstrap reference: identifier withheld
 - standalone repository created: **yes**
 - standalone visibility: **private**
 - standalone default branch: **main**

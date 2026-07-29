@@ -29,10 +29,12 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: Install HINC requirements
+      - name: Install validation and paper requirements
         run: |
           python -m pip install --disable-pip-version-check \
-            -r papers/HINC-001/requirements.txt
+            -r requirements-validation.txt \
+            -r papers/HINC-001/requirements.txt \
+            -r papers/ABF-001/requirements.txt
 
       - name: Compile validators and bounded HINC source
         run: |
@@ -47,6 +49,8 @@ jobs:
           python -m py_compile tools/validate_internal_links.py
           python -m py_compile tools/validate_public_surface_scan.py
           python -m py_compile tools/test_public_status_mutations.py
+          python -m py_compile tools/test_json_schema_negative_controls.py
+          python -m py_compile tools/test_internal_link_negative_control.py
           python -m py_compile papers/HINC-001/src/mcrc_hidden_infinitesimal_noncommutativity_standalone.py
           python -m py_compile papers/HINC-001/src/standalone_common_core_verifier.py
           python -m py_compile papers/HINC-001/tests/test_hinc_standalone.py
@@ -99,7 +103,27 @@ jobs:
             --output reports/full-lean-portfolio-validation-ci.json
           python tools/validate_status_consistency.py \
             --root . \
+            --scan-all \
             --output reports/status-consistency-validation-ci.json
+          python tools/validate_json_schema.py \
+            --root . \
+            --output reports/json-schema-validation-ci.json
+          python tools/test_json_schema_negative_controls.py \
+            --root . \
+            --output reports/json-schema-negative-controls-ci.json
+          python tools/validate_internal_links.py \
+            --root . \
+            --output reports/internal-link-validation-ci.json
+          python tools/test_internal_link_negative_control.py \
+            --root . \
+            --output reports/internal-link-negative-control-ci.json
+          python tools/test_public_status_mutations.py \
+            --root . \
+            --output reports/public-status-mutation-tests-ci.json \
+            --log reports/public-status-mutation-tests-ci.log
+          python tools/validate_public_surface_scan.py \
+            --root . \
+            --output reports/public-surface-scan-ci.json
           python tools/validate_learning_page.py . \
             --output reports/learning-page-validation-ci.json \
             --javascript-output .artifacts/publication/learn-inline.js
@@ -146,6 +170,13 @@ jobs:
             -s papers/HINC-001/tests \
             -p 'test_*.py' \
             -v 2>&1 | tee reports/hinc-test-log-ci.txt
+
+      - name: Run ABF bounded A01 tests
+        run: |
+          python -m unittest discover \
+            -s papers/ABF-001/tests \
+            -p 'test_*.py' \
+            -v 2>&1 | tee reports/abf-test-log-ci.txt
 
       - name: Verify deterministic HINC certificate identity
         run: |
@@ -196,6 +227,8 @@ jobs:
             reports/publication-gate-validation-ci.json
             reports/json-schema-validation-ci.json
             reports/internal-link-validation-ci.json
+            reports/internal-link-negative-control-ci.json
+            reports/json-schema-negative-controls-ci.json
             reports/public-surface-scan-ci.json
             reports/public-status-mutation-tests-ci.json
             reports/public-status-mutation-tests-ci.log

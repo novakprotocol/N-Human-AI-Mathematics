@@ -83,5 +83,20 @@
     "External specialist review and independent outside reproduction are pending.",
     "Global historical priority is unestablished.",
     "Public GitHub visibility is not peer review."
-  ]
+  ],
+  "status_controls": {
+    "public_state": "active_review",
+    "formal_state": "PARTIAL_PASS",
+    "bounded_formal_scope": "bounded_A01_Lean",
+    "compiled_lane": "A01",
+    "a02_a06_status": "incomplete",
+    "claim_map_complete": false,
+    "full_manuscript_lean_verified": false,
+    "external_specialist_review": "pending",
+    "historical_priority": "not_established",
+    "peer_review": "not_submitted",
+    "journal_status": "not_submitted",
+    "public_release_authorized": true,
+    "limitations_confirmed": true
+  }
 }

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This package requests correctness and equivalence review of a self-contained classification theorem. It does not ask the reviewer to endorse novelty, importance, or the wider N-MathLab programme.
+This package requests correctness and equivalence review of a self-contained classification theorem. It does not ask the reviewer to endorse novelty, importance, or the wider private research source programme.
 
 ## Main theorem under review
 

@@ -1,0 +1,6 @@
+ℹ [8475/8477] Replayed ABF.MomentKernel
+info: ABF/MomentKernel.lean:74:0: 'ABF.generatorSpan_le_ker_iff' depends on axioms: [propext, Quot.sound]
+info: ABF/MomentKernel.lean:75:0: 'ABF.mem_ker_iff_coordinatesZero' depends on axioms: [propext, Quot.sound]
+info: ABF/MomentKernel.lean:76:0: 'ABF.bidual_moment_incidence' depends on axioms: [propext, Quot.sound]
+info: ABF/MomentKernel.lean:77:0: 'ABF.bidual_span_kernel_incidence' depends on axioms: [propext, Quot.sound]
+Build completed successfully (8477 jobs).

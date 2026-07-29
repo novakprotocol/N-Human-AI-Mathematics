@@ -1,0 +1,112 @@
+{
+  "failure_count": 0,
+  "negative_control_count": 7,
+  "negative_controls_passed": 7,
+  "records": [
+    {
+      "actual_error_count": 2,
+      "actual_errors": [
+        "instance=/papers/0/state; schema=/properties/papers/items/allOf/0/then/properties/state/const; message='active_review' was expected",
+        "instance=/papers/0/state; schema=/properties/papers/items/properties/state/enum; message='active_public_theorem' is not one of ['active_review', 'hold', 'archived_case_study', 'rejected', 'superseded', 'published']"
+      ],
+      "actual_result": "REJECTED",
+      "control_id": "JSC_NEG_01",
+      "expected_schema_path": "/properties/papers/items/properties/state/enum",
+      "expected_schema_path_present": true,
+      "expected_validation_error": "'active_public_theorem' is not one of",
+      "expected_validation_error_present": true,
+      "schema_file": "schemas/research-index.schema.json",
+      "synthetic_instance": "invalid paper state enum"
+    },
+    {
+      "actual_error_count": 1,
+      "actual_errors": [
+        "instance=/formal_verification; schema=/properties/formal_verification/required; message='claim_map_complete' is a required property"
+      ],
+      "actual_result": "REJECTED",
+      "control_id": "JSC_NEG_02",
+      "expected_schema_path": "/properties/formal_verification/required",
+      "expected_schema_path_present": true,
+      "expected_validation_error": "'claim_map_complete' is a required property",
+      "expected_validation_error_present": true,
+      "schema_file": "schemas/paper-status.schema.json",
+      "synthetic_instance": "missing required formal field"
+    },
+    {
+      "actual_error_count": 1,
+      "actual_errors": [
+        "instance=/formal_verification/full_manuscript_lean_verified; schema=/properties/formal_verification/properties/full_manuscript_lean_verified/type; message='false' is not of type 'boolean'"
+      ],
+      "actual_result": "REJECTED",
+      "control_id": "JSC_NEG_03",
+      "expected_schema_path": "/properties/formal_verification/properties/full_manuscript_lean_verified/type",
+      "expected_schema_path_present": true,
+      "expected_validation_error": "is not of type 'boolean'",
+      "expected_validation_error_present": true,
+      "schema_file": "schemas/paper-status.schema.json",
+      "synthetic_instance": "wrong full-manuscript Lean type"
+    },
+    {
+      "actual_error_count": 2,
+      "actual_errors": [
+        "instance=/status_controls/external_specialist_review; schema=/allOf/0/then/properties/status_controls/properties/external_specialist_review/const; message='pending' was expected",
+        "instance=/status_controls/external_specialist_review; schema=/properties/status_controls/properties/external_specialist_review/enum; message='complete' is not one of ['pending']"
+      ],
+      "actual_result": "REJECTED",
+      "control_id": "JSC_NEG_04",
+      "expected_schema_path": "/properties/status_controls/properties/external_specialist_review/enum",
+      "expected_schema_path_present": true,
+      "expected_validation_error": "'complete' is not one of",
+      "expected_validation_error_present": true,
+      "schema_file": "schemas/paper-status.schema.json",
+      "synthetic_instance": "unsupported external-review value"
+    },
+    {
+      "actual_error_count": 2,
+      "actual_errors": [
+        "instance=/status_controls/historical_priority; schema=/allOf/0/then/properties/status_controls/properties/historical_priority/const; message='not_established' was expected",
+        "instance=/status_controls/historical_priority; schema=/properties/status_controls/properties/historical_priority/enum; message='world_first' is not one of ['not_established']"
+      ],
+      "actual_result": "REJECTED",
+      "control_id": "JSC_NEG_05",
+      "expected_schema_path": "/properties/status_controls/properties/historical_priority/enum",
+      "expected_schema_path_present": true,
+      "expected_validation_error": "'world_first' is not one of",
+      "expected_validation_error_present": true,
+      "schema_file": "schemas/paper-status.schema.json",
+      "synthetic_instance": "unsupported historical-priority value"
+    },
+    {
+      "actual_error_count": 1,
+      "actual_errors": [
+        "instance=/status_controls/public_release_authorized; schema=/allOf/0/then/properties/status_controls/properties/public_release_authorized/const; message=True was expected"
+      ],
+      "actual_result": "REJECTED",
+      "control_id": "JSC_NEG_06",
+      "expected_schema_path": "/allOf/0/then/properties/status_controls/properties/public_release_authorized/const",
+      "expected_schema_path_present": true,
+      "expected_validation_error": "True was expected",
+      "expected_validation_error_present": true,
+      "schema_file": "schemas/paper-status.schema.json",
+      "synthetic_instance": "HINC active state paired with public authorization false"
+    },
+    {
+      "actual_error_count": 1,
+      "actual_errors": [
+        "instance=/papers/2/state; schema=/properties/papers/items/allOf/2/then/properties/state/const; message='hold' was expected"
+      ],
+      "actual_result": "REJECTED",
+      "control_id": "JSC_NEG_07",
+      "expected_schema_path": "/properties/papers/items/allOf/2/then/properties/state/const",
+      "expected_schema_path_present": true,
+      "expected_validation_error": "'hold' was expected",
+      "expected_validation_error_present": true,
+      "schema_file": "schemas/research-index.schema.json",
+      "synthetic_instance": "FSG active state paired with mathematical blocker true"
+    }
+  ],
+  "result": "PASS",
+  "schema": "n.human_ai_mathematics.json_schema_negative_controls.v1",
+  "validator_package": "jsonschema",
+  "validator_version": "4.26.0"
+}

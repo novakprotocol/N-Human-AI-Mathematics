@@ -14,9 +14,8 @@ Neither route replaces the human proof of the complete arbitrary-base manuscript
 ### Standalone manuscript and Python verifier
 
 ```text
-repository: novakprotocol/N-MathLab
-commit:     e6adac212150177d4afa56e643d37533a208693c
-PR:         #406
+source:     derived from a private research source
+identity:   private repository, commit, and review reference withheld
 ```
 
 ### Base formal kernel
@@ -29,7 +28,7 @@ public checker:          novakprotocol/novak-sdt PR #57
 ### Principal classification formal source
 
 ```text
-N-MathLab PR:            #416
+private source reference: identifier withheld
 public checker:          novakprotocol/novak-sdt PR #58
 ```
 

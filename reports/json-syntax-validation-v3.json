@@ -1,0 +1,53 @@
+﻿{
+    "schema":  "n.human_ai_mathematics.json_syntax_validation.v3",
+    "result":  "PASS",
+    "file_count":  9,
+    "failure_count":  0,
+    "records":  [
+                    {
+                        "file":  "research-index.json",
+                        "result":  "PASS",
+                        "error":  null
+                    },
+                    {
+                        "file":  "formal-verification-status.json",
+                        "result":  "PASS",
+                        "error":  null
+                    },
+                    {
+                        "file":  "PAPER_1_3_FULL_LEAN_STATUS.json",
+                        "result":  "PASS",
+                        "error":  null
+                    },
+                    {
+                        "file":  "papers/HINC-001/STATUS.json",
+                        "result":  "PASS",
+                        "error":  null
+                    },
+                    {
+                        "file":  "papers/ABF-001/STATUS.json",
+                        "result":  "PASS",
+                        "error":  null
+                    },
+                    {
+                        "file":  "papers/ABF-001/formal/FORMAL_STATUS_V1.json",
+                        "result":  "PASS",
+                        "error":  null
+                    },
+                    {
+                        "file":  "reports/publication-gates/HINC-001.json",
+                        "result":  "PASS",
+                        "error":  null
+                    },
+                    {
+                        "file":  "reports/publication-gates/ABF-001.json",
+                        "result":  "PASS",
+                        "error":  null
+                    },
+                    {
+                        "file":  "BOOTSTRAP_RECEIPT.json",
+                        "result":  "PASS",
+                        "error":  null
+                    }
+                ]
+}

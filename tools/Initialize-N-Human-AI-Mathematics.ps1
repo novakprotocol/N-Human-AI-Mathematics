@@ -3,6 +3,7 @@ param(
     [string]$Repository = "novakprotocol/N-Human-AI-Mathematics",
     [string]$BootstrapRef = "agent/n-human-ai-mathematics-publication-bootstrap-v1",
     [string]$OutputDirectory = (Join-Path $env:TEMP "N-Human-AI-Mathematics-Bootstrap"),
+    [string]$PrivateSourceRemotePattern = $env:NHAIM_PRIVATE_SOURCE_REMOTE_PATTERN,
     [switch]$SkipGitHubCreate,
     [switch]$KeepWorkDirectory
 )
@@ -246,16 +247,16 @@ if (-not $SkipGitHubCreate) {
         )
 }
 
-# tools/ -> N-Human-AI-Mathematics/ -> exports/ -> N-MathLab root
+# tools/ -> N-Human-AI-Mathematics/ -> exports/ -> private research source root
 $LabRepo = (Resolve-Path (Join-Path $PSScriptRoot "..\..\..")).Path
 if (-not (Test-Path -LiteralPath (Join-Path $LabRepo ".git"))) {
     throw @"
-The script must run from the N-MathLab export tree.
+The script must run from the private research source export tree.
 
 Expected a Git repository at:
   $LabRepo
 
-Do not run this script from N-LMS. Check out novakprotocol/N-MathLab first.
+Do not run this script from N-LMS. Check out the private research source first.
 "@
 }
 
@@ -267,12 +268,12 @@ $RemoteProbe = Invoke-NativeCapture `
     )
 
 if ($RemoteProbe.ExitCode -ne 0) {
-    throw "Unable to read the N-MathLab origin remote."
+    throw "Unable to read the private research source origin remote."
 }
 
 $RemoteUrl = (($RemoteProbe.Output | ForEach-Object { $_.ToString() }) -join "").Trim()
-if ($RemoteUrl -notmatch 'N-MathLab(?:\.git)?$') {
-    throw "The detected repository is not N-MathLab. origin=$RemoteUrl"
+if ($PrivateSourceRemotePattern -and $RemoteUrl -notmatch $PrivateSourceRemotePattern) {
+    throw "The detected private source repository does not match the caller-supplied remote policy."
 }
 
 Invoke-Native `
@@ -326,15 +327,14 @@ foreach ($Source in $Manifest.sources) {
     foreach ($File in $Source.files) {
         $Target = Join-Path $Stage ($File.target -replace '/', '\')
 
-        switch ($Source.repository) {
-            "novakprotocol/N-MathLab" {
-                Export-GitTextFile `
-                    -GitRepository $LabRepo `
-                    -Commit $Source.commit `
-                    -SourcePath $File.source `
-                    -TargetPath $Target
+        if ($Source.private_source_identifier_withheld -eq $true) {
+            if (-not (Test-Path -LiteralPath $Target -PathType Leaf)) {
+                throw "Expected staged private-source export target is missing: $Target"
             }
+            continue
+        }
 
+        switch ($Source.repository) {
             "novakprotocol/novak-sdt" {
                 if (-not $PublicCloneReady) {
                     Invoke-Native `
@@ -394,13 +394,14 @@ $Receipt = [ordered]@{
     created_utc = [DateTime]::UtcNow.ToString("o")
     bootstrap_ref = $BootstrapRef
     bootstrap_commit = $BootstrapCommit
-    manuscript_source_repository = "novakprotocol/N-MathLab"
-    manuscript_source_commit = "e6adac212150177d4afa56e643d37533a208693c"
+    manuscript_source_repository = "derived from a private research source"
+    manuscript_source_commit = $null
     formal_source_repository = "novakprotocol/novak-sdt"
     formal_source_commit = "d7751d1de76253407016ef4bf92738cffa800e82"
     public_visibility_authorized = $false
     license_applied = $false
     validation_receipt = "reports/publication-validation.json"
+    private_source_identifier_withheld = $true
 }
 
 Write-Utf8NoBom `

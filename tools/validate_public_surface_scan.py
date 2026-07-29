@@ -8,11 +8,11 @@ import json
 from dataclasses import asdict
 from pathlib import Path
 
-from public_status_checks import changed_text_files, credential_findings, private_reference_findings, validator_workflow_exclusion_findings
+from public_status_checks import credential_findings, private_reference_findings, tracked_text_files, validator_workflow_exclusion_findings
 
 
 def validate(root: Path) -> dict:
-    files = changed_text_files(root)
+    files = tracked_text_files(root)
     records = []
     findings = []
     for path in files:
@@ -29,7 +29,7 @@ def validate(root: Path) -> dict:
     payload = {
         'schema': 'n.human_ai_mathematics.public_surface_scan.v1',
         'result': 'PASS' if not findings else 'FAIL',
-        'changed_text_files_scanned': len(files),
+        'tracked_text_files_scanned': len(files),
         'credential_pattern_findings': len(credential),
         'personal_path_findings': len(personal),
         'private_reference_findings': len(private_reference),

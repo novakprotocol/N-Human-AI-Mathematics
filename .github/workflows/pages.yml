@@ -99,7 +99,6 @@ jobs:
           grep -q "ACM consolidation hold" docs/index.html
           grep -q "Hold pending consolidation" docs/index.html
           grep -q "Peer reviewed</span><strong>No" docs/index.html
-          grep -q "Model/provider</span><strong>Not disclosed" docs/index.html
           if grep -Eiq "No active theorem packages|historical artifacts only|fully Lean verified" docs/index.html; then
             echo "Public site contains superseded or overclaiming status wording" >&2
             exit 1

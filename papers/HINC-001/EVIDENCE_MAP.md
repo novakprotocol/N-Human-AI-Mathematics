@@ -6,10 +6,10 @@ This document maps each major claim to its human proof, computational evidence, 
 
 | Layer | Repository / source | Exact identity |
 |---|---|---|
-| Standalone manuscript and verifier | `novakprotocol/N-MathLab` PR #406 | `e6adac212150177d4afa56e643d37533a208693c` |
+| Standalone manuscript and verifier | derived from a private research source | private repository, commit, and review reference withheld |
 | Base Lean kernel source | public checker source | `8ccf90b05a0ab4fb45774e9dd8ba7b3c9a59cd8c` |
 | Principal classification Lean source | `novakprotocol/novak-sdt` PR #58 | `d7751d1de76253407016ef4bf92738cffa800e82` |
-| Clean publication staging | `novakprotocol/N-MathLab` export branch | current bootstrap branch head |
+| Clean publication staging | curated public export | current bootstrap branch head |
 
 ## Claim-to-evidence matrix
 

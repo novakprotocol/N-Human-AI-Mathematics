@@ -1,0 +1,998 @@
+{
+  "credential_pattern_findings": 0,
+  "findings": [],
+  "personal_path_findings": 0,
+  "private_branch_path_findings": 0,
+  "private_detector_literals": 0,
+  "private_reference_findings": 0,
+  "records": [
+    {
+      "file": ".github/ISSUE_TEMPLATE/counterexample.yml",
+      "finding_count": 0
+    },
+    {
+      "file": ".github/ISSUE_TEMPLATE/prior-art.yml",
+      "finding_count": 0
+    },
+    {
+      "file": ".github/ISSUE_TEMPLATE/proof-gap.yml",
+      "finding_count": 0
+    },
+    {
+      "file": ".github/ISSUE_TEMPLATE/reproduction.yml",
+      "finding_count": 0
+    },
+    {
+      "file": ".github/pull_request_template.md",
+      "finding_count": 0
+    },
+    {
+      "file": ".github/workflows/diagnose-abf-release-run.yml",
+      "finding_count": 0
+    },
+    {
+      "file": ".github/workflows/pages.yml",
+      "finding_count": 0
+    },
+    {
+      "file": ".github/workflows/patch-abf-release-env.yml",
+      "finding_count": 0
+    },
+    {
+      "file": ".github/workflows/release-abf-001-object-api.yml",
+      "finding_count": 0
+    },
+    {
+      "file": ".github/workflows/release-abf-001-object-tree.yml",
+      "finding_count": 0
+    },
+    {
+      "file": ".github/workflows/release-abf-001.yml",
+      "finding_count": 0
+    },
+    {
+      "file": ".github/workflows/validate-abf-lean.yml",
+      "finding_count": 0
+    },
+    {
+      "file": ".github/workflows/validate-full-lean-portfolio.yml",
+      "finding_count": 0
+    },
+    {
+      "file": ".github/workflows/validate-learning-page.yml",
+      "finding_count": 0
+    },
+    {
+      "file": ".github/workflows/validate-status-consistency.yml",
+      "finding_count": 0
+    },
+    {
+      "file": ".github/workflows/validate.yml",
+      "finding_count": 0
+    },
+    {
+      "file": "AGENTS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "BOOTSTRAP_CORRECTIONS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "BOOTSTRAP_RECEIPT.json",
+      "finding_count": 0
+    },
+    {
+      "file": "BOOTSTRAP_WINDOWS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "CITATION.cff",
+      "finding_count": 0
+    },
+    {
+      "file": "CLAIM_LEVELS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "finding_count": 0
+    },
+    {
+      "file": "CORRECTIONS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "docs/404.html",
+      "finding_count": 0
+    },
+    {
+      "file": "docs/index.html",
+      "finding_count": 0
+    },
+    {
+      "file": "docs/learn.html",
+      "finding_count": 0
+    },
+    {
+      "file": "docs/PUBLIC_SITE_ACTIVATION_2026-07-27.md",
+      "finding_count": 0
+    },
+    {
+      "file": "docs/styles.css",
+      "finding_count": 0
+    },
+    {
+      "file": "EVIDENCE_STANDARD.md",
+      "finding_count": 0
+    },
+    {
+      "file": "FINAL_PUBLIC_SWITCH.md",
+      "finding_count": 0
+    },
+    {
+      "file": "FINAL_PUBLIC_SWITCH_KIT.md",
+      "finding_count": 0
+    },
+    {
+      "file": "formal-verification-status.json",
+      "finding_count": 0
+    },
+    {
+      "file": "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md",
+      "finding_count": 0
+    },
+    {
+      "file": "FULL_LEAN_RELEASE_STANDARD.md",
+      "finding_count": 0
+    },
+    {
+      "file": "FULL_LEAN_VERIFICATION_PROGRAM.md",
+      "finding_count": 0
+    },
+    {
+      "file": "HUMAN_AI_COLLABORATION_RECORD.md",
+      "finding_count": 0
+    },
+    {
+      "file": "HUMAN_AI_MATHEMATICS_PRIOR_ART.md",
+      "finding_count": 0
+    },
+    {
+      "file": "OPEN_REVIEW_CHALLENGE.md",
+      "finding_count": 0
+    },
+    {
+      "file": "PAPER_1_3_FULL_LEAN_STATUS.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/ABF-001_INTEGRATION_PR.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/ABF-001_RELEASE_CANDIDATE.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/ABF-001_RELEASE_NOTES.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/AI_DISCLOSURE.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/CITATION.cff",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/CLAIMS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/CODE_TERMS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/DATA_AND_EVIDENCE_TERMS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/evidence/generated-final/abf001-verifier.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/evidence/historical/local-proof-v32.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/evidence/historical/V30_REVIEW_RECORD.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/evidence/historical/V30_SOURCE_RECORD.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/evidence/historical/V32_REVIEW_RECORD.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/evidence/historical/V32_SOURCE_RECORD.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/evidence/independent-final/abf001-independent-bitset.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/evidence/receipts/small-universe-c-final.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/evidence/receipts/small-universe-final.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/evidence/receipts/tamper-control-final.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/evidence/release/tests.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/EVIDENCE_MAP.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/formal/ABF_FULL_LEAN_COMPLETION_MAP_V1.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/formal/FORMAL_STATUS_V1.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/FORMAL_VERIFICATION.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/FULL_LEAN_COMPLETION_MAP.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/literature/FINAL_DELTA_SEARCH.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/literature/HUMAN_AI_MATHEMATICS_LANDSCAPE.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/literature/PRIMARY_SOURCE_MAP.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/literature/SEARCH_PROTOCOL.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/manuscript/ABF-001_MANUSCRIPT.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/MANUSCRIPT_TERMS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/OWNER_AUTHORIZATION.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/PLAIN_LANGUAGE.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/PRIOR_ART.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/PROOF_MAP.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/qa/final-clean-execution-receipt.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/README.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/REPRODUCE.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/requirements-release.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/requirements.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/review/ABF-001_EXECUTIVE_SUMMARY.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/review/ABF-001_REVIEWER_GUIDE.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/review/COVER_LETTER.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/review/FINAL_HOSTILE_REVIEW.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/review/HOSTILE_REVIEW.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/REVIEW_REQUEST.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/SOURCE_MANIFEST.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/SOURCE_SHA256SUMS.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/src/_primary_bundle/manifest.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/src/abf001_independent_bitset.py",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/src/abf001_small_universe.py",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/src/abf001_tamper_control.py",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/src/abf001_verifier.py",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/src/assemble_primary.py",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/STATUS.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/tests/test_abf001.py",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/THIRD_PARTY_NOTICES.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/tools/build_abf001_publication.py",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/AI_DISCLOSURE.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/CITATION.cff",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/CLAIMS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/CODE_TERMS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/DATA_AND_EVIDENCE_TERMS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/evidence/BINARY_ARTIFACT_IDENTITIES.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/evidence/local-fresh-copy-log.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/evidence/local-test-log.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/evidence/standalone-certificate.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/evidence/submission-execution-receipt.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/EVIDENCE_MAP.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/formal/HINC_FULL_LEAN_COMPLETION_MAP_V1.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/FORMAL_VERIFICATION.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/FOUNDATIONAL_HOCHSCHILD_DERIVATION_2026-07-27.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/FULL_LEAN_COMPLETION_MAP.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/GENERATOR_TO_GLOBAL_LEMMA_2026-07-27.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/HOSTILE_REVIEW_2026-07-27.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/manuscript/MANUSCRIPT_INDEX.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/manuscript/MANUSCRIPT_PART_1.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/manuscript/MANUSCRIPT_PART_2.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/manuscript/MANUSCRIPT_PART_3.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/manuscript/MANUSCRIPT_PART_4.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/MANUSCRIPT_ERRATA_2026-07-27.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/MANUSCRIPT_TERMS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/ODD_PRESENTATION_NORMAL_FORM_2026-07-27.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/PLAIN_LANGUAGE.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/PRIOR_ART.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/PRIOR_ART_PRIMARY_SOURCE_MAP_2026-07-27.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/PROOF_MAP.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/PUBLICATION_ARTIFACTS_0.1.0.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/README.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/REPRODUCE.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/requirements.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/review/COVER_LETTER.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/review/SPECIALIST_REVIEW_PACKET_SOURCE.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/review/SUBMISSION_METADATA_TEMPLATE.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/REVIEW_REQUEST.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/SOURCE_MANIFEST.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/src/mcrc_hidden_infinitesimal_noncommutativity_standalone.py",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/src/standalone_common_core_verifier.py",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/STATUS.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/teaching/TEACHING_HANDOUT.md",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/tests/test_hinc_standalone.py",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/THIRD_PARTY_NOTICES.md",
+      "finding_count": 0
+    },
+    {
+      "file": "PRIVATE_PREFLIGHT_CORRECTION_2026-07-27.md",
+      "finding_count": 0
+    },
+    {
+      "file": "PUBLIC_REVIEW_FORMALIZATION_HOLD_2026-07-29.md",
+      "finding_count": 0
+    },
+    {
+      "file": "PUBLIC_REVIEW_RELEASE.md",
+      "finding_count": 0
+    },
+    {
+      "file": "PUBLIC_SWITCH_READINESS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "PUBLICATION_GATES.md",
+      "finding_count": 0
+    },
+    {
+      "file": "PUBLICATION_WORKFLOW.md",
+      "finding_count": 0
+    },
+    {
+      "file": "README.md",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/abf-lake-version-major-repair-v2.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/abf-lake-version-v3.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/abf-lean-build-major-repair-v2.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/abf-lean-build-v3.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/abf-lean-cache-major-repair-v2.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/abf-test-log-major-repair-v2.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/abf-test-log-v3.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/full-lean-portfolio-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/full-lean-portfolio-validation-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/hinc-lake-version-major-repair-v2.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/hinc-lake-version-v3.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/hinc-lean-build-major-repair-v2.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/hinc-lean-build-v3.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/hinc-lean-cache-major-repair-v2.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/hinc-test-log-major-repair-v2.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/hinc-test-log-v3.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/hosted-runner-availability-2026-07-27.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/internal-link-negative-control-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/internal-link-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/internal-link-validation-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/javascript-syntax-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/json-schema-negative-controls-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/json-schema-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/json-schema-validation-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/json-syntax-validation-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/learn-inline-major-repair-v2.js",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/learn-inline-v3.js",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/learning-page-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/learning-page-validation-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/learning-serve-major-repair-v2/serve-fetch-receipt.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/learning-serve-v3/serve-fetch-receipt.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/LEARNING_PAGE_V12_RELEASE_EDGE.md",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/pages-build-equivalent-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/post-release-cross-package-audit-2026-07-28.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/POST_RELEASE_CROSS_PACKAGE_AUDIT_2026-07-28.md",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-release-audit-2026-07-27.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-release-receipt-2026-07-27.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-release-v2-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-release-v2-validation-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-release-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-release-validation-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-state-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-state-validation-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-status-major-repair-v2-author-receipt.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-status-mutation-tests-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-status-mutation-tests-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-status-v3-author-receipt.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-surface-scan-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-surface-scan-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-switch-readiness.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/publication-gate-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/publication-gate-validation-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/publication-gates/ABF-001.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/publication-gates/HINC-001.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/publication-v1-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/publication-v1-validation-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/publication-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/publication-validation-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/publication-validation.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/python-compile-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/status-consistency-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/status-consistency-validation-v3.json",
+      "finding_count": 0
+    },
+    {
+      "file": "requirements-validation.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "research-index.json",
+      "finding_count": 0
+    },
+    {
+      "file": "RESEARCH_INDEX.md",
+      "finding_count": 0
+    },
+    {
+      "file": "REVIEW_PROTOCOL.md",
+      "finding_count": 0
+    },
+    {
+      "file": "RIGHTS_AND_LICENSING.md",
+      "finding_count": 0
+    },
+    {
+      "file": "RUN-INITIALIZE-N-HUMAN-AI-MATHEMATICS.cmd",
+      "finding_count": 0
+    },
+    {
+      "file": "schemas/full-lean-portfolio.schema.json",
+      "finding_count": 0
+    },
+    {
+      "file": "schemas/paper-1-3-full-lean-status.schema.json",
+      "finding_count": 0
+    },
+    {
+      "file": "schemas/paper-status.schema.json",
+      "finding_count": 0
+    },
+    {
+      "file": "schemas/publication-gate.schema.json",
+      "finding_count": 0
+    },
+    {
+      "file": "schemas/research-index.schema.json",
+      "finding_count": 0
+    },
+    {
+      "file": "START_HERE.md",
+      "finding_count": 0
+    },
+    {
+      "file": "STATUS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/Initialize-N-Human-AI-Mathematics.ps1",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/Invoke-PublicSwitchPreflight.ps1",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/materialize_github_commit_prefix.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/prepare_abf001_integration.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/prepare_abf001_integration_v2.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/prepare_abf001_integration_v3.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/public_status_checks.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/test_internal_link_negative_control.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/test_json_schema_negative_controls.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/test_public_status_mutations.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_full_lean_portfolio.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_internal_links.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_json_schema.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_learning_page.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_public_release.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_public_release_v2.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_public_state.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_public_surface_scan.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_publication.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_publication_gate.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_publication_v2.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_status_consistency.py",
+      "finding_count": 0
+    }
+  ],
+  "result": "PASS",
+  "schema": "n.human_ai_mathematics.public_surface_scan.v1",
+  "tracked_text_files_scanned": 246,
+  "validator_workflow_exclusions": 0
+}

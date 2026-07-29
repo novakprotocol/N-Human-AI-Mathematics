@@ -59,6 +59,8 @@ REQUIRED_FILES = {
     "tools/validate_internal_links.py",
     "tools/validate_public_surface_scan.py",
     "tools/test_public_status_mutations.py",
+    "tools/test_json_schema_negative_controls.py",
+    "tools/test_internal_link_negative_control.py",
     "tools/validate_publication.py",
     "tools/validate_publication_v2.py",
     "tools/validate_publication_gate.py",

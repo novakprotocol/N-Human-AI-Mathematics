@@ -1,0 +1,127 @@
+{
+  "active_public_candidate_review_packages": [
+    "HINC-001",
+    "ABF-001"
+  ],
+  "checks": {
+    "abf_a01_preserved": 1,
+    "abf_lane_not_full": 1,
+    "abf_release_active": 1,
+    "abf_status_not_full": 1,
+    "abf_status_partial": 1,
+    "active_candidate_packages": 1,
+    "active_review_partial_allowed": 1,
+    "bounded_not_full": 1,
+    "control_phrase": 7,
+    "fsg_math_blocker": 1,
+    "fsg_no_public_package": 1,
+    "fsg_no_release_auth": 1,
+    "fsg_not_authorized": 1,
+    "full_pass_admit_zero": 1,
+    "full_pass_axiom_zero": 1,
+    "full_pass_build": 1,
+    "full_pass_fidelity": 1,
+    "full_pass_flag": 1,
+    "full_pass_required_for_full_lean": 1,
+    "full_pass_sorry_zero": 1,
+    "full_pass_sorryax_false": 1,
+    "full_pass_unmapped_zero": 1,
+    "full_pass_unresolved_zero": 1,
+    "hinc_release_active": 1,
+    "hinc_status_not_full": 1,
+    "hinc_status_partial": 1,
+    "lean_boundary": 1,
+    "no_full_pass_papers": 1,
+    "no_fully_lean_verified_manuscripts": 1,
+    "paper_active_authorized": 2,
+    "paper_formal_state": 4,
+    "paper_no_claim_map": 2,
+    "paper_not_full": 4,
+    "paper_public_state": 4,
+    "paper_summary_status": 4,
+    "policy_selected": 1,
+    "portfolio_not_full": 1,
+    "required_file": 16,
+    "research_abf_active": 1,
+    "research_acm_hold": 1,
+    "research_fsg_hold": 1,
+    "research_hinc_active": 1,
+    "site_overclaim_absent": 9,
+    "site_phrase": 5,
+    "status_schema": 1
+  },
+  "failures": [],
+  "files": {
+    "AGENTS.md": {
+      "bytes": 9710,
+      "sha256": "f5c2464dcb9dda85de12a7f80d743c0ea01fdf61b2923e4875dde83ddddf6dc7"
+    },
+    "FULL_LEAN_RELEASE_STANDARD.md": {
+      "bytes": 3453,
+      "sha256": "747edaf0e5094d267b63b4485b6b36fabce29c76d2dd20eeb44d1ed6ce7c3f57"
+    },
+    "FULL_LEAN_VERIFICATION_PROGRAM.md": {
+      "bytes": 3505,
+      "sha256": "303fd6d497a07769002dfbcde8a22281d17e76c05ee9e7a905ecc79d115c7d94"
+    },
+    "PAPER_1_3_FULL_LEAN_STATUS.json": {
+      "bytes": 3694,
+      "sha256": "ee4a6165a41302e5761776385ca81caf73049a22fe4f3b2b9277eb982f39dbb1"
+    },
+    "PUBLIC_REVIEW_FORMALIZATION_HOLD_2026-07-29.md": {
+      "bytes": 2715,
+      "sha256": "76cc8f03b90474c08ec33c3c699966b50117d55ffea53989c210adf1c51df258"
+    },
+    "PUBLIC_REVIEW_RELEASE.md": {
+      "bytes": 5157,
+      "sha256": "0ae910b57f28a191ae4ab12d66d0ac646dd242af30363e0112d21f60881a0c3d"
+    },
+    "STATUS.md": {
+      "bytes": 3473,
+      "sha256": "65a6528838e10a21e715a0f697ccacc811d4eea894e5bd121af13b52dcce31d5"
+    },
+    "docs\\index.html": {
+      "bytes": 9639,
+      "sha256": "dcc63b1b9cff7ee6350dfc7f6605501012dd06b8e82d087e7d6436e2d02aa2d1"
+    },
+    "docs\\learn.html": {
+      "bytes": 21229,
+      "sha256": "a544ccb3a0716a756d8e4c9c53afadcee4a686a7bd4c85f97ba48081940fd6a5"
+    },
+    "formal-verification-status.json": {
+      "bytes": 3672,
+      "sha256": "232d7d6b65448578546bd299c01940a30e25ba2eb782479d66321594df241df3"
+    },
+    "papers\\ABF-001\\FORMAL_VERIFICATION.md": {
+      "bytes": 1998,
+      "sha256": "74399a9458b6f964239c0cdc59f29e9b8c7d59457da1e579b96eb909cb353557"
+    },
+    "papers\\ABF-001\\STATUS.json": {
+      "bytes": 4719,
+      "sha256": "d1b6583f6ad75b06411cce616a699404cda0ecf79af594286ca2451877272dd7"
+    },
+    "papers\\ABF-001\\formal\\FORMAL_STATUS_V1.json": {
+      "bytes": 1026,
+      "sha256": "e1920f232ce3cdbdde668e5217d1496281c8171543c777534fab7826a56c7e0a"
+    },
+    "papers\\HINC-001\\FORMAL_VERIFICATION.md": {
+      "bytes": 5560,
+      "sha256": "bac44f546c0742459e37928dfff173fefb4c199a5ad838cee67457e7273317ab"
+    },
+    "papers\\HINC-001\\STATUS.json": {
+      "bytes": 6326,
+      "sha256": "1b517f0f277492e234cc1355d5ea7458f386451337cf1bd14c525a9741e92815"
+    },
+    "research-index.json": {
+      "bytes": 5197,
+      "sha256": "906e83bcfc1af5df5adf7072db89be7a9c9d5852dc11ab76f4503ac2a70a2369"
+    }
+  },
+  "fsg_public_release_authorized": false,
+  "fully_lean_verified_manuscripts": [],
+  "papers_with_full_pass": [],
+  "portfolio_full_lean_verified": false,
+  "result": "PASS",
+  "schema": "n.human_ai_mathematics.full_lean_portfolio_validation.v3",
+  "total_checks": 92
+}

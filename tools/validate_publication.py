@@ -191,7 +191,11 @@ def validate_manifest(root: Path, paper_id: str, path: Path) -> list[Finding]:
             if not isinstance(source, dict):
                 findings.append(Finding("ERROR", label, "source must be an object")); continue
             commit = source.get("commit")
-            if not isinstance(commit, str) or not COMMIT_RE.fullmatch(commit):
+            private_source_withheld = source.get("private_source_identifier_withheld") is True
+            if private_source_withheld:
+                if commit is not None:
+                    findings.append(Finding("ERROR", label, "withheld private source must not publish a source commit"))
+            elif not isinstance(commit, str) or not COMMIT_RE.fullmatch(commit):
                 findings.append(Finding("ERROR", label, f"invalid source commit: {commit!r}"))
             files = source.get("files")
             if not isinstance(files, list) or not files:

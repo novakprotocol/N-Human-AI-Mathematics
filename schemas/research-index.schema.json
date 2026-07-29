@@ -172,7 +172,215 @@
           "type": "string",
           "minLength": 1
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "id": {
+                "const": "HINC-001"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "state": {
+                "const": "active_review"
+              },
+              "formal_verification": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "claim_map_complete",
+                  "full_manuscript"
+                ],
+                "properties": {
+                  "status": {
+                    "const": "PARTIAL_PASS"
+                  },
+                  "claim_map_complete": {
+                    "const": false
+                  },
+                  "full_manuscript": {
+                    "const": "not_fully_formalized"
+                  }
+                }
+              },
+              "external_specialist_review": {
+                "const": "pending"
+              },
+              "historical_priority": {
+                "const": "unestablished"
+              },
+              "peer_review": {
+                "const": "not_submitted"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "id": {
+                "const": "ABF-001"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "state": {
+                "const": "active_review"
+              },
+              "formal_verification": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "completed_lanes",
+                  "open_lanes",
+                  "claim_map_complete",
+                  "full_manuscript"
+                ],
+                "properties": {
+                  "status": {
+                    "const": "PARTIAL_PASS"
+                  },
+                  "completed_lanes": {
+                    "contains": {
+                      "pattern": "^A01"
+                    }
+                  },
+                  "open_lanes": {
+                    "allOf": [
+                      {
+                        "contains": {
+                          "pattern": "^A02"
+                        }
+                      },
+                      {
+                        "contains": {
+                          "pattern": "^A03"
+                        }
+                      },
+                      {
+                        "contains": {
+                          "pattern": "^A04"
+                        }
+                      },
+                      {
+                        "contains": {
+                          "pattern": "^A05"
+                        }
+                      },
+                      {
+                        "contains": {
+                          "pattern": "^A06"
+                        }
+                      }
+                    ]
+                  },
+                  "claim_map_complete": {
+                    "const": false
+                  },
+                  "full_manuscript": {
+                    "const": "not_fully_formalized"
+                  }
+                }
+              },
+              "external_specialist_review": {
+                "const": "pending"
+              },
+              "historical_priority": {
+                "const": "unestablished"
+              },
+              "peer_review": {
+                "const": "not_submitted"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "id": {
+                "const": "FSG-001"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "state": {
+                "const": "hold"
+              },
+              "formal_verification": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "mathematical_blocker",
+                  "public_theorem_package_released",
+                  "public_release_authorized"
+                ],
+                "properties": {
+                  "status": {
+                    "const": "HOLD_MATHEMATICAL_BLOCKER"
+                  },
+                  "mathematical_blocker": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "public_theorem_package_released": {
+                    "const": false
+                  },
+                  "public_release_authorized": {
+                    "const": false
+                  }
+                }
+              },
+              "peer_review": {
+                "const": "not_submitted"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "id": {
+                "const": "ACM-001"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "state": {
+                "const": "hold"
+              },
+              "formal_verification": {
+                "type": "object",
+                "required": [
+                  "status",
+                  "controlling_manuscript_present",
+                  "claim_map_complete",
+                  "full_manuscript"
+                ],
+                "properties": {
+                  "status": {
+                    "const": "HOLD_PENDING_CONSOLIDATION"
+                  },
+                  "controlling_manuscript_present": {
+                    "const": false
+                  },
+                  "claim_map_complete": {
+                    "const": false
+                  }
+                }
+              },
+              "peer_review": {
+                "const": "not_submitted"
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }

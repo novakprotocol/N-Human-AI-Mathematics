@@ -15,83 +15,209 @@
     "formal_verification",
     "review",
     "release",
-    "limitations"
+    "limitations",
+    "status_controls"
   ],
   "properties": {
-    "$schema": {"type": "string"},
-    "schema_version": {"const": "n.human_ai_mathematics.paper_status.v1"},
-    "paper_id": {"type": "string", "pattern": "^[A-Z]{2,8}-[0-9]{3}$"},
-    "title": {"type": "string", "minLength": 8},
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "n.human_ai_mathematics.paper_status.v1"
+    },
+    "paper_id": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,8}-[0-9]{3}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 8
+    },
     "source": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["repository", "commit", "paths"],
+      "required": [
+        "repository",
+        "commit",
+        "paths"
+      ],
       "properties": {
-        "repository": {"type": "string"},
-        "commit": {"type": ["string", "null"], "pattern": "^[0-9a-f]{40}$"},
+        "repository": {
+          "type": "string"
+        },
+        "commit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{40}$"
+        },
         "paths": {
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
-          "items": {"type": "string", "minLength": 1}
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       }
     },
     "claim": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["level", "status", "globally_novel", "security_consequence"],
+      "required": [
+        "level",
+        "status",
+        "globally_novel",
+        "security_consequence"
+      ],
       "properties": {
-        "level": {"type": "integer", "minimum": 0, "maximum": 9},
-        "status": {"type": "string"},
-        "globally_novel": {"enum": ["established", "unestablished", "not_claimed"]},
-        "security_consequence": {"enum": ["established", "unestablished", "not_applicable", "not_claimed"]}
+        "level": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9
+        },
+        "status": {
+          "type": "string"
+        },
+        "globally_novel": {
+          "enum": [
+            "established",
+            "unestablished",
+            "not_claimed"
+          ]
+        },
+        "security_consequence": {
+          "enum": [
+            "established",
+            "unestablished",
+            "not_applicable",
+            "not_claimed"
+          ]
+        }
       }
     },
     "proof": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["human_proof_status", "dependency_map", "known_gaps"],
+      "required": [
+        "human_proof_status",
+        "dependency_map",
+        "known_gaps"
+      ],
       "properties": {
-        "human_proof_status": {"type": "string"},
-        "dependency_map": {"type": "string"},
-        "known_gaps": {"type": "array", "items": {"type": "string"}}
+        "human_proof_status": {
+          "type": "string"
+        },
+        "dependency_map": {
+          "type": "string"
+        },
+        "known_gaps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "computation": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["role", "primary_status", "independent_status", "receipts"],
+      "required": [
+        "role",
+        "primary_status",
+        "independent_status",
+        "receipts"
+      ],
       "properties": {
-        "role": {"type": "string"},
-        "primary_status": {"type": "string"},
-        "independent_status": {"type": "string"},
-        "receipts": {"type": "array", "items": {"type": "string"}}
+        "role": {
+          "type": "string"
+        },
+        "primary_status": {
+          "type": "string"
+        },
+        "independent_status": {
+          "type": "string"
+        },
+        "receipts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "formal_verification": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["status", "assistant", "verified_scope", "unverified_scope", "receipts"],
+      "required": [
+        "status",
+        "assistant",
+        "verified_scope",
+        "unverified_scope",
+        "receipts",
+        "full_manuscript_lean_verified",
+        "claim_map_complete"
+      ],
       "properties": {
-        "status": {"type": "string"},
-        "assistant": {"type": ["string", "null"]},
-        "verified_scope": {"type": "array", "items": {"type": "string"}},
-        "unverified_scope": {"type": "array", "items": {"type": "string"}},
-        "receipts": {"type": "array", "items": {"type": "string"}},
-        "full_manuscript_lean_verified": {"type": "boolean"},
-        "claim_map_complete": {"type": "boolean"}
+        "status": {
+          "type": "string"
+        },
+        "assistant": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "verified_scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unverified_scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "receipts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "full_manuscript_lean_verified": {
+          "type": "boolean"
+        },
+        "claim_map_complete": {
+          "type": "boolean"
+        }
       }
     },
     "review": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["internal", "external", "historical_priority", "peer_review"],
+      "required": [
+        "internal",
+        "external",
+        "historical_priority",
+        "peer_review"
+      ],
       "properties": {
-        "internal": {"type": "string"},
-        "external": {"type": "string"},
-        "historical_priority": {"type": "string"},
-        "peer_review": {"type": "string"}
+        "internal": {
+          "type": "string"
+        },
+        "external": {
+          "type": "string"
+        },
+        "historical_priority": {
+          "type": "string"
+        },
+        "peer_review": {
+          "type": "string"
+        }
       }
     },
     "release": {
@@ -108,20 +234,275 @@
         "specific_provider_disclosed"
       ],
       "properties": {
-        "public_authorized": {"type": "boolean"},
-        "public_switch_ready": {"type": "boolean"},
-        "channel": {"enum": ["private_staging", "public_review", "archival_release", "journal_submission"]},
-        "version": {"type": ["string", "null"]},
-        "release_date": {"type": ["string", "null"], "format": "date"},
-        "doi": {"type": ["string", "null"]},
-        "specific_model_disclosed": {"type": "boolean"},
-        "specific_provider_disclosed": {"type": "boolean"}
+        "public_authorized": {
+          "type": "boolean"
+        },
+        "public_switch_ready": {
+          "type": "boolean"
+        },
+        "channel": {
+          "enum": [
+            "private_staging",
+            "public_review",
+            "archival_release",
+            "journal_submission"
+          ]
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "release_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "doi": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "specific_model_disclosed": {
+          "type": "boolean"
+        },
+        "specific_provider_disclosed": {
+          "type": "boolean"
+        }
       }
     },
     "limitations": {
       "type": "array",
       "minItems": 1,
-      "items": {"type": "string", "minLength": 1}
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "status_controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "public_state",
+        "formal_state",
+        "bounded_formal_scope",
+        "claim_map_complete",
+        "full_manuscript_lean_verified",
+        "external_specialist_review",
+        "historical_priority",
+        "peer_review",
+        "journal_status",
+        "public_release_authorized",
+        "limitations_confirmed"
+      ],
+      "properties": {
+        "public_state": {
+          "enum": [
+            "active_review",
+            "hold",
+            "archived_case_study",
+            "rejected",
+            "superseded",
+            "published"
+          ]
+        },
+        "formal_state": {
+          "enum": [
+            "PARTIAL_PASS",
+            "FULL_PASS",
+            "HOLD_MATHEMATICAL_BLOCKER",
+            "HOLD_PENDING_CONSOLIDATION"
+          ]
+        },
+        "bounded_formal_scope": {
+          "enum": [
+            "bounded_Lean",
+            "bounded_A01_Lean"
+          ]
+        },
+        "compiled_lane": {
+          "enum": [
+            "A01"
+          ]
+        },
+        "a02_a06_status": {
+          "enum": [
+            "incomplete"
+          ]
+        },
+        "claim_map_complete": {
+          "type": "boolean"
+        },
+        "full_manuscript_lean_verified": {
+          "type": "boolean"
+        },
+        "external_specialist_review": {
+          "enum": [
+            "pending"
+          ]
+        },
+        "historical_priority": {
+          "enum": [
+            "not_established"
+          ]
+        },
+        "peer_review": {
+          "enum": [
+            "not_submitted"
+          ]
+        },
+        "journal_status": {
+          "enum": [
+            "not_submitted"
+          ]
+        },
+        "public_release_authorized": {
+          "type": "boolean"
+        },
+        "limitations_confirmed": {
+          "type": "boolean"
+        }
+      }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "paper_id": {
+            "const": "HINC-001"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status_controls": {
+            "required": [
+              "public_state",
+              "formal_state",
+              "bounded_formal_scope",
+              "claim_map_complete",
+              "full_manuscript_lean_verified",
+              "external_specialist_review",
+              "historical_priority",
+              "peer_review",
+              "journal_status",
+              "public_release_authorized",
+              "limitations_confirmed"
+            ],
+            "properties": {
+              "public_state": {
+                "const": "active_review"
+              },
+              "formal_state": {
+                "const": "PARTIAL_PASS"
+              },
+              "bounded_formal_scope": {
+                "const": "bounded_Lean"
+              },
+              "claim_map_complete": {
+                "const": false
+              },
+              "full_manuscript_lean_verified": {
+                "const": false
+              },
+              "external_specialist_review": {
+                "const": "pending"
+              },
+              "historical_priority": {
+                "const": "not_established"
+              },
+              "peer_review": {
+                "const": "not_submitted"
+              },
+              "journal_status": {
+                "const": "not_submitted"
+              },
+              "public_release_authorized": {
+                "const": true
+              },
+              "limitations_confirmed": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "paper_id": {
+            "const": "ABF-001"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status_controls": {
+            "required": [
+              "public_state",
+              "formal_state",
+              "bounded_formal_scope",
+              "claim_map_complete",
+              "full_manuscript_lean_verified",
+              "external_specialist_review",
+              "historical_priority",
+              "peer_review",
+              "journal_status",
+              "public_release_authorized",
+              "limitations_confirmed",
+              "compiled_lane",
+              "a02_a06_status"
+            ],
+            "properties": {
+              "public_state": {
+                "const": "active_review"
+              },
+              "formal_state": {
+                "const": "PARTIAL_PASS"
+              },
+              "bounded_formal_scope": {
+                "const": "bounded_A01_Lean"
+              },
+              "claim_map_complete": {
+                "const": false
+              },
+              "full_manuscript_lean_verified": {
+                "const": false
+              },
+              "external_specialist_review": {
+                "const": "pending"
+              },
+              "historical_priority": {
+                "const": "not_established"
+              },
+              "peer_review": {
+                "const": "not_submitted"
+              },
+              "journal_status": {
+                "const": "not_submitted"
+              },
+              "public_release_authorized": {
+                "const": true
+              },
+              "limitations_confirmed": {
+                "const": true
+              },
+              "compiled_lane": {
+                "const": "A01"
+              },
+              "a02_a06_status": {
+                "const": "incomplete"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }

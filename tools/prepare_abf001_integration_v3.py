@@ -17,34 +17,32 @@ EXPECTED_REPOSITORY = "novakprotocol/N-Human-AI-Mathematics"
 
 V30_SOURCE_RECORD = """# v30 source record
 
-Source repository: `novakprotocol/N-MathLab`
-Merge commit: `4376321b33f5a8fd8b5a9c63240cc5823eed7bbb`
-Original path: `docs/research/BLACK_BOX_AFFINE_HYPERPLANE_SPECTRUM_V30_PAPER.md`
+Source: derived from a private research source
+Private repository, commit, and source path: withheld
 
 The v30 result proved the affine top-layer signature, punctured-kernel theorem, secondary rank certificate, and exact `130559 / 511 / 0` vectorial spectrum. ABF-001 consolidates and supersedes that manuscript for public review.
 """
 
 V30_REVIEW_RECORD = """# v30 internal hostile-review record
 
-Source repository: `novakprotocol/N-MathLab`
-Merge commit: `4376321b33f5a8fd8b5a9c63240cc5823eed7bbb`
+Source: derived from a private research source
+Private repository and commit: withheld
 
 The internal review accepted the top-layer and punctured-kernel theorems, requested a fuller moment proof, and recommended conditional specialist review with explicit no-security and no-priority boundaries. The consolidated manuscript supplies the Reed-Muller proof.
 """
 
 V32_SOURCE_RECORD = """# v32 source record
 
-Source repository: `novakprotocol/N-MathLab`
-Merge commit: `d530494329163ad1ecc3eb8c72a945b159935bc9`
-Original path: `docs/research/BLACK_BOX_RADICAL_INCIDENCE_DUALITY_V32_PAPER.md`
+Source: derived from a private research source
+Private repository, commit, and source path: withheld
 
 The v32 result proved the bidual moment-incidence theorem and classified the rank profiles, 469 incidences, unique triple-covered parameter, and 201-component forest. ABF-001 corrects the earlier phrase “203 radical subspaces” to “203 singular mask-indexed radicals and 202 distinct radical subspaces.”
 """
 
 V32_REVIEW_RECORD = """# v32 internal hostile-review record
 
-Source repository: `novakprotocol/N-MathLab`
-Merge commit: `d530494329163ad1ecc3eb8c72a945b159935bc9`
+Source: derived from a private research source
+Private repository and commit: withheld
 
 The internal review conditionally accepted the result as a specialist exact-computation and Boolean-functions paper, while reserving historical priority and full-width implications. The review identified the incidence geometry as the strongest finite contribution.
 """
@@ -103,35 +101,37 @@ def normalized_source_manifest() -> dict[str, object]:
         "generated_repository": EXPECTED_REPOSITORY,
         "sources": [
             {
-                "repository": "novakprotocol/N-MathLab",
-                "commit": "4376321b33f5a8fd8b5a9c63240cc5823eed7bbb",
+                "repository": "derived from a private research source",
+                "commit": None,
+                "private_source_identifier_withheld": True,
                 "role": "v30 affine-hyperplane theorem and evidence",
                 "files": [
                     {
-                        "source": "docs/research/BLACK_BOX_AFFINE_HYPERPLANE_SPECTRUM_V30_PAPER.md",
+                        "source": "source-records/ABF-001/lane-01-01-v30-source-record-md",
                         "target": "papers/ABF-001/evidence/historical/V30_SOURCE_RECORD.md",
                     },
                     {
-                        "source": "docs/research/BLACK_BOX_AFFINE_HYPERPLANE_SPECTRUM_V30_INDEPENDENT_REVIEW.md",
+                        "source": "source-records/ABF-001/lane-01-02-v30-review-record-md",
                         "target": "papers/ABF-001/evidence/historical/V30_REVIEW_RECORD.md",
                     },
                 ],
             },
             {
-                "repository": "novakprotocol/N-MathLab",
-                "commit": "d530494329163ad1ecc3eb8c72a945b159935bc9",
+                "repository": "derived from a private research source",
+                "commit": None,
+                "private_source_identifier_withheld": True,
                 "role": "v32 bidual incidence theorem and finite radical geometry",
                 "files": [
                     {
-                        "source": "docs/research/BLACK_BOX_RADICAL_INCIDENCE_DUALITY_V32_PAPER.md",
+                        "source": "source-records/ABF-001/lane-02-01-v32-source-record-md",
                         "target": "papers/ABF-001/evidence/historical/V32_SOURCE_RECORD.md",
                     },
                     {
-                        "source": "docs/research/BLACK_BOX_RADICAL_INCIDENCE_DUALITY_V32_INDEPENDENT_REVIEW.md",
+                        "source": "source-records/ABF-001/lane-02-02-v32-review-record-md",
                         "target": "papers/ABF-001/evidence/historical/V32_REVIEW_RECORD.md",
                     },
                     {
-                        "source": "receipts/black-box-text-inference-v32/local-proof-v32.json",
+                        "source": "source-records/ABF-001/lane-02-03-local-proof-v32-json",
                         "target": "papers/ABF-001/evidence/historical/local-proof-v32.json",
                     },
                 ],

@@ -37,7 +37,7 @@
     "primary_status": "declared Python, C, Groebner, Artin-ring, and standalone common-core routes passed",
     "independent_status": "fresh copied workspace and separately structured internal routes agreed; no outside reproduction yet",
     "receipts": [
-      "N-MathLab PR #406",
+      "derived from a private research source (private identifier withheld)",
       "evidence SHA-256 20d883988da7818f73de0b4ccab68bc7adea5097a4af7a6ef5a72c23b4e1ea4b"
     ]
   },
@@ -73,11 +73,11 @@
       "full revised manuscript"
     ],
     "receipts": [
-      "N-MathLab PR #412",
+      "derived from a private research source (base private identifier withheld)",
       "novakprotocol/novak-sdt PR #57",
       "base workflow run 30119931881",
       "base artifact SHA-256 63b2b160da40f722818820679da7c9d22eb7640694e48a5abc08fccf78f47133",
-      "N-MathLab PR #416",
+      "derived from a private research source (classification private identifier withheld)",
       "novakprotocol/novak-sdt PR #58",
       "classification workflow run 30174213006",
       "classification workflow job 89720259114",
@@ -110,5 +110,18 @@
     "No exact indexed prior-art match was located, but worldwide historical priority is not established.",
     "Finite and symbolic checks do not replace the arbitrary-base human proof or complete formalization.",
     "Journal submission, DOI assignment, peer review, and specific model/provider disclosure are not claimed."
-  ]
+  ],
+  "status_controls": {
+    "public_state": "active_review",
+    "formal_state": "PARTIAL_PASS",
+    "bounded_formal_scope": "bounded_Lean",
+    "claim_map_complete": false,
+    "full_manuscript_lean_verified": false,
+    "external_specialist_review": "pending",
+    "historical_priority": "not_established",
+    "peer_review": "not_submitted",
+    "journal_status": "not_submitted",
+    "public_release_authorized": true,
+    "limitations_confirmed": true
+  }
 }

@@ -8,7 +8,7 @@ if not exist "%SCRIPT%" (
     echo ERROR: Bootstrap script not found:
     echo   %SCRIPT%
     echo.
-    echo Check out the N-MathLab bootstrap branch before running this launcher.
+    echo Check out the private research source bootstrap branch before running this launcher.
     echo.
     pause
     exit /b 1

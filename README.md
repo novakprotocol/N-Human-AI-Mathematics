@@ -1,3 +1,36 @@
+<!--
+NHAIM_STATUS_BLOCK_V1
+HINC-001:
+  public_state: active_review
+  formal_state: PARTIAL_PASS
+  full_manuscript_lean_verified: false
+  external_review: pending
+  historical_priority: not_established
+  peer_review: not_submitted
+  release_authorized: true
+ABF-001:
+  public_state: active_review
+  formal_state: PARTIAL_PASS
+  compiled_lane: A01
+  a02_a06_status: incomplete
+  full_manuscript_lean_verified: false
+  external_review: pending
+  historical_priority: not_established
+  peer_review: not_submitted
+  release_authorized: true
+FSG-001:
+  public_state: hold
+  private_candidate: true
+  mathematical_blocker: true
+  public_theorem_package_released: false
+  release_authorized: false
+ACM-001:
+  public_state: hold
+  controlling_manuscript_complete: false
+  release_authorized: false
+END_NHAIM_STATUS_BLOCK_V1
+-->
+
 # N Human-LLM Mathematics
 
 **Human-led, LLM-assisted mathematical research open for public candidate technical review.**

@@ -1,0 +1,76 @@
+{
+    "schema":  "n.human_ai_mathematics.public_status_v3_author_receipt.v1",
+    "role":  "NHAIM-01-CODEX-PUBLIC-STATUS-CORRECTION",
+    "repository":  "novakprotocol/N-Human-AI-Mathematics",
+    "branch":  "fix/restore-hinc-abf-active-fsg-math-hold-v1",
+    "pr":  60,
+    "base_head":  "d1edab648bd842dec20f8b21625f17258e5e9e9c",
+    "original_pr_head":  "2e5226d7f30b904d800e09626a606308dc6ea31d",
+    "v2_head":  "7e99144075fc3779a9a0b8fa3d70a182ff5f09cf",
+    "generated_before_v3_commit":  true,
+    "result":  "PASS",
+    "duplicate_receipt_generation":  "PASS",
+    "duplicate_mismatches":  [
+
+                             ],
+    "status_conflicts":  {
+                             "conflicting_publication_states":  0,
+                             "conflicting_formal_states":  0,
+                             "per_file_state_mismatches":  0,
+                             "full_lean_overclaim":  0,
+                             "peer_review_overclaim":  0,
+                             "historical_priority_overclaim":  0
+                         },
+    "private_surface":  {
+                            "private_reference_findings":  0,
+                            "private_detector_literals":  0,
+                            "validator_workflow_exclusions":  0,
+                            "credential_pattern_findings":  0,
+                            "personal_path_findings":  0
+                        },
+    "mutation_tests":  {
+                           "result":  "PASS",
+                           "status_mutations_passed":  14,
+                           "status_mutation_count":  14,
+                           "private_reference_mutations_passed":  6,
+                           "private_reference_mutation_count":  6,
+                           "expected_category_checks_passed":  20,
+                           "expected_path_checks_passed":  20,
+                           "worktree_unchanged":  true
+                       },
+    "schema_negative_controls":  {
+                                     "result":  "PASS",
+                                     "negative_controls_passed":  7,
+                                     "negative_control_count":  7
+                                 },
+    "receipt_sha256":  {
+                           "reports/python-compile-v3.json":  "d6930f5352ab93f240d51480f3d352a0b0846135541b1011d7dbcfe944b8b9dd",
+                           "reports/json-syntax-validation-v3.json":  "254cc9e53cdd044a59c7b530e77fcec7356fa16b15e16d8b169b716a8d8199be",
+                           "reports/json-schema-validation-v3.json":  "047d4a4fb091dbf4bc829aa0fb80df87d50ad527fe8a17eb1773225a33c505b1",
+                           "reports/json-schema-negative-controls-v3.json":  "1ca6d8b37c33bc77560dd10920dfc8fe74d15c3293ad61f9bb526fc373bc6e77",
+                           "reports/status-consistency-validation-v3.json":  "bc2af72ff13344da46b5bb6c921a743ba37a0e26c57fe1ef181fc55cb1c472e9",
+                           "reports/public-status-mutation-tests-v3.json":  "b989fe1b67913fb02ed2c6f1d4f9e3a38d9471567e960b84a11161b19cf946b2",
+                           "reports/public-status-mutation-tests-v3.log":  "c2283c5ba33b5c77e9a347f966c11853fb49456b34be17a4939ad452e97fda69",
+                           "reports/public-surface-scan-v3.json":  "a39e7aeb2e50649605a53f3804d0cbe30253ba9086e5744f61055f6bde0305d3",
+                           "reports/internal-link-validation-v3.json":  "91e352d175e861021f932aeca7add2a7d598a311758a252cc673dc02ba6b553e",
+                           "reports/internal-link-negative-control-v3.json":  "212fed9d9194b0d25eaa4d1ace3adbb6ceb06981bb4885ee5c1b649eb4755474",
+                           "reports/learning-page-validation-v3.json":  "6d3f32a40438c5dff8405df0ce2ff44e942e1c5190b12a41a21cae71b8a4f3cd",
+                           "reports/learn-inline-v3.js":  "2290b95fc65be7ee7d67ed6895c5cfd467a54c50e188423b81ceb7ba49f816db",
+                           "reports/javascript-syntax-v3.json":  "5d040134d32df591259871160dcbdc9c2422507e716a4d8c5be921197a9c922e",
+                           "reports/learning-serve-v3/serve-fetch-receipt.json":  "0f755404e461c4a3172d96550185ff74a08eb881d5fcb61cec3f496e3d79b037",
+                           "reports/pages-build-equivalent-v3.json":  "63630f4fef112ffb207f0d42bf556684c8944253d58ff0784bdb0e8c2ae4664f",
+                           "reports/publication-v1-validation-v3.json":  "3b79fc9c10a60f67da0d722bc9d2e113a59853526abb7c4ffaba809d4b563293",
+                           "reports/publication-validation-v3.json":  "1be7b0a1a115197a5cf9256e6df514421bbe8233987fe4f82d1591c39b534044",
+                           "reports/public-state-validation-v3.json":  "2219a8f704aecd8d834483e7a948e6ab80d7d8cc8664e9b49d268ada037be8a6",
+                           "reports/public-release-validation-v3.json":  "77a726d6a430c126f57557752b7a0f53d8c78e0f7929ddcb61aab71ddeff1f40",
+                           "reports/public-release-v2-validation-v3.json":  "77a726d6a430c126f57557752b7a0f53d8c78e0f7929ddcb61aab71ddeff1f40",
+                           "reports/publication-gate-validation-v3.json":  "08e74209afc7a27a8875afcc7cb18acfe0d0cd16d48f5d7f624a653a95d26f57",
+                           "reports/full-lean-portfolio-validation-v3.json":  "8d3e95e0dd306d5ed37b59ab98309074308440f93ad946065e13113f1afd68d8",
+                           "reports/hinc-test-log-v3.txt":  "22f50b6e2e875de226e6da5c56aa43c0ea99463144c58b39c6928e914bdcb953",
+                           "reports/abf-test-log-v3.txt":  "71c941ef1e0e92de0bdcf0c43c68806f98c51a1d70d9a69e46eb753870c39fff",
+                           "reports/hinc-lake-version-v3.txt":  "046ec11da7c5ec88078933908043ff6da9e0b014e190498732e76d7699c3ee22",
+                           "reports/hinc-lean-build-v3.txt":  "4822bddbf64586166a6bc67f309a59d3add3102f4084c75d0c43b46faad5c6fc",
+                           "reports/abf-lake-version-v3.txt":  "046ec11da7c5ec88078933908043ff6da9e0b014e190498732e76d7699c3ee22",
+                           "reports/abf-lean-build-v3.txt":  "6d57612024e1a4b712ee005974ba4a617230ada1708d69af8b4b6112a2f1e7c1"
+                       }
+}
