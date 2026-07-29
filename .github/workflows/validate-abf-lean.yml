@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Check out ABF formal source
         uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: Reject proof placeholders and project axioms
         shell: bash
@@ -30,12 +32,12 @@ jobs:
           set -euo pipefail
           formal='papers/ABF-001/formal'
           if grep -RInE '(^|[^A-Za-z])(sorry|admit)([^A-Za-z]|$)' \
-              "$formal" --include='*.lean'; then
+              "$formal" --include='*.lean' --exclude-dir='.lake'; then
             echo 'Lean placeholder found.' >&2
             exit 1
           fi
           if grep -RInE '^[[:space:]]*axiom[[:space:]]' \
-              "$formal" --include='*.lean'; then
+              "$formal" --include='*.lean' --exclude-dir='.lake'; then
             echo 'Project axiom declaration found.' >&2
             exit 1
           fi
@@ -86,7 +88,7 @@ jobs:
 
           root = Path('papers/ABF-001/formal')
           artifact = Path('.artifacts/abf-lean')
-          files = sorted(root.rglob('*.lean'))
+          files = [root / 'ABF.lean', *sorted((root / 'ABF').rglob('*.lean'))]
           source = '\n'.join(path.read_text(encoding='utf-8') for path in files)
           build = (artifact / 'build.log').read_text(encoding='utf-8')
           manifest = root / 'lake-manifest.json'
@@ -95,6 +97,7 @@ jobs:
               re.MULTILINE,
           )
 
+          assert all(path.is_file() for path in files)
           assert 'sorryAx' not in build
           assert manifest.is_file()
           receipt = {
@@ -103,13 +106,14 @@ jobs:
               'exact_head': '${{ github.sha }}',
               'toolchain': (root / 'lean-toolchain').read_text().strip(),
               'mathlib_request': 'v4.30.0',
+              'lake_manifest_sha256': hashlib.sha256(manifest.read_bytes()).hexdigest(),
               'lean_files': [str(path) for path in files],
               'compiled_source_declaration_count': len(declarations.findall(source)),
               'sorry_admit_count': 0,
               'project_axiom_count': 0,
               'sorryAx_in_build_log': False,
               'formal_lanes_complete': {
-                  'A01': False,
+                  'A01': True,
                   'A02': False,
                   'A03': False,
                   'A04': False,
