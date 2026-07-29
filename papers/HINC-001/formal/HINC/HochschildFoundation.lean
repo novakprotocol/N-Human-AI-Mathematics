@@ -1,12 +1,12 @@
 import HINC.Core
-import Mathlib.Algebra.TrivSqZeroExt
+import Mathlib
 
 /-!
 # HINC normalized Hochschild foundation: first formal lane
 
 This file models the dual numbers as the trivial square-zero extension and
 formalizes the square-zero generator and characteristic-two boundary
-cancellation used in Proposition 2.1 of the manuscript.  It is a foundation for,
+cancellation used in Proposition 2.1 of the manuscript. It is a foundation for,
 not yet the completion of, the normalized-cochain and Gerstenhaber-bracket proof.
 -/
 
