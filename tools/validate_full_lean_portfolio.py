@@ -100,7 +100,7 @@ def validate(root: Path) -> dict[str, Any]:
     )
 
     for phrase in (
-        "full-manuscript-verification authorization",
+        "full-manuscript-verification",
         "zero `sorry`",
         "Complete claim map",
         "Literal-source bridge",
@@ -124,7 +124,7 @@ def validate(root: Path) -> dict[str, Any]:
     for required in (
         "Private release edge · not public",
         "Hold pending consolidation",
-        "Full Lean manuscript</dt><dd>Not completed or claimed",
+        "Lean verification</span><strong>Covers listed declarations—not the full manuscript",
         "Formal verification</strong><span>Not completed or claimed",
     ):
         check("public_boundary_present", required in index, phrase=required)
