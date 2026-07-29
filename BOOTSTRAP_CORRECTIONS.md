@@ -2,9 +2,9 @@
 
 This ledger preserves bootstrap failures separately from successful evidence. A failed attempt is not rewritten as a pass, and an operational correction is not represented as mathematical review.
 
-## BSTR-CORR-001 — wrong repository and unavailable shell
+## BSTR-CORR-001 â€” wrong repository and unavailable shell
 
-**Observed:** the initializer was invoked from `N-LMS`, and the machine did not provide `pwsh`.
+**Observed:** the initializer was invoked from a nonpublic local source directory, and the machine did not provide `pwsh`.
 
 **Effect:** execution stopped before the publication export was located.
 
@@ -12,7 +12,7 @@ This ledger preserves bootstrap failures separately from successful evidence. A 
 
 **Status:** resolved.
 
-## BSTR-CORR-002 — expected GitHub probe promoted to a terminating error
+## BSTR-CORR-002 â€” expected GitHub probe promoted to a terminating error
 
 **Observed:** `gh repo view novakprotocol/N-Human-AI-Mathematics` correctly returned not found, but Windows PowerShell 5.1 promoted the diagnostic stream to `NativeCommandError` while the global error preference was `Stop`.
 
@@ -20,11 +20,11 @@ This ledger preserves bootstrap failures separately from successful evidence. A 
 
 **Correction:** native commands are now evaluated by their exit status under a locally controlled error preference; expected negative probes are captured, while unexpected nonzero exits remain fatal.
 
-**Correcting commit:** `1d922ef9ad025967009df3b3048e9b3a4cb07d11`
+**Correcting commit:** private correction identity redacted; provenance retained outside the public repository.
 
 **Status:** resolved.
 
-## BSTR-CORR-003 — validator matched its own embedded MIT-license signature
+## BSTR-CORR-003 â€” validator matched its own embedded MIT-license signature
 
 **Observed:** the full local materialization reached the publication validator after pinned private research source and Lean sources were copied. The validator reported:
 
@@ -50,22 +50,18 @@ The replacement validator was compiled and exercised against three controls befo
 2. the actual MIT grant sentence in another file failed;
 3. an unsafe `../` manifest target failed.
 
-**Correcting commit:** `87b57d54ed72a39c9607c2189dd0b45752924239`
+**Correcting commit:** private correction identity redacted; provenance retained outside the public repository.
 
 **Status:** resolved by the successful complete rerun below.
 
 ## Successful guarded bootstrap
 
-A complete Windows PowerShell 5.1 rerun used bootstrap source commit:
-
-```text
-9dc69542fb2b089a4cef5ea3c425d82bb705d4dd
-```
+A complete Windows PowerShell 5.1 rerun used a private bootstrap source whose exact identity is redacted from the public repository.
 
 The run:
 
 - authenticated the `novakprotocol` GitHub account;
-- fetched the current private research source bootstrap source;
+- fetched the current private research source bootstrap source with its exact identity withheld from public source;
 - created a detached worktree;
 - materialized the manuscript and verifier sources from a private research source with the private commit withheld;
 - materialized the Lean sources from `novak-sdt` commit `d7751d1de76253407016ef4bf92738cffa800e82`;

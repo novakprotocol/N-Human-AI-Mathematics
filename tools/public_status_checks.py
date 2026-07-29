@@ -80,36 +80,52 @@ CANONICAL_STATE: dict[str, dict[str, Any]] = {
 
 TEXT_STATUS_EXPECTED: dict[str, dict[str, str]] = {
     "HINC-001": {
+        "paper_id": "HINC-001",
         "public_state": "active_review",
         "formal_state": "PARTIAL_PASS",
+        "bounded_formal_scope": "bounded_Lean",
+        "claim_map_complete": "false",
         "full_manuscript_lean_verified": "false",
-        "external_review": "pending",
+        "external_specialist_review": "pending",
         "historical_priority": "not_established",
         "peer_review": "not_submitted",
-        "release_authorized": "true",
+        "journal_status": "not_submitted",
+        "public_release_authorized": "true",
     },
     "ABF-001": {
+        "paper_id": "ABF-001",
         "public_state": "active_review",
         "formal_state": "PARTIAL_PASS",
+        "bounded_formal_scope": "bounded_A01_Lean",
         "compiled_lane": "A01",
         "a02_a06_status": "incomplete",
+        "claim_map_complete": "false",
         "full_manuscript_lean_verified": "false",
-        "external_review": "pending",
+        "external_specialist_review": "pending",
         "historical_priority": "not_established",
         "peer_review": "not_submitted",
-        "release_authorized": "true",
+        "journal_status": "not_submitted",
+        "public_release_authorized": "true",
     },
     "FSG-001": {
+        "paper_id": "FSG-001",
         "public_state": "hold",
         "private_candidate": "true",
         "mathematical_blocker": "true",
-        "public_theorem_package_released": "false",
-        "release_authorized": "false",
+        "public_theorem_released": "false",
+        "correction_status": "private_correction_under_internal_review",
+        "external_review": "not_started",
+        "formal_status": "HOLD_MATHEMATICAL_BLOCKER",
+        "public_release_authorized": "false",
     },
     "ACM-001": {
+        "paper_id": "ACM-001",
         "public_state": "hold",
-        "controlling_manuscript_complete": "false",
-        "release_authorized": "false",
+        "manuscript_complete": "false",
+        "claim_map_complete": "false",
+        "full_manuscript_lean_verified": "false",
+        "public_theorem_released": "false",
+        "public_release_authorized": "false",
     },
 }
 
@@ -429,30 +445,41 @@ def text_status_findings(relative: str, body: str) -> list[Finding]:
         (re.compile(r"\bHINC-001\b[^.\n]{0,120}\b(?:withdrawn|inactive|suspended|retired)\b", re.IGNORECASE), "obsolete_current_state", "HINC inactive or withdrawn contradiction"),
         (re.compile(r"\bHINC-001\b[^.\n]{0,160}\bhistorical\s+(?:public\s+)?artifact(?:\s+only)?\b", re.IGNORECASE), "obsolete_current_state", "HINC historical-artifact-only contradiction"),
         (re.compile(r"\bHINC-001\b[^.\n]{0,120}\bfully\s+(?:Lean\s+)?(?:verified|formalized)\b", re.IGNORECASE), "full_lean_overclaim", "HINC full-Lean overclaim"),
-        (re.compile(r"\bHINC-001\b[^.\n]{0,120}\bexternally\s+(?:validated|reviewed|reproduced)\b", re.IGNORECASE), "peer_review_overclaim", "HINC external-review overclaim"),
+        (re.compile(r"\bHINC-001\b[^.\n]{0,160}\bfull\s+manuscript\b[^.\n]{0,80}\b(?:verified|formalized|machine\s+checked)\b", re.IGNORECASE), "full_lean_overclaim", "HINC full-manuscript overclaim"),
+        (re.compile(r"\bHINC-001\b[^.\n]{0,160}\b(?:claim[- ]map\s+(?:is\s+)?complete|all\s+claims\s+(?:are\s+)?formally\s+mapped)\b", re.IGNORECASE), "full_lean_overclaim", "HINC claim-map completion overclaim"),
+        (re.compile(r"\bHINC-001\b[^.\n]{0,160}\b(?:journal\s+accepted|accepted\s+for\s+publication)\b", re.IGNORECASE), "peer_review_overclaim", "HINC journal-acceptance overclaim"),
+        (re.compile(r"\bHINC-001\b[^.\n]{0,160}\b(?:externally\s+(?:validated|reviewed|reproduced)|external\s+review\s+(?:complete|completed|passed))\b", re.IGNORECASE), "peer_review_overclaim", "HINC external-review overclaim"),
         (re.compile(r"\bHINC-001\b[^.\n]{0,120}\bpeer[- ]review(?:ed)?\b[^.\n]{0,60}\b(?:complete|completed|accepted|yes|true)\b", re.IGNORECASE), "peer_review_overclaim", "HINC peer-review overclaim"),
-        (re.compile(r"\bHINC-001\b[^.\n]{0,120}\b(?:historically\s+first|world[- ]first|historical\s+priority\s+(?:established|claimed|proved))\b", re.IGNORECASE), "historical_priority_overclaim", "HINC priority overclaim"),
+        (re.compile(r"\bHINC-001\b[^.\n]{0,160}\b(?:historically\s+first|first\s+result\s+of\s+its\s+kind|world[- ]first|historical\s+priority\s+(?:established|claimed|proved))\b", re.IGNORECASE), "historical_priority_overclaim", "HINC priority overclaim"),
     )
     abf_patterns = (
         (re.compile(r"\bABF-001\b[^.\n]{0,120}\b(?:withdrawn|inactive|suspended|retired)\b", re.IGNORECASE), "obsolete_current_state", "ABF inactive or withdrawn contradiction"),
         (re.compile(r"\bABF-001\b[^.\n]{0,160}\bhistorical\s+(?:public\s+)?artifact(?:\s+only)?\b", re.IGNORECASE), "obsolete_current_state", "ABF historical-artifact-only contradiction"),
         (re.compile(r"\bABF-001\b[^.\n]{0,120}\bfully\s+(?:Lean\s+)?(?:verified|formalized)\b", re.IGNORECASE), "full_lean_overclaim", "ABF full-Lean overclaim"),
-        (re.compile(r"\bABF-001\b[^.\n]{0,160}\bA02\s*(?:-|through|to|\u2013)\s*A06\b[^.\n]{0,80}\b(?:complete|verified|passed|formalized)\b", re.IGNORECASE), "full_lean_overclaim", "ABF A02-A06 completion overclaim"),
-        (re.compile(r"\bABF-001\b[^.\n]{0,120}\bexternally\s+(?:validated|reviewed|reproduced)\b", re.IGNORECASE), "peer_review_overclaim", "ABF external-review overclaim"),
+        (re.compile(r"\bABF-001\b[^.\n]{0,160}\bfull\s+manuscript\b[^.\n]{0,80}\b(?:verified|formalized|machine\s+checked)\b", re.IGNORECASE), "full_lean_overclaim", "ABF full-manuscript overclaim"),
+        (re.compile(r"\bABF-001\b[^.\n]{0,160}\b(?:claim[- ]map\s+(?:is\s+)?complete|all\s+claims\s+(?:are\s+)?formally\s+mapped)\b", re.IGNORECASE), "full_lean_overclaim", "ABF claim-map completion overclaim"),
+        (re.compile(r"\bABF-001\b[^.\n]{0,200}\bA02\s*(?:-|through|to|\u2013)\s*A06\b[^.\n]{0,100}\b(?:complete|verified|passed|formalized)\b", re.IGNORECASE), "full_lean_overclaim", "ABF A02-A06 completion overclaim"),
+        (re.compile(r"\bABF-001\b[^.\n]{0,200}\bcomplete\s+Boolean\s+atlas\b[^.\n]{0,100}\bformally\s+proved\b", re.IGNORECASE), "full_lean_overclaim", "ABF Boolean-atlas completion overclaim"),
+        (re.compile(r"\bABF-001\b[^.\n]{0,160}\b(?:journal\s+accepted|accepted\s+for\s+publication)\b", re.IGNORECASE), "peer_review_overclaim", "ABF journal-acceptance overclaim"),
+        (re.compile(r"\bABF-001\b[^.\n]{0,160}\b(?:externally\s+(?:validated|reviewed|reproduced)|external\s+review\s+(?:complete|completed|passed))\b", re.IGNORECASE), "peer_review_overclaim", "ABF external-review overclaim"),
         (re.compile(r"\bABF-001\b[^.\n]{0,120}\bpeer[- ]review(?:ed)?\b[^.\n]{0,60}\b(?:complete|completed|accepted|yes|true)\b", re.IGNORECASE), "peer_review_overclaim", "ABF peer-review overclaim"),
-        (re.compile(r"\bABF-001\b[^.\n]{0,120}\b(?:historically\s+first|world[- ]first|historical\s+priority\s+(?:established|claimed|proved))\b", re.IGNORECASE), "historical_priority_overclaim", "ABF priority overclaim"),
+        (re.compile(r"\bABF-001\b[^.\n]{0,160}\b(?:historically\s+first|first\s+result\s+of\s+its\s+kind|world[- ]first|historical\s+priority\s+(?:established|claimed|proved))\b", re.IGNORECASE), "historical_priority_overclaim", "ABF priority overclaim"),
     )
     fsg_patterns = (
         (re.compile(r"\bFSG-001\b[^.\n]{0,120}\bactive\s+public\s+theorem\b", re.IGNORECASE), "fsg_release", "FSG active public theorem overclaim"),
-        (re.compile(r"\bFSG-001\b[^.\n]{0,160}\bcorrected\s+theorem\b[^.\n]{0,80}\b(?:established|passed|accepted|proved)\b", re.IGNORECASE), "fsg_correction_overclaim", "FSG corrected theorem overclaim"),
+        (re.compile(r"\bFSG-001\b[^.\n]{0,160}\b(?:corrected|repaired)\s+theorem\b[^.\n]{0,80}\b(?:established|passed|accepted|proved)\b", re.IGNORECASE), "fsg_correction_overclaim", "FSG corrected theorem overclaim"),
         (re.compile(r"\bFSG-001\b[^.\n]{0,120}\bzero\s+(?:open\s+)?block(?:er|ing\s+finding)s?\b", re.IGNORECASE), "fsg_blocker_contradiction", "FSG zero-blocker contradiction"),
+        (re.compile(r"\bFSG-001\b[^.\n]{0,120}\bblocker\s+removed\b", re.IGNORECASE), "fsg_blocker_contradiction", "FSG blocker-removal contradiction"),
         (re.compile(r"\bFSG-001\b[^.\n]{0,120}\bexternally\s+(?:validated|reviewed|reproduced)\b", re.IGNORECASE), "peer_review_overclaim", "FSG external-review overclaim"),
+        (re.compile(r"\bFSG-001\b[^.\n]{0,160}\bcorrection\s+passed\s+external\s+review\b", re.IGNORECASE), "peer_review_overclaim", "FSG correction external-review overclaim"),
         (re.compile(r"\bFSG-001\b[^.\n]{0,120}\bpublicly\s+released\b", re.IGNORECASE), "fsg_release", "FSG public-release overclaim"),
+        (re.compile(r"\bFSG-001\b[^.\n]{0,160}\bpublic\s+release\s+ready\b", re.IGNORECASE), "fsg_release", "FSG public-release readiness overclaim"),
     )
     acm_patterns = (
-        (re.compile(r"\bACM-001\b[^.\n]{0,120}\bactive\s+public\s+theorem\b", re.IGNORECASE), "acm_hold", "ACM active public theorem overclaim"),
-        (re.compile(r"\bACM-001\b[^.\n]{0,120}\bcontrolling\s+manuscript\b[^.\n]{0,80}\bcomplete\b", re.IGNORECASE), "acm_hold", "ACM controlling-manuscript completion overclaim"),
-        (re.compile(r"\bACM-001\b[^.\n]{0,120}\bfull\s+Lean\b[^.\n]{0,80}\bcomplete\b", re.IGNORECASE), "full_lean_overclaim", "ACM full-Lean overclaim"),
+        (re.compile(r"\bACM-001\b[^.\n]{0,120}\bactive\s+(?:public\s+)?theorem(?:\s+package)?\b", re.IGNORECASE), "acm_hold", "ACM active theorem package overclaim"),
+        (re.compile(r"\bACM-001\b[^.\n]{0,120}\b(?:controlling\s+)?manuscript\b[^.\n]{0,80}\bcomplete\b", re.IGNORECASE), "acm_hold", "ACM manuscript completion overclaim"),
+        (re.compile(r"\bACM-001\b[^.\n]{0,160}\bclaim[- ]map\s+(?:is\s+)?complete\b", re.IGNORECASE), "acm_hold", "ACM claim-map completion overclaim"),
+        (re.compile(r"\bACM-001\b[^.\n]{0,160}\b(?:fully\s+Lean\s+verified|full\s+Lean\b[^.\n]{0,80}\bcomplete)\b", re.IGNORECASE), "full_lean_overclaim", "ACM full-Lean overclaim"),
     )
     add_pattern_findings(relative, body, hinc_patterns, findings)
     add_pattern_findings(relative, body, abf_patterns, findings)
@@ -466,31 +493,106 @@ def reconcile_text_surface(root: Path, relative: str) -> list[Finding]:
 
 
 GITHUB_REPO_URL_RE = re.compile(r"https?://github\.com/([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)", re.IGNORECASE)
-GENERIC_REPO_TOKEN_RE = re.compile(r"\b((?:example\.invalid|novakprotocol|[a-z0-9_.-]+-sentinel)/(?:nonpublic|private|withheld|sentinel)[a-z0-9_.-]*)\b", re.IGNORECASE)
+NOVAK_REPO_TOKEN_RE = re.compile(r"\bnovakprotocol/([A-Za-z0-9_.-]+)\b", re.IGNORECASE)
+GENERIC_REPO_TOKEN_RE = re.compile(r"\b((?:example\.invalid|[a-z0-9_.-]+-sentinel)/(?:nonpublic|private|withheld|sentinel)[a-z0-9_.-]*)\b", re.IGNORECASE)
 PRIVATE_REPOSITORY_SHORTHAND_RE = re.compile(r"\b[A-Z](?:-[A-Za-z0-9]+)*Lab\b")
 PRIVATE_STYLE_PR_RE = re.compile(
-    r"\b(?:private|nonpublic|withheld)\s+(?:lab|laboratory|source|project)[^\n]{0,80}\b(?:PR|pull|issue)\b\s*(?:#?\d+|#[A-Z][A-Z0-9_-]*)\b"
-    r"|\b(?:PR|pull|issue)\b\s*(?:#?\d+|#[A-Z][A-Z0-9_-]*)\b[^\n]{0,80}\b(?:private|nonpublic|withheld)\s+(?:lab|laboratory|source|project)\b",
+    r"\b(?:private|nonpublic|withheld)\s+(?:lab|laboratory|repository|source|project)[^\n]{0,80}\b(?:PR|pull|issue)\b\s*(?:#?\d+|#[A-Z][A-Z0-9_-]*)\b"
+    r"|\b(?:PR|pull|issue)\b\s*(?:#?\d+|#[A-Z][A-Z0-9_-]*)\b[^\n]{0,80}\b(?:private|nonpublic|withheld)\s+(?:lab|laboratory|repository|source|project)\b",
     re.IGNORECASE,
 )
 NONPUBLIC_PROJECT_PR_LINK_RE = re.compile(r"https?://(?:github\.com/)?[A-Za-z0-9_.-]+/(?:nonpublic|private|withheld|sentinel)[A-Za-z0-9_.-]+/(?:pull|issues?)/[A-Za-z0-9_-]+", re.IGNORECASE)
-PRIVATE_BRANCH_RE = re.compile(r"\b(?:agent|fix|formal)/(?:private|nonpublic|withheld|fsg|sentinel)[A-Za-z0-9._/-]*\b", re.IGNORECASE)
-PRIVATE_PATH_RE = re.compile(r"\b(?:papers|manuscript|source|src|formal|review|reviews|evidence|artifact|artifacts|release)/(?:private|nonpublic|withheld|fsg|sentinel)[A-Za-z0-9._/-]*\b", re.IGNORECASE)
-PRIVATE_WINDOWS_PATH_RE = re.compile(r"[A-Za-z]:\\(?:[^\\\r\n]+\\)*(?:private|nonpublic|withheld|fsg|sentinel)[^\\\r\n]*(?:\\[^\\\r\n]+)*", re.IGNORECASE)
-EXACT_HASH_CONTEXT_RE = re.compile(r"\b(?:private|nonpublic|withheld|fsg)[^\n]{0,80}\b[0-9a-f]{40}\b|\b[0-9a-f]{40}\b[^\n]{0,80}\b(?:private|nonpublic|withheld|fsg)\b", re.IGNORECASE)
+PRIVATE_BRANCH_RE = re.compile(r"\b(?:agent|fix|formal|private|nonpublic|withheld)/(?:private|nonpublic|withheld|fsg|sentinel|synthetic)[A-Za-z0-9._/-]*\b", re.IGNORECASE)
+PRIVATE_PATH_RE = re.compile(r"\b(?:papers|manuscript|manuscripts|source|src|formal|review|reviews|evidence|artifact|artifacts|release)/(?:private|nonpublic|withheld|fsg|sentinel|synthetic)[A-Za-z0-9._/-]*\b", re.IGNORECASE)
+PRIVATE_WINDOWS_PATH_RE = re.compile(r"[A-Za-z]:\\(?:[^\\\r\n]+\\)*(?:private|nonpublic|withheld|fsg|sentinel|synthetic)[^\\\r\n]*(?:\\[^\\\r\n]+)*", re.IGNORECASE)
+HASH_RE = re.compile(r"\b[0-9a-f]{40}\b", re.IGNORECASE)
+PRIVATE_HASH_CONTEXT_RE = re.compile(r"\b(?:private|nonpublic|internal source|private provenance|internal provenance|withheld)\b", re.IGNORECASE)
+PUBLIC_HASH_CONTEXT_MARKERS = (
+    "compiled source commit",
+    "formal_source_commit",
+    "immutable source",
+    "merge commit",
+    "novakprotocol/n-human-ai-mathematics",
+    "novakprotocol/novak-sdt",
+    "public checker",
+    "public export",
+    "release branch source commit",
+    "source commit",
+    "standalone initial commit",
+)
 SYNTHETIC_PRIVATE_HOST_RE = re.compile(r"\bexample\.invalid/(?:private|nonpublic|internal|withheld|sentinel)[A-Za-z0-9._/-]*", re.IGNORECASE)
-DYNAMIC_URL_CONSTRUCTION_RE = re.compile(r"[\"']https?://[^\"']*[\"']\s*\+\s*[\"'][^\"']*(?:private|nonpublic|withheld|sentinel)[^\"']*[\"']", re.IGNORECASE)
-DYNAMIC_BRANCH_CONSTRUCTION_RE = re.compile(r"[\"'](?:agent|fix|formal)/[\"']\s*\+\s*[\"'][^\"']*(?:private|nonpublic|withheld|fsg|sentinel)[^\"']*[\"']", re.IGNORECASE)
-DYNAMIC_PATH_CONSTRUCTION_RE = re.compile(r"[\"'](?:manuscript|source|evidence|artifact|artifacts)/[\"']\s*\+\s*[\"'][^\"']*(?:private|nonpublic|withheld|fsg|sentinel)[^\"']*[\"']", re.IGNORECASE)
+DYNAMIC_REPO_URL_CONSTRUCTION_RE = re.compile(
+    r"[\"']https?://github\.com/?[\"']\s*\+\s*[\"'][^\"']*(?:novakprotocol|nonpublic|private|withheld|sentinel|synthetic)[^\"']*[\"']"
+    r"|[\"']https?://github\.com/novakprotocol/?[\"']\s*\+\s*[\"'][^\"']+[\"']",
+    re.IGNORECASE,
+)
+DYNAMIC_PR_CONSTRUCTION_RE = re.compile(
+    r"(?:private|nonpublic|withheld)[^\n]{0,120}(?:[\"'][^\"']*[\"']\s*\+\s*)+[\"'][^\"']*(?:PR|pull|issue|pull/)[^\"']*[\"']"
+    r"|[\"'](?:private|nonpublic|withheld)[^\"']*[\"']\s*\+\s*[\"'][^\"']*(?:PR|pull|issue|pull/)[^\"']*[\"']",
+    re.IGNORECASE,
+)
+DYNAMIC_BRANCH_CONSTRUCTION_RE = re.compile(r"[\"'](?:agent|fix|formal|private|nonpublic|withheld)/[\"']\s*\+\s*[\"'][^\"']*(?:private|nonpublic|withheld|fsg|sentinel|synthetic)[^\"']*[\"']", re.IGNORECASE)
+DYNAMIC_PATH_CONSTRUCTION_RE = re.compile(r"[\"'](?:manuscript|manuscripts|source|evidence|artifact|artifacts)/[\"']\s*\+\s*[\"'][^\"']*(?:private|nonpublic|withheld|fsg|sentinel|synthetic)[^\"']*[\"']", re.IGNORECASE)
 
+
+def line_number(body: str, offset: int) -> int:
+    return body.count("\n", 0, offset) + 1
+
+
+def line_text(body: str, offset: int) -> str:
+    start = body.rfind("\n", 0, offset) + 1
+    end = body.find("\n", offset)
+    if end == -1:
+        end = len(body)
+    return body[start:end]
+
+
+def private_hash_context_findings(relative: str, body: str) -> list[Finding]:
+    findings: list[Finding] = []
+    emitted: set[tuple[str, int]] = set()
+
+    def emit(offset: int) -> None:
+        line = line_number(body, offset)
+        key = (relative, line)
+        if key not in emitted:
+            emitted.add(key)
+            findings.append(Finding("ERROR", f"{relative}:{line}", "private-context exact source hash", "private_reference"))
+
+    for match in HASH_RE.finditer(body):
+        hash_line = line_text(body, match.start())
+        if PRIVATE_HASH_CONTEXT_RE.search(hash_line):
+            emit(match.start())
+            continue
+        paragraph_start = body.rfind("\n\n", 0, match.start()) + 2
+        paragraph_end = body.find("\n\n", match.end())
+        if paragraph_end == -1:
+            paragraph_end = len(body)
+        paragraph = body[paragraph_start:paragraph_end]
+        folded_line = hash_line.casefold()
+        folded_paragraph = paragraph.casefold()
+        public_context = any(marker in folded_line or marker in folded_paragraph for marker in PUBLIC_HASH_CONTEXT_MARKERS)
+        if PRIVATE_HASH_CONTEXT_RE.search(paragraph) and not public_context:
+            emit(match.start())
+
+    structured = re.compile(
+        r"(?is)\b(?:source_classification|source_provenance|private_provenance|classification)\s*:\s*"
+        r"(?:private|nonpublic|internal source|private provenance)\b.{0,250}?"
+        r"\b(?:source_commit|commit|source_sha|sha)\s*:\s*\n?\s*([0-9a-f]{40})\b"
+    )
+    for match in structured.finditer(body):
+        emit(match.start(1))
+    return findings
 
 def private_reference_findings(relative: str, body: str) -> list[Finding]:
     findings: list[Finding] = []
     for match in GITHUB_REPO_URL_RE.finditer(body):
         repo = match.group(1).casefold().removesuffix(".git")
         if repo not in APPROVED_PUBLIC_REPOSITORIES:
-            line = body.count("\n", 0, match.start()) + 1
-            findings.append(Finding("ERROR", f"{relative}:{line}", "non-allowlisted project repository URL", "private_reference"))
+            findings.append(Finding("ERROR", f"{relative}:{line_number(body, match.start())}", "non-allowlisted project repository URL", "private_reference"))
+    for match in NOVAK_REPO_TOKEN_RE.finditer(body):
+        repo = f"novakprotocol/{match.group(1)}".casefold().removesuffix(".git")
+        if repo not in APPROVED_PUBLIC_REPOSITORIES:
+            findings.append(Finding("ERROR", f"{relative}:{line_number(body, match.start())}", "non-allowlisted novakprotocol repository reference", "private_reference"))
     for pattern, message in (
         (GENERIC_REPO_TOKEN_RE, "synthetic or nonpublic repository token"),
         (PRIVATE_REPOSITORY_SHORTHAND_RE, "private repository shorthand"),
@@ -499,17 +601,16 @@ def private_reference_findings(relative: str, body: str) -> list[Finding]:
         (PRIVATE_BRANCH_RE, "private-style branch name"),
         (PRIVATE_PATH_RE, "private manuscript/source/evidence/artifact path"),
         (PRIVATE_WINDOWS_PATH_RE, "private-style local path"),
-        (EXACT_HASH_CONTEXT_RE, "private-context exact source hash"),
         (SYNTHETIC_PRIVATE_HOST_RE, "synthetic nonpublic host reference"),
-        (DYNAMIC_URL_CONSTRUCTION_RE, "dynamically constructed private-style URL"),
+        (DYNAMIC_REPO_URL_CONSTRUCTION_RE, "dynamically constructed nonallowlisted repository URL"),
+        (DYNAMIC_PR_CONSTRUCTION_RE, "dynamically constructed private-style PR reference"),
         (DYNAMIC_BRANCH_CONSTRUCTION_RE, "dynamically constructed private-style branch"),
         (DYNAMIC_PATH_CONSTRUCTION_RE, "dynamically constructed private-style path"),
     ):
         for match in pattern.finditer(body):
-            line = body.count("\n", 0, match.start()) + 1
-            findings.append(Finding("ERROR", f"{relative}:{line}", message, "private_reference"))
+            findings.append(Finding("ERROR", f"{relative}:{line_number(body, match.start())}", message, "private_reference"))
+    findings.extend(private_hash_context_findings(relative, body))
     return findings
-
 
 def credential_findings(relative: str, body: str) -> list[Finding]:
     pieces = {

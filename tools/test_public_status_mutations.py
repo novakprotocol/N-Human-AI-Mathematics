@@ -172,46 +172,62 @@ def m14(root: Path) -> tuple[str, str]:
 
 def p01(root: Path) -> tuple[str, str]:
     rel = "docs/learn.html"
-    url = join("https://github.com/", "novakprotocol/", "nonpublic-sentinel", "/pull/", "SYNTHETIC-0001")
-    append_text(root / rel, f'<a href="{url}">synthetic nonpublic review</a>')
-    return rel, "Expose a direct private-style URL."
+    url = join("https://github.com/", "novakprotocol/", "SYNTHETIC-NONPUBLIC-REPO")
+    append_text(root / rel, f'<a href="{url}">synthetic nonpublic repository</a>')
+    return rel, "Expose an arbitrary invented nonallowlisted repository URL."
 
 
 def p02(root: Path) -> tuple[str, str]:
     rel = "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md"
-    append_text(root / rel, words("Synthetic", "reference:", "private", "lab", "PR", "#SYNTHETIC"))
+    append_text(root / rel, words("Synthetic", "reference:", "private", "lab", "PR", "#SYNTHETIC-0001"))
     return rel, "Expose private-lab PR shorthand."
 
 
 def p03(root: Path) -> tuple[str, str]:
-    rel = "tools/synthetic_private_url.py"
+    rel = "reports/synthetic-private-record.yml"
     path = root / rel
     path.parent.mkdir(parents=True, exist_ok=True)
-    line = join('url = "https://github.com/"', ' + "novakprotocol/', 'nonpublic-sentinel"', ' + "/pull/', 'SYNTHETIC-0001"')
-    path.write_text(line + "\n", encoding="utf-8", newline="\n")
-    return rel, "Expose concatenated URL pieces."
+    body = "source_classification: private\nsource_commit:\n" + ("a" * 40) + "\n"
+    path.write_text(body, encoding="utf-8", newline="\n")
+    return rel, "Expose a multiline private-context hash disclosure."
 
 
 def p04(root: Path) -> tuple[str, str]:
-    rel = ".github/workflows/synthetic-private.yml"
+    rel = "tools/synthetic_dynamic_repo.py"
     path = root / rel
     path.parent.mkdir(parents=True, exist_ok=True)
-    line = join('branch: ${{ "fix/"', ' + "nonpublic-sentinel-branch-v1" }}')
+    line = join('url = "https://github.com/"', ' + "novakprotocol/"', ' + "SYNTHETIC-NONPUBLIC-REPO"')
     path.write_text(line + "\n", encoding="utf-8", newline="\n")
-    return rel, "Expose dynamically assembled branch-like path."
+    return rel, "Expose a dynamically concatenated GitHub repository URL."
 
 
 def p05(root: Path) -> tuple[str, str]:
-    rel = "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md"
-    append_text(root / rel, join("Synthetic path: manuscript/", "nonpublic-sentinel", "/candidate.tex"))
-    return rel, "Expose a private manuscript path."
+    rel = "tools/synthetic_dynamic_pr.py"
+    path = root / rel
+    path.parent.mkdir(parents=True, exist_ok=True)
+    private_word = "private"
+    pr_word = "PR"
+    line = f'ref = "{private_word} " + "lab {pr_word} " + "#SYNTHETIC-0001"'
+    path.write_text(line + "\n", encoding="utf-8", newline="\n")
+    return rel, "Expose a dynamically concatenated private PR reference."
 
 
 def p06(root: Path) -> tuple[str, str]:
     rel = "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md"
-    append_text(root / rel, join("Synthetic path: artifacts/", "nonpublic-sentinel", "/package.zip"))
-    return rel, "Expose a private artifact path."
+    append_text(root / rel, join("Synthetic path: manuscript/", "nonpublic-sentinel", "/candidate.tex"))
+    return rel, "Expose a synthetic private manuscript path."
 
+
+def p07(root: Path) -> tuple[str, str]:
+    rel = "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md"
+    append_text(root / rel, join("Synthetic path: evidence/", "nonpublic-sentinel", "/receipt.json"))
+    return rel, "Expose a synthetic private evidence path."
+
+
+def p08(root: Path) -> tuple[str, str]:
+    rel = "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md"
+    append_text(root / rel, join("Synthetic path: artifacts/", "nonpublic-sentinel", "/package.zip"))
+    return rel, "Expose a synthetic private artifact path."
 
 MUTATIONS: tuple[MutationSpec, ...] = (
     MutationSpec("M01", "status", "per_file_state_mismatch", "research-index.json", m01),
@@ -230,10 +246,12 @@ MUTATIONS: tuple[MutationSpec, ...] = (
     MutationSpec("M14", "status", "current_release_channel", "research-index.json", m14),
     MutationSpec("P01", "private_reference", "private_reference", "docs/learn.html", p01),
     MutationSpec("P02", "private_reference", "private_reference", "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md", p02),
-    MutationSpec("P03", "private_reference", "private_reference", "tools/synthetic_private_url.py", p03),
-    MutationSpec("P04", "private_reference", "private_reference", ".github/workflows/synthetic-private.yml", p04),
-    MutationSpec("P05", "private_reference", "private_reference", "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md", p05),
+    MutationSpec("P03", "private_reference", "private_reference", "reports/synthetic-private-record.yml", p03),
+    MutationSpec("P04", "private_reference", "private_reference", "tools/synthetic_dynamic_repo.py", p04),
+    MutationSpec("P05", "private_reference", "private_reference", "tools/synthetic_dynamic_pr.py", p05),
     MutationSpec("P06", "private_reference", "private_reference", "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md", p06),
+    MutationSpec("P07", "private_reference", "private_reference", "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md", p07),
+    MutationSpec("P08", "private_reference", "private_reference", "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md", p08),
 )
 
 
@@ -314,9 +332,11 @@ def run_mutation(clean_baseline: Path, work_parent: Path, spec: MutationSpec) ->
     )
 
 
-def safe_reset_work_parent(root: Path, work_parent: Path) -> None:
+def safe_reset_work_parent(root: Path, work_parent: Path, allowed_parent: Path) -> None:
     resolved = work_parent.resolve()
-    resolved.relative_to(root.resolve())
+    allowed_roots = (root.resolve(), allowed_parent.resolve())
+    if work_parent.name != "_mutation_work" or not any(resolved == item or item in resolved.parents for item in allowed_roots):
+        raise SystemExit(f"refusing unsafe mutation work directory: {work_parent}")
     if work_parent.exists():
         shutil.rmtree(work_parent)
     work_parent.mkdir(parents=True, exist_ok=True)
@@ -329,18 +349,17 @@ def main() -> int:
     parser.add_argument("--log", type=Path)
     args = parser.parse_args()
     root = args.root.resolve()
-    for stale in (args.output, args.log):
-        if stale:
-            stale_path = stale if stale.is_absolute() else root / stale
-            try:
-                stale_path.resolve().relative_to(root)
-            except ValueError:
-                raise SystemExit(f"refusing to remove output outside repository: {stale_path}")
-            if stale_path.exists():
-                stale_path.unlink()
-    work_parent = root / "reports" / "_mutation_work"
+    output_path = args.output if args.output is None or args.output.is_absolute() else root / args.output
+    log_path = args.log if args.log is None or args.log.is_absolute() else root / args.log
+    for stale_path in (output_path, log_path):
+        if stale_path and stale_path.exists():
+            if not stale_path.is_file():
+                raise SystemExit(f"refusing to remove non-file output path: {stale_path}")
+            stale_path.unlink()
+    output_anchor = (output_path or (root / "reports" / "public-status-mutation-tests.json")).resolve().parent
+    work_parent = output_anchor / "_mutation_work"
     status_before = git_status(root)
-    safe_reset_work_parent(root, work_parent)
+    safe_reset_work_parent(root, work_parent, output_anchor)
 
     baseline_root = work_parent / "baseline" / "repo"
     copy_repo(root, baseline_root)
@@ -387,11 +406,11 @@ def main() -> int:
         "records": [asdict(record) for record in records],
     }
     text = json.dumps(payload, indent=2, sort_keys=True) + "\n"
-    if args.output:
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(text, encoding="utf-8", newline="\n")
-    if args.log:
-        args.log.parent.mkdir(parents=True, exist_ok=True)
+    if output_path:
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(text, encoding="utf-8", newline="\n")
+    if log_path:
+        log_path.parent.mkdir(parents=True, exist_ok=True)
         lines = [
             f"baseline: {'PASS' if baseline_ok else 'FAIL'} exit={baseline.returncode}: {baseline_detected}",
             f"worktree_unchanged: {worktree_unchanged}",
@@ -400,7 +419,7 @@ def main() -> int:
             f"{record.id}: {record.result}: exit={record.actual_exit}: category={record.expected_category_present}: path={record.expected_path_present}: {record.detected_finding}"
             for record in records
         )
-        args.log.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+        log_path.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
     print(text, end="")
     return 0 if payload["result"] == "PASS" else 1
 

@@ -9,6 +9,11 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      target_sha:
+        description: "Immutable commit SHA to validate"
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -22,7 +27,42 @@ jobs:
       - name: Check out complete source history
         uses: actions/checkout@v7
         with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.event_name == 'workflow_dispatch' && inputs.target_sha || github.sha }}
           fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify exact workflow checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            expected="${{ github.event.pull_request.head.sha }}"
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            expected="${{ inputs.target_sha }}"
+          else
+            expected="${{ github.sha }}"
+          fi
+          actual="$(git rev-parse HEAD)"
+          echo "event=${{ github.event_name }}"
+          echo "expected_sha=$expected"
+          echo "actual_checked_out_sha=$actual"
+          test "$actual" = "$expected"
+          mkdir -p .artifacts/exact-head
+          python - <<PY
+          import json
+          from pathlib import Path
+
+          payload = {
+              "schema": "nhaim.workflow_exact_head_checkout.v1",
+              "event": "${{ github.event_name }}",
+              "expected_sha": "$expected",
+              "actual_checked_out_sha": "$actual",
+              "match": "$actual" == "$expected",
+          }
+          path = Path(".artifacts/exact-head/${{ github.job }}-checkout.json")
+          path.parent.mkdir(parents=True, exist_ok=True)
+          path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          PY
 
       - name: Set up Python
         uses: actions/setup-python@v7
@@ -235,6 +275,7 @@ jobs:
             reports/hinc-test-log-ci.txt
             reports/abf-test-log-ci.txt
             .artifacts/publication/learn-inline.js
+            .artifacts/exact-head/
           if-no-files-found: warn
           retention-days: 90
 
@@ -245,6 +286,43 @@ jobs:
     steps:
       - name: Check out bounded HINC formal source
         uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.event_name == 'workflow_dispatch' && inputs.target_sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify exact workflow checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            expected="${{ github.event.pull_request.head.sha }}"
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            expected="${{ inputs.target_sha }}"
+          else
+            expected="${{ github.sha }}"
+          fi
+          actual="$(git rev-parse HEAD)"
+          echo "event=${{ github.event_name }}"
+          echo "expected_sha=$expected"
+          echo "actual_checked_out_sha=$actual"
+          test "$actual" = "$expected"
+          mkdir -p .artifacts/exact-head
+          python - <<PY
+          import json
+          from pathlib import Path
+
+          payload = {
+              "schema": "nhaim.workflow_exact_head_checkout.v1",
+              "event": "${{ github.event_name }}",
+              "expected_sha": "$expected",
+              "actual_checked_out_sha": "$actual",
+              "match": "$actual" == "$expected",
+          }
+          path = Path(".artifacts/exact-head/${{ github.job }}-checkout.json")
+          path.parent.mkdir(parents=True, exist_ok=True)
+          path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          PY
 
       - name: Reject proof placeholders
         shell: bash
@@ -297,5 +375,6 @@ jobs:
             reports/hinc-lean-update-ci.txt
             reports/hinc-lean-cache-ci.txt
             reports/hinc-lean-build-ci.txt
+            .artifacts/exact-head/
           if-no-files-found: warn
           retention-days: 90

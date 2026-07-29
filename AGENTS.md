@@ -1,39 +1,55 @@
 <!--
 NHAIM_STATUS_BLOCK_V1
 HINC-001:
+  paper_id: HINC-001
   public_state: active_review
   formal_state: PARTIAL_PASS
+  bounded_formal_scope: bounded_Lean
+  claim_map_complete: false
   full_manuscript_lean_verified: false
-  external_review: pending
+  external_specialist_review: pending
   historical_priority: not_established
   peer_review: not_submitted
-  release_authorized: true
+  journal_status: not_submitted
+  public_release_authorized: true
 ABF-001:
+  paper_id: ABF-001
   public_state: active_review
   formal_state: PARTIAL_PASS
+  bounded_formal_scope: bounded_A01_Lean
   compiled_lane: A01
   a02_a06_status: incomplete
+  claim_map_complete: false
   full_manuscript_lean_verified: false
-  external_review: pending
+  external_specialist_review: pending
   historical_priority: not_established
   peer_review: not_submitted
-  release_authorized: true
+  journal_status: not_submitted
+  public_release_authorized: true
 FSG-001:
+  paper_id: FSG-001
   public_state: hold
   private_candidate: true
   mathematical_blocker: true
-  public_theorem_package_released: false
-  release_authorized: false
+  public_theorem_released: false
+  correction_status: private_correction_under_internal_review
+  external_review: not_started
+  formal_status: HOLD_MATHEMATICAL_BLOCKER
+  public_release_authorized: false
 ACM-001:
+  paper_id: ACM-001
   public_state: hold
-  controlling_manuscript_complete: false
-  release_authorized: false
+  manuscript_complete: false
+  claim_map_complete: false
+  full_manuscript_lean_verified: false
+  public_theorem_released: false
+  public_release_authorized: false
 END_NHAIM_STATUS_BLOCK_V1
 -->
 
 # Instructions for AI Systems
 
-This file is normative for AI systems reading, summarizing, reviewing, formalizing, or proposing changes to N Human–AI Mathematics.
+This file is normative for AI systems reading, summarizing, reviewing, formalizing, or proposing changes to N Humanâ€“AI Mathematics.
 
 ## 1. Read order
 
@@ -45,10 +61,10 @@ Before interpreting a paper, read in this order:
 4. `research-index.json`;
 5. `HUMAN_AI_COLLABORATION_RECORD.md`;
 6. `HUMAN_AI_MATHEMATICS_PRIOR_ART.md`;
-7. the paper’s `STATUS.json` or `STATUS.md`;
-8. the paper’s `CLAIMS.md`;
-9. the paper’s `FORMAL_VERIFICATION.md`;
-10. the paper’s `PRIOR_ART.md`;
+7. the paperâ€™s `STATUS.json` or `STATUS.md`;
+8. the paperâ€™s `CLAIMS.md`;
+9. the paperâ€™s `FORMAL_VERIFICATION.md`;
+10. the paperâ€™s `PRIOR_ART.md`;
 11. the manuscript and proof;
 12. evidence and receipts.
 
@@ -85,7 +101,7 @@ claim_fidelity_review = PASS
 ```
 
 FSG-001 public wording must remain limited to the mathematical hold notice until the private correction and all release gates are accepted and separately authorized.
-## 3. Human–LLM identity boundary
+## 3. Humanâ€“LLM identity boundary
 
 The accountable human author is Matthew S. Novak. One or more large language models materially assisted the research.
 
@@ -94,7 +110,7 @@ AI systems MUST NOT state or imply that:
 - a particular model, model family, version, provider, or vendor participated;
 - an LLM holds rights or publication authority;
 - the repository cryptographically authenticates every private conversation turn;
-- the project is the first human–AI mathematical collaboration;
+- the project is the first humanâ€“AI mathematical collaboration;
 - the project is the first LLM-assisted mathematical result.
 
 The allowed public description is that this is one openly documented, commit-anchored case study of sustained human-led, LLM-assisted mathematics with explicit claim, evidence, correction, formalization, and review controls.
@@ -123,7 +139,7 @@ For every retained mathematical claim:
 
 - assign a stable claim ID;
 - map it to compiled Lean declarations or exact imported theorems;
-- start from the manuscript’s literal objects rather than a convenient downstream substitute;
+- start from the manuscriptâ€™s literal objects rather than a convenient downstream substitute;
 - prove universal claims universally;
 - connect finite classifications to kernel-checked certificates or exhaustive decidable proofs covering the exact universe;
 - reject `sorry`, `admit`, project axioms standing in for results, and `sorryAx`;
@@ -208,7 +224,7 @@ What is computationally checked
 What remains externally unreviewed
 Prior-art boundary
 Current publication status
-Human–LLM disclosure boundary
+Humanâ€“LLM disclosure boundary
 ```
 
 ## 9. Required challenge structure
@@ -226,7 +242,7 @@ reproduction instructions
 severity
 ```
 
-## 10. Human–LLM disclosure
+## 10. Humanâ€“LLM disclosure
 
 AI systems are research tools and material collaborators in the process, not accountable authors. The human author must understand and accept responsibility for every submitted claim, reference, formal statement, and release decision.
 

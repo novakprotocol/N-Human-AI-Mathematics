@@ -1,33 +1,49 @@
 <!--
 NHAIM_STATUS_BLOCK_V1
 HINC-001:
+  paper_id: HINC-001
   public_state: active_review
   formal_state: PARTIAL_PASS
+  bounded_formal_scope: bounded_Lean
+  claim_map_complete: false
   full_manuscript_lean_verified: false
-  external_review: pending
+  external_specialist_review: pending
   historical_priority: not_established
   peer_review: not_submitted
-  release_authorized: true
+  journal_status: not_submitted
+  public_release_authorized: true
 ABF-001:
+  paper_id: ABF-001
   public_state: active_review
   formal_state: PARTIAL_PASS
+  bounded_formal_scope: bounded_A01_Lean
   compiled_lane: A01
   a02_a06_status: incomplete
+  claim_map_complete: false
   full_manuscript_lean_verified: false
-  external_review: pending
+  external_specialist_review: pending
   historical_priority: not_established
   peer_review: not_submitted
-  release_authorized: true
+  journal_status: not_submitted
+  public_release_authorized: true
 FSG-001:
+  paper_id: FSG-001
   public_state: hold
   private_candidate: true
   mathematical_blocker: true
-  public_theorem_package_released: false
-  release_authorized: false
+  public_theorem_released: false
+  correction_status: private_correction_under_internal_review
+  external_review: not_started
+  formal_status: HOLD_MATHEMATICAL_BLOCKER
+  public_release_authorized: false
 ACM-001:
+  paper_id: ACM-001
   public_state: hold
-  controlling_manuscript_complete: false
-  release_authorized: false
+  manuscript_complete: false
+  claim_map_complete: false
+  full_manuscript_lean_verified: false
+  public_theorem_released: false
+  public_release_authorized: false
 END_NHAIM_STATUS_BLOCK_V1
 -->
 
