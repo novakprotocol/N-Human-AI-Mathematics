@@ -20,8 +20,11 @@
     "bounded_receipt": "PASS",
     "whitespace": "PASS"
   },
+  "claim_map_complete": false,
+  "unresolved_formal_scope": true,
   "full_manuscript_lean_verified": false,
-  "public_release_authorized": true,
-  "existing_public_formal_pass_claim": false,
-  "release_effect": "NO_CHANGE_TO_EXISTING_BOUNDED_PUBLIC_REVIEW"
+  "public_release_authorized": false,
+  "active_theorem_status": "SUSPENDED_PENDING_FULL_LEAN",
+  "historical_public_artifact_preserved": true,
+  "release_effect": "PUBLIC_ARCHIVE_FULL_LEAN_REQUALIFICATION_HOLD"
 }
