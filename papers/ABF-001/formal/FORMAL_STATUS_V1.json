@@ -1,16 +1,24 @@
 {
   "schema": "n.human_ai_mathematics.abf001.formal_status.v1",
   "paper_id": "ABF-001",
-  "status": "BOOTSTRAP_COMPILE_PENDING",
+  "status": "PARTIAL_PASS",
   "toolchain": "leanprover/lean4:v4.30.0",
   "mathlib": "v4.30.0",
   "lanes": {
-    "A01_bidual_moment_kernel": "SOURCE_COMMITTED_COMPILE_PENDING",
+    "A01_bidual_moment_kernel": "COMPILED_PASS",
     "A02_reed_muller_duality": "NOT_STARTED",
     "A03_affine_coordinate_span": "NOT_STARTED",
     "A04_order_zero_signature": "NOT_STARTED",
     "A05_order_one_matrix_pencil": "NOT_STARTED",
     "A06_finite_16_to_8_atlas": "NOT_STARTED"
+  },
+  "compiled_evidence": {
+    "workflow_run": 30416840513,
+    "artifact_id": 8710480551,
+    "artifact_sha256": "3f26bf8873cef61256d602906605b43afe358fe6758e767bc01e0253abdf04da",
+    "placeholder_checks": "PASS",
+    "project_axiom_checks": "PASS",
+    "lean_build": "PASS"
   },
   "full_manuscript_lean_verified": false,
   "public_release_authorized": true,
