@@ -1,0 +1,68 @@
+name: Validate full-portfolio Lean policy
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'FULL_LEAN_VERIFICATION_PROGRAM.md'
+      - 'formal-verification-status.json'
+      - 'papers/HINC-001/FORMAL_VERIFICATION.md'
+      - 'papers/ABF-001/FORMAL_VERIFICATION.md'
+      - 'docs/index.html'
+      - 'docs/learn.html'
+      - 'tools/validate_full_lean_portfolio.py'
+      - '.github/workflows/validate-full-lean-portfolio.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'FULL_LEAN_VERIFICATION_PROGRAM.md'
+      - 'formal-verification-status.json'
+      - 'papers/HINC-001/FORMAL_VERIFICATION.md'
+      - 'papers/ABF-001/FORMAL_VERIFICATION.md'
+      - 'docs/index.html'
+      - 'docs/learn.html'
+      - 'tools/validate_full_lean_portfolio.py'
+      - '.github/workflows/validate-full-lean-portfolio.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  policy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out complete source
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+
+      - name: Validate portfolio formal boundaries
+        run: |
+          set -euo pipefail
+          mkdir -p .artifacts/full-lean-portfolio
+          python -m py_compile tools/validate_full_lean_portfolio.py
+          python tools/validate_full_lean_portfolio.py \
+            --root . \
+            --output .artifacts/full-lean-portfolio/validation.json \
+            | tee .artifacts/full-lean-portfolio/validation.stdout
+
+      - name: Validate JSON and whitespace
+        run: |
+          set -euo pipefail
+          python -m json.tool formal-verification-status.json >/dev/null
+          git diff --check origin/main...HEAD
+
+      - name: Upload policy receipt
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: full-lean-portfolio-${{ github.sha }}
+          path: .artifacts/full-lean-portfolio/
+          if-no-files-found: error
+          retention-days: 90
