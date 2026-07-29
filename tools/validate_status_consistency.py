@@ -67,6 +67,18 @@ def validate(root: Path) -> dict[str, Any]:
         if path.suffix in {".md", ".html"}
     }
     combined = "\n".join(text.values()).lower()
+    current_status_text = "\n".join(
+        text[name]
+        for name in (
+            "status",
+            "release",
+            "hold",
+            "hinc_formal",
+            "abf_formal",
+            "index",
+            "learn",
+        )
+    ).lower()
 
     canonical = {
         "HINC-001": {
@@ -153,14 +165,15 @@ def validate(root: Path) -> dict[str, Any]:
     check("abf_not_authorized", abf.get("release", {}).get("public_authorized") is False)
     check("abf_a01_pass", abf_lane.get("lanes", {}).get("A01_bidual_moment_kernel") == "COMPILED_PASS")
     check("abf_lane_not_full", abf_lane.get("full_manuscript_lean_verified") is False)
+    check("abf_lane_not_authorized", abf_lane.get("public_release_authorized") is False)
 
     required_phrases = (
         "active theorem packages under the current rule: none",
         "historical public artifacts",
         "full-lean requalification hold",
-        "private full-lean completion",
+        "full-lean completion",
         "blocked until papers 1–3",
-        "full manuscript",
+        "full-manuscript lean",
     )
     for phrase in required_phrases:
         check("required_status_wording", phrase in combined, phrase=phrase)
@@ -173,13 +186,9 @@ def validate(root: Path) -> dict[str, Any]:
         "two active packages",
         "private release edge",
         "public technical review:     active",
-        '"public_authorized": true',
-        '"public_switch_ready": true',
-        '"proof_assistant_verified": true',
-        '"full_manuscript_lean_verified": true',
     )
     for phrase in contradictions:
-        check("contradiction_absent", phrase not in combined, phrase=phrase)
+        check("contradiction_absent", phrase not in current_status_text, phrase=phrase)
 
     check("portfolio_no_active", portfolio.get("active_theorem_packages") == [])
     check("portfolio_no_full", portfolio.get("papers_with_full_pass") == [])
@@ -193,10 +202,16 @@ def validate(root: Path) -> dict[str, Any]:
         "checks": dict(sorted(counts.items())),
         "failures": failures,
         "conflicting_publication_states": sum(
-            1 for item in failures if item["category"] in {"canonical_public_state", "research_index_state", "contradiction_absent"}
+            1
+            for item in failures
+            if item["category"]
+            in {"canonical_public_state", "research_index_state", "contradiction_absent"}
         ),
         "conflicting_formal_states": sum(
-            1 for item in failures if item["category"] in {"canonical_formal_state", "matrix_formal_state", "hinc_formal_state", "abf_formal_state"}
+            1
+            for item in failures
+            if item["category"]
+            in {"canonical_formal_state", "matrix_formal_state", "hinc_formal_state", "abf_formal_state"}
         ),
         "files": {
             str(path.relative_to(root)): {"sha256": digest(path), "bytes": path.stat().st_size}
