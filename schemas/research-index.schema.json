@@ -19,29 +19,59 @@
     "papers"
   ],
   "properties": {
-    "$schema": {"type": "string"},
-    "schema_version": {"const": "n.human_ai_mathematics.research_index.v1"},
-    "repository": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"},
-    "repository_visibility_required": {"enum": ["private", "public"]},
-    "accountable_owner": {"type": "string", "minLength": 1},
-    "operating_mode": {"const": "human-led-ai-assisted"},
-    "public_release_authorized": {"type": "boolean"},
-    "public_switch_ready": {"type": "boolean"},
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "n.human_ai_mathematics.research_index.v1"
+    },
+    "repository": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "repository_visibility_required": {
+      "enum": [
+        "private",
+        "public"
+      ]
+    },
+    "accountable_owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "operating_mode": {
+      "const": "human-led-ai-assisted"
+    },
+    "public_release_authorized": {
+      "type": "boolean"
+    },
+    "public_switch_ready": {
+      "type": "boolean"
+    },
     "release_channel": {
       "enum": [
-        "private_staging",
         "public_review",
-        "full_lean_requalification_hold",
         "archival_release",
         "journal_submission"
       ]
     },
-    "release_version": {"type": ["string", "null"]},
-    "specific_model_disclosed": {"type": "boolean"},
-    "specific_provider_disclosed": {"type": "boolean"},
+    "release_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "specific_model_disclosed": {
+      "type": "boolean"
+    },
+    "specific_provider_disclosed": {
+      "type": "boolean"
+    },
     "papers": {
       "type": "array",
-      "items": {"$ref": "#/$defs/paper"},
+      "items": {
+        "$ref": "#/$defs/paper"
+      },
       "uniqueItems": true
     }
   },
@@ -50,10 +80,6 @@
       "enum": [
         "active_review",
         "hold",
-        "public_archive_full_lean_requalification_hold",
-        "private_full_lean_completion_hold",
-        "blocked_until_papers_1_3_full_pass",
-        "teaching_preview_blocked_until_papers_1_3_full_pass",
         "archived_case_study",
         "rejected",
         "superseded",
@@ -83,29 +109,69 @@
         "public_release"
       ],
       "properties": {
-        "id": {"type": "string", "pattern": "^[A-Z]{2,8}-[0-9]{3}$"},
-        "slug": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
-        "title": {"type": "string", "minLength": 8},
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Z]{2,8}-[0-9]{3}$"
+        },
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 8
+        },
         "fields": {
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
-          "items": {"type": "string", "minLength": 2}
+          "items": {
+            "type": "string",
+            "minLength": 2
+          }
         },
-        "state": {"$ref": "#/$defs/state"},
-        "claim_status": {"type": "string", "minLength": 1},
-        "human_proof": {"type": "string", "minLength": 1},
-        "internal_reproduction": {"type": "string", "minLength": 1},
+        "state": {
+          "$ref": "#/$defs/state"
+        },
+        "claim_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "human_proof": {
+          "type": "string",
+          "minLength": 1
+        },
+        "internal_reproduction": {
+          "type": "string",
+          "minLength": 1
+        },
         "formal_verification": {
           "oneOf": [
-            {"type": "string", "minLength": 1},
-            {"$ref": "#/$defs/formalObject"}
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "$ref": "#/$defs/formalObject"
+            }
           ]
         },
-        "external_specialist_review": {"type": "string", "minLength": 1},
-        "historical_priority": {"type": "string", "minLength": 1},
-        "peer_review": {"type": "string", "minLength": 1},
-        "public_release": {"type": "string", "minLength": 1}
+        "external_specialist_review": {
+          "type": "string",
+          "minLength": 1
+        },
+        "historical_priority": {
+          "type": "string",
+          "minLength": 1
+        },
+        "peer_review": {
+          "type": "string",
+          "minLength": 1
+        },
+        "public_release": {
+          "type": "string",
+          "minLength": 1
+        }
       }
     }
   }

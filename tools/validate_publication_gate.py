@@ -465,7 +465,7 @@ def main() -> int:
     errors = [item for item in findings if item.level == "ERROR"]
     result = {
         "schema_version": "n.human_llm_mathematics.publication_gate_validation.v1",
-        "root": str(root),
+        "root": "<repo>",
         "result": "PASS" if not errors else "FAIL",
         "error_count": len(errors),
         "findings": [asdict(item) for item in findings],

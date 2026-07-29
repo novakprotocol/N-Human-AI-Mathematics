@@ -1,0 +1,7 @@
+{
+  "error_count": 0,
+  "findings": [],
+  "result": "PASS",
+  "root": "<repo>",
+  "schema_version": "n.human_llm_mathematics.publication_gate_validation.v1"
+}

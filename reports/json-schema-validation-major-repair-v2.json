@@ -1,0 +1,66 @@
+{
+  "failure_count": 0,
+  "record_count": 7,
+  "records": [
+    {
+      "errors": [],
+      "instance_file": "research-index.json",
+      "result": "PASS",
+      "schema_file": "schemas/research-index.schema.json",
+      "validator": "jsonschema.Draft202012Validator",
+      "validator_version": "4.26.0"
+    },
+    {
+      "errors": [],
+      "instance_file": "formal-verification-status.json",
+      "result": "PASS",
+      "schema_file": "schemas/full-lean-portfolio.schema.json",
+      "validator": "jsonschema.Draft202012Validator",
+      "validator_version": "4.26.0"
+    },
+    {
+      "errors": [],
+      "instance_file": "PAPER_1_3_FULL_LEAN_STATUS.json",
+      "result": "PASS",
+      "schema_file": "schemas/paper-1-3-full-lean-status.schema.json",
+      "validator": "jsonschema.Draft202012Validator",
+      "validator_version": "4.26.0"
+    },
+    {
+      "errors": [],
+      "instance_file": "papers/HINC-001/STATUS.json",
+      "result": "PASS",
+      "schema_file": "schemas/paper-status.schema.json",
+      "validator": "jsonschema.Draft202012Validator",
+      "validator_version": "4.26.0"
+    },
+    {
+      "errors": [],
+      "instance_file": "papers/ABF-001/STATUS.json",
+      "result": "PASS",
+      "schema_file": "schemas/paper-status.schema.json",
+      "validator": "jsonschema.Draft202012Validator",
+      "validator_version": "4.26.0"
+    },
+    {
+      "errors": [],
+      "instance_file": "reports/publication-gates/HINC-001.json",
+      "result": "PASS",
+      "schema_file": "schemas/publication-gate.schema.json",
+      "validator": "jsonschema.Draft202012Validator",
+      "validator_version": "4.26.0"
+    },
+    {
+      "errors": [],
+      "instance_file": "reports/publication-gates/ABF-001.json",
+      "result": "PASS",
+      "schema_file": "schemas/publication-gate.schema.json",
+      "validator": "jsonschema.Draft202012Validator",
+      "validator_version": "4.26.0"
+    }
+  ],
+  "result": "PASS",
+  "schema": "n.human_ai_mathematics.json_schema_validation.v1",
+  "validator_package": "jsonschema",
+  "validator_version": "4.26.0"
+}

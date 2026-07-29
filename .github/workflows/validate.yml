@@ -42,6 +42,11 @@ jobs:
           python -m py_compile tools/validate_full_lean_portfolio.py
           python -m py_compile tools/validate_status_consistency.py
           python -m py_compile tools/validate_learning_page.py
+          python -m py_compile tools/public_status_checks.py
+          python -m py_compile tools/validate_json_schema.py
+          python -m py_compile tools/validate_internal_links.py
+          python -m py_compile tools/validate_public_surface_scan.py
+          python -m py_compile tools/test_public_status_mutations.py
           python -m py_compile papers/HINC-001/src/mcrc_hidden_infinitesimal_noncommutativity_standalone.py
           python -m py_compile papers/HINC-001/src/standalone_common_core_verifier.py
           python -m py_compile papers/HINC-001/tests/test_hinc_standalone.py
@@ -189,7 +194,13 @@ jobs:
             reports/status-consistency-validation-ci.json
             reports/learning-page-validation-ci.json
             reports/publication-gate-validation-ci.json
+            reports/json-schema-validation-ci.json
+            reports/internal-link-validation-ci.json
+            reports/public-surface-scan-ci.json
+            reports/public-status-mutation-tests-ci.json
+            reports/public-status-mutation-tests-ci.log
             reports/hinc-test-log-ci.txt
+            reports/abf-test-log-ci.txt
             .artifacts/publication/learn-inline.js
           if-no-files-found: warn
           retention-days: 90

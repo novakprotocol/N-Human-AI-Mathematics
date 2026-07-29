@@ -19,6 +19,7 @@ ABF-001   active public candidate technical review
 FSG-001   private candidate
           public state: HOLD -- MATHEMATICAL BLOCKER
           mathematical state: C06 / main theorem item (v) false as written
+          no public theorem package released
           public theorem package released: no
           public release authorized: no
 

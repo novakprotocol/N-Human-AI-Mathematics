@@ -44,7 +44,7 @@ peer reviewed, externally reproduced, historically first, or journal accepted.
 
 ## FSG and Future Releases
 
-FSG-001 is blocked independently by a confirmed mathematical counterexample in
+FSG-001 is on HOLD -- MATHEMATICAL BLOCKER and is blocked independently by a confirmed mathematical counterexample in
 the private candidate manuscript. No public FSG theorem package has been
 released, and no public FSG release is authorized.
 

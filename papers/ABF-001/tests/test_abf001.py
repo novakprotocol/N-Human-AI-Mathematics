@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import os
+import shutil
 import sys
 import tempfile
 import unittest
@@ -14,13 +16,22 @@ from abf001_verifier import analyze
 class ABF001VerifierTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.temp = tempfile.TemporaryDirectory()
-        cls.output = Path(cls.temp.name)
+        output_root = os.environ.get("ABF001_TEST_OUTPUT_DIR")
+        if output_root:
+            cls.temp = None
+            cls.output = Path(output_root)
+            if cls.output.exists():
+                shutil.rmtree(cls.output)
+            cls.output.mkdir(parents=True, exist_ok=True)
+        else:
+            cls.temp = tempfile.TemporaryDirectory()
+            cls.output = Path(cls.temp.name)
         cls.report = analyze(cls.output)
 
     @classmethod
     def tearDownClass(cls) -> None:
-        cls.temp.cleanup()
+        if cls.temp is not None:
+            cls.temp.cleanup()
 
     def test_truth_table_and_top_layer(self) -> None:
         self.assertEqual(

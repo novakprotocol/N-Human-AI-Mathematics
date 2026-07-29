@@ -1,6 +1,6 @@
 # Publication Workflow
 
-N-MathLab remains the private research laboratory. N Human–AI Mathematics receives only curated, self-contained exports.
+the private laboratory remains the private research laboratory. N Human–AI Mathematics receives only curated, self-contained exports.
 
 ## Two distinct release tracks
 
@@ -32,7 +32,7 @@ A public GitHub repository is not a journal publication. External review is not 
 
 ## Gate 1 — Select one controlling result
 
-The paper must have one principal object and one controlling theorem package. Related lemmas may be included; unrelated result stacks remain in N-MathLab.
+The paper must have one principal object and one controlling theorem package. Related lemmas may be included; unrelated result stacks remain outside the public review package.
 
 Required:
 
@@ -180,7 +180,7 @@ After public visibility:
 
 ## Gate 11 — Private or public specialist review
 
-Send one bounded package to the appropriate specialist. Ask specific questions. Do not send the entire N-MathLab history unless requested.
+Send one bounded package to the appropriate specialist. Ask specific questions. Do not send the entire the private laboratory history unless requested.
 
 A specialist packet includes:
 
@@ -222,7 +222,14 @@ Reviewable Markdown, LaTeX, formal source, structured status, and exact evidence
 
 ## One paper at a time
 
-The active public candidate-review packages are `HINC-001` and `ABF-001`. `FSG-001` remains private on HOLD -- MATHEMATICAL BLOCKER with no public theorem package released and no public release authorization. `ACM-001` remains on hold pending consolidation.
+Current portfolio state:
+
+```text
+HINC-001  active public candidate technical review; PARTIAL_PASS / bounded Lean verification; full manuscript incomplete
+ABF-001   active public candidate technical review; PARTIAL_PASS / bounded A01 Lean verification; full manuscript incomplete
+FSG-001   private candidate; HOLD -- MATHEMATICAL BLOCKER; no public theorem package released; no public release authorization
+ACM-001   hold pending consolidation; controlling manuscript incomplete; no public release authorization
+```
 
 The public workflow must demonstrate:
 

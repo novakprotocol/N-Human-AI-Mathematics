@@ -90,10 +90,20 @@ jobs:
           test -f docs/styles.css
           test -f docs/404.html
           test -f docs/.nojekyll
-          grep -q "Public technical review" docs/index.html
-          grep -q "Candidate mathematics open for technical review" docs/index.html
+          grep -q "HINC-001</dt><dd>Active candidate public technical review" docs/index.html
+          grep -q "ABF-001</dt><dd>Active candidate public technical review" docs/index.html
+          grep -q "Bounded Lean PASS" docs/index.html
+          grep -q "Bounded A01 Lean PASS" docs/index.html
+          grep -q "FSG private mathematical hold" docs/index.html
+          grep -q "HOLD -- MATHEMATICAL BLOCKER" docs/index.html
+          grep -q "ACM consolidation hold" docs/index.html
+          grep -q "Hold pending consolidation" docs/index.html
           grep -q "Peer reviewed</span><strong>No" docs/index.html
           grep -q "Model/provider</span><strong>Not disclosed" docs/index.html
+          if grep -Eiq "No active theorem packages|historical artifacts only|fully Lean verified" docs/index.html; then
+            echo "Public site contains superseded or overclaiming status wording" >&2
+            exit 1
+          fi
           if grep -qi "noindex" docs/index.html; then
             echo "Public site still contains noindex" >&2
             exit 1

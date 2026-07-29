@@ -63,7 +63,7 @@ A02-A06 and the complete proof-connected finite atlas remain unformalized.
 FSG-001 is private and paused. A universal arithmetic criterion in the private
 candidate manuscript was disproved before public release. The private statement,
 proof, tests, formal map, and status records are being corrected and
-independently re-audited. No FSG theorem package has been publicly released.
+independently re-audited. No public FSG theorem package has been released. No FSG theorem package has been publicly released.
 
 ```text
 public state:       private candidate

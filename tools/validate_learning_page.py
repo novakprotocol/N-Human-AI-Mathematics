@@ -9,6 +9,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
 
+from public_status_checks import private_reference_findings
+
 SCHEMA = "n.human_ai_mathematics.learning_page_validation.v14"
 
 
@@ -85,11 +87,6 @@ def validate(root: Path) -> dict[str, Any]:
         "full-Lean requalification hold",
         "Active theorem status suspended",
         "Private release edge",
-        "github.com/novakprotocol/N-MathLab",
-        "PR #428",
-        "agent/mcrc-fibonacci-sandpile-groups-v3",
-        "papers/mcrc-fibonacci-sandpile-v3",
-        "PASS_PUBLIC_TECHNICAL_REVIEW_FSG",
         "renderPetal",
         "mSlider",
         "Interactive Carry-Rees petal teaching diagram",
@@ -104,6 +101,12 @@ def validate(root: Path) -> dict[str, Any]:
     check("interactive_acm", "renderLights" in page and "lightReadout" in page)
     check("fsg_noninteractive", "hold-notice" in page and "renderPetal" not in page and "mSlider" not in page)
     check("page_size", 12_000 <= len(page.encode("utf-8")) <= 90_000, bytes=len(page.encode("utf-8")))
+    for finding in private_reference_findings("docs/learn.html", page):
+        check("private_reference_absent", False, path=finding.path, message=finding.message)
+    for finding in private_reference_findings("docs/index.html", index):
+        check("private_reference_absent", False, path=finding.path, message=finding.message)
+    for finding in private_reference_findings("FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md", correction):
+        check("private_reference_absent", False, path=finding.path, message=finding.message)
 
     required_index_phrases = (
         'href="learn.html"',
@@ -122,8 +125,6 @@ def validate(root: Path) -> dict[str, Any]:
         "Historical public artifacts",
         "Active theorem status suspended",
         "Private release edge",
-        "github.com/novakprotocol/N-MathLab",
-        "PR #428",
     ):
         check("index_overclaim_absent", phrase.casefold() not in index.casefold(), phrase=phrase)
 

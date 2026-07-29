@@ -1,6 +1,6 @@
 # Research Index
 
-This index lists only results selected for paper-scale review packages. It is not an inventory of every N-MathLab experiment.
+This index lists only results selected for paper-scale review packages. It is not an inventory of every the private laboratory experiment.
 
 ## Repository State
 

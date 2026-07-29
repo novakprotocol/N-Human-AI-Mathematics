@@ -1,4 +1,4 @@
-name: Validate repository status consistency
+﻿name: Validate repository status consistency
 
 on:
   pull_request:
@@ -14,14 +14,23 @@ on:
       - 'PAPER_1_3_FULL_LEAN_STATUS.json'
       - 'formal-verification-status.json'
       - 'research-index.json'
+      - 'schemas/**'
       - 'papers/HINC-001/STATUS.json'
       - 'papers/HINC-001/FORMAL_VERIFICATION.md'
       - 'papers/ABF-001/STATUS.json'
       - 'papers/ABF-001/FORMAL_VERIFICATION.md'
       - 'papers/ABF-001/formal/FORMAL_STATUS_V1.json'
+      - 'reports/publication-gates/HINC-001.json'
+      - 'reports/publication-gates/ABF-001.json'
       - 'docs/index.html'
       - 'docs/learn.html'
+      - 'tools/public_status_checks.py'
       - 'tools/validate_status_consistency.py'
+      - 'tools/validate_json_schema.py'
+      - 'tools/validate_internal_links.py'
+      - 'tools/validate_public_surface_scan.py'
+      - 'tools/test_public_status_mutations.py'
+      - 'requirements-validation.txt'
       - '.github/workflows/validate-status-consistency.yml'
   push:
     branches: [main]
@@ -36,14 +45,23 @@ on:
       - 'PAPER_1_3_FULL_LEAN_STATUS.json'
       - 'formal-verification-status.json'
       - 'research-index.json'
+      - 'schemas/**'
       - 'papers/HINC-001/STATUS.json'
       - 'papers/HINC-001/FORMAL_VERIFICATION.md'
       - 'papers/ABF-001/STATUS.json'
       - 'papers/ABF-001/FORMAL_VERIFICATION.md'
       - 'papers/ABF-001/formal/FORMAL_STATUS_V1.json'
+      - 'reports/publication-gates/HINC-001.json'
+      - 'reports/publication-gates/ABF-001.json'
       - 'docs/index.html'
       - 'docs/learn.html'
+      - 'tools/public_status_checks.py'
       - 'tools/validate_status_consistency.py'
+      - 'tools/validate_json_schema.py'
+      - 'tools/validate_internal_links.py'
+      - 'tools/validate_public_surface_scan.py'
+      - 'tools/test_public_status_mutations.py'
+      - 'requirements-validation.txt'
       - '.github/workflows/validate-status-consistency.yml'
   workflow_dispatch:
 
@@ -53,7 +71,7 @@ permissions:
 jobs:
   consistency:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
         with:
@@ -63,15 +81,41 @@ jobs:
         with:
           python-version: '3.13'
 
+      - name: Install validation requirements
+        run: python -m pip install --disable-pip-version-check -r requirements-validation.txt
+
       - name: Validate publication and formal-state consistency
         run: |
           set -euo pipefail
           mkdir -p .artifacts/status-consistency
-          python -m py_compile tools/validate_status_consistency.py
+          python -m py_compile \
+            tools/public_status_checks.py \
+            tools/validate_status_consistency.py \
+            tools/validate_json_schema.py \
+            tools/validate_internal_links.py \
+            tools/validate_public_surface_scan.py \
+            tools/test_public_status_mutations.py
           python tools/validate_status_consistency.py \
             --root . \
             --output .artifacts/status-consistency/validation.json \
             | tee .artifacts/status-consistency/validation.stdout
+          python tools/validate_json_schema.py \
+            --root . \
+            --output .artifacts/status-consistency/json-schema.json \
+            | tee .artifacts/status-consistency/json-schema.stdout
+          python tools/validate_internal_links.py \
+            --root . \
+            --output .artifacts/status-consistency/internal-links.json \
+            | tee .artifacts/status-consistency/internal-links.stdout
+          python tools/test_public_status_mutations.py \
+            --root . \
+            --output .artifacts/status-consistency/mutation-tests.json \
+            --log .artifacts/status-consistency/mutation-tests.log \
+            | tee .artifacts/status-consistency/mutation-tests.stdout
+          python tools/validate_public_surface_scan.py \
+            --root . \
+            --output .artifacts/status-consistency/public-surface-scan.json \
+            | tee .artifacts/status-consistency/public-surface-scan.stdout
 
       - name: Validate JSON and whitespace
         run: |
@@ -82,6 +126,8 @@ jobs:
           python -m json.tool papers/HINC-001/STATUS.json >/dev/null
           python -m json.tool papers/ABF-001/STATUS.json >/dev/null
           python -m json.tool papers/ABF-001/formal/FORMAL_STATUS_V1.json >/dev/null
+          python -m json.tool reports/publication-gates/HINC-001.json >/dev/null
+          python -m json.tool reports/publication-gates/ABF-001.json >/dev/null
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
             git fetch origin "${{ github.base_ref }}"
             base="$(git merge-base "origin/${{ github.base_ref }}" HEAD)"

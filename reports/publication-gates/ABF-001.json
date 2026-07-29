@@ -102,6 +102,7 @@
     "Historical priority remains unestablished.",
     "External specialist review and outside reproduction remain pending.",
     "A01 has bounded Lean verification, but the full manuscript is not fully Lean verified.",
-    "No full-width cryptographic security or insecurity conclusion is claimed."
+    "No full-width cryptographic security or insecurity conclusion is claimed.",
+    "Peer review is not complete."
   ]
 }

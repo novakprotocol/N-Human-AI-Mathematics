@@ -1,0 +1,147 @@
+{
+  "abf_active_status_present": "yes",
+  "acm_hold_present": "yes",
+  "canonical_state": {
+    "ABF-001": {
+      "active_public_review_authorized": true,
+      "bounded_phrase": "bounded a01 lean",
+      "compiled_bounded_lane": "A01",
+      "formal_state": "PARTIAL_PASS",
+      "full_manuscript_lean_verified": false,
+      "matrix_public_state": "ACTIVE_PUBLIC_CANDIDATE_TECHNICAL_REVIEW",
+      "portfolio_public_state": "ACTIVE_PUBLIC_CANDIDATE_TECHNICAL_REVIEW",
+      "research_state": "active_review",
+      "status_formal_state": "PARTIAL_PASS_BOUNDED_A01_LEAN_VERIFICATION"
+    },
+    "ACM-001": {
+      "controlling_manuscript_complete": false,
+      "formal_state": "HOLD_PENDING_CONSOLIDATION",
+      "full_manuscript_lean_verified": false,
+      "matrix_public_state": "HOLD_PENDING_CONSOLIDATION",
+      "portfolio_public_state": "HOLD_PENDING_CONSOLIDATION",
+      "public_release_authorized": false,
+      "research_state": "hold"
+    },
+    "FSG-001": {
+      "formal_state": "HOLD_MATHEMATICAL_BLOCKER",
+      "full_manuscript_lean_verified": false,
+      "mathematical_blocker": true,
+      "matrix_public_state": "PRIVATE_CANDIDATE_MATHEMATICAL_BLOCKER_HOLD",
+      "portfolio_public_state": "PRIVATE_CANDIDATE_MATHEMATICAL_BLOCKER_HOLD",
+      "private_candidate": true,
+      "public_release_authorized": false,
+      "public_theorem_package_released": false,
+      "research_state": "hold"
+    },
+    "HINC-001": {
+      "active_public_review_authorized": true,
+      "bounded_phrase": "bounded lean",
+      "formal_state": "PARTIAL_PASS",
+      "full_manuscript_lean_verified": false,
+      "matrix_public_state": "ACTIVE_PUBLIC_CANDIDATE_TECHNICAL_REVIEW",
+      "portfolio_public_state": "ACTIVE_PUBLIC_CANDIDATE_TECHNICAL_REVIEW",
+      "research_state": "active_review",
+      "status_formal_state": "PARTIAL_PASS_BOUNDED_LEAN_VERIFICATION"
+    }
+  },
+  "conflicting_formal_states": 0,
+  "conflicting_publication_states": 0,
+  "credential_or_personal_path_findings": 0,
+  "error_count": 0,
+  "files": {
+    "AGENTS.md": {
+      "bytes": 8890,
+      "sha256": "d2c6b42b59f822febbef6fb4e4c7382e10548d3673632af7949348d0b41323f9"
+    },
+    "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md": {
+      "bytes": 1382,
+      "sha256": "10895aa5fc8204aca3c5cc2c7f63d5f00927e3838010aac0a244e50b32eb02d1"
+    },
+    "FULL_LEAN_RELEASE_STANDARD.md": {
+      "bytes": 2633,
+      "sha256": "cc2cfda40dac6e9d23bcaf9ae875fb559d6b1c9da9736e43ebfe6ad8a1b3b48a"
+    },
+    "FULL_LEAN_VERIFICATION_PROGRAM.md": {
+      "bytes": 2685,
+      "sha256": "83dbf532cd0cda09745dd8b41a2a4e058e3b537593fff334860ed4b1b06f0a89"
+    },
+    "PAPER_1_3_FULL_LEAN_STATUS.json": {
+      "bytes": 3694,
+      "sha256": "ee4a6165a41302e5761776385ca81caf73049a22fe4f3b2b9277eb982f39dbb1"
+    },
+    "PUBLICATION_WORKFLOW.md": {
+      "bytes": 7563,
+      "sha256": "5b9b43ad308e9b49809e37e5681a6cc9a7b1fcfa811c8348a7e103de96957b02"
+    },
+    "PUBLIC_REVIEW_FORMALIZATION_HOLD_2026-07-29.md": {
+      "bytes": 1895,
+      "sha256": "7e40ed07756a24a89fd579f8f6c03300dff472362db568a176e1a5d4969069a0"
+    },
+    "PUBLIC_REVIEW_RELEASE.md": {
+      "bytes": 4337,
+      "sha256": "c1f9f65a41a33c05212b403eeaaeb7538c4eac8f0d4172bd9dc238f58072a833"
+    },
+    "README.md": {
+      "bytes": 6612,
+      "sha256": "43ae3f14d010f93a698983da36c391da2224fc339b3cb20ada5691428513fe09"
+    },
+    "RESEARCH_INDEX.md": {
+      "bytes": 4046,
+      "sha256": "54ce79caabb212890ac02b12f253bf4a74da185ec17d10cb2210e60946571921"
+    },
+    "START_HERE.md": {
+      "bytes": 4140,
+      "sha256": "50f136fcd4377494480c02a7d04cddddb7ec32f4f213893aeec38f02558c282f"
+    },
+    "STATUS.md": {
+      "bytes": 2653,
+      "sha256": "0f9eb04f2658e20b92bc561a1ddc558fe5b78481146404503a6af922c8107288"
+    },
+    "docs/index.html": {
+      "bytes": 8819,
+      "sha256": "7c996e6b9da7abeec624b12b7fd60c59c7230a7266d42d39791f9979eb52f387"
+    },
+    "docs/learn.html": {
+      "bytes": 20409,
+      "sha256": "50291016a4c40150b8b1006253470f108794c55616d05b8c7d7d0f67d8fafa9a"
+    },
+    "formal-verification-status.json": {
+      "bytes": 3672,
+      "sha256": "232d7d6b65448578546bd299c01940a30e25ba2eb782479d66321594df241df3"
+    },
+    "papers/ABF-001/STATUS.json": {
+      "bytes": 4189,
+      "sha256": "c8eace225303e836c07fdb5aba3b5dd91500504dd9a084afc42362e4f9f1f6be"
+    },
+    "papers/HINC-001/STATUS.json": {
+      "bytes": 5691,
+      "sha256": "9bc102b3cdf4ac05ba0c7a3c796bb50842cca5b5ce9452b6c2345139e0f529ee"
+    },
+    "reports/publication-gates/ABF-001.json": {
+      "bytes": 4365,
+      "sha256": "d026b9118f6009ffb5ca7429da2d3c78414561de62066bec1cae6ae8ab4abf6f"
+    },
+    "reports/publication-gates/HINC-001.json": {
+      "bytes": 4215,
+      "sha256": "53c1d91b466dc3cea70584a81d879a9476e626bd5d5c8313735ec264d554ef33"
+    },
+    "research-index.json": {
+      "bytes": 5197,
+      "sha256": "906e83bcfc1af5df5adf7072db89be7a9c9d5852dc11ab76f4503ac2a70a2369"
+    }
+  },
+  "findings": [],
+  "fsg_mathematical_hold_present": "yes",
+  "full_lean_overclaim": 0,
+  "hinc_active_status_present": "yes",
+  "historical_priority_overclaim": 0,
+  "peer_review_overclaim": 0,
+  "per_file_state_mismatches": 0,
+  "private_detector_literals": 0,
+  "private_fsg_references_in_changed_files": 0,
+  "result": "PASS",
+  "scanned_text_file_count": 63,
+  "schema": "n.human_ai_mathematics.status_consistency_validation.v3",
+  "total_findings": 0,
+  "validator_workflow_private_scan_exclusions": 0
+}

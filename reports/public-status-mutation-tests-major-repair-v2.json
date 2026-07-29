@@ -1,0 +1,219 @@
+{
+  "failed": 0,
+  "mutation_count": 14,
+  "passed": 14,
+  "records": [
+    {
+      "actual_exit": 1,
+      "changed_file": "research-index.json",
+      "command": [
+        "python",
+        "tools/validate_status_consistency.py",
+        "--root",
+        "<mutation-repo>"
+      ],
+      "detected_finding": "per_file_state_mismatch: research-index.json: HINC-001 state mismatch",
+      "expected_nonzero_exit": true,
+      "id": "M01",
+      "mutation": "Change HINC from active_review to hold.",
+      "result": "PASS"
+    },
+    {
+      "actual_exit": 1,
+      "changed_file": "research-index.json",
+      "command": [
+        "python",
+        "tools/validate_status_consistency.py",
+        "--root",
+        "<mutation-repo>"
+      ],
+      "detected_finding": "per_file_state_mismatch: research-index.json: ABF-001 state mismatch",
+      "expected_nonzero_exit": true,
+      "id": "M02",
+      "mutation": "Change ABF from active_review to hold.",
+      "result": "PASS"
+    },
+    {
+      "actual_exit": 1,
+      "changed_file": "research-index.json",
+      "command": [
+        "python",
+        "tools/validate_status_consistency.py",
+        "--root",
+        "<mutation-repo>"
+      ],
+      "detected_finding": "per_file_state_mismatch: research-index.json: FSG-001 state mismatch",
+      "expected_nonzero_exit": true,
+      "id": "M03",
+      "mutation": "Change FSG from hold to active_review.",
+      "result": "PASS"
+    },
+    {
+      "actual_exit": 1,
+      "changed_file": "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md",
+      "command": [
+        "python",
+        "tools/validate_status_consistency.py",
+        "--root",
+        "<mutation-repo>"
+      ],
+      "detected_finding": "fsg_blocker_contradiction: FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md: forbidden current-status wording: zero blocking findings",
+      "expected_nonzero_exit": true,
+      "id": "M04",
+      "mutation": "Add current FSG wording equivalent to zero blocking findings.",
+      "result": "PASS"
+    },
+    {
+      "actual_exit": 1,
+      "changed_file": "docs/learn.html",
+      "command": [
+        "python",
+        "tools/validate_status_consistency.py",
+        "--root",
+        "<mutation-repo>"
+      ],
+      "detected_finding": "private_reference: docs/learn.html:34: synthetic or nonpublic repository token",
+      "expected_nonzero_exit": true,
+      "id": "M05",
+      "mutation": "Add a synthetic nonpublic repository or private-style link to a public FSG surface.",
+      "result": "PASS"
+    },
+    {
+      "actual_exit": 1,
+      "changed_file": "README.md",
+      "command": [
+        "python",
+        "tools/validate_status_consistency.py",
+        "--root",
+        "<mutation-repo>"
+      ],
+      "detected_finding": "full_lean_overclaim: README.md: fully Lean verified paper claim",
+      "expected_nonzero_exit": true,
+      "id": "M06",
+      "mutation": "Claim HINC or ABF is fully Lean verified.",
+      "result": "PASS"
+    },
+    {
+      "actual_exit": 1,
+      "changed_file": "README.md",
+      "command": [
+        "python",
+        "tools/validate_status_consistency.py",
+        "--root",
+        "<mutation-repo>"
+      ],
+      "detected_finding": "peer_review_overclaim: README.md: forbidden current-status wording: peer reviewed: yes",
+      "expected_nonzero_exit": true,
+      "id": "M07",
+      "mutation": "Claim peer review has been completed.",
+      "result": "PASS"
+    },
+    {
+      "actual_exit": 1,
+      "changed_file": "README.md",
+      "command": [
+        "python",
+        "tools/validate_status_consistency.py",
+        "--root",
+        "<mutation-repo>"
+      ],
+      "detected_finding": "historical_priority_overclaim: README.md: forbidden current-status wording: world-first",
+      "expected_nonzero_exit": true,
+      "id": "M08",
+      "mutation": "Claim historical priority or a world-first status.",
+      "result": "PASS"
+    },
+    {
+      "actual_exit": 1,
+      "changed_file": "docs/index.html",
+      "command": [
+        "python",
+        "tools/validate_status_consistency.py",
+        "--root",
+        "<mutation-repo>"
+      ],
+      "detected_finding": "obsolete_current_state: docs/index.html: forbidden current-status wording: hold pending full lean",
+      "expected_nonzero_exit": true,
+      "id": "M09",
+      "mutation": "Create a contradiction between machine-readable and human-readable state.",
+      "result": "PASS"
+    },
+    {
+      "actual_exit": 1,
+      "changed_file": "docs/index.html",
+      "command": [
+        "python",
+        "tools/validate_status_consistency.py",
+        "--root",
+        "<mutation-repo>"
+      ],
+      "detected_finding": "obsolete_current_state: docs/index.html: forbidden current-status wording: no active theorem packages",
+      "expected_nonzero_exit": true,
+      "id": "M10",
+      "mutation": "Restore No active theorem packages to the current landing page.",
+      "result": "PASS"
+    },
+    {
+      "actual_exit": 1,
+      "changed_file": "README.md",
+      "command": [
+        "python",
+        "tools/validate_status_consistency.py",
+        "--root",
+        "<mutation-repo>"
+      ],
+      "detected_finding": "obsolete_current_state: README.md: forbidden current-status wording: historical artifacts only",
+      "expected_nonzero_exit": true,
+      "id": "M11",
+      "mutation": "Restore HINC/ABF historical artifact only wording.",
+      "result": "PASS"
+    },
+    {
+      "actual_exit": 1,
+      "changed_file": "docs/learn.html",
+      "command": [
+        "python",
+        "tools/validate_status_consistency.py",
+        "--root",
+        "<mutation-repo>"
+      ],
+      "detected_finding": "fsg_correction_overclaim: docs/learn.html: forbidden current-status wording: fsg-001 correction has passed",
+      "expected_nonzero_exit": true,
+      "id": "M12",
+      "mutation": "Represent the private FSG correction as passed or established.",
+      "result": "PASS"
+    },
+    {
+      "actual_exit": 1,
+      "changed_file": "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md",
+      "command": [
+        "python",
+        "tools/validate_status_consistency.py",
+        "--root",
+        "<mutation-repo>"
+      ],
+      "detected_finding": "private_reference: FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md:22: synthetic or nonpublic repository token",
+      "expected_nonzero_exit": true,
+      "id": "M13",
+      "mutation": "Expose a synthetic private branch, manuscript path, or artifact path.",
+      "result": "PASS"
+    },
+    {
+      "actual_exit": 1,
+      "changed_file": "research-index.json",
+      "command": [
+        "python",
+        "tools/validate_status_consistency.py",
+        "--root",
+        "<mutation-repo>"
+      ],
+      "detected_finding": "current_release_channel: research-index.json: current release channel must be public_review",
+      "expected_nonzero_exit": true,
+      "id": "M14",
+      "mutation": "Use obsolete full-Lean requalification-hold state as the current release channel.",
+      "result": "PASS"
+    }
+  ],
+  "result": "PASS",
+  "schema": "n.human_ai_mathematics.public_status_mutation_tests.v1"
+}

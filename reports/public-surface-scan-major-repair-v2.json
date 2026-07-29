@@ -1,0 +1,266 @@
+{
+  "changed_text_files_scanned": 63,
+  "credential_pattern_findings": 0,
+  "findings": [],
+  "personal_path_findings": 0,
+  "private_branch_path_findings": 0,
+  "private_detector_literals": 0,
+  "private_reference_findings": 0,
+  "records": [
+    {
+      "file": ".github/workflows/validate-status-consistency.yml",
+      "finding_count": 0
+    },
+    {
+      "file": ".github/workflows/validate.yml",
+      "finding_count": 0
+    },
+    {
+      "file": "AGENTS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "BOOTSTRAP_WINDOWS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "docs/index.html",
+      "finding_count": 0
+    },
+    {
+      "file": "docs/learn.html",
+      "finding_count": 0
+    },
+    {
+      "file": "formal-verification-status.json",
+      "finding_count": 0
+    },
+    {
+      "file": "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md",
+      "finding_count": 0
+    },
+    {
+      "file": "FULL_LEAN_RELEASE_STANDARD.md",
+      "finding_count": 0
+    },
+    {
+      "file": "FULL_LEAN_VERIFICATION_PROGRAM.md",
+      "finding_count": 0
+    },
+    {
+      "file": "PAPER_1_3_FULL_LEAN_STATUS.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/ABF-001/STATUS.json",
+      "finding_count": 0
+    },
+    {
+      "file": "papers/HINC-001/STATUS.json",
+      "finding_count": 0
+    },
+    {
+      "file": "PUBLIC_REVIEW_FORMALIZATION_HOLD_2026-07-29.md",
+      "finding_count": 0
+    },
+    {
+      "file": "PUBLIC_REVIEW_RELEASE.md",
+      "finding_count": 0
+    },
+    {
+      "file": "PUBLICATION_WORKFLOW.md",
+      "finding_count": 0
+    },
+    {
+      "file": "README.md",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/abf-lake-version-major-repair-v2.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/abf-lean-build-major-repair-v2.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/abf-lean-cache-major-repair-v2.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/abf-test-log-major-repair-v2.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/full-lean-portfolio-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/hinc-lake-version-major-repair-v2.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/hinc-lean-build-major-repair-v2.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/hinc-lean-cache-major-repair-v2.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/hinc-test-log-major-repair-v2.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/internal-link-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/json-schema-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/learn-inline-major-repair-v2.js",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/learning-page-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/learning-serve-major-repair-v2/serve-fetch-receipt.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-release-v2-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-release-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-state-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-status-major-repair-v2-author-receipt.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-status-mutation-tests-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/public-surface-scan-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/publication-gate-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/publication-gates/ABF-001.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/publication-gates/HINC-001.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/publication-v1-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/publication-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "reports/status-consistency-validation-major-repair-v2.json",
+      "finding_count": 0
+    },
+    {
+      "file": "requirements-validation.txt",
+      "finding_count": 0
+    },
+    {
+      "file": "research-index.json",
+      "finding_count": 0
+    },
+    {
+      "file": "RESEARCH_INDEX.md",
+      "finding_count": 0
+    },
+    {
+      "file": "schemas/full-lean-portfolio.schema.json",
+      "finding_count": 0
+    },
+    {
+      "file": "schemas/paper-1-3-full-lean-status.schema.json",
+      "finding_count": 0
+    },
+    {
+      "file": "schemas/paper-status.schema.json",
+      "finding_count": 0
+    },
+    {
+      "file": "START_HERE.md",
+      "finding_count": 0
+    },
+    {
+      "file": "STATUS.md",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/public_status_checks.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/test_public_status_mutations.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_full_lean_portfolio.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_internal_links.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_json_schema.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_learning_page.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_public_release.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_public_release_v2.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_public_state.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_public_surface_scan.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_publication.py",
+      "finding_count": 0
+    },
+    {
+      "file": "tools/validate_status_consistency.py",
+      "finding_count": 0
+    }
+  ],
+  "result": "PASS",
+  "schema": "n.human_ai_mathematics.public_surface_scan.v1",
+  "validator_workflow_exclusions": 0
+}
