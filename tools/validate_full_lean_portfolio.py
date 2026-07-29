@@ -100,7 +100,7 @@ def validate(root: Path) -> dict[str, Any]:
     )
 
     for phrase in (
-        "full-manuscript-verification",
+        "fully Lean-verified",
         "zero `sorry`",
         "Complete claim map",
         "Literal-source bridge",
