@@ -1,0 +1,446 @@
+{
+    "schema":  "nhaim.public_status.exact_head_execution.v4",
+    "repository":  "novakprotocol/N-Human-AI-Mathematics",
+    "pr":  60,
+    "branch":  "fix/restore-hinc-abf-active-fsg-math-hold-v1",
+    "base_head":  "d1edab648bd842dec20f8b21625f17258e5e9e9c",
+    "original_head":  "2e5226d7f30b904d800e09626a606308dc6ea31d",
+    "v2_head":  "7e99144075fc3779a9a0b8fa3d70a182ff5f09cf",
+    "v3_head":  "fb38d736dbbd3304888ecca1077ab5d2bb966d61",
+    "execution_target_head":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+    "worktree_creation_command":  "git worktree add --detach \u003cPUBLIC_DETACHED_WORKTREE\u003e dda1d03bc54f52261e27b60642a314748b94a8d6",
+    "worktree_creation_exit_code":  0,
+    "worktree_creation_public_path_redaction":  "local absolute path prefix withheld from public evidence",
+    "detached_head_verified":  true,
+    "clean_before":  true,
+    "clean_after":  true,
+
+    "actual_private_identifiers":  0,
+
+    "local_commands_exit_codes_complete":  true,
+    "local_result":  "PASS",
+    "local_command_count":  30,
+    "local_failures":  [
+
+                       ],
+    "local_commands":  [
+                           {
+                               "id":  "00-python-version",
+                               "description":  "Record Python version",
+                               "command":  "python --version",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "00-node-version",
+                               "description":  "Record Node version",
+                               "command":  "node --version",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "00-git-head",
+                               "description":  "Verify exact detached head",
+                               "command":  "git rev-parse HEAD; git symbolic-ref -q HEAD; $symExit=$LASTEXITCODE; Write-Output \"symbolic_ref_exit=$symExit\"; git branch --show-current; git rev-parse --abbrev-ref HEAD; git status --porcelain",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "01-python-compile",
+                               "description":  "Python compilation of validators and bounded sources/tests",
+                               "command":  "python -m py_compile tools/public_status_checks.py tools/validate_status_consistency.py tools/validate_public_surface_scan.py tools/test_public_status_mutations.py tools/test_internal_link_negative_control.py tools/validate_internal_links.py tools/test_json_schema_negative_controls.py tools/validate_json_schema.py tools/validate_learning_page.py tools/validate_full_lean_portfolio.py tools/validate_publication.py tools/validate_publication_v2.py tools/validate_publication_gate.py tools/validate_public_state.py tools/validate_public_release.py tools/validate_public_release_v2.py papers/HINC-001/src/mcrc_hidden_infinitesimal_noncommutativity_standalone.py papers/HINC-001/src/standalone_common_core_verifier.py papers/HINC-001/tests/test_hinc_standalone.py papers/ABF-001/src/abf001_verifier.py papers/ABF-001/src/abf001_independent_bitset.py papers/ABF-001/tests/test_abf001.py",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "02-json-syntax",
+                               "description":  "JSON syntax validation for tracked JSON files",
+                               "command":  "python -c \"import json,pathlib,subprocess; files=subprocess.check_output([\u0027git\u0027,\u0027ls-files\u0027,\u0027*.json\u0027], text=True).splitlines(); [json.loads(pathlib.Path(p).read_text(encoding=\u0027utf-8-sig\u0027)) for p in files]; print(\u0027json syntax PASS\u0027, len(files))\"",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "03-json-schema-positive",
+                               "description":  "Genuine JSON Schema positive validation",
+                               "command":  "python tools/validate_json_schema.py --root . --output \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\json-schema-validation.json\u0027",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "04-json-schema-negative",
+                               "description":  "Seven JSON Schema negative controls",
+                               "command":  "python tools/test_json_schema_negative_controls.py --root . --output \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\json-schema-negative-controls.json\u0027",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "05-status-consistency",
+                               "description":  "Canonical status, per-file blocks, semantic contradictions",
+                               "command":  "python tools/validate_status_consistency.py --root . --scan-all --output \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\status-consistency-validation.json\u0027",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "06-status-and-restricted-mutations",
+                               "description":  "Clean baseline gate, 14 status mutations, 8 restricted-reference mutations",
+                               "command":  "python tools/test_public_status_mutations.py --root . --output \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\public-status-mutation-tests.json\u0027 --log \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\public-status-mutation-tests.log\u0027",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "07-internal-link-negative",
+                               "description":  "Four internal-link negative controls",
+                               "command":  "python tools/test_internal_link_negative_control.py --root . --output \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\internal-link-negative-control.json\u0027",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "08-public-surface-scan",
+                               "description":  "Public-surface restricted-reference, credential, and personal-path scan",
+                               "command":  "python tools/validate_public_surface_scan.py --root . --output \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\public-surface-scan.json\u0027",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "09-internal-links-positive",
+                               "description":  "Internal-link and duplicate-ID positive validation",
+                               "command":  "python tools/validate_internal_links.py --root . --output \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\internal-link-validation.json\u0027",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "10-learning-page",
+                               "description":  "Learning-page validation and JS extraction",
+                               "command":  "python tools/validate_learning_page.py . --output \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\learning-page-validation.json\u0027 --javascript-output \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\learn-inline.js\u0027",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "11-javascript-syntax",
+                               "description":  "JavaScript syntax validation",
+                               "command":  "node --check \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\learn-inline.js\u0027",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "12-serve-fetch",
+                               "description":  "Serve/fetch corrected public pages",
+                               "command":  "$listener = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::Loopback, 0); $listener.Start(); $port = $listener.LocalEndpoint.Port; $listener.Stop();\r\n$docs = (Resolve-Path -LiteralPath \u0027docs\u0027).Path;\r\n$proc = Start-Process -FilePath python -ArgumentList @(\u0027-m\u0027,\u0027http.server\u0027,$port,\u0027--bind\u0027,\u0027127.0.0.1\u0027,\u0027--directory\u0027,$docs) -PassThru -WindowStyle Hidden -RedirectStandardOutput \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\serve-http.stdout.log\u0027 -RedirectStandardError \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\serve-http.stderr.log\u0027;\r\ntry {\r\n  Start-Sleep -Seconds 2;\r\n  $index = (Invoke-WebRequest -UseBasicParsing -Uri \"http://127.0.0.1:$port/index.html\").Content;\r\n  $learn = (Invoke-WebRequest -UseBasicParsing -Uri \"http://127.0.0.1:$port/learn.html\").Content;\r\n  $checks = @(\r\n    ($index -match \u0027HINC-001\u003c/dt\u003e\u003cdd\u003eActive candidate public technical review\u0027),\r\n    ($index -match \u0027ABF-001\u003c/dt\u003e\u003cdd\u003eActive candidate public technical review\u0027),\r\n    ($index -match \u0027FSG-001\u003c/dt\u003e\u003cdd\u003ePrivate; HOLD\u0027),\r\n    ($index -match \u0027ACM-001\u003c/dt\u003e\u003cdd\u003eHold pending consolidation\u0027),\r\n    ($learn -match \u0027FSG-001 teaching preview paused\u0027),\r\n    ($learn -match \u0027HINC-001 and ABF-001 are unaffected\u0027)\r\n  );\r\n  $ok = -not ($checks -contains $false);\r\n  $result = if ($ok) { \u0027PASS\u0027 } else { \u0027FAIL\u0027 }; [ordered]@{ schema=\u0027nhaim.public_status.serve_fetch.v4\u0027; result=$result; port=$port; checks=$checks } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\serve-fetch-receipt.json\u0027 -Encoding utf8;\r\n  if (-not $ok) { exit 1 }\r\n}\r\nfinally {\r\n  if ($proc -and -not $proc.HasExited) { Stop-Process -Id $proc.Id -Force }\r\n}",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "13-pages-build-equivalent",
+                               "description":  "GitHub Pages build-equivalent validation without deployment",
+                               "command":  "$env:NHAIM_PAGES_RECEIPT=\u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\pages-build-equivalent.json\u0027; python -c \"import json,os,pathlib; index=pathlib.Path(\u0027docs/index.html\u0027).read_text(encoding=\u0027utf-8\u0027); learn=pathlib.Path(\u0027docs/learn.html\u0027).read_text(encoding=\u0027utf-8\u0027); checks={\u0027hinc_active\u0027:\u0027HINC-001\u003c/dt\u003e\u003cdd\u003eActive candidate public technical review\u0027 in index,\u0027abf_active\u0027:\u0027ABF-001\u003c/dt\u003e\u003cdd\u003eActive candidate public technical review\u0027 in index,\u0027fsg_hold\u0027:\u0027FSG-001\u003c/dt\u003e\u003cdd\u003ePrivate; HOLD\u0027 in index,\u0027acm_hold\u0027:\u0027ACM-001\u003c/dt\u003e\u003cdd\u003eHold pending consolidation\u0027 in index,\u0027preview_paused\u0027:\u0027FSG-001 teaching preview paused\u0027 in learn,\u0027no_full_lean_overclaim\u0027:\u0027fully Lean verified\u0027 not in index.lower()}; ok=all(checks.values()); pathlib.Path(os.environ[\u0027NHAIM_PAGES_RECEIPT\u0027]).write_text(json.dumps({\u0027schema\u0027:\u0027nhaim.public_status.pages_build_equivalent.v4\u0027,\u0027result\u0027:\u0027PASS\u0027 if ok else \u0027FAIL\u0027,\u0027checks\u0027:checks}, indent=2, sort_keys=True)+\u0027\\n\u0027, encoding=\u0027utf-8\u0027); print(json.dumps(checks, sort_keys=True)); raise SystemExit(0 if ok else 1)\"",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "14-publication-v1",
+                               "description":  "Publication validation v1",
+                               "command":  "python tools/validate_publication.py --root . --allow-public --json-output \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\publication-v1-validation.json\u0027",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "15-publication-v2",
+                               "description":  "Publication validation v2",
+                               "command":  "python tools/validate_publication_v2.py --root . --allow-public --json-output \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\publication-v2-validation.json\u0027",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "16-public-state",
+                               "description":  "Public-state validation",
+                               "command":  "python tools/validate_public_state.py --root . --json-output \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\public-state-validation.json\u0027",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "17-public-release",
+                               "description":  "Public-release validation",
+                               "command":  "python tools/validate_public_release.py --root . --json-output \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\public-release-validation.json\u0027",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "18-public-release-v2",
+                               "description":  "Public-release validation v2",
+                               "command":  "python tools/validate_public_release_v2.py --root . --json-output \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\public-release-v2-validation.json\u0027",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "19-publication-gate",
+                               "description":  "Publication-gate validation",
+                               "command":  "python tools/validate_publication_gate.py --root . --json-output \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\publication-gate-validation.json\u0027",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "20-full-lean-boundary",
+                               "description":  "Full-Lean portfolio boundary validation",
+                               "command":  "python tools/validate_full_lean_portfolio.py --root . --output \u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\full-lean-portfolio-validation.json\u0027",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "21-hinc-tests",
+                               "description":  "HINC five-test suite",
+                               "command":  "python -m unittest discover -s papers/HINC-001/tests -p \u0027test_*.py\u0027 -v",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "22-abf-tests",
+                               "description":  "ABF six-test suite",
+                               "command":  "$env:ABF001_TEST_OUTPUT_DIR=\u0027\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-output-dda1d03-run2\\abf-test-output\u0027; python -m unittest discover -s papers/ABF-001/tests -p \u0027test_*.py\u0027 -v",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "23-lake-version",
+                               "description":  "Record Lean Lake availability",
+                               "command":  "lake --version",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "24-hinc-lean-build",
+                               "description":  "HINC bounded Lean build",
+                               "command":  "lake --version; lake update; lake exe cache get; lake build",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2\\papers\\HINC-001\\formal",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "25-abf-lean-build",
+                               "description":  "ABF bounded A01 Lean build",
+                               "command":  "lake --version; lake update; lake exe cache get; lake build",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2\\papers\\ABF-001\\formal",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "26-whitespace",
+                               "description":  "Whitespace diff check from base to exact head",
+                               "command":  "git diff --check d1edab648bd842dec20f8b21625f17258e5e9e9c HEAD --",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           },
+                           {
+                               "id":  "27-clean-after",
+                               "description":  "Clean-after check",
+                               "command":  "git status --porcelain",
+                               "working_directory":  "\u003cPUBLIC_WORKSPACE_ROOT\u003e\\nhaim-public-status-v4-exact-head-dda1d03-run2",
+                               "exit_code":  0,
+                               "result":  "PASS"
+                           }
+                       ],
+    "status_summary":  {
+                           "conflicting_publication_states":  0,
+                           "conflicting_formal_states":  0,
+                           "per_file_state_mismatches":  0,
+                           "restricted_detector_literals":  0,
+                           "restricted_fsg_references_in_changed_files":  0,
+                           "validator_workflow_restricted_scan_exclusions":  0,
+                           "full_lean_overclaim":  0,
+                           "peer_review_overclaim":  0,
+                           "historical_priority_overclaim":  0,
+                           "hinc_active_status_present":  "yes",
+                           "abf_active_status_present":  "yes",
+                           "fsg_mathematical_hold_present":  "yes",
+                           "acm_hold_present":  "yes"
+                       },
+    "scan_summary":  {
+                         "restricted_reference_findings":  0,
+                         "restricted_detector_literals":  0,
+                         "credential_pattern_findings":  0,
+                         "personal_path_findings":  0,
+                         "restricted_branch_path_findings":  0,
+                         "validator_workflow_exclusions":  0
+                     },
+    "mutation_summary":  {
+                             "result":  "PASS",
+                             "status_mutations_passed":  14,
+                             "status_mutation_count":  14,
+                             "restricted_reference_mutations_passed":  8,
+                             "restricted_reference_mutation_count":  8,
+                             "expected_category_checks_passed":  22,
+                             "expected_path_checks_passed":  22,
+                             "worktree_unchanged":  true
+                         },
+    "schema_negative_controls":  {
+                                     "result":  "PASS",
+                                     "negative_controls_passed":  7,
+                                     "negative_control_count":  7
+                                 },
+    "internal_link_negative_controls":  {
+                                            "result":  "PASS",
+                                            "passed":  4,
+                                            "control_count":  4,
+                                            "expected_category_checks_passed":  4,
+                                            "expected_path_checks_passed":  4
+                                        },
+    "hosted_workflows":  [
+                             {
+                                 "workflow_name":  "Validate full-portfolio Lean policy",
+                                 "run_id":  30497473218,
+                                 "jobs":  [
+                                              {
+                                                  "job_id":  90729533312,
+                                                  "job_name":  "policy",
+                                                  "conclusion":  "success",
+                                                  "expected_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                  "actual_checked_out_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                  "exact_head_classification":  "EXACT_HEAD_PASS",
+                                                  "first_failure":  null
+                                              }
+                                          ],
+                                 "artifacts":  [
+                                                   {
+                                                       "id":  8742160403,
+                                                       "name":  "full-lean-portfolio-dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                       "digest":  "sha256:aed26c12ce76cd26d659855fc3933d44000138ec020cd5e3ac8fc5edbe7cf7be"
+                                                   }
+                                               ]
+                             },
+                             {
+                                 "workflow_name":  "Validate four-path full-Lean learning page",
+                                 "run_id":  30497473228,
+                                 "jobs":  [
+                                              {
+                                                  "job_id":  90729533399,
+                                                  "job_name":  "learning-page",
+                                                  "conclusion":  "success",
+                                                  "expected_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                  "actual_checked_out_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                  "exact_head_classification":  "EXACT_HEAD_PASS",
+                                                  "first_failure":  null
+                                              }
+                                          ],
+                                 "artifacts":  [
+                                                   {
+                                                       "id":  8742160462,
+                                                       "name":  "learning-page-v14-dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                       "digest":  "sha256:1fd6e705927306e6ca9789ed2e4c62334ea78382906c601f764ac00ee5556430"
+                                                   }
+                                               ]
+                             },
+                             {
+                                 "workflow_name":  "Validate repository status consistency",
+                                 "run_id":  30497473207,
+                                 "jobs":  [
+                                              {
+                                                  "job_id":  90729533459,
+                                                  "job_name":  "consistency",
+                                                  "conclusion":  "success",
+                                                  "expected_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                  "actual_checked_out_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                  "exact_head_classification":  "EXACT_HEAD_PASS",
+                                                  "first_failure":  null
+                                              }
+                                          ],
+                                 "artifacts":  [
+                                                   {
+                                                       "id":  8742165648,
+                                                       "name":  "status-consistency-dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                       "digest":  "sha256:6cd04dedbb53ad5581572111a62c07273b55084713c298808fe482a0a3817052"
+                                                   }
+                                               ]
+                             },
+                             {
+                                 "workflow_name":  "Validate mathematical publication repository",
+                                 "run_id":  30497473208,
+                                 "jobs":  [
+                                              {
+                                                  "job_id":  90729533575,
+                                                  "job_name":  "publication",
+                                                  "conclusion":  "success",
+                                                  "expected_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                  "actual_checked_out_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                  "exact_head_classification":  "EXACT_HEAD_PASS",
+                                                  "first_failure":  null
+                                              },
+                                              {
+                                                  "job_id":  90729533617,
+                                                  "job_name":  "lean-bounded-hinc",
+                                                  "conclusion":  "success",
+                                                  "expected_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                  "actual_checked_out_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                  "exact_head_classification":  "EXACT_HEAD_PASS",
+                                                  "first_failure":  null
+                                              }
+                                          ],
+                                 "artifacts":  [
+                                                   {
+                                                       "id":  8742182642,
+                                                       "name":  "publication-validation-30497473208",
+                                                       "digest":  "sha256:0740493463c1e75d579a31c6b263a686d4851709a3d26418cf70bb9a2cfc92f9"
+                                                   },
+                                                   {
+                                                       "id":  8742203068,
+                                                       "name":  "hinc-bounded-lean-validation-30497473208",
+                                                       "digest":  "sha256:f33eb67917041c4bcd0b0117225a9cf0b9f19fa9dc2b20a5492a042488c4bc73"
+                                                   }
+                                               ]
+                             },
+                             {
+                                 "workflow_name":  "Validate ABF-001 Lean formalization",
+                                 "run_id":  30497473213,
+                                 "jobs":  [
+                                              {
+                                                  "job_id":  90729533460,
+                                                  "job_name":  "lean",
+                                                  "conclusion":  "success",
+                                                  "expected_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                  "actual_checked_out_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                  "exact_head_classification":  "EXACT_HEAD_PASS",
+                                                  "first_failure":  null
+                                              }
+                                          ],
+                                 "artifacts":  [
+                                                   {
+                                                       "id":  8742200959,
+                                                       "name":  "abf001-lean-dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                       "digest":  "sha256:2d3ae0cfe71e6752a68dc581bc799921979e28c3a474f953cbea300131468177"
+                                                   }
+                                               ]
+                             }
+                         ],
+    "theorem_source_changed":  false,
+    "formal_source_changed":  false,
+    "repository_visibility_changed":  false,
+    "pages_disabled":  false,
+    "release_history_changed":  false,
+    "merge_performed":  false,
+    "release_action":  false
+}

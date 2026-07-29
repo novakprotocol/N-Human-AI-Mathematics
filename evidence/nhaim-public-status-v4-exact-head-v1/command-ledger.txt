@@ -1,0 +1,205 @@
+schema: nhaim.public_status.command_ledger.v4
+execution_target_head: dda1d03bc54f52261e27b60642a314748b94a8d6
+local_absolute_paths: redacted as <PUBLIC_WORKSPACE_ROOT>
+
+[00-python-version] PASS exit=0
+description: Record Python version
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python --version
+
+[00-node-version] PASS exit=0
+description: Record Node version
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  node --version
+
+[00-git-head] PASS exit=0
+description: Verify exact detached head
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  git rev-parse HEAD; git symbolic-ref -q HEAD; $symExit=$LASTEXITCODE; Write-Output "symbolic_ref_exit=$symExit"; git branch --show-current; git rev-parse --abbrev-ref HEAD; git status --porcelain
+
+[01-python-compile] PASS exit=0
+description: Python compilation of validators and bounded sources/tests
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python -m py_compile tools/public_status_checks.py tools/validate_status_consistency.py tools/validate_public_surface_scan.py tools/test_public_status_mutations.py tools/test_internal_link_negative_control.py tools/validate_internal_links.py tools/test_json_schema_negative_controls.py tools/validate_json_schema.py tools/validate_learning_page.py tools/validate_full_lean_portfolio.py tools/validate_publication.py tools/validate_publication_v2.py tools/validate_publication_gate.py tools/validate_public_state.py tools/validate_public_release.py tools/validate_public_release_v2.py papers/HINC-001/src/mcrc_hidden_infinitesimal_noncommutativity_standalone.py papers/HINC-001/src/standalone_common_core_verifier.py papers/HINC-001/tests/test_hinc_standalone.py papers/ABF-001/src/abf001_verifier.py papers/ABF-001/src/abf001_independent_bitset.py papers/ABF-001/tests/test_abf001.py
+
+[02-json-syntax] PASS exit=0
+description: JSON syntax validation for tracked JSON files
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python -c "import json,pathlib,subprocess; files=subprocess.check_output(['git','ls-files','*.json'], text=True).splitlines(); [json.loads(pathlib.Path(p).read_text(encoding='utf-8-sig')) for p in files]; print('json syntax PASS', len(files))"
+
+[03-json-schema-positive] PASS exit=0
+description: Genuine JSON Schema positive validation
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python tools/validate_json_schema.py --root . --output '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\json-schema-validation.json'
+
+[04-json-schema-negative] PASS exit=0
+description: Seven JSON Schema negative controls
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python tools/test_json_schema_negative_controls.py --root . --output '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\json-schema-negative-controls.json'
+
+[05-status-consistency] PASS exit=0
+description: Canonical status, per-file blocks, semantic contradictions
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python tools/validate_status_consistency.py --root . --scan-all --output '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\status-consistency-validation.json'
+
+[06-status-and-private-mutations] PASS exit=0
+description: Clean baseline gate, 14 status mutations, 8 private-reference mutations
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python tools/test_public_status_mutations.py --root . --output '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\public-status-mutation-tests.json' --log '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\public-status-mutation-tests.log'
+
+[07-internal-link-negative] PASS exit=0
+description: Four internal-link negative controls
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python tools/test_internal_link_negative_control.py --root . --output '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\internal-link-negative-control.json'
+
+[08-public-surface-scan] PASS exit=0
+description: Public-surface private-reference, credential, and personal-path scan
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python tools/validate_public_surface_scan.py --root . --output '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\public-surface-scan.json'
+
+[09-internal-links-positive] PASS exit=0
+description: Internal-link and duplicate-ID positive validation
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python tools/validate_internal_links.py --root . --output '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\internal-link-validation.json'
+
+[10-learning-page] PASS exit=0
+description: Learning-page validation and JS extraction
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python tools/validate_learning_page.py . --output '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\learning-page-validation.json' --javascript-output '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\learn-inline.js'
+
+[11-javascript-syntax] PASS exit=0
+description: JavaScript syntax validation
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  node --check '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\learn-inline.js'
+
+[12-serve-fetch] PASS exit=0
+description: Serve/fetch corrected public pages
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  $listener = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::Loopback, 0); $listener.Start(); $port = $listener.LocalEndpoint.Port; $listener.Stop();
+  $docs = (Resolve-Path -LiteralPath 'docs').Path;
+  $proc = Start-Process -FilePath python -ArgumentList @('-m','http.server',$port,'--bind','127.0.0.1','--directory',$docs) -PassThru -WindowStyle Hidden -RedirectStandardOutput '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\serve-http.stdout.log' -RedirectStandardError '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\serve-http.stderr.log';
+  try {
+    Start-Sleep -Seconds 2;
+    $index = (Invoke-WebRequest -UseBasicParsing -Uri "http://127.0.0.1:$port/index.html").Content;
+    $learn = (Invoke-WebRequest -UseBasicParsing -Uri "http://127.0.0.1:$port/learn.html").Content;
+    $checks = @(
+      ($index -match 'HINC-001</dt><dd>Active candidate public technical review'),
+      ($index -match 'ABF-001</dt><dd>Active candidate public technical review'),
+      ($index -match 'FSG-001</dt><dd>Private; HOLD'),
+      ($index -match 'ACM-001</dt><dd>Hold pending consolidation'),
+      ($learn -match 'FSG-001 teaching preview paused'),
+      ($learn -match 'HINC-001 and ABF-001 are unaffected')
+    );
+    $ok = -not ($checks -contains $false);
+    $result = if ($ok) { 'PASS' } else { 'FAIL' }; [ordered]@{ schema='nhaim.public_status.serve_fetch.v4'; result=$result; port=$port; checks=$checks } | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\serve-fetch-receipt.json' -Encoding utf8;
+    if (-not $ok) { exit 1 }
+  }
+  finally {
+    if ($proc -and -not $proc.HasExited) { Stop-Process -Id $proc.Id -Force }
+  }
+
+[13-pages-build-equivalent] PASS exit=0
+description: GitHub Pages build-equivalent validation without deployment
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  $env:NHAIM_PAGES_RECEIPT='<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\pages-build-equivalent.json'; python -c "import json,os,pathlib; index=pathlib.Path('docs/index.html').read_text(encoding='utf-8'); learn=pathlib.Path('docs/learn.html').read_text(encoding='utf-8'); checks={'hinc_active':'HINC-001</dt><dd>Active candidate public technical review' in index,'abf_active':'ABF-001</dt><dd>Active candidate public technical review' in index,'fsg_hold':'FSG-001</dt><dd>Private; HOLD' in index,'acm_hold':'ACM-001</dt><dd>Hold pending consolidation' in index,'preview_paused':'FSG-001 teaching preview paused' in learn,'no_full_lean_overclaim':'fully Lean verified' not in index.lower()}; ok=all(checks.values()); pathlib.Path(os.environ['NHAIM_PAGES_RECEIPT']).write_text(json.dumps({'schema':'nhaim.public_status.pages_build_equivalent.v4','result':'PASS' if ok else 'FAIL','checks':checks}, indent=2, sort_keys=True)+'\n', encoding='utf-8'); print(json.dumps(checks, sort_keys=True)); raise SystemExit(0 if ok else 1)"
+
+[14-publication-v1] PASS exit=0
+description: Publication validation v1
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python tools/validate_publication.py --root . --allow-public --json-output '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\publication-v1-validation.json'
+
+[15-publication-v2] PASS exit=0
+description: Publication validation v2
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python tools/validate_publication_v2.py --root . --allow-public --json-output '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\publication-v2-validation.json'
+
+[16-public-state] PASS exit=0
+description: Public-state validation
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python tools/validate_public_state.py --root . --json-output '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\public-state-validation.json'
+
+[17-public-release] PASS exit=0
+description: Public-release validation
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python tools/validate_public_release.py --root . --json-output '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\public-release-validation.json'
+
+[18-public-release-v2] PASS exit=0
+description: Public-release validation v2
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python tools/validate_public_release_v2.py --root . --json-output '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\public-release-v2-validation.json'
+
+[19-publication-gate] PASS exit=0
+description: Publication-gate validation
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python tools/validate_publication_gate.py --root . --json-output '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\publication-gate-validation.json'
+
+[20-full-lean-boundary] PASS exit=0
+description: Full-Lean portfolio boundary validation
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python tools/validate_full_lean_portfolio.py --root . --output '<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\full-lean-portfolio-validation.json'
+
+[21-hinc-tests] PASS exit=0
+description: HINC five-test suite
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  python -m unittest discover -s papers/HINC-001/tests -p 'test_*.py' -v
+
+[22-abf-tests] PASS exit=0
+description: ABF six-test suite
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  $env:ABF001_TEST_OUTPUT_DIR='<PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-output-dda1d03-run2\abf-test-output'; python -m unittest discover -s papers/ABF-001/tests -p 'test_*.py' -v
+
+[23-lake-version] PASS exit=0
+description: Record Lean Lake availability
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  lake --version
+
+[24-hinc-lean-build] PASS exit=0
+description: HINC bounded Lean build
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2\papers\HINC-001\formal
+command:
+  lake --version; lake update; lake exe cache get; lake build
+
+[25-abf-lean-build] PASS exit=0
+description: ABF bounded A01 Lean build
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2\papers\ABF-001\formal
+command:
+  lake --version; lake update; lake exe cache get; lake build
+
+[26-whitespace] PASS exit=0
+description: Whitespace diff check from base to exact head
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  git diff --check d1edab648bd842dec20f8b21625f17258e5e9e9c HEAD --
+
+[27-clean-after] PASS exit=0
+description: Clean-after check
+working_directory: <PUBLIC_WORKSPACE_ROOT>\nhaim-public-status-v4-exact-head-dda1d03-run2
+command:
+  git status --porcelain
+

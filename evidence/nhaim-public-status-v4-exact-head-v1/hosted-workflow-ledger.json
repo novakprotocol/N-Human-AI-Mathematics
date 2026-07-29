@@ -1,0 +1,141 @@
+{
+    "schema":  "nhaim.public_status.hosted_workflow_ledger.v4",
+    "execution_target_head":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+    "inspected_at_utc":  "2026-07-29T23:02:01.1711462Z",
+    "source":  "GitHub Actions API and gh run logs",
+    "checkout_log_snippet_file":  "hosted-checkout-log-snippets.txt",
+    "workflows":  [
+                      {
+                          "workflow_name":  "Validate full-portfolio Lean policy",
+                          "run_id":  30497473218,
+                          "jobs":  [
+                                       {
+                                           "job_id":  90729533312,
+                                           "job_name":  "policy",
+                                           "conclusion":  "success",
+                                           "expected_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                           "actual_checked_out_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                           "exact_head_classification":  "EXACT_HEAD_PASS",
+                                           "first_failure":  null
+                                       }
+                                   ],
+                          "artifacts":  [
+                                            {
+                                                "id":  8742160403,
+                                                "name":  "full-lean-portfolio-dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                "digest":  "sha256:aed26c12ce76cd26d659855fc3933d44000138ec020cd5e3ac8fc5edbe7cf7be"
+                                            }
+                                        ]
+                      },
+                      {
+                          "workflow_name":  "Validate four-path full-Lean learning page",
+                          "run_id":  30497473228,
+                          "jobs":  [
+                                       {
+                                           "job_id":  90729533399,
+                                           "job_name":  "learning-page",
+                                           "conclusion":  "success",
+                                           "expected_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                           "actual_checked_out_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                           "exact_head_classification":  "EXACT_HEAD_PASS",
+                                           "first_failure":  null
+                                       }
+                                   ],
+                          "artifacts":  [
+                                            {
+                                                "id":  8742160462,
+                                                "name":  "learning-page-v14-dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                "digest":  "sha256:1fd6e705927306e6ca9789ed2e4c62334ea78382906c601f764ac00ee5556430"
+                                            }
+                                        ]
+                      },
+                      {
+                          "workflow_name":  "Validate repository status consistency",
+                          "run_id":  30497473207,
+                          "jobs":  [
+                                       {
+                                           "job_id":  90729533459,
+                                           "job_name":  "consistency",
+                                           "conclusion":  "success",
+                                           "expected_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                           "actual_checked_out_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                           "exact_head_classification":  "EXACT_HEAD_PASS",
+                                           "first_failure":  null
+                                       }
+                                   ],
+                          "artifacts":  [
+                                            {
+                                                "id":  8742165648,
+                                                "name":  "status-consistency-dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                "digest":  "sha256:6cd04dedbb53ad5581572111a62c07273b55084713c298808fe482a0a3817052"
+                                            }
+                                        ]
+                      },
+                      {
+                          "workflow_name":  "Validate mathematical publication repository",
+                          "run_id":  30497473208,
+                          "jobs":  [
+                                       {
+                                           "job_id":  90729533575,
+                                           "job_name":  "publication",
+                                           "conclusion":  "success",
+                                           "expected_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                           "actual_checked_out_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                           "exact_head_classification":  "EXACT_HEAD_PASS",
+                                           "first_failure":  null
+                                       },
+                                       {
+                                           "job_id":  90729533617,
+                                           "job_name":  "lean-bounded-hinc",
+                                           "conclusion":  "success",
+                                           "expected_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                           "actual_checked_out_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                           "exact_head_classification":  "EXACT_HEAD_PASS",
+                                           "first_failure":  null
+                                       }
+                                   ],
+                          "artifacts":  [
+                                            {
+                                                "id":  8742182642,
+                                                "name":  "publication-validation-30497473208",
+                                                "digest":  "sha256:0740493463c1e75d579a31c6b263a686d4851709a3d26418cf70bb9a2cfc92f9"
+                                            },
+                                            {
+                                                "id":  8742203068,
+                                                "name":  "hinc-bounded-lean-validation-30497473208",
+                                                "digest":  "sha256:f33eb67917041c4bcd0b0117225a9cf0b9f19fa9dc2b20a5492a042488c4bc73"
+                                            }
+                                        ]
+                      },
+                      {
+                          "workflow_name":  "Validate ABF-001 Lean formalization",
+                          "run_id":  30497473213,
+                          "jobs":  [
+                                       {
+                                           "job_id":  90729533460,
+                                           "job_name":  "lean",
+                                           "conclusion":  "success",
+                                           "expected_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                           "actual_checked_out_sha":  "dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                           "exact_head_classification":  "EXACT_HEAD_PASS",
+                                           "first_failure":  null
+                                       }
+                                   ],
+                          "artifacts":  [
+                                            {
+                                                "id":  8742200959,
+                                                "name":  "abf001-lean-dda1d03bc54f52261e27b60642a314748b94a8d6",
+                                                "digest":  "sha256:2d3ae0cfe71e6752a68dc581bc799921979e28c3a474f953cbea300131468177"
+                                            }
+                                        ]
+                      }
+                  ],
+    "summary":  {
+                    "required_workflows":  5,
+                    "workflow_conclusions":  "success",
+                    "exact_head_jobs":  6,
+                    "exact_head_pass":  6,
+                    "exact_head_fail":  0,
+                    "not_run_hosted_infrastructure":  0
+                }
+}
