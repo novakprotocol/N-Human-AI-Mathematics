@@ -27,29 +27,30 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: "3.12"
+          python-version: "3.13"
 
       - name: Install HINC requirements
         run: |
           python -m pip install --disable-pip-version-check \
             -r papers/HINC-001/requirements.txt
 
-      - name: Compile validators and HINC source
+      - name: Compile validators and bounded HINC source
         run: |
           python -m py_compile tools/validate_publication.py
           python -m py_compile tools/validate_publication_v2.py
-          python -m py_compile tools/validate_public_release.py
-          python -m py_compile tools/validate_public_release_v2.py
-          python -m py_compile tools/validate_public_state.py
           python -m py_compile tools/validate_publication_gate.py
+          python -m py_compile tools/validate_full_lean_portfolio.py
+          python -m py_compile tools/validate_status_consistency.py
+          python -m py_compile tools/validate_learning_page.py
           python -m py_compile papers/HINC-001/src/mcrc_hidden_infinitesimal_noncommutativity_standalone.py
           python -m py_compile papers/HINC-001/src/standalone_common_core_verifier.py
           python -m py_compile papers/HINC-001/tests/test_hinc_standalone.py
 
-      - name: Verify repository visibility matches the recorded state
+      - name: Verify public archive visibility and inactive theorem state
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          set -euo pipefail
           gh api "repos/${GITHUB_REPOSITORY}" > /tmp/repository.json
           python - <<'PY'
           import json
@@ -57,60 +58,84 @@ jobs:
 
           repository = json.loads(Path("/tmp/repository.json").read_text())
           index = json.loads(Path("research-index.json").read_text(encoding="utf-8"))
-          expected = "public" if index["public_release_authorized"] else "private"
-          assert repository["visibility"] == expected, (
-              expected,
+          portfolio = json.loads(Path("formal-verification-status.json").read_text(encoding="utf-8"))
+
+          expected_visibility = index["repository_visibility_required"]
+          assert expected_visibility == "public", expected_visibility
+          assert repository["visibility"] == expected_visibility, (
+              expected_visibility,
               repository["visibility"],
           )
           assert repository["default_branch"] == "main"
-          print(f"repository visibility: {expected.upper()}")
+          assert index["public_release_authorized"] is False
+          assert index["release_channel"] == "full_lean_requalification_hold"
+          assert portfolio["active_theorem_packages"] == []
+          assert portfolio["papers_with_full_pass"] == []
+          assert portfolio["public_release_authorized"] is False
+          print("repository visibility: PUBLIC ARCHIVE")
+          print("active theorem packages: NONE")
           PY
 
-      - name: Validate publication and release boundaries
+      - name: Validate publication, full-Lean, status, and learning boundaries
         run: |
-          mkdir -p reports
+          set -euo pipefail
+          mkdir -p reports .artifacts/publication
           python tools/validate_publication_v2.py \
             --root . \
             --allow-public \
             --json-output reports/publication-validation-ci.json
-          python - <<'PY'
-          import json
-          import subprocess
-          from pathlib import Path
-
-          index = json.loads(Path("research-index.json").read_text(encoding="utf-8"))
-          if index["public_release_authorized"]:
-              command = [
-                  "python",
-                  "tools/validate_public_state.py",
-                  "--root",
-                  ".",
-                  "--json-output",
-                  "reports/public-state-validation-ci.json",
-              ]
-          else:
-              command = [
-                  "python",
-                  "tools/validate_public_release_v2.py",
-                  "--root",
-                  ".",
-                  "--json-output",
-                  "reports/public-review-validation-ci.json",
-              ]
-          subprocess.run(command, check=True)
-          PY
+          python tools/validate_full_lean_portfolio.py \
+            --root . \
+            --output reports/full-lean-portfolio-validation-ci.json
+          python tools/validate_status_consistency.py \
+            --root . \
+            --output reports/status-consistency-validation-ci.json
+          python tools/validate_learning_page.py . \
+            --output reports/learning-page-validation-ci.json \
+            --javascript-output .artifacts/publication/learn-inline.js
           python tools/validate_publication_gate.py \
             --root . \
             --json-output reports/publication-gate-validation-ci.json
 
-      - name: Run HINC standalone tests
+      - name: Verify requalification HOLD receipts
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          index = json.loads(Path("research-index.json").read_text(encoding="utf-8"))
+          portfolio = json.loads(Path("formal-verification-status.json").read_text(encoding="utf-8"))
+          hinc = json.loads(Path("papers/HINC-001/STATUS.json").read_text(encoding="utf-8"))
+          abf = json.loads(Path("papers/ABF-001/STATUS.json").read_text(encoding="utf-8"))
+          hinc_gate = json.loads(Path("reports/publication-gates/HINC-001.json").read_text(encoding="utf-8"))
+          abf_gate = json.loads(Path("reports/publication-gates/ABF-001.json").read_text(encoding="utf-8"))
+
+          assert index["repository_visibility_required"] == "public"
+          assert index["public_release_authorized"] is False
+          assert index["public_switch_ready"] is False
+          assert index["release_channel"] == "full_lean_requalification_hold"
+          assert portfolio["active_theorem_packages"] == []
+          assert portfolio["papers_with_full_pass"] == []
+          assert hinc["formal_verification"]["full_manuscript_lean_verified"] is False
+          assert hinc["release"]["public_authorized"] is False
+          assert abf["formal_verification"]["full_manuscript_lean_verified"] is False
+          assert abf["release"]["public_authorized"] is False
+          assert hinc_gate["status"] == "HOLD"
+          assert abf_gate["status"] == "HOLD"
+          assert any(gate["status"] == "HOLD" for gate in hinc_gate["gates"].values())
+          assert any(gate["status"] == "HOLD" for gate in abf_gate["gates"].values())
+          print("full-Lean requalification HOLD state: PASS")
+          PY
+
+      - name: Run HINC historical bounded tests
         run: |
           python -m unittest discover \
             -s papers/HINC-001/tests \
             -p 'test_*.py' \
             -v 2>&1 | tee reports/hinc-test-log-ci.txt
 
-      - name: Verify deterministic certificate identity
+      - name: Verify deterministic HINC certificate identity
         run: |
           python - <<'PY'
           import sys
@@ -124,46 +149,18 @@ jobs:
           print(actual)
           PY
 
-      - name: Verify private-readiness or public-release state
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-
-          index = json.loads(Path("research-index.json").read_text(encoding="utf-8"))
-          hinc = json.loads(Path("papers/HINC-001/STATUS.json").read_text(encoding="utf-8"))
-          audit = json.loads(Path("reports/public-release-audit-2026-07-27.json").read_text(encoding="utf-8"))
-          readiness = json.loads(Path("reports/public-switch-readiness.json").read_text(encoding="utf-8"))
-
-          assert index["public_switch_ready"] is True
-          assert index["specific_model_disclosed"] is False
-          assert index["specific_provider_disclosed"] is False
-          assert hinc["release"]["public_switch_ready"] is True
-          assert hinc["release"]["specific_model_disclosed"] is False
-          assert hinc["release"]["specific_provider_disclosed"] is False
-
-          if index["public_release_authorized"] is False:
-              assert index["release_channel"] == "private_staging"
-              assert index["release_version"] == "0.1.0-public-review-candidate"
-              assert hinc["release"]["public_authorized"] is False
-              assert hinc["release"]["channel"] == "private_staging"
-              assert audit["result"] == "READY_PENDING_VISIBILITY_SWITCH"
-              assert readiness["result"] == "READY_PENDING_VISIBILITY_SWITCH"
-              print("private release-ready state: PASS")
-          else:
-              assert index["release_channel"] == "public_review"
-              assert index["release_version"] == "0.1.0-public-review"
-              assert hinc["release"]["public_authorized"] is True
-              assert hinc["release"]["channel"] == "public_review"
-              assert audit["result"] == "PUBLIC_RELEASED"
-              assert readiness["result"] == "PUBLIC_RELEASED"
-              print("public release state: PASS")
-          PY
-
-      - name: Check branch whitespace
+      - name: Validate JSON and branch whitespace
         shell: bash
         run: |
           set -euo pipefail
+          python -m json.tool research-index.json >/dev/null
+          python -m json.tool formal-verification-status.json >/dev/null
+          python -m json.tool PAPER_1_3_FULL_LEAN_STATUS.json >/dev/null
+          python -m json.tool papers/HINC-001/STATUS.json >/dev/null
+          python -m json.tool papers/ABF-001/STATUS.json >/dev/null
+          python -m json.tool papers/ABF-001/formal/FORMAL_STATUS_V1.json >/dev/null
+          python -m json.tool reports/publication-gates/HINC-001.json >/dev/null
+          python -m json.tool reports/publication-gates/ABF-001.json >/dev/null
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
             git fetch origin "${{ github.base_ref }}"
             BASE="$(git merge-base "origin/${{ github.base_ref }}" HEAD)"
@@ -181,21 +178,21 @@ jobs:
           name: publication-validation-${{ github.run_id }}
           path: |
             reports/publication-validation-ci.json
-            reports/public-review-validation-ci.json
-            reports/public-state-validation-ci.json
+            reports/full-lean-portfolio-validation-ci.json
+            reports/status-consistency-validation-ci.json
+            reports/learning-page-validation-ci.json
             reports/publication-gate-validation-ci.json
             reports/hinc-test-log-ci.txt
-            reports/public-release-audit-2026-07-27.json
-            reports/public-switch-readiness.json
+            .artifacts/publication/learn-inline.js
           if-no-files-found: warn
           retention-days: 90
 
-  lean:
+  lean-bounded-hinc:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
     steps:
-      - name: Check out formal source
+      - name: Check out bounded HINC formal source
         uses: actions/checkout@v7
 
       - name: Reject proof placeholders
@@ -221,7 +218,7 @@ jobs:
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
           "$HOME/.elan/bin/elan" --version | tee reports/elan-version-ci.txt
 
-      - name: Update dependencies and build pinned Lean package
+      - name: Build the historical bounded HINC package
         shell: bash
         run: |
           set -euo pipefail
@@ -232,12 +229,16 @@ jobs:
           lake update 2>&1 | tee ../../../reports/hinc-lean-update-ci.txt
           lake exe cache get 2>&1 | tee ../../../reports/hinc-lean-cache-ci.txt
           lake build 2>&1 | tee ../../../reports/hinc-lean-build-ci.txt
+          if grep -q 'sorryAx' ../../../reports/hinc-lean-build-ci.txt; then
+            echo "bounded HINC build contains sorryAx" >&2
+            exit 1
+          fi
 
-      - name: Upload Lean build receipts
+      - name: Upload bounded HINC build receipts
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: hinc-lean-validation-${{ github.run_id }}
+          name: hinc-bounded-lean-validation-${{ github.run_id }}
           path: |
             reports/elan-installer-sha256-ci.txt
             reports/elan-version-ci.txt
