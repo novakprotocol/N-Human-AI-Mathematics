@@ -17,22 +17,23 @@
   },
   "claim": {
     "level": 3,
-    "status": "self-contained candidate arbitrary-base binary-Gerstenhaber classification prepared for public technical review",
+    "status": "human candidate classification preserved as a public historical artifact; active theorem status suspended pending complete manuscript Lean verification",
     "globally_novel": "unestablished",
     "security_consequence": "not_applicable"
   },
   "proof": {
-    "human_proof_status": "consolidated revised manuscript complete",
+    "human_proof_status": "consolidated revised candidate manuscript complete",
     "dependency_map": "PROOF_MAP.md",
     "known_gaps": [
       "the full revised manuscript is not formalized in Lean",
+      "the complete manuscript claim-to-declaration map is incomplete",
       "external algebraic-monoid and Gerstenhaber specialist review is pending",
       "independent external reproduction is pending",
       "source-level historical-equivalence review is pending"
     ]
   },
   "computation": {
-    "role": "finite Artin-ring, native, symbolic, and common-core challenge routes; not a substitute for the arbitrary-base proof",
+    "role": "finite Artin-ring, native, symbolic, and common-core challenge routes; not a substitute for the arbitrary-base proof or full formalization",
     "primary_status": "declared Python, C, Groebner, Artin-ring, and standalone common-core routes passed",
     "independent_status": "fresh copied workspace and separately structured internal routes agreed; no outside reproduction yet",
     "receipts": [
@@ -41,8 +42,10 @@
     ]
   },
   "formal_verification": {
-    "status": "base algebraic kernel and principal even/odd coefficient classifications public hosted PASS; full revised manuscript not formalized",
+    "status": "PARTIAL_PASS_FULL_MANUSCRIPT_REQUALIFICATION_HOLD",
     "assistant": "Lean 4.30.0 with Mathlib v4.30.0",
+    "full_manuscript_lean_verified": false,
+    "claim_map_complete": false,
     "verified_scope": [
       "crossing closure, associativity, identity, and commutativity",
       "square-zero skew-extension closure, associativity, and identity",
@@ -66,6 +69,7 @@
       "clopen decomposition as a functorial scheme theorem",
       "complete scheme-theoretic center equality",
       "fppf-derived subgroup theorem and abelianization",
+      "idempotent, normalization, tangent, finite-count, and zeta consequences",
       "full revised manuscript"
     ],
     "receipts": [
@@ -84,27 +88,27 @@
     ]
   },
   "review": {
-    "internal": "hostile review completed; no coefficient-system counterexample found; all release-blocking proof and scheme-language corrections integrated into the controlling manuscript",
-    "external": "pending and explicitly requested by the proposed public technical-review release",
+    "internal": "hostile review completed for the human candidate package; no coefficient-system counterexample found",
+    "external": "pending",
     "historical_priority": "unestablished; broad search found established component frameworks but no exact indexed paired classification",
     "peer_review": "not submitted"
   },
   "release": {
-    "public_authorized": true,
-    "public_switch_ready": true,
-    "channel": "public_review",
-    "version": "0.1.0-public-review",
-    "release_date": "2026-07-27",
+    "public_authorized": false,
+    "public_switch_ready": false,
+    "channel": "public_archive_full_lean_requalification_hold",
+    "historical_version": "0.1.0-public-review",
+    "historical_release_date": "2026-07-27",
     "doi": null,
     "specific_model_disclosed": false,
     "specific_provider_disclosed": false
   },
   "limitations": [
-    "The repository is public for candidate technical review; public visibility is not peer review or validation.",
-    "The Lean PASS covers the base kernel and coefficient classifications, not the full revised manuscript.",
-    "External specialist review and independent reproduction are pending and are objectives of public technical review, not prerequisites falsely represented as completed.",
+    "The historical public artifact is preserved for provenance but is not an active theorem package under the 29 July 2026 owner rule.",
+    "The Lean PASS covers bounded algebraic kernels and coefficient classifications, not the full revised manuscript.",
+    "External specialist review and independent reproduction are pending.",
     "No exact indexed prior-art match was located, but worldwide historical priority is not established.",
-    "Finite and symbolic checks do not replace the arbitrary-base human proof.",
+    "Finite and symbolic checks do not replace the arbitrary-base human proof or complete formalization.",
     "Journal submission, DOI assignment, peer review, and specific model/provider disclosure are not claimed."
   ]
 }
