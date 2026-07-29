@@ -7,6 +7,7 @@
   "required": [
     "schema_version",
     "repository",
+    "repository_visibility_required",
     "accountable_owner",
     "operating_mode",
     "public_release_authorized",
@@ -21,11 +22,20 @@
     "$schema": {"type": "string"},
     "schema_version": {"const": "n.human_ai_mathematics.research_index.v1"},
     "repository": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"},
+    "repository_visibility_required": {"enum": ["private", "public"]},
     "accountable_owner": {"type": "string", "minLength": 1},
     "operating_mode": {"const": "human-led-ai-assisted"},
     "public_release_authorized": {"type": "boolean"},
     "public_switch_ready": {"type": "boolean"},
-    "release_channel": {"enum": ["private_staging", "public_review", "archival_release", "journal_submission"]},
+    "release_channel": {
+      "enum": [
+        "private_staging",
+        "public_review",
+        "full_lean_requalification_hold",
+        "archival_release",
+        "journal_submission"
+      ]
+    },
     "release_version": {"type": ["string", "null"]},
     "specific_model_disclosed": {"type": "boolean"},
     "specific_provider_disclosed": {"type": "boolean"},
@@ -40,6 +50,10 @@
       "enum": [
         "active_review",
         "hold",
+        "public_archive_full_lean_requalification_hold",
+        "private_full_lean_completion_hold",
+        "blocked_until_papers_1_3_full_pass",
+        "teaching_preview_blocked_until_papers_1_3_full_pass",
         "archived_case_study",
         "rejected",
         "superseded",
@@ -48,7 +62,7 @@
     },
     "formalObject": {
       "type": "object",
-      "additionalProperties": {"type": "string"}
+      "additionalProperties": true
     },
     "paper": {
       "type": "object",
