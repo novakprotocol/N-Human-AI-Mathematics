@@ -17,10 +17,10 @@ def AnnihilatesMoments (ell : V →ₗ[K] K) (μ : ι → V) : Prop :=
 
 theorem generatorSpan_le_ker_iff
     (ell : V →ₗ[K] K) (μ : ι → V) :
-    generatorSpan μ ≤ LinearMap.ker ell ↔ AnnihilatesMoments ell μ := by
+    generatorSpan (K := K) μ ≤ ell.ker ↔ AnnihilatesMoments ell μ := by
   constructor
   · intro h i
-    have hmem : μ i ∈ generatorSpan μ := by
+    have hmem : μ i ∈ generatorSpan (K := K) μ := by
       exact Submodule.subset_span (Set.mem_range_self i)
     have hker := h hmem
     simpa using hker
@@ -34,7 +34,7 @@ def CoordinatesZero (y : ι → K) : Prop :=
 
 theorem mem_ker_iff_coordinatesZero
     (Phi : Q →ₗ[K] (ι → K)) (q : Q) :
-    q ∈ LinearMap.ker Phi ↔ CoordinatesZero (Phi q) := by
+    q ∈ Phi.ker ↔ CoordinatesZero (Phi q) := by
   change Phi q = 0 ↔ ∀ i, Phi q i = 0
   constructor
   · intro h i
@@ -50,7 +50,7 @@ theorem bidual_moment_incidence
     (Phi : Q →ₗ[K] (ι → K))
     (compat : ∀ q i, Phi q i = ell (moment q i))
     (q : Q) :
-    AnnihilatesMoments ell (moment q) ↔ q ∈ LinearMap.ker Phi := by
+    AnnihilatesMoments ell (moment q) ↔ q ∈ Phi.ker := by
   rw [mem_ker_iff_coordinatesZero]
   constructor
   · intro h i
@@ -66,8 +66,8 @@ theorem bidual_span_kernel_incidence
     (Phi : Q →ₗ[K] (ι → K))
     (compat : ∀ q i, Phi q i = ell (moment q i))
     (q : Q) :
-    generatorSpan (moment q) ≤ LinearMap.ker ell ↔
-      q ∈ LinearMap.ker Phi := by
+    generatorSpan (K := K) (moment q) ≤ ell.ker ↔
+      q ∈ Phi.ker := by
   rw [generatorSpan_le_ker_iff]
   exact bidual_moment_incidence moment ell Phi compat q
 
