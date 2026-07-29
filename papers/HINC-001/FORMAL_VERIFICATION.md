@@ -2,10 +2,14 @@
 
 ## Summary
 
-Two public immutable Lean gates pass:
+Three bounded Lean gates pass:
 
-1. the base crossing, skew-extension, center-consequence, and commutator kernel;
-2. the principal even and odd coefficient classifications and normalized monoid laws.
+1. the base crossing, skew-extension, center consequence, and commutator kernel;
+2. the principal even and odd coefficient classifications and normalized monoid laws;
+3. the first dual-number Hochschild foundation: the square-zero generator,
+   characteristic-two boundary cancellation, represented differential
+   vanishing, represented cup associativity, and the epsilon-coefficient product
+   rule.
 
 The controlling revised manuscript is:
 
@@ -13,7 +17,8 @@ The controlling revised manuscript is:
 manuscript/HINC-001_REVISED_MANUSCRIPT.md
 ```
 
-The full revised manuscript is **not** formalized. Public technical review must preserve that boundary.
+The full revised manuscript is **not** formalized. Public technical review must
+preserve that boundary.
 
 ## Base kernel — public hosted PASS
 
@@ -34,7 +39,8 @@ build jobs:           8,477
 sorryAx:              absent
 ```
 
-The retained axiom report lists Lean’s standard `propext` and `Quot.sound` dependencies for the displayed declarations and no `sorryAx`.
+The retained axiom report lists Lean's standard `propext` and `Quot.sound`
+dependencies for the displayed declarations and no `sorryAx`.
 
 ### Base declarations covered
 
@@ -61,7 +67,7 @@ workflow job:                89720259114
 artifact:                    8623775718
 artifact SHA-256:            2dee88b9a248dee8719c27aa23a27ca3281e697cf67202bb50c1fe60a4809dc9
 Classification.lean SHA-256: 56267aba47fd67e94be5842057aaec5bd0718829e860af212eedcdb43efbb084
-axiom-report SHA-256:        dcd0bbefb6d88e0c70a57dabc0e45c408fe7998ace6b33e330f6f6d44fb5b7ce
+axiom-report SHA-256:         dcd0bbefb6d88e0c70a57dabc0e45c408fe7998ace6b33e330f6f6d44fb5b7ce
 lake build:                  PASS
 build jobs:                  8,478
 placeholder gate:            PASS
@@ -85,7 +91,8 @@ eta^2=0
 lambda(delta-1)=0.
 ```
 
-It also verifies closure, identity, associativity, and the normalized coefficient-level classification under
+It also verifies closure, identity, associativity, and the normalized
+coefficient-level classification under
 
 ```text
 (lambda,delta,eta)(lambda',delta',eta')
@@ -94,7 +101,8 @@ It also verifies closure, identity, associativity, and the normalized coefficien
 
 ### Verified odd coefficient theorem
 
-Lean verifies equivalence between the direct homogeneous coefficient equations and
+Lean verifies equivalence between the direct homogeneous coefficient equations
+and
 
 ```text
 x=q=sigma=0
@@ -104,26 +112,69 @@ lambda(mu-1)=0
 rho(mu-1)=0.
 ```
 
-It also verifies closure, identity, associativity, commutativity, and the normalized coefficient-level classification under coordinatewise composition.
+It also verifies closure, identity, associativity, commutativity, and the
+normalized coefficient-level classification under coordinatewise composition.
 
-## Preserved failed run and repair
+## Dual-number Hochschild foundation — hosted PASS
 
-The first expanded classification run reached Lean compilation but failed because `OddEndoData.ext` used recursive simplification that exceeded Lean’s recursion depth.
+Exact formal source:
 
 ```text
-failed run:          30173789803
-failed job:          89719185539
-failed artifact:     8623660266
-failure class:       formal proof engineering
+formal/HINC/HochschildFoundation.lean
 ```
 
-The proof was replaced by explicit substitution of the four data-field equalities followed by reflexivity. The mathematical normal form did not change. The repaired immutable source produced the PASS above.
+Validated identity:
+
+```text
+exact source head:      6670525b00a18b70ec4918982faca0898ecc8e27
+workflow run:           30417097923
+workflow job:           90465882595
+artifact:               8710568867
+artifact SHA-256:       2c50072b1c455c45b4d8720762b1451ad1f7e0c2aa5002b79eb0dc9b69828887
+Lean:                   4.30.0
+Mathlib:                v4.30.0
+placeholder gate:       PASS
+lake build:             PASS
+publication gate:       PASS
+full-manuscript PASS:   no
+```
+
+Lean models the dual numbers as Mathlib's trivial square-zero extension and
+verifies:
+
+1. `epsilon^2 = 0` for the distinguished generator;
+2. cancellation of the two remaining normalized Hochschild boundary terms in
+   characteristic two;
+3. vanishing of the represented normalized-differential value;
+4. associativity of represented cup-product multiplication;
+5. evaluation of the epsilon-coefficient projection on the generator;
+6. the epsilon-coefficient product rule.
+
+This lane does **not** yet identify the complete normalized cochain complex in
+all degrees, construct the full Gerstenhaber insertion/bracket operation, prove
+the closed bracket formula, or connect those constructions to every presented
+source-algebra relation. Those are separate lanes.
+
+## Preserved failed runs and repairs
+
+The first expanded classification run reached Lean compilation but failed because
+`OddEndoData.ext` used recursive simplification that exceeded Lean's recursion
+depth. The proof was replaced by explicit substitution followed by reflexivity;
+the mathematical normal form did not change.
+
+The first Hochschild-foundation attempts exposed two proof-engineering defects:
+an invalid Mathlib module path, followed by an incorrect characteristic-two lemma
+name and an attempted definitional proof of the coefficient formula. The accepted
+source uses the pinned umbrella import, `CharTwo.add_self_eq_zero`, and Mathlib's
+trivial-square-zero multiplication simplification. No failed attempt is counted
+as formal evidence.
 
 ## Deliberately unverified scope
 
 Lean does not yet verify:
 
-- the normalized Hochschild cochain derivation in the revised manuscript;
+- the complete normalized Hochschild cochain identification in every degree;
+- the complete insertion and Gerstenhaber-bracket derivation;
 - the complete presented source algebras;
 - the odd presentation normal-form theorem;
 - the generator-to-global binary-bracket lemma;
@@ -141,19 +192,24 @@ Lean does not yet verify:
 
 The correct statement is:
 
-> The algebraic kernel, coefficient equations, and normalized monoid laws have bounded public Lean verification under a pinned environment with no `sorryAx`. The complete revised HINC-001 manuscript has a human proof but is not fully formalized.
+> The algebraic kernel, coefficient equations, normalized monoid laws, and the
+> first dual-number Hochschild boundary foundation have bounded public Lean
+> verification under a pinned environment with no `sorryAx`. The complete
+> revised HINC-001 manuscript has a human proof but is not fully formalized.
 
 Do not replace that with “HINC-001 is formally proved.”
 
 ## Next formal targets
 
-The highest-value independent formalization targets are:
+The highest-value next targets are:
 
-1. the characteristic-two normalized Hochschild calculation;
+1. the complete normalized Hochschild cochain and Gerstenhaber-bracket
+   calculation;
 2. the even and odd presented source algebras;
 3. the odd normal-form theorem;
 4. the generator-to-global biderivation lemma;
 5. the natural representability bijections;
 6. the scheme center and fppf-derived subgroup.
 
-These targets may proceed after public release. Public visibility is intended to solicit formalization and review; it does not claim those tasks are complete.
+Public visibility is intended to solicit formalization and review; it does not
+claim those tasks are complete.
