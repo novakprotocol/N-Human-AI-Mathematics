@@ -69,7 +69,7 @@ For each paper `P`, the formal receipt must establish all of the following:
 Any missing condition leaves the result at `PARTIAL`, `BOOTSTRAP`, `HOLD`, or
 `FAIL`; it may not be rounded up.
 
-## Portfolio status at policy activation
+## Current portfolio status
 
 ### HINC-001
 
@@ -91,17 +91,23 @@ and arithmetic consequences.
 
 ```text
 public state:                     active candidate technical review
-proof-assistant project:          none
+proof-assistant project:          Lean 4.30.0 / Mathlib 4.30.0
+compiled Lean boundary:           A01 bidual moment-kernel bridge
 human proof:                      complete candidate
 computational evidence:           extensive
-formal status:                    NOT_STARTED
+formal status:                    PARTIAL_PASS
 fully Lean-verified:              no
 ```
 
-The formal order is Reed--Muller duality, affine-hyperplane coordinates, moment
-spaces, the moment criterion, bidual incidence, order-zero signature, order-one
-matrix identity, and proof-connected finite rank/kernel certificates for the
-complete declared atlas.
+The compiled A01 lane proves the abstract equivalence between annihilating the
+moment generators, annihilating their generated span, and lying in the kernel of
+a compatible affine-parameter moment map. It does not prove the Reed--Muller
+degree criterion or the finite atlas.
+
+The remaining formal order is Reed--Muller duality, affine-hyperplane
+coordinates, complete moment spaces, the degree-drop criterion, order-zero
+signature, order-one matrix identity, and proof-connected finite rank/kernel
+certificates for the complete declared atlas.
 
 ### FSG-001
 
@@ -156,7 +162,7 @@ and `all claims machine-checked` are prohibited for a non-`FULL_PASS` paper.
 
 ```text
 HINC-001: remain active with bounded formal boundary
-ABF-001:  remain active with no formal-PASS claim
+ABF-001:  remain active with bounded A01 formal PASS
 FSG-001:  HOLD under the selected full-Lean gold standard
 ACM-001:  HOLD pending consolidation and full formalization
 ```
