@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed checks for the four-path full-Lean requalification page."""
+"""Fail-closed checks for the corrected learning page and FSG hold notice."""
 from __future__ import annotations
 
 import argparse
@@ -9,7 +9,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
 
-SCHEMA = "n.human_ai_mathematics.learning_page_validation.v13"
+SCHEMA = "n.human_ai_mathematics.learning_page_validation.v14"
 
 
 class PageParser(HTMLParser):
@@ -46,6 +46,7 @@ def sha256(path: Path) -> str:
 def validate(root: Path) -> dict[str, Any]:
     page_path = root / "docs/learn.html"
     index_path = root / "docs/index.html"
+    correction_path = root / "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md"
     failures: list[dict[str, Any]] = []
     checks: dict[str, int] = {}
 
@@ -56,65 +57,86 @@ def validate(root: Path) -> dict[str, Any]:
 
     check("page_file", page_path.is_file(), path=str(page_path))
     check("index_file", index_path.is_file(), path=str(index_path))
+    check("correction_file", correction_path.is_file(), path=str(correction_path))
     page = page_path.read_text(encoding="utf-8") if page_path.is_file() else ""
     index = index_path.read_text(encoding="utf-8") if index_path.is_file() else ""
+    correction = correction_path.read_text(encoding="utf-8") if correction_path.is_file() else ""
 
     parser = PageParser()
     parser.feed(page)
 
     required_page_phrases = (
-        "Four Mathematical Mysteries | Full-Lean Requalification",
-        "No active theorem packages under the current rule",
-        "Historical public artifacts · full-Lean requalification hold",
-        "Private · exact-head bootstrap PASS · F01–F07 incomplete",
-        "Blocked until papers 1–3 reach FULL_PASS",
-        "A01, the abstract bidual moment-kernel bridge, compiles",
-        "F03 and F05 are release-critical",
-        "manuscript-to-formal-statement fidelity review",
+        "Mathematical Review Paths | Corrected Public Status",
+        "Active candidate public technical review",
+        "bounded Lean PASS",
+        "bounded A01 Lean PASS",
+        "HOLD -- MATHEMATICAL BLOCKER",
+        "No FSG theorem package has been publicly released",
+        "general educational explanation is disabled",
+        "no public theorem package released",
+        "Hold pending consolidation",
     )
     for phrase in required_page_phrases:
-        check("required_boundary_text", phrase.lower() in page.lower(), phrase=phrase)
+        check("required_boundary_text", phrase.casefold() in page.casefold(), phrase=phrase)
 
     forbidden_page_phrases = (
-        "Active public review",
+        "No active theorem packages",
+        "Historical public artifacts",
+        "full-Lean requalification hold",
+        "Active theorem status suspended",
         "Private release edge",
-        "HINC-001 and ABF-001 have immutable public technical-review packages",
-        "public release is not authorized",
         "github.com/novakprotocol/N-MathLab",
+        "PR #428",
         "agent/mcrc-fibonacci-sandpile-groups-v3",
         "papers/mcrc-fibonacci-sandpile-v3",
         "PASS_PUBLIC_TECHNICAL_REVIEW_FSG",
+        "renderPetal",
+        "mSlider",
+        "Interactive Carry-Rees petal teaching diagram",
     )
     for phrase in forbidden_page_phrases:
-        check("forbidden_text_absent", phrase.lower() not in page.lower(), phrase=phrase)
+        check("forbidden_text_absent", phrase.casefold() not in page.casefold(), phrase=phrase)
 
     check("unique_ids", len(parser.ids) == len(set(parser.ids)), count=len(parser.ids))
     check("one_inline_script", len(parser.inline_scripts) == 1, actual=len(parser.inline_scripts))
-    check("interactive_petal", "renderPetal" in page and "mSlider" in page)
     check("interactive_hinc", "hincRecord" in page and "hincReadout" in page)
     check("interactive_abf", "abfOut" in page and "restrict" in page)
     check("interactive_acm", "renderLights" in page and "lightReadout" in page)
-    check("page_size", 12_000 <= len(page.encode("utf-8")) <= 80_000, bytes=len(page.encode("utf-8")))
+    check("fsg_noninteractive", "hold-notice" in page and "renderPetal" not in page and "mSlider" not in page)
+    check("page_size", 12_000 <= len(page.encode("utf-8")) <= 90_000, bytes=len(page.encode("utf-8")))
 
     required_index_phrases = (
         'href="learn.html"',
-        "Three papers. One strict Lean standard.",
-        "Active theorem packages</span><strong>None",
-        "Public archive · full-Lean hold",
-        "Private · full-Lean completion",
-        "Blocked until papers 1–3 align",
+        "Active candidate review, bounded formal status.",
+        "Active review</span>",
+        "Bounded Lean PASS",
+        "Bounded A01 Lean PASS",
+        "HOLD -- MATHEMATICAL BLOCKER",
+        "No public theorem package released",
     )
     for phrase in required_index_phrases:
-        check("index_integration", phrase.lower() in index.lower(), phrase=phrase)
+        check("index_integration", phrase.casefold() in index.casefold(), phrase=phrase)
 
     for phrase in (
-        "HINC-001 and ABF-001 are active candidate packages",
-        "Active public review",
+        "No active theorem packages",
+        "Historical public artifacts",
+        "Active theorem status suspended",
         "Private release edge",
-        "Two active packages",
         "github.com/novakprotocol/N-MathLab",
+        "PR #428",
     ):
-        check("index_overclaim_absent", phrase.lower() not in index.lower(), phrase=phrase)
+        check("index_overclaim_absent", phrase.casefold() not in index.casefold(), phrase=phrase)
+
+    required_correction_phrases = (
+        "FSG-001 was never released as a public theorem package",
+        "confirmed counterexample",
+        "teaching preview is paused",
+        "private correction is under internal review",
+        "HINC-001 and ABF-001 are unaffected",
+        "No external review, historical priority, peer-review status",
+    )
+    for phrase in required_correction_phrases:
+        check("correction_record", phrase.casefold() in correction.casefold(), phrase=phrase)
 
     return {
         "schema": SCHEMA,
@@ -123,21 +145,16 @@ def validate(root: Path) -> dict[str, Any]:
         "total_checks": sum(checks.values()),
         "failures": failures,
         "files": {
-            "docs/learn.html": {
-                "bytes": page_path.stat().st_size if page_path.is_file() else 0,
-                "sha256": sha256(page_path) if page_path.is_file() else None,
-            },
-            "docs/index.html": {
-                "bytes": index_path.stat().st_size if index_path.is_file() else 0,
-                "sha256": sha256(index_path) if index_path.is_file() else None,
-            },
+            "docs/learn.html": {"bytes": page_path.stat().st_size if page_path.is_file() else 0, "sha256": sha256(page_path) if page_path.is_file() else None},
+            "docs/index.html": {"bytes": index_path.stat().st_size if index_path.is_file() else 0, "sha256": sha256(index_path) if index_path.is_file() else None},
+            "FSG_001_PUBLIC_TEACHING_HOLD_2026-07-29.md": {"bytes": correction_path.stat().st_size if correction_path.is_file() else 0, "sha256": sha256(correction_path) if correction_path.is_file() else None},
         },
         "boundaries": {
-            "active_theorem_packages": [],
-            "hinc_001_full_lean_hold": True,
-            "abf_001_full_lean_hold": True,
-            "fsg_001_private_full_lean_hold": True,
-            "acm_001_blocked": True,
+            "hinc_001_active_review": True,
+            "abf_001_active_review": True,
+            "fsg_001_private_mathematical_hold": True,
+            "fsg_interactive_preview_disabled": True,
+            "acm_001_hold": True,
             "private_fsg_source_exposed": False,
         },
         "inline_javascript": parser.inline_scripts[0] if len(parser.inline_scripts) == 1 else "",
@@ -153,11 +170,7 @@ def main() -> int:
     payload = validate(args.root.resolve())
     if args.javascript_output:
         args.javascript_output.parent.mkdir(parents=True, exist_ok=True)
-        args.javascript_output.write_text(
-            str(payload.pop("inline_javascript")),
-            encoding="utf-8",
-            newline="\n",
-        )
+        args.javascript_output.write_text(str(payload.pop("inline_javascript")), encoding="utf-8", newline="\n")
     else:
         payload.pop("inline_javascript", None)
     text = json.dumps(payload, indent=2, sort_keys=True) + "\n"

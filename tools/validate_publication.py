@@ -44,9 +44,13 @@ TEXT_SUFFIXES = {
     ".md", ".txt", ".json", ".yml", ".yaml", ".cff", ".py", ".ps1",
     ".lean", ".tex", ".bib", ".toml",
 }
-# This checker embeds its detection signatures, so its own source is the only
-# explicitly excluded text file. The exclusion is recorded in every receipt.
-SCAN_EXCLUDED_PATHS = frozenset({"tools/validate_publication.py"})
+# These checker/preflight files embed detection signatures. The exclusions are
+# recorded in every receipt and do not exempt public research content.
+SCAN_EXCLUDED_PATHS = frozenset({
+    "tools/Invoke-PublicSwitchPreflight.ps1",
+    "tools/validate_public_release.py",
+    "tools/validate_publication.py",
+})
 MIT_LICENSE_GRANT = (
     r"Permission is hereby granted, free of charge, "
     r"to any person obtaining a copy"

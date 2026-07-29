@@ -1,9 +1,9 @@
 {
   "schema_version": "n.human_llm_mathematics.publication_gate.v1",
   "paper_id": "HINC-001",
-  "receipt_date": "2026-07-29",
+  "receipt_date": "2026-07-27",
   "release_target": "public_technical_review",
-  "status": "HOLD",
+  "status": "PASS_PUBLIC_TECHNICAL_REVIEW",
   "source_identity": {
     "repository": "novakprotocol/N-Human-AI-Mathematics",
     "candidate_source_commit": "4b3d321bdfb34e561d76408f26e7b53a629e8893",
@@ -21,19 +21,18 @@
         "papers/HINC-001/STATUS.json",
         "papers/HINC-001/FORMAL_VERIFICATION.md"
       ],
-      "notes": "The historical candidate claim boundary is preserved. Current active-theorem status is separately suspended."
+      "notes": "Active candidate public technical review only; peer review, worldwide priority, and full-manuscript formalization are not claimed."
     },
     "proof": {
-      "status": "HOLD",
+      "status": "PASS",
       "evidence": [
         "papers/HINC-001/manuscript/HINC-001_REVISED_MANUSCRIPT.md",
         "papers/HINC-001/PROOF_MAP.md",
-        "papers/HINC-001/FORMAL_VERIFICATION.md",
-        "papers/HINC-001/formal/HINC_FULL_LEAN_COMPLETION_MAP_V1.md"
+        "papers/HINC-001/FORMAL_VERIFICATION.md"
       ],
       "universal_claims_have_complete_human_proofs": true,
       "finite_claims_exhaustively_verified_or_not_applicable": true,
-      "proof_assistant_status": "PARTIAL_PASS; H04-H09 and the complete manuscript claim map remain open"
+      "proof_assistant_status": "PARTIAL_PASS / bounded Lean verification; full revised manuscript not fully formalized"
     },
     "hostile_review": {
       "status": "PASS",
@@ -42,7 +41,7 @@
         "papers/HINC-001/PROOF_MAP.md"
       ],
       "blocking_findings_open": 0,
-      "notes": "Historical internal hostile review remains preserved; complete formalization fidelity remains a separate gate."
+      "notes": "Historical internal hostile review remains preserved; complete formalization remains a separate improvement program."
     },
     "prior_art_search": {
       "status": "PASS",
@@ -67,11 +66,11 @@
       "external_reproduction": "pending"
     },
     "clean_execution": {
-      "status": "HOLD",
+      "status": "PASS",
       "evidence": [
         "papers/HINC-001/evidence/local-test-log.txt",
         "papers/HINC-001/evidence/local-fresh-copy-log.txt",
-        "HOLD: a complete full-manuscript exact-head Lean build and claim-fidelity receipt do not yet exist"
+        "reports/public-switch-readiness.json"
       ],
       "fresh_checkout_or_clean_copy": true,
       "completed_without_timeout": true,
@@ -92,19 +91,18 @@
       "doi": null
     },
     "owner_authorization": {
-      "status": "HOLD",
+      "status": "PASS",
       "evidence": [
-        "reports/public-release-receipt-2026-07-27.json",
-        "PUBLIC_REVIEW_FORMALIZATION_HOLD_2026-07-29.md"
+        "reports/public-release-receipt-2026-07-27.json"
       ],
-      "package_specific_authorization": false,
-      "notes": "Historical release authorization is preserved; current active-theorem authorization is suspended until FULL_PASS."
+      "package_specific_authorization": true,
+      "notes": "Existing HINC-001 public candidate-review authorization is preserved."
     }
   },
   "limitations": [
-    "The historical public release remains accessible for provenance and correction.",
-    "The full revised manuscript is not formally verified.",
-    "HINC-001 is not an active theorem package under the 29 July 2026 owner-selected rule.",
-    "External specialist review, outside reproduction, peer review, and historical priority remain pending."
+    "This receipt authorizes only the recorded candidate public technical-review release.",
+    "The full revised manuscript is not fully Lean verified.",
+    "External specialist review, outside reproduction, peer review, and historical priority remain pending.",
+    "The release record establishes provenance, not correctness or worldwide priority."
   ]
 }

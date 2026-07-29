@@ -5,10 +5,10 @@
   "repository_visibility_required": "public",
   "accountable_owner": "Matthew S. Novak",
   "operating_mode": "human-led-ai-assisted",
-  "public_release_authorized": false,
-  "public_switch_ready": false,
-  "release_channel": "full_lean_requalification_hold",
-  "release_version": "historical-0.1.0-public-review",
+  "public_release_authorized": true,
+  "public_switch_ready": true,
+  "release_channel": "public_review",
+  "release_version": "0.1.0-public-review",
   "specific_model_disclosed": false,
   "specific_provider_disclosed": false,
   "papers": [
@@ -21,22 +21,23 @@
         "binary Gerstenhaber algebras",
         "nonreduced algebraic geometry"
       ],
-      "state": "public_archive_full_lean_requalification_hold",
-      "claim_status": "human_candidate_manuscript_preserved_not_active_until_full_lean",
-      "human_proof": "consolidated_revised_manuscript_complete",
+      "state": "active_review",
+      "claim_status": "active_public_candidate_technical_review",
+      "human_proof": "consolidated_revised_candidate_manuscript_complete",
       "internal_reproduction": "passed_declared_python_c_groebner_artin_and_common_core_routes",
       "formal_verification": {
         "status": "PARTIAL_PASS",
+        "bounded_lean_verification": "PASS",
         "base_kernel": "public_hosted_pass",
         "principal_classification": "public_hosted_pass",
         "claim_map_complete": false,
         "unresolved_formal_scope": true,
-        "full_manuscript": "not_formalized"
+        "full_manuscript": "not_fully_formalized"
       },
       "external_specialist_review": "pending",
       "historical_priority": "unestablished",
       "peer_review": "not_submitted",
-      "public_release": "historical_artifact_preserved_active_status_suspended"
+      "public_release": "active_public_candidate_review_0.1.0"
     },
     {
       "id": "ABF-001",
@@ -49,12 +50,13 @@
         "finite linear algebra",
         "symmetric bilinear forms"
       ],
-      "state": "public_archive_full_lean_requalification_hold",
-      "claim_status": "human_candidate_and_finite_classification_preserved_not_active_until_full_lean",
+      "state": "active_review",
+      "claim_status": "active_public_candidate_technical_review",
       "human_proof": "complete_self_contained_candidate_manuscript",
       "internal_reproduction": "primary_bitset_small_universe_and_tamper_routes_pass",
       "formal_verification": {
         "status": "PARTIAL_PASS",
+        "bounded_a01_lean_verification": "PASS",
         "completed_lanes": [
           "A01 bidual moment-kernel bridge"
         ],
@@ -67,12 +69,12 @@
         ],
         "claim_map_complete": false,
         "unresolved_formal_scope": true,
-        "full_manuscript": "not_formalized"
+        "full_manuscript": "not_fully_formalized"
       },
       "external_specialist_review": "pending",
       "historical_priority": "unestablished",
       "peer_review": "not_submitted",
-      "public_release": "historical_artifact_preserved_active_status_suspended"
+      "public_release": "active_public_candidate_review_0.1.0"
     },
     {
       "id": "FSG-001",
@@ -84,35 +86,21 @@
         "Fibonacci divisibility",
         "chip firing"
       ],
-      "state": "private_full_lean_completion_hold",
-      "claim_status": "complete_internal_human_candidate_not_public",
-      "human_proof": "complete_internal_candidate",
-      "internal_reproduction": "multiple_routes_passed",
+      "state": "hold",
+      "claim_status": "private_candidate_hold_mathematical_blocker_c06_main_theorem_item_v_false_as_written",
+      "human_proof": "private_candidate_under_correction",
+      "internal_reproduction": "private_correction_under_internal_review",
       "formal_verification": {
-        "status": "PARTIAL_BOOTSTRAP_PASS",
-        "bootstrap_exact_head": "462395ad89ee3fa20b1fccd4ecf86c15dd156879",
-        "bootstrap_bundle_sha256": "98fd4e3d06f45f46545be63ae1845b6833f7b1c247903869e67b91339711275c",
-        "compiled_scope": [
-          "Fibonacci foundation",
-          "literal petal graph adjacency"
-        ],
-        "open_lanes": [
-          "F01 complete Fibonacci and Lucas arithmetic",
-          "F02 connectedness, degrees, and literal Laplacian",
-          "F03 integral graph-to-3x3 bridge",
-          "F04 tree, forest, gluing, and resistance",
-          "F05 Smith normal form and critical groups",
-          "F06 chip signatures and firing reconstruction",
-          "F07 valuation, CRT, torsion, and density"
-        ],
-        "claim_map_complete": false,
-        "unresolved_formal_scope": true,
-        "full_manuscript": "not_formalized"
+        "status": "HOLD_MATHEMATICAL_BLOCKER",
+        "mathematical_blocker": "C06 / main theorem item (v) false as written",
+        "full_manuscript": "not_publicly_released",
+        "public_theorem_package_released": false,
+        "public_release_authorized": false
       },
       "external_specialist_review": "pending_two_specialties",
       "historical_priority": "unestablished",
       "peer_review": "not_submitted",
-      "public_release": "not_released"
+      "public_release": "not_released_no_public_fsg_theorem_package"
     },
     {
       "id": "ACM-001",
@@ -123,12 +111,12 @@
         "matroids",
         "Boolean functions"
       ],
-      "state": "blocked_until_papers_1_3_full_pass",
-      "claim_status": "exact_finite_classification_requires_consolidation",
+      "state": "hold",
+      "claim_status": "hold_pending_consolidation",
       "human_proof": "partial_manuscript_set_requires_consolidation",
       "internal_reproduction": "multiple_routes_passed_for_merged_scope",
       "formal_verification": {
-        "status": "BLOCKED_BY_CONSOLIDATION",
+        "status": "HOLD_PENDING_CONSOLIDATION",
         "controlling_manuscript_present": false,
         "claim_map_complete": false,
         "full_manuscript": "not_formalized"
@@ -136,7 +124,7 @@
       "external_specialist_review": "pending",
       "historical_priority": "unestablished",
       "peer_review": "not_submitted",
-      "public_release": "not_released"
+      "public_release": "not_released_hold_pending_consolidation"
     }
   ]
 }

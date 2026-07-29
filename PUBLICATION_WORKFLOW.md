@@ -222,7 +222,7 @@ Reviewable Markdown, LaTeX, formal source, structured status, and exact evidence
 
 ## One paper at a time
 
-The first complete public-review package is `HINC-001`. Later papers may be indexed as `hold`, but no entry should be represented as a released paper until it independently satisfies the package gates.
+The active public candidate-review packages are `HINC-001` and `ABF-001`. `FSG-001` remains private on HOLD -- MATHEMATICAL BLOCKER with no public theorem package released and no public release authorization. `ACM-001` remains on hold pending consolidation.
 
 The public workflow must demonstrate:
 

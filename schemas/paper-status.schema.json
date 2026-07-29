@@ -78,7 +78,9 @@
         "assistant": {"type": ["string", "null"]},
         "verified_scope": {"type": "array", "items": {"type": "string"}},
         "unverified_scope": {"type": "array", "items": {"type": "string"}},
-        "receipts": {"type": "array", "items": {"type": "string"}}
+        "receipts": {"type": "array", "items": {"type": "string"}},
+        "full_manuscript_lean_verified": {"type": "boolean"},
+        "claim_map_complete": {"type": "boolean"}
       }
     },
     "review": {

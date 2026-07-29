@@ -2,15 +2,16 @@
   "schema": "n.human_ai_mathematics.full_lean_portfolio.v2",
   "effective_date_utc": "2026-07-29",
   "policy": {
-    "name": "complete_manuscript_full_lean_release_gate",
+    "name": "full_lean_gold_standard_with_active_candidate_review_boundary",
     "selected": true,
-    "full_pass_required_for_every_active_theorem_package": true,
+    "full_pass_required_for_fully_lean_verified_manuscript": true,
+    "active_candidate_review_allowed_with_exact_bounded_partial_pass": true,
     "bounded_pass_may_be_described_as_full_pass": false,
     "lean_establishes_novelty_or_peer_review": false
   },
   "portfolio": {
     "HINC-001": {
-      "public_state": "PUBLIC_ARCHIVE_FULL_LEAN_REQUALIFICATION_HOLD",
+      "public_state": "ACTIVE_PUBLIC_CANDIDATE_TECHNICAL_REVIEW",
       "formal_status": "PARTIAL_PASS",
       "compiled_bounded_lanes": [
         "base algebraic kernel",
@@ -19,10 +20,12 @@
       "claim_map_complete": false,
       "unresolved_formal_scope": true,
       "full_manuscript_lean_verified": false,
-      "active_public_review_authorized": false
+      "external_review": "pending",
+      "historical_priority": "unestablished",
+      "active_public_review_authorized": true
     },
     "ABF-001": {
-      "public_state": "PUBLIC_ARCHIVE_FULL_LEAN_REQUALIFICATION_HOLD",
+      "public_state": "ACTIVE_PUBLIC_CANDIDATE_TECHNICAL_REVIEW",
       "formal_status": "PARTIAL_PASS",
       "compiled_bounded_lanes": [
         "A01 bidual moment-kernel bridge"
@@ -37,36 +40,23 @@
       "claim_map_complete": false,
       "unresolved_formal_scope": true,
       "full_manuscript_lean_verified": false,
-      "active_public_review_authorized": false
+      "external_review": "pending",
+      "historical_priority": "unestablished",
+      "active_public_review_authorized": true
     },
     "FSG-001": {
-      "public_state": "PRIVATE_FULL_LEAN_COMPLETION_HOLD",
-      "formal_status": "PARTIAL_BOOTSTRAP_PASS",
-      "bootstrap_exact_head": "462395ad89ee3fa20b1fccd4ecf86c15dd156879",
-      "bootstrap_bundle_sha256": "98fd4e3d06f45f46545be63ae1845b6833f7b1c247903869e67b91339711275c",
-      "compiled_bounded_lanes": [
-        "Fibonacci foundation",
-        "literal petal graph adjacency"
-      ],
-      "open_lanes": [
-        "F01 complete Fibonacci and Lucas arithmetic",
-        "F02 connectedness, degrees, and literal Laplacian",
-        "F03 integral graph-to-3x3 bridge",
-        "F04 tree, forest, gluing, and resistance",
-        "F05 Smith normal form and critical groups",
-        "F06 chip signatures and firing reconstruction",
-        "F07 valuation, CRT, torsion, and density"
-      ],
-      "clean_immutable_execution_pass": false,
-      "claim_map_complete": false,
-      "unresolved_formal_scope": true,
+      "public_state": "PRIVATE_CANDIDATE_MATHEMATICAL_BLOCKER_HOLD",
+      "formal_status": "HOLD_MATHEMATICAL_BLOCKER",
+      "mathematical_blocker": "C06 / main theorem item (v) false as written",
+      "private_correction_under_internal_review": true,
       "full_manuscript_lean_verified": false,
+      "public_theorem_package_released": false,
       "public_mathematical_release_authorized": false,
       "release_decision": "HOLD"
     },
     "ACM-001": {
-      "public_state": "TEACHING_PREVIEW_BLOCKED_UNTIL_PAPERS_1_3_FULL_PASS",
-      "formal_status": "BLOCKED_BY_CONSOLIDATION",
+      "public_state": "HOLD_PENDING_CONSOLIDATION",
+      "formal_status": "HOLD_PENDING_CONSOLIDATION",
       "controlling_manuscript_present": false,
       "proof_assistant_project_present": false,
       "claim_map_complete": false,
@@ -88,14 +78,22 @@
   },
   "portfolio_full_lean_verified": false,
   "papers_with_full_pass": [],
-  "active_theorem_packages": [],
+  "fully_lean_verified_manuscripts": [],
+  "active_public_candidate_review_packages": [
+    "HINC-001",
+    "ABF-001"
+  ],
   "prohibited_unqualified_claims": [
-    "all papers are Lean verified",
+    "HINC-001 is fully Lean verified",
+    "ABF-001 is fully Lean verified",
     "all claims are machine checked",
     "the portfolio is formally proved",
     "the manuscripts are fully formalized",
-    "HINC-001 or ABF-001 remains active under the current owner rule",
-    "FSG-001 is ready for public theorem release"
+    "FSG-001 is ready for public theorem release",
+    "FSG-001 correction has passed review",
+    "peer reviewed",
+    "historical priority established"
   ],
-  "public_release_authorized": false
+  "hinc_abf_public_candidate_review_authorized": true,
+  "fsg_public_release_authorized": false
 }

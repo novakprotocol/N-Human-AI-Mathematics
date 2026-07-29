@@ -23,21 +23,21 @@ Do not infer current status from an old manuscript paragraph, issue comment, cha
 
 ## 2. Current release boundary
 
-Effective 29 July 2026, the accountable owner requires **complete retained manuscript claim-to-Lean coverage before active theorem release**.
+Effective 29 July 2026, the accountable owner distinguishes active public candidate technical review from full-manuscript Lean `FULL_PASS`.
 
 Current state:
 
 ```text
-HINC-001  public historical artifact; PARTIAL_PASS; full-Lean hold
-ABF-001   public historical artifact; PARTIAL_PASS; full-Lean hold
-FSG-001   private; bootstrap PASS; full F01–F07 hold
-ACM-001   blocked until papers 1–3 align
-active theorem packages under the new rule: none
+HINC-001  active public candidate technical review; PARTIAL_PASS / bounded Lean verification
+ABF-001   active public candidate technical review; PARTIAL_PASS / bounded A01 Lean verification
+FSG-001   private candidate; HOLD -- MATHEMATICAL BLOCKER; no public theorem package released
+ACM-001   hold pending consolidation
+FULL_PASS manuscripts: none
 ```
 
-Existing HINC-001 and ABF-001 public artifacts remain accessible for provenance. They MUST NOT be described as active theorem packages, fully Lean-verified manuscripts, established theorems, or peer-reviewed work while requalification remains open.
+Existing HINC-001 and ABF-001 public candidate-review packages remain active only with their exact bounded formal-verification statements. They MUST NOT be described as fully Lean-verified manuscripts, established theorems, peer-reviewed work, externally reproduced work, historically first, or journal accepted.
 
-A paper may be classified `ACTIVE_PUBLIC_REVIEW` only when the machine-readable gate reports:
+A manuscript may be classified `FULL_PASS` only when the machine-readable gate reports:
 
 ```text
 full_manuscript_lean_verified = true
@@ -49,9 +49,9 @@ project_axiom_count = 0
 sorryAx_present = false
 clean_immutable_build = PASS
 claim_fidelity_review = PASS
-public_release_authorized = true
 ```
 
+FSG-001 public wording must remain limited to the mathematical hold notice until the private correction and all release gates are accepted and separately authorized.
 ## 3. Human–LLM identity boundary
 
 The accountable human author is Matthew S. Novak. One or more large language models materially assisted the research.
@@ -145,7 +145,7 @@ AI systems MUST:
 - label simulated review as internal simulation;
 - keep human authorship and publication authority explicit;
 - preserve the category-level public disclosure without inferring a specific model or provider;
-- stop public promotion when any FULL_PASS field is incomplete.
+- stop any FULL_PASS or fully Lean-verified promotion when any required FULL_PASS field is incomplete.
 
 AI systems MUST NOT:
 
@@ -158,7 +158,7 @@ AI systems MUST NOT:
 - treat AI output as an authority source;
 - publish hidden chain-of-thought or private chat transcripts as research evidence;
 - add a specific model or provider identity without a separately reviewed owner decision;
-- advance ACM-001 or later publication work before HINC-001, ABF-001, and FSG-001 align under the owner-selected rule.
+- advance FSG-001 public release while the mathematical blocker remains, or advance ACM-001 before its consolidation gate closes.
 
 ## 8. Required theorem-summary structure
 
@@ -209,7 +209,7 @@ Stop and require correction or human review when:
 - a private path, secret, personal record, or withheld model/provider identifier appears in public staging;
 - the requested wording exceeds the evidence status;
 - a consequential release or rights action lacks explicit owner authorization;
-- any mathematical claim remains unmapped or only partially formalized;
+- a FULL_PASS or fully Lean-verified claim is proposed while any mathematical claim remains unmapped or only partially formalized;
 - any unexpected axiom, `sorryAx`, statement mismatch, or fidelity blocker remains;
 - the clean exact-head build does not complete.
 
