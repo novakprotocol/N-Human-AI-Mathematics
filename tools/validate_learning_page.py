@@ -70,7 +70,7 @@ def validate(root: Path) -> dict[str, Any]:
         "Blocked until papers 1–3 reach FULL_PASS",
         "A01, the abstract bidual moment-kernel bridge, compiles",
         "F03 and F05 are release-critical",
-        "complete manuscript-to-formal-statement fidelity review",
+        "manuscript-to-formal-statement fidelity review",
     )
     for phrase in required_page_phrases:
         check("required_boundary_text", phrase.lower() in page.lower(), phrase=phrase)
@@ -99,10 +99,10 @@ def validate(root: Path) -> dict[str, Any]:
     required_index_phrases = (
         'href="learn.html"',
         "Three papers. One strict Lean standard.",
-        "No active theorem packages",
-        "Public archive · full-Lean requalification hold",
-        "Private full-Lean completion hold",
-        "Blocked until papers 1–3 reach FULL_PASS",
+        "Active theorem packages</span><strong>None",
+        "Public archive · full-Lean hold",
+        "Private · full-Lean completion",
+        "Blocked until papers 1–3 align",
     )
     for phrase in required_index_phrases:
         check("index_integration", phrase.lower() in index.lower(), phrase=phrase)
