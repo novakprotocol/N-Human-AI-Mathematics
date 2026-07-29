@@ -1,0 +1,58 @@
+{
+  "schema": "n.human_ai_mathematics.full_lean_portfolio.v1",
+  "policy": {
+    "name": "full_portfolio_lean_gold",
+    "selected": true,
+    "full_pass_required_for_new_fsg_or_acm_release": true,
+    "lean_establishes_novelty_or_peer_review": false
+  },
+  "portfolio": {
+    "HINC-001": {
+      "public_state": "ACTIVE_CANDIDATE_TECHNICAL_REVIEW",
+      "formal_status": "PARTIAL_PASS",
+      "compiled_bounded_kernel": true,
+      "claim_map_complete": false,
+      "unresolved_formal_scope": true,
+      "full_manuscript_lean_verified": false,
+      "public_release_with_bounded_boundary_remains_valid": true
+    },
+    "ABF-001": {
+      "public_state": "ACTIVE_CANDIDATE_TECHNICAL_REVIEW",
+      "formal_status": "NOT_STARTED",
+      "proof_assistant_project_present": false,
+      "human_candidate_proof_present": true,
+      "computational_verification_present": true,
+      "claim_map_complete": false,
+      "full_manuscript_lean_verified": false,
+      "public_release_with_no_formal_pass_claim_remains_valid": true
+    },
+    "FSG-001": {
+      "public_state": "PRIVATE_RELEASE_EDGE_TEACHING_PREVIEW",
+      "formal_status": "BOOTSTRAP_COMPILE_PENDING",
+      "private_formal_project_present": true,
+      "clean_immutable_execution_pass": false,
+      "claim_map_complete": false,
+      "full_manuscript_lean_verified": false,
+      "public_mathematical_release_authorized": false,
+      "release_decision": "HOLD"
+    },
+    "ACM-001": {
+      "public_state": "TEACHING_PREVIEW_CONSOLIDATION_HOLD",
+      "formal_status": "BLOCKED_BY_CONSOLIDATION",
+      "controlling_manuscript_present": false,
+      "proof_assistant_project_present": false,
+      "claim_map_complete": false,
+      "full_manuscript_lean_verified": false,
+      "public_mathematical_release_authorized": false,
+      "release_decision": "HOLD"
+    }
+  },
+  "portfolio_full_lean_verified": false,
+  "papers_with_full_pass": [],
+  "prohibited_unqualified_claims": [
+    "all papers are Lean verified",
+    "all claims are machine checked",
+    "the portfolio is formally proved",
+    "the manuscripts are fully formalized"
+  ]
+}
