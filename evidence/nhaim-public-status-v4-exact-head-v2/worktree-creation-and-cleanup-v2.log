@@ -1,0 +1,109 @@
+schema: nhaim.public_status.worktree_creation_cleanup.v4.1
+execution_target_head: dda1d03bc54f52261e27b60642a314748b94a8d6
+source_branch: fix/restore-hinc-abf-active-fsg-math-hold-v1
+local_absolute_workspace_paths: redacted as LOCAL_WORKSPACE_PATH_REDACTED
+
+[pre-creation-path-check]
+command: Test-Path -LiteralPath C:\tmp\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final
+exit_code: 0
+stdout: False
+stderr:
+
+[worktree-creation]
+timestamp_utc: 2026-07-30T03:26:20.6576387Z
+command: git -C . worktree add --detach C:\tmp\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final dda1d03bc54f52261e27b60642a314748b94a8d6
+exit_code: 0
+stdout:
+HEAD is now at dda1d03 Repair public status V4 privacy and exact-head gates
+stderr:
+Preparing worktree (detached HEAD dda1d03)
+
+[control-checkout-head]
+command: git rev-parse HEAD
+exit_code: 0
+stdout: dda1d03bc54f52261e27b60642a314748b94a8d6
+stderr:
+
+[worktree-list-after-creation]
+command: git -C . worktree list --porcelain
+exit_code: 0
+stdout:
+worktree LOCAL_WORKSPACE_PATH_REDACTED/N-Human-AI-Mathematics
+HEAD dda1d03bc54f52261e27b60642a314748b94a8d6
+branch refs/heads/fix/restore-hinc-abf-active-fsg-math-hold-v1
+
+worktree C:/tmp/nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final
+HEAD dda1d03bc54f52261e27b60642a314748b94a8d6
+detached
+
+worktree LOCAL_WORKSPACE_PATH_REDACTED/nhaim-public-status-v4-exact-head-dda1d03
+HEAD dda1d03bc54f52261e27b60642a314748b94a8d6
+detached
+
+worktree LOCAL_WORKSPACE_PATH_REDACTED/nhaim-public-status-v4-exact-head-dda1d03-run2
+HEAD dda1d03bc54f52261e27b60642a314748b94a8d6
+detached
+stderr:
+
+[detached-state]
+command: git rev-parse HEAD
+exit_code: 0
+stdout: dda1d03bc54f52261e27b60642a314748b94a8d6
+stderr:
+
+command: git symbolic-ref -q HEAD
+exit_code: 1
+stdout:
+stderr:
+
+command: git branch --show-current
+exit_code: 0
+stdout:
+stderr:
+
+command: git rev-parse --abbrev-ref HEAD
+exit_code: 0
+stdout: HEAD
+stderr:
+
+command: git status --porcelain=v1 --untracked-files=all
+exit_code: 0
+stdout:
+stderr:
+
+detached_head_verified: true
+clean_before: true
+
+[worktree-removal]
+timestamp_utc: 2026-07-30T03:40:49.7014138Z
+command: git -C . worktree remove C:\tmp\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final
+exit_code: 0
+stdout:
+
+stderr:
+
+
+[post-removal-path-check]
+command: Test-Path -LiteralPath C:\tmp\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final
+exit_code: 0
+stdout: False
+stderr:
+
+[worktree-list-after-cleanup]
+command: git -C . worktree list --porcelain
+exit_code: 0
+stdout:
+worktree LOCAL_WORKSPACE_PATH_REDACTED/N-Human-AI-Mathematics
+HEAD dda1d03bc54f52261e27b60642a314748b94a8d6
+branch refs/heads/fix/restore-hinc-abf-active-fsg-math-hold-v1
+
+worktree LOCAL_WORKSPACE_PATH_REDACTED/nhaim-public-status-v4-exact-head-dda1d03
+HEAD dda1d03bc54f52261e27b60642a314748b94a8d6
+detached
+
+worktree LOCAL_WORKSPACE_PATH_REDACTED/nhaim-public-status-v4-exact-head-dda1d03-run2
+HEAD dda1d03bc54f52261e27b60642a314748b94a8d6
+detached
+stderr:
+
+temporary_worktree_absent: true

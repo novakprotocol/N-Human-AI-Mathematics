@@ -1,0 +1,834 @@
+{
+  "Pages_disabled": false,
+  "abbrev_ref": "HEAD",
+  "actual_private_identifiers": 0,
+  "base_head": "d1edab648bd842dec20f8b21625f17258e5e9e9c",
+  "branch_show_current": "",
+  "clean_after": true,
+  "clean_before": true,
+  "commands": [
+    {
+      "command": "python --version",
+      "description": "Record Python version",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "00-python-version",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "c4a684e859efa868ffdfb4967e90ffd847a0fc1f293e16ed50ea18af8e3b95f6",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "node --version",
+      "description": "Record Node version",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "00-node-version",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "8f9258d5e9da5443c42966a661aee09292b49d1c64e718dcc5f72976500bac48",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "$h = git rev-parse HEAD; $h; if ($h -ne 'dda1d03bc54f52261e27b60642a314748b94a8d6') { exit 1 }",
+      "description": "Verify exact detached HEAD SHA",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "00-git-head-rev-parse",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "da925843287cc9b6033970ab6fe19ec29fd3a0c3620b83c8653c44db4de4b9f6",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "git symbolic-ref -q HEAD",
+      "description": "Verify no symbolic branch",
+      "exit_code": 1,
+      "expected_exit_codes": [
+        1
+      ],
+      "id": "00-git-head-symbolic-ref",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "$b = git branch --show-current; $b; if ($b) { exit 1 }",
+      "description": "Verify empty current branch",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "00-git-branch-current",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "$r = git rev-parse --abbrev-ref HEAD; $r; if ($r -ne 'HEAD') { exit 1 }",
+      "description": "Verify abbrev-ref is HEAD",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "00-git-abbrev-ref",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "34d6a94dacb895403529caac12a19aed745c6caca7a8d0f4ed631999044f76e8",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "$s = git status --porcelain=v1 --untracked-files=all; if ($s) { $s; exit 1 }",
+      "description": "Verify clean worktree before suite",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "00-git-status-before",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B -c 'import pathlib; files=[''tools/public_status_checks.py'', ''tools/validate_status_consistency.py'', ''tools/validate_public_surface_scan.py'', ''tools/test_public_status_mutations.py'', ''tools/test_internal_link_negative_control.py'', ''tools/validate_internal_links.py'', ''tools/test_json_schema_negative_controls.py'', ''tools/validate_json_schema.py'', ''tools/validate_learning_page.py'', ''tools/validate_full_lean_portfolio.py'', ''tools/validate_publication.py'', ''tools/validate_publication_v2.py'', ''tools/validate_publication_gate.py'', ''tools/validate_public_state.py'', ''tools/validate_public_release.py'', ''tools/validate_public_release_v2.py'', ''papers/HINC-001/src/mcrc_hidden_infinitesimal_noncommutativity_standalone.py'', ''papers/HINC-001/src/standalone_common_core_verifier.py'', ''papers/HINC-001/tests/test_hinc_standalone.py'', ''papers/ABF-001/src/abf001_verifier.py'', ''papers/ABF-001/src/abf001_independent_bitset.py'', ''papers/ABF-001/tests/test_abf001.py'']; [compile(pathlib.Path(p).read_text(encoding=''utf-8-sig''), p, ''exec'') for p in files]; print(''python compile PASS'', len(files))'",
+      "description": "Python compilation without bytecode output",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "01-python-compile",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "12ff9cf061a242a594e67558c15d53edb31274622ad826bf2d0a2d41dbc123e1",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B -c 'import json,pathlib,subprocess; files=subprocess.check_output([''git'',''ls-files'',''*.json''], text=True).splitlines(); [json.loads(pathlib.Path(p).read_text(encoding=''utf-8-sig'')) for p in files]; print(''json syntax PASS'', len(files))'",
+      "description": "JSON syntax validation for tracked JSON files",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "02-json-syntax",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "dc9fc5c8b07bcaf720e5663d41977e1de070cf9dae43f754b54671c2dcaf1c67",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B tools/validate_json_schema.py --root . --output 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\json-schema-validation.json'",
+      "description": "Genuine JSON Schema positive validation",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "03-json-schema-positive",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "047d4a4fb091dbf4bc829aa0fb80df87d50ad527fe8a17eb1773225a33c505b1",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B tools/test_json_schema_negative_controls.py --root . --output 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\json-schema-negative-controls.json'",
+      "description": "Seven JSON Schema negative controls",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "04-json-schema-negative",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "1ca6d8b37c33bc77560dd10920dfc8fe74d15c3293ad61f9bb526fc373bc6e77",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B tools/validate_status_consistency.py --root . --scan-all --output 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\status-consistency-validation.json'",
+      "description": "Canonical status, per-file status blocks, semantic contradiction validation",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "05-status-consistency",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "76159d3d1e3d5362d5f3b1c9de2b9367730af9b0ecdfe5f8bd0e0b44b1f78595",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B tools/test_public_status_mutations.py --root . --output 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\public-status-mutation-tests.json' --log 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\public-status-mutation-tests.log'",
+      "description": "Clean baseline validator, 14 status mutations, 8 private-reference mutations",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "06-status-and-private-mutations",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "cd1707002aafb84b9deda0085a56cb030914e5af52524e5ee6eaf241bc997bb3",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B tools/test_internal_link_negative_control.py --root . --output 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\internal-link-negative-control.json'",
+      "description": "Four internal-link negative controls",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "07-internal-link-negative",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "31538f350643e7b24fecd3c52d87e651dbd1b9680f18bd7762eb6df66bea4e8a",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B tools/validate_public_surface_scan.py --root . --output 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\public-surface-scan.json'",
+      "description": "Public-surface private-reference, credential, and personal-path scan",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "08-public-surface-scan",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "a39e7aeb2e50649605a53f3804d0cbe30253ba9086e5744f61055f6bde0305d3",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B tools/validate_internal_links.py --root . --output 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\internal-link-validation.json'",
+      "description": "Positive internal-link and duplicate-ID validation",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "09-internal-links-positive",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "91e352d175e861021f932aeca7add2a7d598a311758a252cc673dc02ba6b553e",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B tools/validate_learning_page.py . --output 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\learning-page-validation.json' --javascript-output 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\learn-inline.js'",
+      "description": "Learning-page validation and JavaScript extraction",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "10-learning-page",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "8155e7173ebfa0b8eb3ae59fd79110c89a428f435b5bc9c53d3a35d361ef0872",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "node --check 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\learn-inline.js'",
+      "description": "JavaScript syntax validation",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "11-javascript-syntax",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B -c 'import functools,http.server,json,pathlib,socketserver,threading,urllib.request; docs=pathlib.Path(''docs'').resolve(); handler=functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(docs)); srv=socketserver.TCPServer((''127.0.0.1'',0), handler); port=srv.server_address[1]; thread=threading.Thread(target=srv.serve_forever, daemon=True); thread.start(); index=urllib.request.urlopen(f''http://127.0.0.1:{port}/index.html'', timeout=10).read().decode(''utf-8''); learn=urllib.request.urlopen(f''http://127.0.0.1:{port}/learn.html'', timeout=10).read().decode(''utf-8''); srv.shutdown(); srv.server_close(); checks={''hinc_active'':''HINC-001</dt><dd>Active candidate public technical review'' in index,''abf_active'':''ABF-001</dt><dd>Active candidate public technical review'' in index,''fsg_hold'':''FSG-001</dt><dd>Private / HOLD -- MATHEMATICAL BLOCKER / no public theorem package released'' in index,''acm_hold'':''ACM-001</dt><dd>Hold pending consolidation'' in index,''preview_paused'':''The teaching preview is paused.'' in learn,''hinc_abf_active'':''HINC-001 and ABF-001 are active candidate public technical-review packages'' in learn}; ok=all(checks.values()); pathlib.Path(''C:\\\\tmp\\\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\\\serve-fetch-receipt.json'').write_text(json.dumps({''schema'':''nhaim.public_status.serve_fetch.v4.1'',''result'':''PASS'' if ok else ''FAIL'',''port'':port,''checks'':checks}, indent=2, sort_keys=True)+''\\n'', encoding=''utf-8''); print(json.dumps(checks, sort_keys=True)); raise SystemExit(0 if ok else 1)'",
+      "description": "Serve/fetch validation",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "12-serve-fetch",
+      "result": "PASS",
+      "stderr_sha256": "5d131d43e691fa388372c72d35952038e891963911826dce2905d02a357f3c36",
+      "stdout_sha256": "0d861c9026fe8758002bee199d2232fd43f5858b160d66a0b1b84f29ef98a83b",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B -c 'import json,pathlib; index=pathlib.Path(''docs/index.html'').read_text(encoding=''utf-8''); learn=pathlib.Path(''docs/learn.html'').read_text(encoding=''utf-8''); checks={''hinc_active'':''HINC-001</dt><dd>Active candidate public technical review'' in index,''abf_active'':''ABF-001</dt><dd>Active candidate public technical review'' in index,''fsg_hold'':''FSG-001</dt><dd>Private / HOLD -- MATHEMATICAL BLOCKER / no public theorem package released'' in index,''acm_hold'':''ACM-001</dt><dd>Hold pending consolidation'' in index,''preview_paused'':''The teaching preview is paused.'' in learn,''no_full_lean_overclaim'':''fully Lean verified'' not in index.lower()}; ok=all(checks.values()); pathlib.Path(''C:\\\\tmp\\\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\\\pages-build-equivalent.json'').write_text(json.dumps({''schema'':''nhaim.public_status.pages_build_equivalent.v4.1'',''result'':''PASS'' if ok else ''FAIL'',''checks'':checks}, indent=2, sort_keys=True)+''\\n'', encoding=''utf-8''); print(json.dumps(checks, sort_keys=True)); raise SystemExit(0 if ok else 1)'",
+      "description": "GitHub Pages build-equivalent validation without deployment",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "13-pages-build-equivalent",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "903966021af058c75c7a2a1017ee00e103c18be3ebbe7bdeee078820f525e001",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B tools/validate_publication.py --root . --allow-public --json-output 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\publication-v1-validation.json'",
+      "description": "Publication validator v1",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "14-publication-v1",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "f80fefe59bddee2eeec7d0f9d9b35b8d5d36e136b34e0a17d64af7c06bb4a0b1",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B tools/validate_publication_v2.py --root . --allow-public --json-output 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\publication-v2-validation.json'",
+      "description": "Publication validator v2",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "15-publication-v2",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "f80fefe59bddee2eeec7d0f9d9b35b8d5d36e136b34e0a17d64af7c06bb4a0b1",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B tools/validate_public_state.py --root . --json-output 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\public-state-validation.json'",
+      "description": "Public-state validation",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "16-public-state",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "8f61b33d7ff6e05288f5fd1a02857128c8070c5224d9531fa91c8a363c5f44fa",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B tools/validate_public_release.py --root . --json-output 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\public-release-validation.json'",
+      "description": "Public-release validation",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "17-public-release",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "9a022bc17c84f97f9346db7853b8cbc2988e9f84d14be307e45f623037b9da89",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B tools/validate_public_release_v2.py --root . --json-output 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\public-release-v2-validation.json'",
+      "description": "Public-release validator v2",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "18-public-release-v2",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "9a022bc17c84f97f9346db7853b8cbc2988e9f84d14be307e45f623037b9da89",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B tools/validate_publication_gate.py --root . --json-output 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\publication-gate-validation.json'",
+      "description": "Publication-gate validation",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "19-publication-gate",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "9a022bc17c84f97f9346db7853b8cbc2988e9f84d14be307e45f623037b9da89",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B tools/validate_full_lean_portfolio.py --root . --output 'C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\full-lean-portfolio-validation.json'",
+      "description": "Full-Lean portfolio boundary validation",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "20-full-lean-boundary",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "8514d30a576639d173c9a9dcf40a14b2b5f8ab9805094bd8a1470649767f88fa",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "python -B -m unittest discover -s papers/HINC-001/tests -p 'test_*.py' -v",
+      "description": "HINC five-test suite",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "21-hinc-tests",
+      "result": "PASS",
+      "stderr_sha256": "05a4ca73df1db3b22220d79aea0593a5bae6d403bc6dad63691777037edd66cb",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "$env:ABF001_TEST_OUTPUT_DIR='C:\\tmp\\nhaim-public-status-v4-evidence-v2-output-019fb0f6-final\\abf-test-output'; python -B -m unittest discover -s papers/ABF-001/tests -p 'test_*.py' -v",
+      "description": "ABF six-test suite",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "22-abf-tests",
+      "result": "PASS",
+      "stderr_sha256": "3687d13b6acc45f18440e09698b628e91a0120aae7e52b5baf39663b1271aaa9",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "lake --version",
+      "description": "Record HINC Lake availability",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "23-hinc-lake-version",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "046ec11da7c5ec88078933908043ff6da9e0b014e190498732e76d7699c3ee22",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final\\papers\\HINC-001\\formal"
+    },
+    {
+      "command": "lake update",
+      "description": "HINC bounded Lean dependency update",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "24-hinc-lake-update",
+      "result": "PASS",
+      "stderr_sha256": "082c1ab8d86d9c0248a485072bc3c0053e343cdab4f0bd26b75df5cff7d26056",
+      "stdout_sha256": "859f5af59e12ac13e79c42332e3b921765c0f0481e499427997ca9618b7e8a29",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final\\papers\\HINC-001\\formal"
+    },
+    {
+      "command": "lake exe cache get",
+      "description": "HINC bounded Lean cache fetch",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "25-hinc-lake-cache-get",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "710fe2d0d3538eafecf6e37ce32d8042a2a79d2f411b86a412a3309b7e370ac8",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final\\papers\\HINC-001\\formal"
+    },
+    {
+      "command": "lake build",
+      "description": "HINC bounded Lean build",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "26-hinc-lake-build",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "6b0a1c75e2bc505d839de3908e3424cde5f3c73e26aa25dd3cc5bc2de81bfe22",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final\\papers\\HINC-001\\formal"
+    },
+    {
+      "command": "lake --version",
+      "description": "Record ABF Lake availability",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "27-abf-lake-version",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "046ec11da7c5ec88078933908043ff6da9e0b014e190498732e76d7699c3ee22",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final\\papers\\ABF-001\\formal"
+    },
+    {
+      "command": "lake update",
+      "description": "ABF bounded A01 Lean dependency update",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "28-abf-lake-update",
+      "result": "PASS",
+      "stderr_sha256": "8ddaf0cb69d49c772c67a0eca90179facc059630ec0f37ef4a37728123fa087d",
+      "stdout_sha256": "2fa7e642e79d44a89b2444037307b845462cfd5f6966b69a10bd3c7209793289",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final\\papers\\ABF-001\\formal"
+    },
+    {
+      "command": "lake exe cache get",
+      "description": "ABF bounded A01 Lean cache fetch",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "29-abf-lake-cache-get",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "710fe2d0d3538eafecf6e37ce32d8042a2a79d2f411b86a412a3309b7e370ac8",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final\\papers\\ABF-001\\formal"
+    },
+    {
+      "command": "lake build",
+      "description": "ABF bounded A01 Lean build",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "30-abf-lake-build",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "cb2760f721f767993e3809e6394165ac9432ef04ce90d265e5067d85e7c9d3d4",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final\\papers\\ABF-001\\formal"
+    },
+    {
+      "command": "$root = (Resolve-Path -LiteralPath .).Path; $targets = @('papers/HINC-001/formal/.lake', 'papers/HINC-001/formal/lake-manifest.json', 'papers/ABF-001/formal/.lake', 'papers/ABF-001/formal/lake-manifest.json'); foreach ($rel in $targets) { $full = [System.IO.Path]::GetFullPath((Join-Path $root $rel)); if (-not $full.StartsWith($root)) { Write-Output \"refusing cleanup outside worktree: $full\"; exit 2 }; if (Test-Path -LiteralPath $full) { Remove-Item -LiteralPath $full -Recurse -Force; Write-Output \"removed $rel\" } }; $status = git status --porcelain=v1 --untracked-files=all; if ($status) { $status; exit 1 }",
+      "description": "Remove generated Lake artifacts before final clean check",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "30b-clean-lake-artifacts",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "9e0fef0c9da80c55ef800496a3dd82ca696912a79d6d77387b163c46e61dd96a",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "git diff --check d1edab648bd842dec20f8b21625f17258e5e9e9c HEAD --",
+      "description": "Whitespace diff check from base to exact head",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "31-whitespace",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    },
+    {
+      "command": "$s = git status --porcelain=v1 --untracked-files=all; if ($s) { $s; exit 1 }",
+      "description": "Final clean-worktree check",
+      "exit_code": 0,
+      "expected_exit_codes": [
+        0
+      ],
+      "id": "32-clean-after",
+      "result": "PASS",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "working_directory": "C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final"
+    }
+  ],
+  "control_checkout_head_at_creation": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+  "detached_head_verified": true,
+  "duplicate_receipt_identity": true,
+  "execution_target_head": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+  "exit_codes": {
+    "00-git-abbrev-ref": 0,
+    "00-git-branch-current": 0,
+    "00-git-head-rev-parse": 0,
+    "00-git-head-symbolic-ref": 1,
+    "00-git-status-before": 0,
+    "00-node-version": 0,
+    "00-python-version": 0,
+    "01-python-compile": 0,
+    "02-json-syntax": 0,
+    "03-json-schema-positive": 0,
+    "04-json-schema-negative": 0,
+    "05-status-consistency": 0,
+    "06-status-and-private-mutations": 0,
+    "07-internal-link-negative": 0,
+    "08-public-surface-scan": 0,
+    "09-internal-links-positive": 0,
+    "10-learning-page": 0,
+    "11-javascript-syntax": 0,
+    "12-serve-fetch": 0,
+    "13-pages-build-equivalent": 0,
+    "14-publication-v1": 0,
+    "15-publication-v2": 0,
+    "16-public-state": 0,
+    "17-public-release": 0,
+    "18-public-release-v2": 0,
+    "19-publication-gate": 0,
+    "20-full-lean-boundary": 0,
+    "21-hinc-tests": 0,
+    "22-abf-tests": 0,
+    "23-hinc-lake-version": 0,
+    "24-hinc-lake-update": 0,
+    "25-hinc-lake-cache-get": 0,
+    "26-hinc-lake-build": 0,
+    "27-abf-lake-version": 0,
+    "28-abf-lake-update": 0,
+    "29-abf-lake-cache-get": 0,
+    "30-abf-lake-build": 0,
+    "30b-clean-lake-artifacts": 0,
+    "31-whitespace": 0,
+    "32-clean-after": 0
+  },
+  "formal_source_changed": false,
+  "hosted_workflows": [
+    {
+      "artifact_ids": [
+        8742160403
+      ],
+      "conclusion": "success",
+      "event": "pull_request",
+      "head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+      "jobs": [
+        {
+          "actual_checked_out_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "artifact_ids": [
+            8742160403
+          ],
+          "conclusion": "success",
+          "event": "pull_request",
+          "exact_head_classification": "EXACT_HEAD_PASS",
+          "expected_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "first_failure": null,
+          "job_id": 90729533312,
+          "job_name": "policy",
+          "step_count": 10
+        }
+      ],
+      "run_id": 30497473218,
+      "workflow_name": "Validate full-portfolio Lean policy"
+    },
+    {
+      "artifact_ids": [
+        8742160462
+      ],
+      "conclusion": "success",
+      "event": "pull_request",
+      "head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+      "jobs": [
+        {
+          "actual_checked_out_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "artifact_ids": [
+            8742160462
+          ],
+          "conclusion": "success",
+          "event": "pull_request",
+          "exact_head_classification": "EXACT_HEAD_PASS",
+          "expected_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "first_failure": null,
+          "job_id": 90729533399,
+          "job_name": "learning-page",
+          "step_count": 14
+        }
+      ],
+      "run_id": 30497473228,
+      "workflow_name": "Validate four-path full-Lean learning page"
+    },
+    {
+      "artifact_ids": [
+        8742165648
+      ],
+      "conclusion": "success",
+      "event": "pull_request",
+      "head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+      "jobs": [
+        {
+          "actual_checked_out_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "artifact_ids": [
+            8742165648
+          ],
+          "conclusion": "success",
+          "event": "pull_request",
+          "exact_head_classification": "EXACT_HEAD_PASS",
+          "expected_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "first_failure": null,
+          "job_id": 90729533459,
+          "job_name": "consistency",
+          "step_count": 11
+        }
+      ],
+      "run_id": 30497473207,
+      "workflow_name": "Validate repository status consistency"
+    },
+    {
+      "artifact_ids": [
+        8742203068,
+        8742182642
+      ],
+      "conclusion": "success",
+      "event": "pull_request",
+      "head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+      "jobs": [
+        {
+          "actual_checked_out_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "artifact_ids": [
+            8742182642
+          ],
+          "conclusion": "success",
+          "event": "pull_request",
+          "exact_head_classification": "EXACT_HEAD_PASS",
+          "expected_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "first_failure": null,
+          "job_id": 90729533575,
+          "job_name": "publication",
+          "step_count": 17
+        },
+        {
+          "actual_checked_out_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "artifact_ids": [
+            8742203068
+          ],
+          "conclusion": "success",
+          "event": "pull_request",
+          "exact_head_classification": "EXACT_HEAD_PASS",
+          "expected_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "first_failure": null,
+          "job_id": 90729533617,
+          "job_name": "lean-bounded-hinc",
+          "step_count": 9
+        }
+      ],
+      "run_id": 30497473208,
+      "workflow_name": "Validate mathematical publication repository"
+    },
+    {
+      "artifact_ids": [
+        8742200959
+      ],
+      "conclusion": "success",
+      "event": "pull_request",
+      "head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+      "jobs": [
+        {
+          "actual_checked_out_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "artifact_ids": [
+            8742200959
+          ],
+          "conclusion": "success",
+          "event": "pull_request",
+          "exact_head_classification": "EXACT_HEAD_PASS",
+          "expected_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "first_failure": null,
+          "job_id": 90729533460,
+          "job_name": "lean",
+          "step_count": 12
+        }
+      ],
+      "run_id": 30497473213,
+      "workflow_name": "Validate ABF-001 Lean formalization"
+    }
+  ],
+  "identity_gate": {
+    "evidence_branch_head_before": "aeffea46500d813629193b8ade7033b1fbc30e2a",
+    "no_later_pr_source_commit": true,
+    "source_head_after_local_execution": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+    "source_head_before": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+    "source_pr_draft": true,
+    "source_pr_mergeable": true,
+    "source_pr_open": true,
+    "source_pr_unmerged": true
+  },
+  "immutable_execution_target_unchanged": true,
+  "limitations": [
+    "internal evidence repair",
+    "not peer review",
+    "not novelty or priority clearance"
+  ],
+  "local_results": {
+    "abf_lean": true,
+    "abf_tests": true,
+    "clean_after": true,
+    "clean_before": true,
+    "command_count": 40,
+    "duplicate_id_validation": true,
+    "failures": [],
+    "full_lean_boundary": true,
+    "hinc_lean": true,
+    "hinc_tests": true,
+    "internal_link_negative_controls": {
+      "control_count": 4,
+      "passed": 4,
+      "result": "PASS"
+    },
+    "internal_links_positive": true,
+    "json_schema_negative_controls": {
+      "negative_control_count": 7,
+      "negative_controls_passed": 7,
+      "result": "PASS"
+    },
+    "json_schema_positive": true,
+    "json_syntax": true,
+    "learning_page": true,
+    "mutations": {
+      "private_reference_mutation_count": 8,
+      "private_reference_mutations_passed": 8,
+      "result": "PASS",
+      "status_mutation_count": 14,
+      "status_mutations_passed": 14,
+      "worktree_unchanged": true
+    },
+    "pages_build_equivalent": true,
+    "public_release": true,
+    "public_release_v2": true,
+    "public_state": true,
+    "public_surface_scan": {
+      "credential_pattern_findings": 0,
+      "personal_path_findings": 0,
+      "private_reference_findings": 0,
+      "result": "PASS"
+    },
+    "publication_gate": true,
+    "publication_v1": true,
+    "publication_v2": true,
+    "python_compilation": true,
+    "result": "PASS",
+    "serve_fetch": true,
+    "status_consistency": {
+      "conflicting_formal_states": 0,
+      "conflicting_publication_states": 0,
+      "full_lean_overclaim": 0,
+      "historical_priority_overclaim": 0,
+      "peer_review_overclaim": 0,
+      "per_file_state_mismatches": 0,
+      "result": "PASS"
+    },
+    "whitespace": true
+  },
+  "merge_performed": false,
+  "old_evidence_commit_preserved": "aeffea46500d813629193b8ade7033b1fbc30e2a",
+  "old_evidence_status": "superseded_invalid_package_integrity",
+  "old_receipt_sha256_preserved_historical": "c92df77215ca7cc166cfb3cc4f2957701946310f8407c25184a3b5ab19cc2ef5",
+  "parent_evidence_commit": "aeffea46500d813629193b8ade7033b1fbc30e2a",
+  "path_absent_after_cleanup": true,
+  "path_absent_after_cleanup_command": "Test-Path -LiteralPath C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final",
+  "path_preexisted": false,
+  "path_preexistence_command": "Test-Path -LiteralPath C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final",
+  "release_action": false,
+  "release_history_changed": false,
+  "repository": "novakprotocol/N-Human-AI-Mathematics",
+  "repository_visibility_changed": false,
+  "schema": "nhaim.public_status.exact_head_execution.v4.1",
+  "source_branch": "fix/restore-hinc-abf-active-fsg-math-hold-v1",
+  "source_pr": 60,
+  "symbolic_ref_exit_code": 1,
+  "theorem_source_changed": false,
+  "v1_evidence_preserved": true,
+  "v1_package_integrity_audit": "failed",
+  "v2_replaces_v1_for_evidence_package_integrity": true,
+  "worktree_creation_command": "git -C . worktree add --detach C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final dda1d03bc54f52261e27b60642a314748b94a8d6",
+  "worktree_creation_exit_code": 0,
+  "worktree_creation_stderr_sha256": "d1c0a6103834dda8938ff57f6a8816669df77b3dadb1e1dad37a5a5d66574206",
+  "worktree_creation_stdout_sha256": "2d6bd3c61d284b889f0f621aea8a94df7685d0ffecad4cd8327c77bd485ffa38",
+  "worktree_creation_timestamp_utc": "2026-07-30T03:26:20.6576387Z",
+  "worktree_list_after_cleanup_redacted": "worktree LOCAL_WORKSPACE_PATH_REDACTED/N-Human-AI-Mathematics\nHEAD dda1d03bc54f52261e27b60642a314748b94a8d6\nbranch refs/heads/fix/restore-hinc-abf-active-fsg-math-hold-v1\n\nworktree LOCAL_WORKSPACE_PATH_REDACTED/nhaim-public-status-v4-exact-head-dda1d03\nHEAD dda1d03bc54f52261e27b60642a314748b94a8d6\ndetached\n\nworktree LOCAL_WORKSPACE_PATH_REDACTED/nhaim-public-status-v4-exact-head-dda1d03-run2\nHEAD dda1d03bc54f52261e27b60642a314748b94a8d6\ndetached\n",
+  "worktree_list_after_creation_redacted": "worktree LOCAL_WORKSPACE_PATH_REDACTED/N-Human-AI-Mathematics\nHEAD dda1d03bc54f52261e27b60642a314748b94a8d6\nbranch refs/heads/fix/restore-hinc-abf-active-fsg-math-hold-v1\n\nworktree C:/tmp/nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final\nHEAD dda1d03bc54f52261e27b60642a314748b94a8d6\ndetached\n\nworktree LOCAL_WORKSPACE_PATH_REDACTED/nhaim-public-status-v4-exact-head-dda1d03\nHEAD dda1d03bc54f52261e27b60642a314748b94a8d6\ndetached\n\nworktree LOCAL_WORKSPACE_PATH_REDACTED/nhaim-public-status-v4-exact-head-dda1d03-run2\nHEAD dda1d03bc54f52261e27b60642a314748b94a8d6\ndetached\n",
+  "worktree_removal_command": "git -C . worktree remove C:\\tmp\\nhaim-public-status-v4-exact-head-v2-worktree-019fb0f6-final",
+  "worktree_removal_exit_code": 0,
+  "worktree_removal_stderr_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+  "worktree_removal_stdout_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+  "worktree_removal_timestamp_utc": "2026-07-30T03:40:49.7014138Z"
+}

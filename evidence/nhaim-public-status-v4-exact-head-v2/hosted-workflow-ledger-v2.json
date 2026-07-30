@@ -1,0 +1,1111 @@
+{
+  "checkout_snippets_location": "embedded in hosted-workflow-ledger-v2.json",
+  "execution_target_head": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+  "inspected_at_utc": "2026-07-30T03:40:32.136878Z",
+  "repository": "novakprotocol/N-Human-AI-Mathematics",
+  "schema": "nhaim.public_status.hosted_workflow_ledger.v4.1",
+  "separate_checkout_snippet_file": null,
+  "source": "GitHub Actions API and gh run logs re-fetched for V2 evidence repair",
+  "summary": {
+    "actual_sha_mismatches": [],
+    "exact_head_fail": 0,
+    "exact_head_jobs": 6,
+    "exact_head_pass": 6,
+    "expected_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+    "required_workflows": 5,
+    "workflow_conclusions": [
+      "success"
+    ]
+  },
+  "workflows": [
+    {
+      "artifacts": [
+        {
+          "created_at": "2026-07-29T22:49:43Z",
+          "digest": "sha256:aed26c12ce76cd26d659855fc3933d44000138ec020cd5e3ac8fc5edbe7cf7be",
+          "expired": false,
+          "id": 8742160403,
+          "name": "full-lean-portfolio-dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "size_in_bytes": 3860,
+          "updated_at": "2026-07-29T22:49:43Z"
+        }
+      ],
+      "conclusion": "success",
+      "created_at": "2026-07-29T22:49:33Z",
+      "event": "pull_request",
+      "head_branch": "fix/restore-hinc-abf-active-fsg-math-hold-v1",
+      "head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+      "html_url": "https://github.com/novakprotocol/N-Human-AI-Mathematics/actions/runs/30497473218",
+      "jobs": [
+        {
+          "actual_checked_out_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "artifact_ids": [
+            8742160403
+          ],
+          "checkout_log_snippets": [
+            "policy\tCheck out complete source\t\ufeff2026-07-29T22:49:40.4629723Z ##[group]Run actions/checkout@v7",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4630708Z with:",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4631497Z   ref: dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4632147Z   fetch-depth: 0",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4632671Z   persist-credentials: false",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4633287Z   repository: novakprotocol/N-Human-AI-Mathematics",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4637571Z   token: ***",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4638040Z   ssh-strict: true",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4638504Z   ssh-user: git",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4638954Z   clean: true",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4639429Z   sparse-checkout-cone-mode: true",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4639986Z   fetch-tags: false",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4640459Z   show-progress: true",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4640941Z   lfs: false",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4641553Z   submodules: false",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4642037Z   set-safe-directory: true",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4642574Z   allow-unsafe-pr-checkout: false",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.4643435Z ##[endgroup]",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.5693276Z Syncing repository: novakprotocol/N-Human-AI-Mathematics",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.5696824Z ##[group]Getting Git version info",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.5698534Z Working directory is '/home/runner/work/N-Human-AI-Mathematics/N-Human-AI-Mathematics'",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.5700881Z [command]/usr/bin/git version",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.5808242Z git version 2.54.0",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.5837499Z ##[endgroup]",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.5846037Z Temporarily overriding HOME='/home/runner/work/_temp/86365917-f943-4b3e-b54a-ca273199f3a9' before making global git config changes",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.5848750Z Adding repository directory to the temporary git global config as a safe directory",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.5851561Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/N-Human-AI-Mathematics/N-Human-AI-Mathematics",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.5926928Z Deleting the contents of '/home/runner/work/N-Human-AI-Mathematics/N-Human-AI-Mathematics'",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.5930123Z ##[group]Determining repository object format",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.5932455Z ##[endgroup]",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.5933956Z ##[group]Initializing the repository",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.5936981Z [command]/usr/bin/git init /home/runner/work/N-Human-AI-Mathematics/N-Human-AI-Mathematics",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.6082824Z hint: Using 'master' as the name for the initial branch. This default branch name",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.6086223Z hint: will change to \"main\" in Git 3.0. To configure the initial branch name",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.6090056Z hint: to use in all of your new repositories, which will suppress this warning,",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.6092458Z hint: call:",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.6094010Z hint:",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.6095381Z hint: \tgit config --global init.defaultBranch <name>",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.6096905Z hint:",
+            "policy\tCheck out complete source\t2026-07-29T22:49:40.6098640Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and"
+          ],
+          "conclusion": "success",
+          "event": "pull_request",
+          "exact_head_classification": "EXACT_HEAD_PASS",
+          "expected_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "first_failure": null,
+          "job_head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "job_id": 90729533312,
+          "job_name": "policy",
+          "run_head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "run_id": 30497473218,
+          "steps": [
+            {
+              "completed_at": "2026-07-29T22:49:40Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "started_at": "2026-07-29T22:49:38Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:41Z",
+              "conclusion": "success",
+              "name": "Check out complete source",
+              "number": 2,
+              "started_at": "2026-07-29T22:49:40Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:41Z",
+              "conclusion": "success",
+              "name": "Verify exact workflow checkout",
+              "number": 3,
+              "started_at": "2026-07-29T22:49:41Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:42Z",
+              "conclusion": "success",
+              "name": "Set up Python",
+              "number": 4,
+              "started_at": "2026-07-29T22:49:41Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:42Z",
+              "conclusion": "success",
+              "name": "Validate portfolio formal boundaries",
+              "number": 5,
+              "started_at": "2026-07-29T22:49:42Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:42Z",
+              "conclusion": "success",
+              "name": "Validate JSON and whitespace",
+              "number": 6,
+              "started_at": "2026-07-29T22:49:42Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:43Z",
+              "conclusion": "success",
+              "name": "Upload policy receipt",
+              "number": 7,
+              "started_at": "2026-07-29T22:49:42Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:44Z",
+              "conclusion": "success",
+              "name": "Post Set up Python",
+              "number": 13,
+              "started_at": "2026-07-29T22:49:43Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:44Z",
+              "conclusion": "success",
+              "name": "Post Check out complete source",
+              "number": 14,
+              "started_at": "2026-07-29T22:49:44Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:44Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "started_at": "2026-07-29T22:49:44Z",
+              "status": "completed"
+            }
+          ],
+          "workflow": "Validate full-portfolio Lean policy"
+        }
+      ],
+      "run_attempt": 1,
+      "run_id": 30497473218,
+      "status": "completed",
+      "updated_at": "2026-07-29T22:49:47Z",
+      "workflow_name": "Validate full-portfolio Lean policy"
+    },
+    {
+      "artifacts": [
+        {
+          "created_at": "2026-07-29T22:49:44Z",
+          "digest": "sha256:1fd6e705927306e6ca9789ed2e4c62334ea78382906c601f764ac00ee5556430",
+          "expired": false,
+          "id": 8742160462,
+          "name": "learning-page-v14-dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "size_in_bytes": 14317,
+          "updated_at": "2026-07-29T22:49:44Z"
+        }
+      ],
+      "conclusion": "success",
+      "created_at": "2026-07-29T22:49:33Z",
+      "event": "pull_request",
+      "head_branch": "fix/restore-hinc-abf-active-fsg-math-hold-v1",
+      "head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+      "html_url": "https://github.com/novakprotocol/N-Human-AI-Mathematics/actions/runs/30497473228",
+      "jobs": [
+        {
+          "actual_checked_out_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "artifact_ids": [
+            8742160462
+          ],
+          "checkout_log_snippets": [
+            "learning-page\tRun actions/checkout@v4\t2026-07-29T22:49:38.3580345Z   ref: dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "learning-page\tRun actions/checkout@v4\t2026-07-29T22:49:39.6849706Z [command]/usr/bin/git rev-parse --verify --quiet dda1d03bc54f52261e27b60642a314748b94a8d6^{object}",
+            "learning-page\tRun actions/checkout@v4\t2026-07-29T22:49:39.6876471Z dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "learning-page\tRun actions/checkout@v4\t2026-07-29T22:49:39.7427863Z [command]/usr/bin/git checkout --progress --force dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "learning-page\tRun actions/checkout@v4\t2026-07-29T22:49:39.8689798Z Note: switching to 'dda1d03bc54f52261e27b60642a314748b94a8d6'.",
+            "learning-page\tRun actions/checkout@v4\t2026-07-29T22:49:39.8700869Z You are in 'detached HEAD' state. You can look around, make experimental",
+            "learning-page\tRun actions/checkout@v4\t2026-07-29T22:49:39.8708748Z HEAD is now at dda1d03 Repair public status V4 privacy and exact-head gates",
+            "learning-page\tRun actions/checkout@v4\t2026-07-29T22:49:39.8767490Z dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "learning-page\tVerify exact workflow checkout\t\ufeff2026-07-29T22:49:40.0519724Z ##[group]Run set -euo pipefail",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0520518Z ^[[36;1mset -euo pipefail^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0521118Z ^[[36;1mif [[ \"pull_request\" == \"pull_request\" ]]; then^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0521935Z ^[[36;1m  expected=\"dda1d03bc54f52261e27b60642a314748b94a8d6\"^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0522649Z ^[[36;1melif [[ \"pull_request\" == \"workflow_dispatch\" ]]; then^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0523195Z ^[[36;1m  expected=\"\"^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0523658Z ^[[36;1melse^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0524175Z ^[[36;1m  expected=\"91c6bddf5d2f85585d0936db98b7921720afe855\"^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0524722Z ^[[36;1mfi^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0525202Z ^[[36;1mactual=\"$(git rev-parse HEAD)\"^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0525710Z ^[[36;1mecho \"event=pull_request\"^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0526234Z ^[[36;1mecho \"expected_sha=$expected\"^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0526807Z ^[[36;1mecho \"actual_checked_out_sha=$actual\"^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0527330Z ^[[36;1mtest \"$actual\" = \"$expected\"^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0527862Z ^[[36;1mmkdir -p .artifacts/exact-head^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0528464Z ^[[36;1mpython - <<PY^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0528920Z ^[[36;1mimport json^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0529654Z ^[[36;1mfrom pathlib import Path^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0530130Z ^[[36;1m^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0530586Z ^[[36;1mpayload = {^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0531101Z ^[[36;1m    \"schema\": \"nhaim.workflow_exact_head_checkout.v1\",^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0531642Z ^[[36;1m    \"event\": \"pull_request\",^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0532181Z ^[[36;1m    \"expected_sha\": \"$expected\",^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0532695Z ^[[36;1m    \"actual_checked_out_sha\": \"$actual\",^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0533253Z ^[[36;1m    \"match\": \"$actual\" == \"$expected\",^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0533761Z ^[[36;1m}^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0534297Z ^[[36;1mpath = Path(\".artifacts/exact-head/learning-page-checkout.json\")^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0534972Z ^[[36;1mpath.parent.mkdir(parents=True, exist_ok=True)^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0535661Z ^[[36;1mpath.write_text(json.dumps(payload, indent=2, sort_keys=True) + \"\\n\", encoding=\"utf-8\")^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0536290Z ^[[36;1mPY^[[0m",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0574504Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}",
+            "learning-page\tVerify exact workflow checkout\t2026-07-29T22:49:40.0575431Z ##[endgroup]"
+          ],
+          "conclusion": "success",
+          "event": "pull_request",
+          "exact_head_classification": "EXACT_HEAD_PASS",
+          "expected_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "first_failure": null,
+          "job_head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "job_id": 90729533399,
+          "job_name": "learning-page",
+          "run_head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "run_id": 30497473228,
+          "steps": [
+            {
+              "completed_at": "2026-07-29T22:49:38Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "started_at": "2026-07-29T22:49:37Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:40Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "started_at": "2026-07-29T22:49:38Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:40Z",
+              "conclusion": "success",
+              "name": "Verify exact workflow checkout",
+              "number": 3,
+              "started_at": "2026-07-29T22:49:40Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:40Z",
+              "conclusion": "success",
+              "name": "Run actions/setup-python@v5",
+              "number": 4,
+              "started_at": "2026-07-29T22:49:40Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:40Z",
+              "conclusion": "success",
+              "name": "Run actions/setup-node@v4",
+              "number": 5,
+              "started_at": "2026-07-29T22:49:40Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:42Z",
+              "conclusion": "success",
+              "name": "Validate status, interactions, boundaries, and identities",
+              "number": 6,
+              "started_at": "2026-07-29T22:49:40Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:42Z",
+              "conclusion": "success",
+              "name": "Check learning-page JavaScript syntax",
+              "number": 7,
+              "started_at": "2026-07-29T22:49:42Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:42Z",
+              "conclusion": "success",
+              "name": "Serve and fetch both public pages",
+              "number": 8,
+              "started_at": "2026-07-29T22:49:42Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:42Z",
+              "conclusion": "success",
+              "name": "Check whitespace",
+              "number": 9,
+              "started_at": "2026-07-29T22:49:42Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:44Z",
+              "conclusion": "success",
+              "name": "Upload validation receipt",
+              "number": 10,
+              "started_at": "2026-07-29T22:49:42Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:44Z",
+              "conclusion": "success",
+              "name": "Post Run actions/setup-node@v4",
+              "number": 18,
+              "started_at": "2026-07-29T22:49:44Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:44Z",
+              "conclusion": "success",
+              "name": "Post Run actions/setup-python@v5",
+              "number": 19,
+              "started_at": "2026-07-29T22:49:44Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:44Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "number": 20,
+              "started_at": "2026-07-29T22:49:44Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:44Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 21,
+              "started_at": "2026-07-29T22:49:44Z",
+              "status": "completed"
+            }
+          ],
+          "workflow": "Validate four-path full-Lean learning page"
+        }
+      ],
+      "run_attempt": 1,
+      "run_id": 30497473228,
+      "status": "completed",
+      "updated_at": "2026-07-29T22:49:48Z",
+      "workflow_name": "Validate four-path full-Lean learning page"
+    },
+    {
+      "artifacts": [
+        {
+          "created_at": "2026-07-29T22:49:58Z",
+          "digest": "sha256:6cd04dedbb53ad5581572111a62c07273b55084713c298808fe482a0a3817052",
+          "expired": false,
+          "id": 8742165648,
+          "name": "status-consistency-dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "size_in_bytes": 32342,
+          "updated_at": "2026-07-29T22:49:58Z"
+        }
+      ],
+      "conclusion": "success",
+      "created_at": "2026-07-29T22:49:33Z",
+      "event": "pull_request",
+      "head_branch": "fix/restore-hinc-abf-active-fsg-math-hold-v1",
+      "head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+      "html_url": "https://github.com/novakprotocol/N-Human-AI-Mathematics/actions/runs/30497473207",
+      "jobs": [
+        {
+          "actual_checked_out_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "artifact_ids": [
+            8742165648
+          ],
+          "checkout_log_snippets": [
+            "consistency\tRun actions/checkout@v4\t2026-07-29T22:49:37.7242234Z   ref: dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "consistency\tRun actions/checkout@v4\t2026-07-29T22:49:38.5212953Z [command]/usr/bin/git rev-parse --verify --quiet dda1d03bc54f52261e27b60642a314748b94a8d6^{object}",
+            "consistency\tRun actions/checkout@v4\t2026-07-29T22:49:38.5240763Z dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "consistency\tRun actions/checkout@v4\t2026-07-29T22:49:38.5928065Z [command]/usr/bin/git checkout --progress --force dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "consistency\tRun actions/checkout@v4\t2026-07-29T22:49:38.6207786Z Note: switching to 'dda1d03bc54f52261e27b60642a314748b94a8d6'.",
+            "consistency\tRun actions/checkout@v4\t2026-07-29T22:49:38.6209075Z You are in 'detached HEAD' state. You can look around, make experimental",
+            "consistency\tRun actions/checkout@v4\t2026-07-29T22:49:38.6218652Z HEAD is now at dda1d03 Repair public status V4 privacy and exact-head gates",
+            "consistency\tRun actions/checkout@v4\t2026-07-29T22:49:38.6276532Z dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "consistency\tVerify exact workflow checkout\t\ufeff2026-07-29T22:49:38.7159741Z ##[group]Run set -euo pipefail",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7160423Z ^[[36;1mset -euo pipefail^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7161075Z ^[[36;1mif [[ \"pull_request\" == \"pull_request\" ]]; then^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7161986Z ^[[36;1m  expected=\"dda1d03bc54f52261e27b60642a314748b94a8d6\"^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7162947Z ^[[36;1melif [[ \"pull_request\" == \"workflow_dispatch\" ]]; then^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7163747Z ^[[36;1m  expected=\"\"^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7164195Z ^[[36;1melse^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7164764Z ^[[36;1m  expected=\"91c6bddf5d2f85585d0936db98b7921720afe855\"^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7165542Z ^[[36;1mfi^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7165948Z ^[[36;1mactual=\"$(git rev-parse HEAD)\"^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7166570Z ^[[36;1mecho \"event=pull_request\"^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7167404Z ^[[36;1mecho \"expected_sha=$expected\"^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7168083Z ^[[36;1mecho \"actual_checked_out_sha=$actual\"^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7168759Z ^[[36;1mtest \"$actual\" = \"$expected\"^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7169406Z ^[[36;1mmkdir -p .artifacts/exact-head^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7170058Z ^[[36;1mpython - <<PY^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7170519Z ^[[36;1mimport json^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7170993Z ^[[36;1mfrom pathlib import Path^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7171533Z ^[[36;1m^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7171896Z ^[[36;1mpayload = {^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7172511Z ^[[36;1m    \"schema\": \"nhaim.workflow_exact_head_checkout.v1\",^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7173306Z ^[[36;1m    \"event\": \"pull_request\",^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7173922Z ^[[36;1m    \"expected_sha\": \"$expected\",^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7174599Z ^[[36;1m    \"actual_checked_out_sha\": \"$actual\",^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7175323Z ^[[36;1m    \"match\": \"$actual\" == \"$expected\",^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7175950Z ^[[36;1m}^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7176606Z ^[[36;1mpath = Path(\".artifacts/exact-head/consistency-checkout.json\")^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7177825Z ^[[36;1mpath.parent.mkdir(parents=True, exist_ok=True)^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7179115Z ^[[36;1mpath.write_text(json.dumps(payload, indent=2, sort_keys=True) + \"\\n\", encoding=\"utf-8\")^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7180242Z ^[[36;1mPY^[[0m",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7223599Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}",
+            "consistency\tVerify exact workflow checkout\t2026-07-29T22:49:38.7224422Z ##[endgroup]"
+          ],
+          "conclusion": "success",
+          "event": "pull_request",
+          "exact_head_classification": "EXACT_HEAD_PASS",
+          "expected_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "first_failure": null,
+          "job_head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "job_id": 90729533459,
+          "job_name": "consistency",
+          "run_head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "run_id": 30497473207,
+          "steps": [
+            {
+              "completed_at": "2026-07-29T22:49:37Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "started_at": "2026-07-29T22:49:36Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:38Z",
+              "conclusion": "success",
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "started_at": "2026-07-29T22:49:37Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:38Z",
+              "conclusion": "success",
+              "name": "Verify exact workflow checkout",
+              "number": 3,
+              "started_at": "2026-07-29T22:49:38Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:38Z",
+              "conclusion": "success",
+              "name": "Run actions/setup-python@v5",
+              "number": 4,
+              "started_at": "2026-07-29T22:49:38Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:40Z",
+              "conclusion": "success",
+              "name": "Install validation requirements",
+              "number": 5,
+              "started_at": "2026-07-29T22:49:38Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:57Z",
+              "conclusion": "success",
+              "name": "Validate publication and formal-state consistency",
+              "number": 6,
+              "started_at": "2026-07-29T22:49:40Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:58Z",
+              "conclusion": "success",
+              "name": "Validate JSON and whitespace",
+              "number": 7,
+              "started_at": "2026-07-29T22:49:57Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:59Z",
+              "conclusion": "success",
+              "name": "Upload consistency receipt",
+              "number": 8,
+              "started_at": "2026-07-29T22:49:58Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:59Z",
+              "conclusion": "success",
+              "name": "Post Run actions/setup-python@v5",
+              "number": 15,
+              "started_at": "2026-07-29T22:49:59Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:59Z",
+              "conclusion": "success",
+              "name": "Post Run actions/checkout@v4",
+              "number": 16,
+              "started_at": "2026-07-29T22:49:59Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:59Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 17,
+              "started_at": "2026-07-29T22:49:59Z",
+              "status": "completed"
+            }
+          ],
+          "workflow": "Validate repository status consistency"
+        }
+      ],
+      "run_attempt": 1,
+      "run_id": 30497473207,
+      "status": "completed",
+      "updated_at": "2026-07-29T22:50:01Z",
+      "workflow_name": "Validate repository status consistency"
+    },
+    {
+      "artifacts": [
+        {
+          "created_at": "2026-07-29T22:51:45Z",
+          "digest": "sha256:f33eb67917041c4bcd0b0117225a9cf0b9f19fa9dc2b20a5492a042488c4bc73",
+          "expired": false,
+          "id": 8742203068,
+          "name": "hinc-bounded-lean-validation-30497473208",
+          "size_in_bytes": 4529,
+          "updated_at": "2026-07-29T22:51:45Z"
+        },
+        {
+          "created_at": "2026-07-29T22:50:47Z",
+          "digest": "sha256:0740493463c1e75d579a31c6b263a686d4851709a3d26418cf70bb9a2cfc92f9",
+          "expired": false,
+          "id": 8742182642,
+          "name": "publication-validation-30497473208",
+          "size_in_bytes": 22503,
+          "updated_at": "2026-07-29T22:50:47Z"
+        }
+      ],
+      "conclusion": "success",
+      "created_at": "2026-07-29T22:49:33Z",
+      "event": "pull_request",
+      "head_branch": "fix/restore-hinc-abf-active-fsg-math-hold-v1",
+      "head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+      "html_url": "https://github.com/novakprotocol/N-Human-AI-Mathematics/actions/runs/30497473208",
+      "jobs": [
+        {
+          "actual_checked_out_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "artifact_ids": [
+            8742182642
+          ],
+          "checkout_log_snippets": [
+            "publication\tCheck out complete source history\t\ufeff2026-07-29T22:49:43.0646588Z ##[group]Run actions/checkout@v7",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0647439Z with:",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0647904Z   ref: dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0648483Z   fetch-depth: 0",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0648933Z   persist-credentials: false",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0649494Z   repository: novakprotocol/N-Human-AI-Mathematics",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0653768Z   token: ***",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0654225Z   ssh-strict: true",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0654646Z   ssh-user: git",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0655054Z   clean: true",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0655491Z   sparse-checkout-cone-mode: true",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0656000Z   fetch-tags: false",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0656437Z   show-progress: true",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0656870Z   lfs: false",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0657273Z   submodules: false",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0657707Z   set-safe-directory: true",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0658198Z   allow-unsafe-pr-checkout: false",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.0658889Z ##[endgroup]",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1673959Z Syncing repository: novakprotocol/N-Human-AI-Mathematics",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1676694Z ##[group]Getting Git version info",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1677614Z Working directory is '/home/runner/work/N-Human-AI-Mathematics/N-Human-AI-Mathematics'",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1678864Z [command]/usr/bin/git version",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1742748Z git version 2.54.0",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1764119Z ##[endgroup]",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1788632Z Temporarily overriding HOME='/home/runner/work/_temp/a0008a5d-535b-4e39-9f2f-fca0131719da' before making global git config changes",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1791219Z Adding repository directory to the temporary git global config as a safe directory",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1793914Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/N-Human-AI-Mathematics/N-Human-AI-Mathematics",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1844191Z Deleting the contents of '/home/runner/work/N-Human-AI-Mathematics/N-Human-AI-Mathematics'",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1849190Z ##[group]Determining repository object format",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1850947Z ##[endgroup]",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1852362Z ##[group]Initializing the repository",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1855817Z [command]/usr/bin/git init /home/runner/work/N-Human-AI-Mathematics/N-Human-AI-Mathematics",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1957808Z hint: Using 'master' as the name for the initial branch. This default branch name",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1958964Z hint: will change to \"main\" in Git 3.0. To configure the initial branch name",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1960141Z hint: to use in all of your new repositories, which will suppress this warning,",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1960874Z hint: call:",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1961277Z hint:",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1961799Z hint: \tgit config --global init.defaultBranch <name>",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1962412Z hint:",
+            "publication\tCheck out complete source history\t2026-07-29T22:49:43.1962981Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and"
+          ],
+          "conclusion": "success",
+          "event": "pull_request",
+          "exact_head_classification": "EXACT_HEAD_PASS",
+          "expected_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "first_failure": null,
+          "job_head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "job_id": 90729533575,
+          "job_name": "publication",
+          "run_head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "run_id": 30497473208,
+          "steps": [
+            {
+              "completed_at": "2026-07-29T22:49:43Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "started_at": "2026-07-29T22:49:42Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:43Z",
+              "conclusion": "success",
+              "name": "Check out complete source history",
+              "number": 2,
+              "started_at": "2026-07-29T22:49:43Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:43Z",
+              "conclusion": "success",
+              "name": "Verify exact workflow checkout",
+              "number": 3,
+              "started_at": "2026-07-29T22:49:43Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:44Z",
+              "conclusion": "success",
+              "name": "Set up Python",
+              "number": 4,
+              "started_at": "2026-07-29T22:49:43Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:58Z",
+              "conclusion": "success",
+              "name": "Install validation and paper requirements",
+              "number": 5,
+              "started_at": "2026-07-29T22:49:44Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:58Z",
+              "conclusion": "success",
+              "name": "Compile validators and bounded HINC source",
+              "number": 6,
+              "started_at": "2026-07-29T22:49:58Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:59Z",
+              "conclusion": "success",
+              "name": "Verify public candidate-review status correction",
+              "number": 7,
+              "started_at": "2026-07-29T22:49:58Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:50:21Z",
+              "conclusion": "success",
+              "name": "Validate publication, full-Lean, status, and learning boundaries",
+              "number": 8,
+              "started_at": "2026-07-29T22:49:59Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:50:21Z",
+              "conclusion": "success",
+              "name": "Verify active candidate-review receipts",
+              "number": 9,
+              "started_at": "2026-07-29T22:50:21Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:50:30Z",
+              "conclusion": "success",
+              "name": "Run HINC historical bounded tests",
+              "number": 10,
+              "started_at": "2026-07-29T22:50:21Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:50:43Z",
+              "conclusion": "success",
+              "name": "Run ABF bounded A01 tests",
+              "number": 11,
+              "started_at": "2026-07-29T22:50:30Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:50:46Z",
+              "conclusion": "success",
+              "name": "Verify deterministic HINC certificate identity",
+              "number": 12,
+              "started_at": "2026-07-29T22:50:43Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:50:47Z",
+              "conclusion": "success",
+              "name": "Validate JSON and branch whitespace",
+              "number": 13,
+              "started_at": "2026-07-29T22:50:46Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:50:47Z",
+              "conclusion": "success",
+              "name": "Upload publication receipts",
+              "number": 14,
+              "started_at": "2026-07-29T22:50:47Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:50:48Z",
+              "conclusion": "success",
+              "name": "Post Set up Python",
+              "number": 27,
+              "started_at": "2026-07-29T22:50:47Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:50:48Z",
+              "conclusion": "success",
+              "name": "Post Check out complete source history",
+              "number": 28,
+              "started_at": "2026-07-29T22:50:48Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:50:48Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 29,
+              "started_at": "2026-07-29T22:50:48Z",
+              "status": "completed"
+            }
+          ],
+          "workflow": "Validate mathematical publication repository"
+        },
+        {
+          "actual_checked_out_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "artifact_ids": [
+            8742203068
+          ],
+          "checkout_log_snippets": [
+            "lean-bounded-hinc\tCheck out bounded HINC formal source\t2026-07-29T22:49:38.8145142Z   ref: dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "lean-bounded-hinc\tCheck out bounded HINC formal source\t2026-07-29T22:49:39.6304488Z [command]/usr/bin/git rev-parse --verify --quiet dda1d03bc54f52261e27b60642a314748b94a8d6^{object}",
+            "lean-bounded-hinc\tCheck out bounded HINC formal source\t2026-07-29T22:49:39.6335593Z dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "lean-bounded-hinc\tCheck out bounded HINC formal source\t2026-07-29T22:49:39.6461321Z [command]/usr/bin/git checkout --progress --force dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "lean-bounded-hinc\tCheck out bounded HINC formal source\t2026-07-29T22:49:39.6786357Z Note: switching to 'dda1d03bc54f52261e27b60642a314748b94a8d6'.",
+            "lean-bounded-hinc\tCheck out bounded HINC formal source\t2026-07-29T22:49:39.6788575Z You are in 'detached HEAD' state. You can look around, make experimental",
+            "lean-bounded-hinc\tCheck out bounded HINC formal source\t2026-07-29T22:49:39.6814728Z HEAD is now at dda1d03 Repair public status V4 privacy and exact-head gates",
+            "lean-bounded-hinc\tCheck out bounded HINC formal source\t2026-07-29T22:49:39.6886324Z dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t\ufeff2026-07-29T22:49:39.8433269Z ##[group]Run set -euo pipefail",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8434621Z ^[[36;1mset -euo pipefail^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8435914Z ^[[36;1mif [[ \"pull_request\" == \"pull_request\" ]]; then^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8437587Z ^[[36;1m  expected=\"dda1d03bc54f52261e27b60642a314748b94a8d6\"^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8439763Z ^[[36;1melif [[ \"pull_request\" == \"workflow_dispatch\" ]]; then^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8441278Z ^[[36;1m  expected=\"\"^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8442255Z ^[[36;1melse^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8443414Z ^[[36;1m  expected=\"91c6bddf5d2f85585d0936db98b7921720afe855\"^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8445079Z ^[[36;1mfi^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8446007Z ^[[36;1mactual=\"$(git rev-parse HEAD)\"^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8447232Z ^[[36;1mecho \"event=pull_request\"^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8448702Z ^[[36;1mecho \"expected_sha=$expected\"^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8450203Z ^[[36;1mecho \"actual_checked_out_sha=$actual\"^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8451521Z ^[[36;1mtest \"$actual\" = \"$expected\"^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8452742Z ^[[36;1mmkdir -p .artifacts/exact-head^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8454007Z ^[[36;1mpython - <<PY^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8454994Z ^[[36;1mimport json^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8455990Z ^[[36;1mfrom pathlib import Path^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8457094Z ^[[36;1m^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8457927Z ^[[36;1mpayload = {^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8459511Z ^[[36;1m    \"schema\": \"nhaim.workflow_exact_head_checkout.v1\",^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8461011Z ^[[36;1m    \"event\": \"pull_request\",^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8462223Z ^[[36;1m    \"expected_sha\": \"$expected\",^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8463603Z ^[[36;1m    \"actual_checked_out_sha\": \"$actual\",^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8464990Z ^[[36;1m    \"match\": \"$actual\" == \"$expected\",^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8466201Z ^[[36;1m}^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8467554Z ^[[36;1mpath = Path(\".artifacts/exact-head/lean-bounded-hinc-checkout.json\")^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8469735Z ^[[36;1mpath.parent.mkdir(parents=True, exist_ok=True)^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8471920Z ^[[36;1mpath.write_text(json.dumps(payload, indent=2, sort_keys=True) + \"\\n\", encoding=\"utf-8\")^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8473851Z ^[[36;1mPY^[[0m",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8524276Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}",
+            "lean-bounded-hinc\tVerify exact workflow checkout\t2026-07-29T22:49:39.8525775Z ##[endgroup]"
+          ],
+          "conclusion": "success",
+          "event": "pull_request",
+          "exact_head_classification": "EXACT_HEAD_PASS",
+          "expected_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "first_failure": null,
+          "job_head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "job_id": 90729533617,
+          "job_name": "lean-bounded-hinc",
+          "run_head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "run_id": 30497473208,
+          "steps": [
+            {
+              "completed_at": "2026-07-29T22:49:38Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "started_at": "2026-07-29T22:49:37Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:39Z",
+              "conclusion": "success",
+              "name": "Check out bounded HINC formal source",
+              "number": 2,
+              "started_at": "2026-07-29T22:49:38Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:39Z",
+              "conclusion": "success",
+              "name": "Verify exact workflow checkout",
+              "number": 3,
+              "started_at": "2026-07-29T22:49:39Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:39Z",
+              "conclusion": "success",
+              "name": "Reject proof placeholders",
+              "number": 4,
+              "started_at": "2026-07-29T22:49:39Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:40Z",
+              "conclusion": "success",
+              "name": "Install pinned Lean toolchain manager",
+              "number": 5,
+              "started_at": "2026-07-29T22:49:39Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:51:44Z",
+              "conclusion": "success",
+              "name": "Build the historical bounded HINC package",
+              "number": 6,
+              "started_at": "2026-07-29T22:49:40Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:51:45Z",
+              "conclusion": "success",
+              "name": "Upload bounded HINC build receipts",
+              "number": 7,
+              "started_at": "2026-07-29T22:51:44Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:51:45Z",
+              "conclusion": "success",
+              "name": "Post Check out bounded HINC formal source",
+              "number": 14,
+              "started_at": "2026-07-29T22:51:45Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:51:45Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 15,
+              "started_at": "2026-07-29T22:51:45Z",
+              "status": "completed"
+            }
+          ],
+          "workflow": "Validate mathematical publication repository"
+        }
+      ],
+      "run_attempt": 1,
+      "run_id": 30497473208,
+      "status": "completed",
+      "updated_at": "2026-07-29T22:51:49Z",
+      "workflow_name": "Validate mathematical publication repository"
+    },
+    {
+      "artifacts": [
+        {
+          "created_at": "2026-07-29T22:51:39Z",
+          "digest": "sha256:2d3ae0cfe71e6752a68dc581bc799921979e28c3a474f953cbea300131468177",
+          "expired": false,
+          "id": 8742200959,
+          "name": "abf001-lean-dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "size_in_bytes": 8039,
+          "updated_at": "2026-07-29T22:51:39Z"
+        }
+      ],
+      "conclusion": "success",
+      "created_at": "2026-07-29T22:49:33Z",
+      "event": "pull_request",
+      "head_branch": "fix/restore-hinc-abf-active-fsg-math-hold-v1",
+      "head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+      "html_url": "https://github.com/novakprotocol/N-Human-AI-Mathematics/actions/runs/30497473213",
+      "jobs": [
+        {
+          "actual_checked_out_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "artifact_ids": [
+            8742200959
+          ],
+          "checkout_log_snippets": [
+            "lean\tCheck out ABF formal source\t2026-07-29T22:49:43.9059500Z   ref: dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "lean\tCheck out ABF formal source\t2026-07-29T22:49:44.5550176Z [command]/usr/bin/git rev-parse --verify --quiet dda1d03bc54f52261e27b60642a314748b94a8d6^{object}",
+            "lean\tCheck out ABF formal source\t2026-07-29T22:49:44.5580555Z dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "lean\tCheck out ABF formal source\t2026-07-29T22:49:44.5777428Z [command]/usr/bin/git checkout --progress --force dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "lean\tCheck out ABF formal source\t2026-07-29T22:49:44.6027049Z Note: switching to 'dda1d03bc54f52261e27b60642a314748b94a8d6'.",
+            "lean\tCheck out ABF formal source\t2026-07-29T22:49:44.6030010Z You are in 'detached HEAD' state. You can look around, make experimental",
+            "lean\tCheck out ABF formal source\t2026-07-29T22:49:44.6046830Z HEAD is now at dda1d03 Repair public status V4 privacy and exact-head gates",
+            "lean\tCheck out ABF formal source\t2026-07-29T22:49:44.6125187Z dda1d03bc54f52261e27b60642a314748b94a8d6",
+            "lean\tVerify exact workflow checkout\t\ufeff2026-07-29T22:49:44.7697330Z ##[group]Run set -euo pipefail",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7698805Z ^[[36;1mset -euo pipefail^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7700034Z ^[[36;1mif [[ \"pull_request\" == \"pull_request\" ]]; then^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7701655Z ^[[36;1m  expected=\"dda1d03bc54f52261e27b60642a314748b94a8d6\"^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7703369Z ^[[36;1melif [[ \"pull_request\" == \"workflow_dispatch\" ]]; then^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7704805Z ^[[36;1m  expected=\"\"^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7705706Z ^[[36;1melse^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7706777Z ^[[36;1m  expected=\"91c6bddf5d2f85585d0936db98b7921720afe855\"^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7708578Z ^[[36;1mfi^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7709430Z ^[[36;1mactual=\"$(git rev-parse HEAD)\"^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7710601Z ^[[36;1mecho \"event=pull_request\"^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7711736Z ^[[36;1mecho \"expected_sha=$expected\"^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7712970Z ^[[36;1mecho \"actual_checked_out_sha=$actual\"^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7714225Z ^[[36;1mtest \"$actual\" = \"$expected\"^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7715442Z ^[[36;1mmkdir -p .artifacts/exact-head^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7716641Z ^[[36;1mpython - <<PY^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7717563Z ^[[36;1mimport json^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7718635Z ^[[36;1mfrom pathlib import Path^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7719675Z ^[[36;1m^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7720432Z ^[[36;1mpayload = {^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7721584Z ^[[36;1m    \"schema\": \"nhaim.workflow_exact_head_checkout.v1\",^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7723013Z ^[[36;1m    \"event\": \"pull_request\",^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7724162Z ^[[36;1m    \"expected_sha\": \"$expected\",^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7725406Z ^[[36;1m    \"actual_checked_out_sha\": \"$actual\",^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7726718Z ^[[36;1m    \"match\": \"$actual\" == \"$expected\",^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7727982Z ^[[36;1m}^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7729083Z ^[[36;1mpath = Path(\".artifacts/exact-head/lean-checkout.json\")^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7730761Z ^[[36;1mpath.parent.mkdir(parents=True, exist_ok=True)^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7732887Z ^[[36;1mpath.write_text(json.dumps(payload, indent=2, sort_keys=True) + \"\\n\", encoding=\"utf-8\")^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7734785Z ^[[36;1mPY^[[0m",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7784396Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}",
+            "lean\tVerify exact workflow checkout\t2026-07-29T22:49:44.7785827Z ##[endgroup]"
+          ],
+          "conclusion": "success",
+          "event": "pull_request",
+          "exact_head_classification": "EXACT_HEAD_PASS",
+          "expected_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "first_failure": null,
+          "job_head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "job_id": 90729533460,
+          "job_name": "lean",
+          "run_head_sha": "dda1d03bc54f52261e27b60642a314748b94a8d6",
+          "run_id": 30497473213,
+          "steps": [
+            {
+              "completed_at": "2026-07-29T22:49:43Z",
+              "conclusion": "success",
+              "name": "Set up job",
+              "number": 1,
+              "started_at": "2026-07-29T22:49:43Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:44Z",
+              "conclusion": "success",
+              "name": "Check out ABF formal source",
+              "number": 2,
+              "started_at": "2026-07-29T22:49:43Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:44Z",
+              "conclusion": "success",
+              "name": "Verify exact workflow checkout",
+              "number": 3,
+              "started_at": "2026-07-29T22:49:44Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:44Z",
+              "conclusion": "success",
+              "name": "Reject proof placeholders and project axioms",
+              "number": 4,
+              "started_at": "2026-07-29T22:49:44Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:49:45Z",
+              "conclusion": "success",
+              "name": "Install pinned Lean toolchain manager",
+              "number": 5,
+              "started_at": "2026-07-29T22:49:44Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:51:38Z",
+              "conclusion": "success",
+              "name": "Resolve dependencies and build ABF declarations",
+              "number": 6,
+              "started_at": "2026-07-29T22:49:45Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:51:38Z",
+              "conclusion": "success",
+              "name": "Write bounded formal receipt",
+              "number": 7,
+              "started_at": "2026-07-29T22:51:38Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:51:38Z",
+              "conclusion": "success",
+              "name": "Validate ABF status and portfolio boundary",
+              "number": 8,
+              "started_at": "2026-07-29T22:51:38Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:51:38Z",
+              "conclusion": "success",
+              "name": "Check ABF formal branch whitespace",
+              "number": 9,
+              "started_at": "2026-07-29T22:51:38Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:51:39Z",
+              "conclusion": "success",
+              "name": "Upload ABF Lean receipts",
+              "number": 10,
+              "started_at": "2026-07-29T22:51:38Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:51:39Z",
+              "conclusion": "success",
+              "name": "Post Check out ABF formal source",
+              "number": 20,
+              "started_at": "2026-07-29T22:51:39Z",
+              "status": "completed"
+            },
+            {
+              "completed_at": "2026-07-29T22:51:39Z",
+              "conclusion": "success",
+              "name": "Complete job",
+              "number": 21,
+              "started_at": "2026-07-29T22:51:39Z",
+              "status": "completed"
+            }
+          ],
+          "workflow": "Validate ABF-001 Lean formalization"
+        }
+      ],
+      "run_attempt": 1,
+      "run_id": 30497473213,
+      "status": "completed",
+      "updated_at": "2026-07-29T22:51:42Z",
+      "workflow_name": "Validate ABF-001 Lean formalization"
+    }
+  ]
+}
